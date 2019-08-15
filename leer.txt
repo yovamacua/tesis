@@ -1,0 +1,7 @@
+Configurar su conexion local con:
+password = '' (es decir sin password)
+usuario = 'root'
+base de datos = 'proyecto_tesis'
+
+los datos deben ser los mismos para todos asi evitamos que la conexion
+cambie cada vez que alguientra trabajo en el proyecto.
