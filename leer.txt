@@ -1,25 +1,16 @@
-- Configurar su conexion local con:
+=================
+- Configurar conexion local con:
 password = '' (es decir sin password)
 usuario = 'root'
 base de datos = 'campoescuela'
+=================
 
-los datos deben ser los mismos para todos asi evitamos que la conexion
-cambie cada vez que alguientra trabajo en el proyecto.
+- Archivo "original" dentro de "base_de_datos" es el diagrama original (respaldo) que contiene las
+referencias a las tablas de los permisos que borre.
 
-- En la carpeta "vista" crear sub carpetas para cada vista
-ejemplo
-vistas->inventario
-vistas->cuentas
-vistas->usuarios
-etc...
-para manterner el orden
+- Adjunto nuevo diagrama, script y imagen de BD funcional.
 
-utilizar carpeta "base" dentro de vista... para crear nuevas vistas.
+- Tener 2 conexion habilitadas en el archivo de conexion genera conflico, una de las conexion
+esta comentada
 
-usar un prefijo en cada uno de los archivo de modelo y controlador
-ejemplo:
-ym_actualizar_producto.php
-ym_crear_usuario.php
-
-al igual que el caso anterior, crear carpetas para cada cosa que este relacionada o sean
-de la misma "categoria"
+- Mantenimiento de tabla usuario, solo falta opcion "eliminar"
