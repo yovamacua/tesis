@@ -1,6 +1,12 @@
 <?php
+   require_once("../config/conexion.php");
+      if(isset($_SESSION["id_usuario"])){
+?>
+
+<?php
   require_once("header.php");
 ?>
+
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -103,3 +109,8 @@
   require_once("footer.php");
 ?>
 <script type="text/javascript" src="js/usuarios.js"></script>
+<?php
+  } else {
+  header("Location:".Conectar::ruta()."vistas/index.php");
+  }
+?>

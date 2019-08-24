@@ -21,6 +21,7 @@ $conn =null; */
 //****************************************
 //Conexion usando clase
 //****************************************
+  session_start();
 class Conectar {
  	protected $dbh;
  	protected function conexion(){
