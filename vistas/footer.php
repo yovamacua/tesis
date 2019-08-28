@@ -207,6 +207,8 @@
 <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="../public/bower_components/jquery-ui/jquery-ui.min.js"></script>
+<script src='../public/bower_components/jquery-ui/ui/i18n/datepicker-es.js' type='text/javascript'></script>
+
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button);

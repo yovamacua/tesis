@@ -131,11 +131,8 @@
         </li>
 
          <li class="">
-          <a href="categorias.php">
-            <i class="fa fa-list" aria-hidden="true"></i> <span>Categoría</span>
-            <span class="pull-right-container badge bg-blue">
-              <i class="fa fa-bell pull-right">20</i>
-            </span>
+          <a href="incidentes.php">
+            <i class="fa fa-list" aria-hidden="true"></i> <span>Incidentes</span>
           </a>
 
         </li>
