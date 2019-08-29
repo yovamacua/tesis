@@ -24,11 +24,12 @@ $conn =null; */
   session_start();
 class Conectar {
  	protected $dbh;
- 	protected function conexion(){
+ 	public function conexion(){
 	try {
     //conexion a la bd
- 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","");
-      return $conectar;
+ 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","admin12-");
+ 			return $conectar;
+     
  		} catch (Exception $e) {
       //mensaje de error si no conectar
  			print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -46,4 +47,8 @@ class Conectar {
 		 	return "http://localhost/tesis/";
 		 }
 	}//cierre de llave conectar
+
+    $a= new Conectar();
+	$a->conexion();
 ?>
+
