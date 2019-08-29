@@ -133,7 +133,7 @@
   
      if(is_array($datos)==true and count($datos)>0){
           $categorias->eliminar_categoria($_POST["id_categoria"]);
-          $messages[]="El registro del incidente se eliminó exitosamente";
+          $messages[]=" La categoria se eliminó exitosamente";
      }else {
        $errors[]="No hay registro que borrar";
      }
