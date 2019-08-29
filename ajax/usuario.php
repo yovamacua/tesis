@@ -4,6 +4,8 @@
   require_once("../config/conexion.php");
   //llamar a el modelo Usuarios
   require_once("../modelos/Usuarios.php");
+
+  require_once("mensajes.php");
   //se crea un objeto de tipo usuario
   $usuarios = new Usuarios();
 
@@ -44,7 +46,7 @@
                          $messages[]="El usuario se registró correctamente";
 	                     	   } else {
              /*si NO se registra el usuario aparece siguente mensaje*/
-                                    $messages[]="La cédula o el correo ya existe";
+                                    $messages[]="El correo ya esta registrado";
 	                     	   }
 	                     } //cierre de la validacion empty que valida el id usuario no sea vacio
 
@@ -59,39 +61,15 @@
                         $errors[]="El password no coincide";
                  }
 
-// inicio bloque de mensaje de notificacion de accion realizada o no realizada
-    //mensaje de exito
-     if(isset($messages)){
-
-				?>
-				<div class="alert alert-success" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>¡Bien hecho!</strong>
-						<?php
-							foreach($messages as $message) {
-									echo $message;
-								}
-							?>
-				</div>
-				<?php
-			}
-	 // fin mensaje de exito
-
-    //mensaje de error
-         if(isset($errors)){
-
-			?>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong>
-						<?php
-							foreach($errors as $error) {
-									echo $error;
-								}
-							?>
-				</div>
-			<?php
-			}
+                 //mensaje success
+                 if (isset($messages)){
+              				echo exito($messages);
+              			}
+            	 //fin success
+            	 //mensaje error
+                     if (isset($errors)){
+                       echo  error($errors);
+            			}
 	 //fin mensaje error
    // fin bloque de mensaje de notificacion
       break; // fin del primer caso
@@ -122,23 +100,10 @@
                 $errors[]="El usuario no existe";
 
              }
-
-
-	         //inicio de mensaje de error
-
-				if(isset($errors)){
-					?>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Error!</strong>
-							<?php
-								foreach($errors as $error) {
-										echo $error;
-									}
-								?>
-					</div>
-					<?php
-			      }
+      	 //mensaje error
+               if (isset($errors)){
+                 echo  error($errors);
+      			}
 	        //fin de mensaje de error
 
 // inicio caso

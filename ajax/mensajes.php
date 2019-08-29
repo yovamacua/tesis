@@ -10,6 +10,20 @@ function exito($messages)
   									echo $message;
   								}
   							?>
-  				</div>';
+  				</div>
           <?php
+}
+
+function error($errors){
+  ?>
+  <div class="alert alert-danger" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Error!</strong>
+      <?php
+        foreach ($errors as $error) {
+            echo $error;
+          }
+        ?>
+  </div>
+  <?php
 }

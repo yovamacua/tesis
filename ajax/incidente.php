@@ -2,6 +2,7 @@
  //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
   require_once("../modelos/Incidentes.php");
+  require_once("mensajes.php");
 
 //objeto de tipo Incidentes
   $incidentes = new Incidentes();
@@ -39,32 +40,12 @@
 	            }
      //mensaje success
      if (isset($messages)){
-				?>
-				<div class="alert alert-success" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>¡Bien hecho!</strong>
-						<?php
-							foreach ($messages as $message) {
-									echo $message;
-								}
-							?>
-				</div>
-				<?php
-			}
+  				echo exito($messages);
+  			}
 	 //fin success
 	 //mensaje error
          if (isset($errors)){
-			?>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong>
-						<?php
-							foreach ($errors as $error) {
-									echo $error;
-								}
-							?>
-				</div>
-			<?php
+           echo  error($errors);
 			}
 	 //fin mensaje error
      break;
@@ -88,20 +69,10 @@
                 $errors[]="El incidente no existe";
 	        }
 
-         //inicio de mensaje de error
-				if(isset($errors)){
-					?>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Error!</strong>
-							<?php
-								foreach ($errors as $error) {
-										echo $error;
-									}
-								?>
-					</div>
-					<?php
-			      }
+    	 //mensaje error
+             if (isset($errors)){
+               echo  error($errors);
+    			}
 	        //fin de mensaje de error
 	 break;
         case "listar":
@@ -139,33 +110,15 @@
        $errors[]="No hay registro que borrar";
      }
 
-if(isset($messages)){
-  ?>
-  <div class="alert alert-success" role="alert">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>¡Bien hecho!</strong>
-      <?php
-        foreach($messages as $message) {
-            echo $message;
-          }
-        ?>
-  </div>
-  <?php
-}
-
-  if(isset($errors)){
-?>
-<div class="alert alert-danger" role="alert">
-  <button type="button" class="close" data-dismiss="alert">&times;</button>
-    <strong>Error!</strong>
-    <?php
-      foreach($errors as $error) {
-          echo $error;
-        }
-      ?>
-</div>
-<?php
-}
+     //mensaje success
+     if (isset($messages)){
+  	    echo exito($messages);
+  			}
+	 //fin success
+	 //mensaje error
+    if (isset($errors)){
+    echo  error($errors);
+			}
 break;
 }
 ?>
