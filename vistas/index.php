@@ -31,6 +31,24 @@
    <!-- iCheck -->
    <link rel="stylesheet" href="../public/plugins/iCheck/square/blue.css">
 
+   <link rel="stylesheet" href="../assets/css/supersized.css">
+
+   <!-- estilos adicionales para el formulario -->
+   <style>
+   .login-logo{
+         margin-bottom: 0px!important;
+         margin-top: -20px!important;
+   }
+   .login-box-body{
+     border-radius: 1rem;
+         background: -moz-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.4) 100%);
+         background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 100%);
+         background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 100%);
+         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
+   }
+    .login-box{margin: auto!important;
+    padding-top: 12rem!important;}
+   </style>
    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
    <!--[if lt IE 9]>
@@ -43,9 +61,6 @@
  </head>
  <body class="hold-transition login-page">
  <div class="login-box">
-   <div class="login-logo">
-     <a href="../../index2.html"><b>Acceso</b></a>
-   </div>
    <!-- /.login-logo -->
    <div class="login-box-body">
 
@@ -97,13 +112,20 @@
 
              ?>
 
-
+             <div class="login-logo">
+               <a href="#"><b>Acceso</b></a>
+             </div>
          </div>
 
 
          </div>
        </div>
    </div>
+   <!-- Javascript -->
+   <script src="../assets/js/jquery-1.8.2.min.js"></script>
+   <script src="../assets/js/supersized.3.2.7.min.js"></script>
+   <script src="../assets/js/supersized-init.js"></script>
+   <script src="../assets/js/scripts.js"></script>
    <!--/container-fluid-->
  <!-- FIN MENSAJES DE ALERTA-->
 
