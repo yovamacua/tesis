@@ -138,8 +138,8 @@
         </li>
 
          <li class="">
-          <a href="productos.php">
-            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Productos</span>
+          <a href="perdidas.php">
+            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Perdidas</span>
             <span class="pull-right-container badge bg-blue">
               <i class="fa fa-bell pull-right">20</i>
             </span>
