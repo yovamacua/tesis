@@ -24,10 +24,10 @@ $conn =null; */
   session_start();
 class Conectar {
  	protected $dbh;
- 	public function conexion(){
+ 	protected function conexion(){
 	try {
     //conexion a la bd
- 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","");
+ 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","admin12-");
  			return $conectar;
      
  		} catch (Exception $e) {
@@ -48,7 +48,5 @@ class Conectar {
 		 }
 	}//cierre de llave conectar
 
-    $a= new Conectar();
-	$a->conexion();
 ?>
 
