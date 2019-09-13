@@ -27,7 +27,7 @@ class Conectar {
  	public function conexion(){
 	try {
     //conexion a la bd
- 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","");
+ 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela;charset=utf8","root","");
  			return $conectar;
      
  		} catch (Exception $e) {

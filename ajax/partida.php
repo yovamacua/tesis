@@ -16,7 +16,7 @@
           case "guardaryeditar":
 
       $datos = $partidas->get_nombre_partidas($_POST["nombrepartida"]);
-      
+
 	       	   /*si el titulo no existe entonces lo registra
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["id_partida"])){
@@ -83,6 +83,7 @@
         $sub_array = array();
       $sub_array[] = $row["nombrepartida"];
       $sub_array[] = $row["responsable"];
+      $sub_array[] = '<a href="cuenta.php?id='.$row["id_partida"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar</button></a>';
      $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
      $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
       $data[] = $sub_array;
