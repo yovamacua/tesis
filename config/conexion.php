@@ -24,12 +24,13 @@ $conn =null; */
   session_start();
 class Conectar {
  	protected $dbh;
- 	public function conexion(){
+ 	protected function conexion(){
 	try {
     //conexion a la bd
- 			$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela;charset=utf8","root","");
+
+$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela","root","admin12-");
  			return $conectar;
-     
+
  		} catch (Exception $e) {
       //mensaje de error si no conectar
  			print "¡Error!: " . $e->getMessage() . "<br/>";
@@ -38,7 +39,7 @@ class Conectar {
 } //cierre de llave de la function conexion()
 
     // funcion para evitar problemas de tilde ( o carateres latinos)
-		 public function set_names(){
+	public function set_names(){
  	   return $this->dbh->query("SET NAMES 'utf8'");
 		 }
 
@@ -51,4 +52,3 @@ class Conectar {
     $a= new Conectar();
 	$a->conexion();
 ?>
-

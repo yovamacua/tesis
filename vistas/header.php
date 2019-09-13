@@ -1,4 +1,4 @@
-<?php
+ <?php
     require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
 ?>
@@ -138,8 +138,8 @@
         </li>
 
          <li class="">
-          <a href="productos.php">
-            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Productos</span>
+          <a href="perdidas.php">
+            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Perdidas</span>
             <span class="pull-right-container badge bg-blue">
               <i class="fa fa-bell pull-right">20</i>
             </span>
@@ -148,6 +148,15 @@
          <li class="">
               <a href="categorias.php">
                 <i class="fa fa-users"></i> <span>Categoria</span>
+                <span class="pull-right-container badge bg-blue">
+                  <i class="fa fa-bell pull-right">5</i>
+                </span>
+              </a>
+
+          </li>
+          <li class="">
+              <a href="productos.php">
+                <i class="fa fa-users"></i> <span>Producto</span>
                 <span class="pull-right-container badge bg-blue">
                   <i class="fa fa-bell pull-right">5</i>
                 </span>
