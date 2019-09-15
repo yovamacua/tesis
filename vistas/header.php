@@ -137,6 +137,13 @@
 
         </li>
 
+        <li class="">
+         <a href="partidas.php">
+           <i class="fa fa-list" aria-hidden="true"></i> <span>Partidas</span>
+         </a>
+
+       </li>
+
          <li class="">
           <a href="perdidas.php">
             <i class="fa fa-tasks" aria-hidden="true"></i> <span>Perdidas</span>
