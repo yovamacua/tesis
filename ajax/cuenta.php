@@ -80,7 +80,7 @@
       {
         $sub_array = array();
       $sub_array[] = $row["nombrecuenta"];
-      $sub_array[] = '<a href="entrada.php?id='.$row["id_cuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Entrada</button></a>';
+      $sub_array[] = '<a href="entrada.php?identificador='.$row["id_cuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Entrada</button></a>';
      $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
      $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
       $data[] = $sub_array;

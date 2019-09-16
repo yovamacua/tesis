@@ -24,7 +24,7 @@ $conn =null; */
 session_start();
 class Conectar {
  	protected $dbh;
- 	protected function conexion(){
+ 	public function conexion(){
 	try {
     //conexion a la bd
 
