@@ -152,6 +152,16 @@
             </span>
           </a>
         </li>
+
+        <li class="">
+          <a href="donaciones.php">
+            <i class="fa fa-tasks" aria-hidden="true"></i> <span>Donaciones</span>
+            <span class="pull-right-container badge bg-blue">
+              <i class="fa fa-bell pull-right">20</i>
+            </span>
+          </a>
+        </li>
+
          <li class="">
               <a href="categorias.php">
                 <i class="fa fa-users"></i> <span>Categoria</span>

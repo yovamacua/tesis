@@ -17,14 +17,14 @@
 		}
 
 		//mostrar las perdidas por el id
-		public function get_perdidas_por_id($idperdidas){
+		public function get_perdidas_por_id($id_perdida){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select * from perdidas where idperdidas=?";	
+			$sql = "select * from perdidas where id_perdida=?";	
 			$sql = $conectar->prepare($sql);
-			$sql-> bindValue(1, $idperdidas);
+			$sql-> bindValue(1, $id_perdida);
 			$sql-> execute();
 
 			return $resultado = $sql->fetchAll();
@@ -50,7 +50,7 @@
 		}
  
 		//editar perdidas
-		public function editar_perdida($idperdidas, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
+		public function editar_perdida($id_perdida, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
@@ -65,7 +65,7 @@
             unidadDelProduc=?,
             id_usuario=?
             where
-            idperdidas=?";	
+            id_perdida=?";	
 
 			$sql = $conectar->prepare($sql);
 
@@ -77,7 +77,7 @@
 			$sql-> bindValue(6, $_POST["anio"]);
 			$sql-> bindValue(7, $_POST["unidadDelProduc"]);
 			$sql-> bindValue(8, $_POST["id_usuario"]);
-			$sql-> bindValue(9, $_POST["idperdidas"]);
+			$sql-> bindValue(9, $_POST["id_perdida"]);
 			$sql-> execute();
 		}
 
@@ -93,13 +93,13 @@
   //       }
 
 		//método para eliminar un registro
-        public function eliminar_perdida($idperdidas){
+        public function eliminar_perdida($id_perdida){
            $conectar = parent::conexion();
            parent::set_names();
 
-           $sql="delete from perdidas where idperdidas=?";
+           $sql="delete from perdidas where id_perdida=?";
            $sql=$conectar->prepare($sql);
-           $sql->bindValue(1, $idperdidas);
+           $sql->bindValue(1, $id_perdida);
            $sql->execute();
 
            return $resultado=$sql->fetch();
