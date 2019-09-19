@@ -1,6 +1,4 @@
 <?php
-
-
 /* $servername="localhost";
 $username="root";
 $password="admin12-";
@@ -17,18 +15,21 @@ try {
 // cerrar la conexion
 $conn =null; */
 
+define('DBHOST','localhost');
+define('DBUSER','root');
+define('DBPASS','');
+define('DBNAME','campoescuela');
 
 //****************************************
 //Conexion usando clase
 //****************************************
-session_start();
+ session_start();
 class Conectar {
  	protected $dbh;
  	public function conexion(){
 	try {
     //conexion a la bd
-
-$conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela;charset=utf8","root","");
+ 			$conectar = $this->dbh = new PDO("mysql:host=".DBHOST.";charset=utf8;dbname=".DBNAME, DBUSER, DBPASS);
  			return $conectar;
 
  		} catch (Exception $e) {
@@ -48,4 +49,3 @@ $conectar = $this->dbh = new PDO("mysql:local=localhost;dbname=campoescuela;char
 		 	return "http://localhost/tesis/";
 		 }
 	}//cierre de llave conectar
-?>
