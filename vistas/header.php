@@ -264,6 +264,13 @@
           </a>
         </li>
 
+        <li class="">
+         <a href="respaldo.php">
+           <i class="fa fa-list" aria-hidden="true"></i> <span>Respaldo</span>
+         </a>
+
+       </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->
