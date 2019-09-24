@@ -129,12 +129,12 @@
             //imprimir palabra en vez de el numero 0 o 1
 	         $atrib = "btn btn-success btn-md estado";
 	        if($row["estado"] == 0){
-	          $est = 'INACTIVO';
-	          $atrib = "btn btn-warning btn-md estado";
+	          $est = '<i class="fa fa-power-off" aria-hidden="true"></i>';
+	          $atrib = "btn btn-dark btn-md estado";
 	        }
 	        else{
 	          if($row["estado"] == 1){
-	            $est = 'ACTIVO';
+	            $est = '<i class="fa fa-power-off" aria-hidden="true"></i>';
 
 	          }
 	        }
@@ -156,9 +156,9 @@
       //se formate el la fecha, tipo y formato
       $sub_array[] = date("d-m-Y",strtotime($row["fecha_ingreso"]));
       //botones con valores de los campos en el id
-      $sub_array[] = '<button type="button" onClick="cambiarEstado('.$row["id_usuario"].','.$row["estado"].');" name="estado" id="'.$row["id_usuario"].'" class="'.$atrib.'">'.$est.'</button>';
-      $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-      $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+      $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado('.$row["id_usuario"].','.$row["estado"].');" name="estado" id="'.$row["id_usuario"].'" class="'.$atrib.' hint--top" aria-label="Cambiar Estado">'.$est.'</button>
+      <button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
+      <button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="glyphicon glyphicon-edit"></i></button></div>';
 	     $data[]=$sub_array;
      }
 
