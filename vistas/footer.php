@@ -228,7 +228,8 @@
     <script src="../public/datatables/pdfmake.min.js"></script>
     <script src="../public/datatables/vfs_fonts.js"></script>
 
-
+    <!--- modal popup loading -->
+    <script src="../public/plugins/BlockUI/blockUI.js"></script>
 
 <!-- Morris.js charts -->
 <script src="../public/bower_components/raphael/raphael.min.js"></script>

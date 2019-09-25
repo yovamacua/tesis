@@ -23,16 +23,15 @@
   include '../modelos/actions_table/sumatoria.php';
   $final = sumar($conectar, $identificador);
 
-
 ?>
 <style>
-  #user_data_processing{display: none!important;}
+#user_data_processing{display: none!important;}
 
-tbody tr td:nth-child(6):before {
+tbody tr td:nth-child(7):before {
 content: "$";
 float: left;
 }
-tbody tr td:nth-child(6) div{margin-left: 1.5rem; }
+tbody tr td:nth-child(7) div{margin-left: 1.5rem; }
 #user_data{width: auto!important;}
 .table>thead>tr>th{text-align: center!important;}
 body
@@ -92,7 +91,20 @@ cursor: default;
   padding: 0.5rem;
   color: white;
   font-weight: 700;}
+
+  .handle {
+    width:12px;
+    margin: 5px 0 0 0;
+    height:34px;
+    /*float: left;*/
+    cursor: move;
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAH0lEQVQIW2OcN2/efwYgSEpKYgTRjBgCIFFkAFaGDAC2jQgFaRPeawAAAABJRU5ErkJggg==) repeat;
+}
 /*.table-responsive{overflow-x: visible!important;}*/
+.ui-sortable-handle{background-color:white!important;cursor: move!important;}
+.ui-sortable-helper{background-color:#f9f9f9!important; height:auto!important;cursor: -webkit-grabbing!important; cursor: grabbing!important;}
+thead>tr>th:first-child{padding: 5px!important;}
+table>tbody>tr>td:first-child{padding: 5px!important;}
 
 </style>
 <!--- Cargar sidebar menu colapsado -->
@@ -112,12 +124,11 @@ body.classList.add("sidebar-collapse");
                     <!-- centro -->
                     <div class="panel-body table-responsive">
                       <div class="container box">
-
                          <div class="table-responsive">
-
                           <table id="user_data" class="table table-bordered table-striped ">
                            <thead>
                             <tr>
+                            <th scope="col"></th>
                               <th scope="col">Actividad<br>General</th>
                              <th scope="col">Actividad<br>Especifica</th>
                              <th scope="col">Responsable</th>
@@ -131,7 +142,10 @@ body.classList.add("sidebar-collapse");
                              <th scope="col">Acción</th>
                             </tr>
                            </thead>
+                           <tbody id="sortable">
+                           </tbody>
                           </table>
+                           <input type="hidden" name="page_order_list" id="page_order_list" />
                          </div>
                         </div>
                           <div id="alert_message"><div class="alert alert-success"><?php echo $final; ?>&nbsp; </div></div>
@@ -147,6 +161,50 @@ body.classList.add("sidebar-collapse");
 <?php
   require_once("footer.php");
 ?>
+<script>
+$(document).ready(function(){
+  $(function() {
+    $("#sortable").sortable({handle: '.handle'});
+  });
+
+ $("#sortable" ).sortable({
+  placeholder : "ui-state-highlight",
+  update  : function(event, ui)
+  {
+   var page_id_array = new Array();
+   $('tbody#sortable tr td div').each(function(){
+    page_id_array.push($(this).attr("id"));
+    $.blockUI({
+      message: '<img src="../public/plugins/BlockUI/loading.gif" /><br><h3> Procesando... por favor espere.</h3>',
+       css: {
+            border: 'none',
+            padding: '20px',
+            backgroundColor: '#000',
+            '-webkit-border-radius': '10px',
+            '-moz-border-radius': '10px',
+            opacity: .7,
+            color: '#fff'
+        }
+     });
+    setTimeout($.unblockUI, 2000);
+   });
+   $.ajax({
+    url:"../modelos/actions_table/update-row.php",
+    method:"POST",
+    data:{page_id_array:page_id_array},
+    success:function(data)
+    {
+     //alert(data);
+    }
+   });
+  }
+ });
+
+});
+</script>
+
+
+
 <script type="text/javascript" language="javascript" >
 
 //validate only numbers

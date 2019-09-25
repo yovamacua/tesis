@@ -1,0 +1,45 @@
+.boton-top{
+    width: 50%!important;
+    z-index: 1!important;
+}
+.boton-top button{
+  margin-left: 6px!important;
+}
+.tabla-top{
+  margin-top: -5rem!important;
+}
+
+.table-bordered>thead>tr>th, .table-bordered>thead>tr>td {
+    text-align: center!important;
+}
+
+.cbtns{text-align: center!important;}
+
+/*** media queries for responsive skin using bootstrap 3 ***/
+
+/* Small devices */
+@media (max-width: 320px) {
+  /*** vista usuarios **/
+  .tabla-top { margin-top: 0rem!important;}
+}
+
+/* Smartphones */
+@media (min-width: 321px) and (max-width: 480px) {
+  /*** vista usuarios **/
+  .tabla-top { margin-top: 0rem!important;}
+}
+
+/* Smartphones to Tablets */
+@media (min-width: 481px) and (max-width: 767px) {
+  /*** vista usuarios **/
+  .tabla-top { margin-top: 0rem!important;}
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 992px) {  }
+
+/* Desktop */
+@media (min-width: 993px) and (max-width: 1199px) {  }
+
+/* Large Display */
+@media (min-width: 1200px) {  }

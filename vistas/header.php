@@ -17,6 +17,13 @@
   <!-- Ionicons -->
   <link rel="stylesheet" href="../public/bower_components/Ionicons/css/ionicons.min.css">
 
+  <!-- Tesis style proyect -->
+  <link rel="stylesheet" href="../public/css/tesis.css">
+
+  <!-- library hint for cool tooltips -->
+  <link rel="stylesheet" href="../public/css/hint.css">
+
+
   <!-- DataTables -->
 
   <!--<link rel="stylesheet" href="../public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">-->
@@ -273,6 +280,13 @@
             <i class="fa fa-building" aria-hidden="true"></i> <span>Empresa</span>
           </a>
         </li>
+
+        <li class="">
+         <a href="respaldo.php">
+           <i class="fa fa-list" aria-hidden="true"></i> <span>Respaldo</span>
+         </a>
+
+       </li>
 
       </ul>
     </section>
