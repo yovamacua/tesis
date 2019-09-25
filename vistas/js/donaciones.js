@@ -4,33 +4,30 @@ var tabla;
 function init(){
 	listar();
 	//cuando se de click al boton submit se ejecuta la funcion guardar
-	$("#perdida_form").on("submit",function(e){
+	$("#donacion_form").on("submit",function(e){
 		guardaryeditar(e);
 	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
-		$(".modal-title").text("Agregar perdida");
+		$(".modal-title").text("Agregar donacion");
 	});
 
 }
 
 //funcion que limpia los campos del formulario
 function limpiar(){
-	$('#nombreProduc').val("");
-	$('#cantidad').val("");
+	$('#fecha').val("");
+	$('#donante').val("");
 	$('#descripcion').val("");
-	$('#precioProduc').val("");
-	$('#mes').val("");
-	$('#anio').val("");
-	$('#unidadDelProduc').val("");
-	$('#id_perdida').val("");
+	$('#cantidad').val("");
+	$('#id_donacion').val("");
 
 }
 
 // funcion listar
 function listar(){
-	tabla=$('#perdida_data').dataTable({
+	tabla=$('#donacion_data').dataTable({
 	"aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
 		dom: "Bfrtip", //definimos los elementos del control de tabla
@@ -43,7 +40,7 @@ function listar(){
 
 		"ajax":
 			{
-				url: '../ajax/perdida.php?op=listar',
+				url: '../ajax/donacion.php?op=listar',
 				type: "get",
 				dataType: "json",
 				error: function(e){
@@ -86,22 +83,19 @@ function listar(){
 	}).DataTable();
 }
  
-//mostrar las perdidas en la ventana modal del formulario
-function mostrar(id_perdida){
-	$.post("../ajax/perdida.php?op=mostrar",{id_perdida : id_perdida}, function(data, status){
+//mostrar las donaciones en la ventana modal del formulario
+function mostrar(id_donacion){
+	$.post("../ajax/donacion.php?op=mostrar",{id_donacion : id_donacion}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
-	 		$('#perdidaModal').modal("show");
-	 		$('#nombreProduc').val(data.nombreProduc);
-	 		$('#cantidad').val(data.cantidad);
+	 		$('#donacionModal').modal("show");
+	 		$('#fecha').val(data.fecha);
+	 		$('#donante').val(data.donante);
 	 		$('#descripcion').val(data.descripcion);
-	 		$('#precioProduc').val(data.precioProduc);
-	 		$('#mes').val(data.mes);
-	 		$('#anio').val(data.anio);
-	 		$('#unidadDelProduc').val(data.unidadDelProduc);
-	 		$('.modal-title').text("Editar Perdida");
-	 		$('#id_perdida').val(id_perdida);
+	 		$('#cantidad').val(data.cantidad);
+	 		$('.modal-title').text("Editar Donacion");
+	 		$('#id_donacion').val(id_donacion);
 	 		$('#action').val("Edit");
 	 });
  
@@ -109,10 +103,10 @@ function mostrar(id_perdida){
 	//la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 	function guardaryeditar(e){
 		e.preventDefault(); // no se activa la accion predeterminada del evento
-		var formData = new FormData($("#perdida_form")[0]);
+		var formData = new FormData($("#donacion_form")[0]);
 
 	    $.ajax({
-	     	url: "../ajax/perdida.php?op=guardaryeditar",
+	     	url: "../ajax/donacion.php?op=guardaryeditar",
 	       	type: "POST",
 	       	data: formData,
 	       	contentType: false,
@@ -120,30 +114,30 @@ function mostrar(id_perdida){
 
 	       	success: function(datos){
 	      		console.log(datos);
-		       	$('#perdida_form')[0].reset();
-		       	$('#perdidaModal').modal('hide');
+		       	$('#donacion_form')[0].reset();
+		       	$('#donacionModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
-		       	$('#perdida_data').DataTable().ajax.reload();
+		       	$('#donacion_data').DataTable().ajax.reload();
 		        limpiar();
 	       }
 
 	   	});
 	}
 
-function eliminar(id_perdida){
+function eliminar(id_donacion){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-	bootbox.confirm("¿Está Seguro de eliminar la perdida?", function(result){
+	bootbox.confirm("¿Está Seguro de eliminar la donación?", function(result){
 		if(result){
 	    	$.ajax({
-	       		url:"../ajax/perdida.php?op=eliminar_perdida",
+	       		url:"../ajax/donacion.php?op=eliminar_donacion",
 	      		method:"POST",
-	       		data:{id_perdida:id_perdida},
+	       		data:{id_donacion:id_donacion},
 
 	       		success:function(data){
 		         //alert(data);
 		         $("#resultados_ajax").html(data);
-		         $("#perdida_data").DataTable().ajax.reload();
+		         $("#donacion_data").DataTable().ajax.reload();
 	       		}
 	     	});
    		}

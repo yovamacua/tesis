@@ -2,46 +2,43 @@
 	//llamar a la conexion de la base de datos
 	require_once("../config/conexion.php");
  
-	//llamar al modelo perdidas
-	require_once("../modelos/Perdidas.php");
+	//llamar al modelo Donaciones
+	require_once("../modelos/Donaciones.php");
 
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
-	$perdidas = new Perdidas();
+	$donaciones = new Donaciones();
  
-	$id_perdida = isset($_POST["id_perdida"]);
-	$nombreProduc = isset($_POST["nombreProduc"]);
-	$cantidad = isset($_POST["cantidad"]);
+	$id_donacion = isset($_POST["id_donacion"]);
+	$fecha = isset($_POST["fecha"]);
+	$donante = isset($_POST["donante"]);
 	$descripcion = isset($_POST["descripcion"]);
-	$precioProduc = isset($_POST["precioProduc"]);
-	$mes = isset($_POST["mes"]);
-	$anio = isset($_POST["anio"]);
-	$unidadDelProduc = isset($_POST["unidadDelProduc"]);
+	$cantidad = isset($_POST["cantidad"]);
 	$id_usuario=isset($_POST["id_usuario"]);
  
 switch ($_GET["op"]) { 
 
 	case 'guardaryeditar':
-		$datos = $perdidas->get_perdidas_por_id($_POST["id_perdida"]);
+		$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
 	       	/*si el titulo no existe entonces lo registra
 	        importante: se debe poner el $_POST sino no funciona*/
-	        if(empty($_POST["id_perdida"])){
-	       	  /*verificamos si el incidente existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
+	        if(empty($_POST["id_donacion"])){
+	       	  /*verificamos si la donacion existe en la base de datos, si ya existe un registro con la donacion entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
-			       	   	  //no existe la categoria por lo tanto hacemos el registros
-		 			$perdidas->registrar_perdidas($nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+			       	   	  //no existe la donacion por lo tanto hacemos el registros
+		 			$donaciones->registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $id_usuario);
 			       	   	  
-			       	   	  $messages[]="La perdida se registró correctamente";
+			       	   	  $messages[]="La donación se registró correctamente";
 			    }else {
 				    
-				    $errors[]="Existe una perdida con el mismo id";
+				    $errors[]="Existe una donación con el mismo id";
 				}
 
 			    }else {
-	            	/*si ya existe entonces editamos el incidente*/
-	             $perdidas-> editar_perdida($id_perdida, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+	            	/*si ya existe entonces editamos la donacion*/
+	             $donaciones-> editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $id_usuario);
 
-	            	  $messages[]="La perdida se editó correctamente";
+	            	  $messages[]="La donación se editó correctamente";
 	            }
      	//mensaje success
      	if (isset($messages)){
@@ -75,27 +72,24 @@ switch ($_GET["op"]) {
 		break;
 		
 		case 'mostrar':
-			# selecciona el id de la perdida
-			//el parametro id_perdida se envia por AJAX cuando se edita la perdida
-			$datos = $perdidas->get_perdidas_por_id($_POST["id_perdida"]);
+			# selecciona el id de la donacion
+			//el parametro id_donacion se envia por AJAX cuando se edita la donacion
+			$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
 			if(is_array($datos)==true and count($datos)>0){
 
 				foreach ($datos as $row) {
 				
-					$output["nombreProduc"] = $row["nombreProduc"];
-					$output["cantidad"] = $row["cantidad"];
+					$output["fecha"] = $row["fecha"];
+					$output["donante"] = $row["donante"];
 					$output["descripcion"] = $row["descripcion"];
-					$output["precioProduc"] = $row["precioProduc"];
-					$output["mes"] = $row["mes"];
-					$output["anio"] = $row["anio"];
-					$output["unidadDelProduc"] = $row["unidadDelProduc"];
+					$output["cantidad"] = $row["cantidad"];
 
 					echo json_encode($output);
 				}
 
 			}else{
 				//si no existe el registro no se recorre el array
-				$errors[] = "No existe una perdida con ese id";
+				$errors[] = "No existe una donación con ese id";
 
 			}
 			if(isset($errors)){
@@ -115,20 +109,18 @@ switch ($_GET["op"]) {
 		break;
  
 		case 'listar':
-			$datos=$perdidas->get_perdidas();
+			$datos=$donaciones->get_donaciones();
  	 		$data= Array();
 
 		    foreach($datos as $row){
 		        $sub_array = array();
-		      	$sub_array[] = $row["nombreProduc"];
-		     	$sub_array[] = $row["cantidad"];
+		        //formateo de la fecha, tipo y formato
+		      	$sub_array[] = $row["fecha"];
+		     	$sub_array[] = $row["donante"];
 		     	$sub_array[] = $row["descripcion"];
-		     	$sub_array[] = $row["precioProduc"];
-		     	$sub_array[] = $row["mes"];
-		     	$sub_array[] = $row["anio"];
-		     	$sub_array[] = $row["unidadDelProduc"];
-		     	$sub_array[] = '<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-		     	$sub_array[] = '<button type="button" onClick="eliminar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+		     	$sub_array[] = $row["cantidad"];
+		     	$sub_array[] = '<button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
+		     	$sub_array[] = '<button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
 		      	$data[] = $sub_array;
 		      }
 
@@ -141,13 +133,13 @@ switch ($_GET["op"]) {
 		 			echo json_encode($results);
 		break;
 
-		case "eliminar_perdida":
+		case "eliminar_donacion":
 
-		  	$datos = $perdidas->get_perdidas_por_id($_POST["id_perdida"]);
+		  	$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
 
 		    if(is_array($datos)==true and count($datos)>0){
-		          $perdidas->eliminar_perdida($_POST["id_perdida"]);
-		          $messages[]="El registro de la perdida se eliminó exitosamente";
+		          $donaciones->eliminar_donacion($_POST["id_donacion"]);
+		          $messages[]="El registro de la donación se eliminó exitosamente";
 		     }else {
 		       $errors[]="No hay registro que borrar";
 		     }
@@ -182,4 +174,3 @@ switch ($_GET["op"]) {
 		break;
 	}
 ?>		
-
