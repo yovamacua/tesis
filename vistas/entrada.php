@@ -58,7 +58,7 @@ padding: 1%;
 }
 
 .addbottom{
-  z-index: 9999;
+      z-index: 9999!important;
       width: 60px;
       height: 60px;
       background: #F44336;
@@ -129,14 +129,14 @@ body.classList.add("sidebar-collapse");
                              <th scope="col">Plazo <br>Fin</th>
                              <th scope="col">Indicador<br>de Logro</th>
                              <th scope="col">Acción</th>
-
                             </tr>
                            </thead>
                           </table>
                          </div>
                         </div>
-                          <div id="alert_message"><div class="alert alert-success"><?php echo $final; ?>&nbsp;                            <a href="#" class="scroll-down"><button type="button" name="add" id="add" class="addbottom">+</button>
-                                                    </a></div></div>
+                          <div id="alert_message"><div class="alert alert-success"><?php echo $final; ?>&nbsp; </div></div>
+                          <a href="#" class="scroll-down"><button type="button" name="add" id="add" class="addbottom">+</button>
+                          </a>
                     </div>
               </div><!-- /.col -->
           </div><!-- /.row -->
