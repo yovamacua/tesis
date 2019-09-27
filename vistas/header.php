@@ -115,6 +115,7 @@
     </nav>
   </header>
 
+<<<<<<< HEAD
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
@@ -302,6 +303,9 @@
     </section>
     <!-- /.sidebar -->
   </aside>
+=======
+  <?php require_once("sidebar-menu.php");?>
+>>>>>>> eb6f7bedb781fec6006ecc3828a568921245ac54
 
   <div id="resultados_ajax" class="text-center"></div>
    <!--FORMULARIO PERFIL USUARIO MODAL-->
