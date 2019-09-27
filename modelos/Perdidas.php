@@ -81,16 +81,6 @@
 			$sql-> execute();
 		}
 
-		// //método si la perdida existe en la base de datos
-		// public function get_nombre_perdida($nombreProduc){
-
-	 //        $conectar=parent::conexion();
-	 //        $sql="select * from perdidas where nombreProduc=?";
-	 //        $sql=$conectar->prepare($sql);
-	 //        $sql->bindValue(1, $nombreProduc);
-	 //        $sql->execute();
-  //          	return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-  //       }
 
 		//método para eliminar un registro
         public function eliminar_perdida($id_perdida){

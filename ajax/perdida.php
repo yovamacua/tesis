@@ -38,7 +38,7 @@ switch ($_GET["op"]) {
 				}
 
 			    }else {
-	            	/*si ya existe entonces editamos el incidente*/
+	            	/*si ya existe entonces editamos la perdida*/
 	             $perdidas-> editar_perdida($id_perdida, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
 
 	            	  $messages[]="La perdida se editó correctamente";

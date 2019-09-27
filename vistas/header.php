@@ -217,6 +217,16 @@
 
         </li>
 
+        <li class="">
+              <a href="gastos.php">
+                <i class="fa fa-users"></i> <span>Gastos</span>
+                <span class="pull-right-container badge bg-blue">
+                  <i class="fa fa-bell pull-right">5</i>
+                </span>
+              </a>
+
+          </li>
+
          <li class="treeview">
           <a href="ventas.php">
             <i class="fa fa-suitcase" aria-hidden="true"></i> <span>Ventas</span>

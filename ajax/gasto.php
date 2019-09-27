@@ -2,43 +2,42 @@
 	//llamar a la conexion de la base de datos
 	require_once("../config/conexion.php");
  
-	//llamar al modelo Donaciones
-	require_once("../modelos/Donaciones.php");
+	//llamar al modelo Gastos
+	require_once("../modelos/Gastos.php"); 
 
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
-	$donaciones = new Donaciones();
+	$gastos = new Gastos();
  
-	$id_donacion = isset($_POST["id_donacion"]);
+	$id_gasto = isset($_POST["id_gasto"]);
 	$fecha = isset($_POST["fecha"]);
-	$donante = isset($_POST["donante"]);
 	$descripcion = isset($_POST["descripcion"]);
-	$cantidad = isset($_POST["cantidad"]);
+	$precio = isset($_POST["precio"]);
 	$id_usuario=isset($_POST["id_usuario"]);
  
 switch ($_GET["op"]) { 
 
 	case 'guardaryeditar':
-		$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
+		$datos = $gastos->get_gastos_por_id($_POST["id_gasto"]);
 	       	/*si el titulo no existe entonces lo registra
 	        importante: se debe poner el $_POST sino no funciona*/
-	        if(empty($_POST["id_donacion"])){
-	       	  /*verificamos si la donacion existe en la base de datos, si ya existe un registro con la donacion entonces no se registra*/
+	        if(empty($_POST["id_gasto"])){
+	       	  /*verificamos si el gasto existe en la base de datos, si ya existe un registro con el gasto entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
-			       	   	  //no existe la donacion por lo tanto hacemos el registros
-		 			$donaciones->registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $id_usuario);
+			       	   	  //no existe el gasto por lo tanto hacemos el registros
+		 			$gastos->registrar_gastos($fecha, $descripcion, $precio, $id_usuario);
 			       	   	  
-			       	   	  $messages[]="La donación se registró correctamente";
+			       	   	  $messages[]="El gasto se registró correctamente";
 			    }else {
 				    
-				    $errors[]="Existe una donación con el mismo id";
+				    $errors[]="Existe un gasto con el mismo id";
 				}
 
 			    }else {
-	            	/*si ya existe entonces editamos la donacion*/
-	             $donaciones-> editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $id_usuario);
+	            	/*si ya existe entonces editamos el gasto*/
+	             $gastos->editar_gasto($id_gasto, $fecha, $descripcion, $precio, $id_usuario);
 
-	            	  $messages[]="La donación se editó correctamente";
+	            	  $messages[]="El gasto se editó correctamente";
 	            }
      	//mensaje success
      	if (isset($messages)){
@@ -72,24 +71,23 @@ switch ($_GET["op"]) {
 		break;
 		
 		case 'mostrar':
-			# selecciona el id de la donacion
-			//el parametro id_donacion se envia por AJAX cuando se edita la donacion
-			$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
+			# selecciona el id de el gasto
+			//el parametro id_gasto se envia por AJAX cuando se edita el gasto
+			$datos = $gastos->get_gastos_por_id($_POST["id_gasto"]);
 			if(is_array($datos)==true and count($datos)>0){
 
 				foreach ($datos as $row) {
 				
 					$output["fecha"] = $row["fecha"];
-					$output["donante"] = $row["donante"];
 					$output["descripcion"] = $row["descripcion"];
-					$output["cantidad"] = $row["cantidad"];
+					$output["precio"] = $row["precio"];
 
 					echo json_encode($output);
 				}
 
 			}else{
 				//si no existe el registro no se recorre el array
-				$errors[] = "No existe una donación con ese id";
+				$errors[] = "No existe un gasto con ese id";
 
 			}
 			if(isset($errors)){
@@ -109,18 +107,17 @@ switch ($_GET["op"]) {
 		break;
  
 		case 'listar':
-			$datos=$donaciones->get_donaciones();
+			$datos=$gastos->get_gastos();
  	 		$data= Array();
 
 		    foreach($datos as $row){
 		        $sub_array = array();
 		      
 		      	$sub_array[] = $row["fecha"];
-		     	$sub_array[] = $row["donante"];
 		     	$sub_array[] = $row["descripcion"];
-		     	$sub_array[] = $row["cantidad"];
-		     	$sub_array[] = '<button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-		     	$sub_array[] = '<button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+		     	$sub_array[] = $row["precio"];
+		     	$sub_array[] = '<button type="button" onClick="mostrar('.$row["id_gasto"].');"  id="'.$row["id_gasto"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
+		     	$sub_array[] = '<button type="button" onClick="eliminar('.$row["id_gasto"].');"  id="'.$row["id_gasto"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
 		      	$data[] = $sub_array;
 		      }
 
@@ -133,13 +130,13 @@ switch ($_GET["op"]) {
 		 			echo json_encode($results);
 		break;
 
-		case "eliminar_donacion":
+		case "eliminar_gasto":
 
-		  	$datos = $donaciones->get_donaciones_por_id($_POST["id_donacion"]);
+		  	$datos = $gastos->get_gastos_por_id($_POST["id_gasto"]);
 
 		    if(is_array($datos)==true and count($datos)>0){
-		          $donaciones->eliminar_donacion($_POST["id_donacion"]);
-		          $messages[]="El registro de la donación se eliminó exitosamente";
+		          $gastos->eliminar_gasto($_POST["id_gasto"]);
+		          $messages[]="El registro del gasto se eliminó exitosamente";
 		     }else {
 		       $errors[]="No hay registro que borrar";
 		     }
@@ -173,4 +170,4 @@ switch ($_GET["op"]) {
 			}
 		break;
 	}
-?>		
+?>	
