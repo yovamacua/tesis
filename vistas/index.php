@@ -11,6 +11,12 @@
      $usuario->login();
  }
 
+if(isset($_SESSION["id_usuario"]))
+{
+   header("Location:".Conectar::ruta()."vistas/home.php");
+}
+else{
+// muestra si la session no existe
  ?>
  <!DOCTYPE html>
  <html>
@@ -186,3 +192,6 @@
  </script>
  </body>
  </html>
+<?php
+}
+?>

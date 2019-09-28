@@ -22,7 +22,9 @@
   //se declaran las variables de los valores que se envian por el formulario
   //y se valida que no se esten recibiendo vacias
 
+   //este es el que se envia del formulario
    $id_usuario = isset($_POST["id_usuario"]);
+
    $nombre=isset($_POST["nombre"]);
    $apellido=isset($_POST["apellido"]);
    $email=isset($_POST["email"]);
@@ -30,13 +32,21 @@
    $usuario=isset($_POST["usuario"]);
    $password1=isset($_POST["password1"]);
    $password2=isset($_POST["password2"]);
-   //este es el que se envia del formulario
+
    $estado=isset($_POST["estado"]);
 
    // switch para seleccionar opcion segun parametro enviado en la url
    switch($_GET["op"]){
    case "guardaryeditar":
 
+// se reciben las variables y se valida si el formato es correcto
+  if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $nombre) or 
+      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $apellido) or
+      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $usuario) or
+      $cargo < 0 or
+      !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $email) or
+      $estado < 0)
+      {
    /*verificamos si existe correo en la base de datos
    si ya existe un registro con esecorreo entonces no se registra el usuario*/
 
@@ -59,7 +69,6 @@
                                     $messages[]="El correo ya esta registrado";
 	                     	   }
 	                     } //cierre de la validacion empty que valida el id usuario no sea vacio
-
 	                     else {
              /*si ya existe entonces editamos el usuario*/
             $usuarios->editar_usuario($id_usuario,$nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado);
@@ -80,6 +89,12 @@
                      if (isset($errors)){
                        echo  error($errors);
             			}
+    // fin validacion   
+      }
+  else{ 
+      $errors[]="Formatos de Información no validos";
+      echo  error($errors);           
+    }
 	 //fin mensaje error
    // fin bloque de mensaje de notificacion
       break; // fin del primer caso
