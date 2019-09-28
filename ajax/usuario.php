@@ -40,13 +40,17 @@
    case "guardaryeditar":
 
 // se reciben las variables y se valida si el formato es correcto
-  if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $nombre) or 
-      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $apellido) or
-      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $usuario) or
-      $cargo < 0 or
-      !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $email) or
-      $estado < 0)
+  if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or 
+      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["apellido"]) or
+      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["usuario"]) or
+      $_POST["cargo"] < 0 or
+      !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $_POST["email"]) or
+      $_POST["estado"] < 0)
       {
+        $errors[]="Formatos de Información no validos";
+        echo  error($errors);
+      }
+      else{        
    /*verificamos si existe correo en la base de datos
    si ya existe un registro con esecorreo entonces no se registra el usuario*/
 
@@ -90,11 +94,7 @@
                        echo  error($errors);
             			}
     // fin validacion   
-      }
-  else{ 
-      $errors[]="Formatos de Información no validos";
-      echo  error($errors);           
-    }
+      }          
 	 //fin mensaje error
    // fin bloque de mensaje de notificacion
       break; // fin del primer caso
@@ -130,7 +130,6 @@
                  echo  error($errors);
       			}
 	        //fin de mensaje de error
-
 // inicio caso
          break;
          case "activarydesactivar":

@@ -30,14 +30,10 @@ else{
    <link rel="stylesheet" href="../public/bower_components/bootstrap/dist/css/bootstrap.min.css">
    <!-- Font Awesome -->
    <link rel="stylesheet" href="../public/bower_components/font-awesome/css/font-awesome.min.css">
-   <!-- Ionicons -->
-   <link rel="stylesheet" href="../public/bower_components/Ionicons/css/ionicons.min.css">
-   <!-- Theme style -->
+ <!-- Theme style -->
    <link rel="stylesheet" href="../public/dist/css/AdminLTE.min.css">
    <!-- iCheck -->
-   <link rel="stylesheet" href="../public/plugins/iCheck/square/blue.css">
 
-   <link rel="stylesheet" href="../assets/css/supersized.css">
 
    <!-- estilos adicionales para el formulario -->
    <style>
@@ -46,11 +42,13 @@ else{
          margin-top: -20px!important;
    }
    .login-box-body{
-     border-radius: 1rem;
          background: -moz-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.4) 100%);
          background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 100%);
          background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,255,255,0.4) 100%);
          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
+         -webkit-box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
    }
     .login-box{margin: auto!important;
     padding-top: 12rem!important;}
@@ -65,7 +63,7 @@ else{
    <!-- Google Font -->
    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
  </head>
- <body class="hold-transition login-page">
+ <body class="login-page bg-login">
  <div class="login-box">
    <!-- /.login-logo -->
    <div class="login-box-body">
@@ -119,7 +117,7 @@ else{
              ?>
 
              <div class="login-logo">
-               <a href="#"><b>Acceso</b></a>
+               <b style="color:black;">Acceso</b>
              </div>
          </div>
 
@@ -129,19 +127,17 @@ else{
    </div>
    <!-- Javascript -->
    <script src="../assets/js/jquery-1.8.2.min.js"></script>
-   <script src="../assets/js/supersized.3.2.7.min.js"></script>
-   <script src="../assets/js/supersized-init.js"></script>
    <script src="../assets/js/scripts.js"></script>
    <!--/container-fluid-->
  <!-- FIN MENSAJES DE ALERTA-->
 
  <!--login-box-msg-->
 
-     <p class="text-center pad text-bold bg-primary margin-bottom">Ingrese los datos</p>
+     <p class="text-center pad text-bold bg-primary margin-bottom"><i class="fa fa-user icon-title"></i> Ingrese sus datos</p>
 
      <form action="" method="post">
        <div class="form-group has-feedback">
-         <input type="email" name="correo" id="correo" class="form-control" placeholder="Email" required="required">
+         <input type="email" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto">
          <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
        </div>
        <div class="form-group has-feedback">
@@ -151,14 +147,17 @@ else{
 
         <div class="form-group">
          <input type="hidden" name="enviar" class="form-control" value="si">
-
        </div>
+
        <div class="row">
 
          <div class="col-xs-7 col-xs-offset-3 col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
-           <button type="submit" class="btn btn-primary btn-block btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i>  Iniciar Sesión</button>
+           <button type="submit" class="btn btn-primary bg-primary btn-block btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i>  Iniciar Sesión</button>
          </div>
-         <!-- /.col -->
+         <!-- /.col --> 
+         <div class="form-group" style="float: right; margin: 13px 15px 0px 0px;">
+         <a href="#" style="color:#5e99bb; font-size: 1.5rem;">¿No puede acceder?</a>
+       </div>
        </div>
      </form>
 
@@ -173,23 +172,10 @@ else{
 
  </div>
  <!-- /.login-box -->
-
-
  <!-- jQuery 3 -->
  <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
  <!-- Bootstrap 3.3.7 -->
  <script src="../public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
- <!-- iCheck -->
- <script src="../public/plugins/iCheck/icheck.min.js"></script>
- <script>
-   $(function () {
-     $('input').iCheck({
-       checkboxClass: 'icheckbox_square-blue',
-       radioClass: 'iradio_square-blue',
-       increaseArea: '20%' // optional
-     });
-   });
- </script>
  </body>
  </html>
 <?php

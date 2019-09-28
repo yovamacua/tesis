@@ -66,7 +66,7 @@
            <div class="form-row">
              <div class="form-group col-md-6">
 <label>Nombres</label>
-<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="25" required=""/>
+<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="25" required="" autofocus="autofocus" />
 <span class="error_form" id="error_nombre"></span>
               </div>
 
