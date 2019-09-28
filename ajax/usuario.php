@@ -2,6 +2,16 @@
 
   //llamar a la conexion de la base de datos
   require_once("../config/conexion.php");
+
+
+  /*llamar a todo los modelos de tablas asociados al usuario
+   para verificar si el usuario tiene registros asociados en las tablas de la base de datos*/
+  require_once("../modelos/Incidentes.php");
+  require_once("../modelos/Partidas.php");
+
+  /*AGREGAR LAS TABLAS QUE FALTAN AL TERMINAR PROYECTO */
+
+
   //llamar a el modelo Usuarios
   require_once("../modelos/Usuarios.php");
 
@@ -158,7 +168,7 @@
       //botones con valores de los campos en el id
       $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado('.$row["id_usuario"].','.$row["estado"].');" name="estado" id="'.$row["id_usuario"].'" class="'.$atrib.' hint--top" aria-label="Cambiar Estado">'.$est.'</button>
       <button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
-      <button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="glyphicon glyphicon-edit"></i></button></div>';
+      <button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
 	     $data[]=$sub_array;
      }
 
@@ -170,5 +180,46 @@
  			"aaData"=>$data);
       echo json_encode($results);
       break;
+
+      case "eliminar_usuario":
+
+     //verificamos si el usuario existe en las tablas si existe entonces el usuario no se elimina,
+     // si no existe entonces se puede eliminar el usuario
+              $incidente = new Incidentes();
+              $partida = new Partidas();
+
+              $inc= $incidente->get_incidente_por_id_usuario($_POST["id_usuario"]);
+              $par= $partida->get_partida_por_id_usuario($_POST["id_usuario"]);
+
+              if(
+                is_array($inc)==true and count($inc)>0 or
+                is_array($par)==true and count($par)>0
+                )
+              {
+              //si existe el usuario en las tablas, no se elimina.
+              $errors[]="El usuario existe en los registros, no se puede eliminar";
+              }//fin
+
+            else{
+                 $datos= $usuarios->get_usuario_por_id($_POST["id_usuario"]);
+               //si el usuario no existe en las tablas de la bd y que existe en la tabla de usuario entonces se elimina
+                 if(is_array($datos)==true and count($datos)>0){
+                      $usuarios->eliminar_usuario($_POST["id_usuario"]);
+                      $messages[]="El usuario se eliminó exitosamente";
+                 }
+
+
+            }
+            //mensaje success
+            if (isset($messages)){
+                 echo exito($messages);
+               }
+          //fin success
+          //mensaje error
+                if (isset($errors)){
+                  echo  error($errors);
+             }
+
+
      }
 ?>

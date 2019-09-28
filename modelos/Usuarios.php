@@ -132,7 +132,6 @@
           //se le pasa el id campurado por el boton
           $sql->bindValue(1, $id_usuario);
           $sql->execute();
-
           return $resultado=$sql->fetchAll();
 
    	    }
@@ -155,7 +154,6 @@
    	    	$sql->execute();
    	    }
 
-
    	    //valida correo
 
         public function get_correo_del_usuario($email){
@@ -166,6 +164,16 @@
         $sql->bindValue(1, $email);
         $sql->execute();
         return $resultado=$sql->fetchAll();
+      }
+
+      //método para eliminar un registro
+      public function eliminar_usuario($id_usuario){
+      $conectar=parent::conexion();
+      $sql="delete from usuarios where id_usuario=?";
+      $sql=$conectar->prepare($sql);
+      $sql->bindValue(1,$id_usuario);
+      $sql->execute();
+      return $resultado=$sql->fetch();
       }
    }
 

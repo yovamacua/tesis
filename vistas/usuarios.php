@@ -10,13 +10,18 @@
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        <section class="content-header">
+      <h1>
+        Listado de Usuarios
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+        <li><i class="fa fa-users"></i>Usuarios</li>
+      </ol>
+    </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-
-             <h2>Listado de Usuarios</h2>
-            <div class="row">
-              <div class="col-md-12">
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
@@ -46,8 +51,6 @@
                     </div>
                     <!--Fin centro -->
                   </div><!-- /.box -->
-              </div><!-- /.col -->
-          </div><!-- /.row -->
       </section><!-- /.content -->
   </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
@@ -60,62 +63,70 @@
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                  <h4 class="modal-title">Agregar Usuario</h4>
                </div>
-
-
-
            <div class="form-row">
              <div class="form-group col-md-6">
-               <label>Nombres</label>
-               <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" title="No se permite numeros" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+<label>Nombres</label>
+<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="25" required=""/>
+<span class="error_form" id="error_nombre"></span>
               </div>
+
               <div class="form-group col-md-6">
-                <label>Apellidos</label>
-                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellidos" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+<label>Apellidos</label>
+<input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellidos" maxlength="25" required=""/>
+<span class="error_form" id="error_apellido"></span>
                </div>
              </div>
 
              <div class="form-row">
                <div class="form-group col-md-6">
-                 <label>Usuario</label>
-                 <input type="text" name="usuario" id="usuario" class="form-control" placeholder="Usuario"  title="No se permite numeros" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+<label>Usuario</label>
+<input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Usuario" maxlength="15" required=""/>
+<span class="error_form" id="error_usuario"></span>
                   </div>
+
+
                 <div class="form-group col-md-6">
-                  <label>Cargo</label>
-                   <select class="form-control" id="cargo" name="cargo" required>
-                      <option value="">-- Selecciona cargo --</option>
-                      <option value="1" selected>Administrador</option>
-                      <option value="0">Empleado</option>
-                   </select>
-                 </div>
+<label>Cargo</label>
+   <select class="form-control" id="cargo" name="cargo">
+      <option value="">-- Selecciona cargo --</option>
+      <option value="1">Administrador</option>
+      <option value="0">Empleado</option>
+      </select>
+      <span class="error_form" id="error_cargo"></span>
+                </div>
                </div>
 
                <div class="form-row">
                  <div class="form-group col-md-12">
-                   <label>Correo</label>
-                   <input type="email" name="email" id="email" class="form-control" placeholder="Correo" title="Utilizar una direccion de correo" required="required"/>
+<label>Correo</label>
+<input type="email" name="email" id="email" class="form-control" placeholder="Correo" required=""/>
+<span class="error_form" id="error_email"></span>
                   </div>
                  </div>
 
-
                <div class="form-row">
                  <div class="form-group col-md-6">
-                   <label>Password</label>
-                   <input type="password" name="password1" id="password1" class="form-control" placeholder="Password" required/>
+<label>Password</label>
+<input  type="password" name="password1" id="password1" class="form-control" placeholder="Password" required="" maxlength="20"/>
+<span class="error_form" id="error_password1" ></span>
                   </div>
+                  
                   <div class="form-group col-md-6">
-                    <label>Repita Password</label>
-                    <input type="password" name="password2" id="password2" class="form-control" placeholder="Repita Password" required/>
+<label>Repita Password</label>
+<input type="password" name="password2" id="password2" class="form-control" placeholder="Repita Password" required="" maxlength="20"/>
+<span class="error_form" id="error_password2"></span>
                    </div>
                  </div>
 
                  <div class="form-row">
                     <div class="form-group col-md-12">
                       <label>Estado</label>
-                       <select class="form-control" id="estado" name="estado" required>
-                          <option value="">-- Selecciona estado --</option>
-                          <option value="1" selected>Activo</option>
-                          <option value="0">Inactivo</option>
-                       </select>
+<select class="form-control" id="estado" name="estado" required="">
+    <option value="">-- Selecciona estado --</option>
+    <option value="1" selected>Activo</option>
+    <option value="0">Inactivo</option>
+</select>
+<span class="error_form" id="error_estado"></span>
                      </div>
                     </div>
 
