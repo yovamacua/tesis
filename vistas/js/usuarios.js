@@ -366,8 +366,8 @@ $(function() {
 				$('#apellido').val(data.apellido);
 				$('#cargo').val(data.cargo);
 				$('#usuario').val(data.usuario);
-				$('#password1').val(data.password1);
-				$('#password2').val(data.password2);
+				//$('#password1').val(data.password1);
+				//$('#password2').val(data.password2);
 				$('#email').val(data.correo);
 				$('#estado').val(data.estado);
 				$('.modal-title').text("Editar Usuario");
@@ -430,7 +430,6 @@ $(function() {
 //ELIMINAR USUARIO
 
   function eliminar(id_usuario){
-
 
      bootbox.confirm("¿Está Seguro de eliminar el usuario?", function(result){
    if(result)

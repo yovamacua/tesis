@@ -1,9 +1,21 @@
+//EDITAR ESTADO DEL USUARIO
+       //importante:id_usuario, est se envia por post via ajax
 //una vez se da click a submit se llama a la funcion editar_perfil(e)
 
 	$("#perfil_form").on("submit",function(e)
 	{
 		editar_perfil(e);
 	});
+
+
+function saliendo(){
+     bootbox.confirm("¿Está Seguro de salir del sistema?", function(result){
+   if(result)
+   {
+    location = 'logout.php';
+   }
+  });
+}
 
 //MOSTRAR PERFIL DE USUARIO
 function mostrar_perfil(id_usuario_perfil)

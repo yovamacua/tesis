@@ -15,6 +15,11 @@
       $correo = $_POST["correo"];
       $estado = "1";
 
+      if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["correo"])){
+           header("Location:".Conectar::ruta()."vistas/index.php?m=1");
+    exit();
+  }else{
+    
       // valida si los campos son enviados vacios
         if(empty($correo) and empty($password)){
           header("Location:".Conectar::ruta()."vistas/index.php?m=2");
@@ -26,11 +31,12 @@
     } */
 
      else {
-          $sql= "select * from usuarios where correo=? and password=? and estado=?";
+          $sql= "select * from usuarios where correo=? or usuario=? and password=? and estado=?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1, $correo);
-          $sql->bindValue(2, $password);
-          $sql->bindValue(3, $estado);
+          $sql->bindValue(2, $correo);
+          $sql->bindValue(3, sha1($password));
+          $sql->bindValue(4, $estado);
           $sql->execute();
           $resultado = $sql->fetch();
               //si existe el registro entonces se conecta en session
@@ -48,6 +54,8 @@
                }
            }//cierre del else
     }//condicion enviar
+  }
+
 }
 
 
@@ -78,8 +86,8 @@
              $sql->bindValue(3, $_POST["email"]);
              $sql->bindValue(4, $_POST["cargo"]);
              $sql->bindValue(5, $_POST["usuario"]);
-             $sql->bindValue(6, $_POST["password1"]);
-             $sql->bindValue(7, $_POST["password2"]);
+             $sql->bindValue(6, sha1($_POST["password1"]));
+             $sql->bindValue(7, sha1($_POST["password2"]));
              $sql->bindValue(8, $_POST["estado"]);
              //se ejecuta
              $sql->execute();
@@ -111,8 +119,8 @@
              $sql->bindValue(3,$_POST["email"]);
              $sql->bindValue(4,$_POST["cargo"]);
              $sql->bindValue(5,$_POST["usuario"]);
-             $sql->bindValue(6,$_POST["password1"]);
-             $sql->bindValue(7,$_POST["password2"]);
+             $sql->bindValue(6,sha1($_POST["password1"]));
+             $sql->bindValue(7,sha1($_POST["password2"]));
              $sql->bindValue(8,$_POST["estado"]);
              $sql->bindValue(9,$_POST["id_usuario"]);
              $sql->execute();

@@ -12,7 +12,7 @@
       <div class="content-wrapper">
         <section class="content-header">
       <h1>
-        Listado de Usuarios
+        Administración de Usuarios
       </h1>
       <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>

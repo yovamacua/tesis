@@ -66,5 +66,8 @@
   <!--LIBRERIA DE MENSAJE MODAL-->
 <script src="js/bootbox.min.js"></script>
 
+<!-- boton bonito resposive -->
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/r-2.2.0/sl-1.2.3/datatables.min.js"></script>
+
 </body>
 </html>

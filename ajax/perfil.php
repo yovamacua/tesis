@@ -2,6 +2,7 @@
 
 //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
+  require_once("mensajes.php");
   //llamo al modelo Perfil
   require_once("../modelos/Perfil.php");
   $perfil = new Perfil();
@@ -43,19 +44,9 @@
                 $errors[]="El usuario no existe";
           }
            //inicio de mensaje de error
-        if (isset($errors)){
-          ?>
-          <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                foreach ($errors as $error) {
-                    echo $error;
+          if (isset($errors)){
+            echo  error($errors);
                   }
-                ?>
-          </div>
-          <?php
-            }
           //fin de mensaje de error
        break;
 
@@ -75,36 +66,16 @@
     else {
         $errors[]="El password no coincide";
     }
-     //mensaje success
-     if (isset($messages)){
-        ?>
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Bien hecho!</strong>
-            <?php
-              foreach ($messages as $message) {
-                  echo $message;
-                }
-              ?>
-        </div>
-        <?php
-      }
+                 //mensaje success
+                 if (isset($messages)){
+                      echo exito($messages);
+                    }
    //fin success
 
-   //mensaje error
-         if (isset($errors)){
-      ?>
-        <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>Error!</strong>
-            <?php
-              foreach ($errors as $error) {
-                  echo $error;
-                }
-              ?>
-        </div>
-      <?php
-      }
+               //mensaje error
+                     if (isset($errors)){
+                       echo  error($errors);
+                  }
    //fin mensaje error
         break;
    }

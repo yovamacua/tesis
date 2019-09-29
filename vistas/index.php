@@ -137,12 +137,14 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
 
      <form action="" method="post">
        <div class="form-group has-feedback">
-         <input type="email" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto">
-         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+         <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto">
+         <span class="glyphicon glyphicon-user form-control-feedback"></span>
+         <span class="error_form" id="error_correo"></span>
        </div>
        <div class="form-group has-feedback">
-         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required">
          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+         <span class="error_form" id="error_password"></span>
        </div>
 
         <div class="form-group">
@@ -161,11 +163,52 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
        </div>
      </form>
 
+<script type="text/javascript">
+  
+$(function() {
+   //creando variables y ocultando campos de error
+         $("#error_correo").hide();
+         $("#error_password").hide();
+                
+   // se ejecuta funcion en el id del control cuando se pierde el foco
+         $("#correo").focusout(function(){
+            campo_correo();
+         });
+
+         $("#password").focusout(function(){
+            campo_password();
+         });
+       
+       function campo_correo() {
+            var correo = $("#correo").val().length;
+            if (correo <= 0) {
+               $("#error_correo").html("Debe completar este campo");
+               $("#error_correo").show();
+               $("#correo").css("border-bottom","2px solid #F90A0A");
+               $("#error_correo").css("color","red");
+            } else {
+               $("#error_correo").hide();
+               $("#correo").css("border-bottom","1px solid #d2d6de");
+            }
+         }
+
+       function campo_password() {
+            var password = $("#password").val().length;
+            if (password <= 0) {
+               $("#error_password").html("Debe completar este campo");
+               $("#error_password").show();
+               $("#password").css("border-bottom","2px solid #F90A0A");
+               $("#error_password").css("color","red");
+            } else {
+               $("#error_password").hide();
+               $("#password").css("border-bottom","1px solid #d2d6de");
+            }
+         }        
+ });
 
 
-     <!--<a href="#">I forgot my password</a><br>-->
 
-
+</script>
 
    </div>
    <!-- /.login-box-body -->
