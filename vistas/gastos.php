@@ -33,8 +33,7 @@
                                   <th>Fecha</th>
                                   <th>Descripcion</th>
                                   <th>Gasto</th>
-                                  <th width="10%">Editar</th>
-                                  <th width="10%">Eliminar</th>
+                                  <th>Acciones</th>
                                   </tr>
                               </thead>
                             <tbody>
@@ -58,7 +57,7 @@
                  <h4 class="modal-title">Agregar Gasto</h4>
                </div>
 
-          <div class="modal-body">
+         
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
           $( function() {
@@ -67,17 +66,25 @@
           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
 
-          <label>Fecha</label>
-          <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
-          <br />
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha</label>
+              <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
+            </div>
+            <div class="form-group col-md-6">
+            <label>Gasto</label>
+            <input type="number" step="any" name="precio" id="precio" class="form-control" placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+          </div>
+        </div>
 
-          <label>Descripcion</label>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+          <label>Descripción</label>
           <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-          <br />
+        </div>  
 
-          <label>Gasto</label>
-          <input type="number" step="any" name="precio" id="precio" class="form-control" placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-          <br />
+          
+          
  
                </div>
                <div class="modal-footer">

@@ -8,7 +8,7 @@
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
 	$perdidas = new Perdidas();
- 
+	
 	$id_perdida = isset($_POST["id_perdida"]);
 	$nombreProduc = isset($_POST["nombreProduc"]);
 	$cantidad = isset($_POST["cantidad"]);
@@ -127,8 +127,9 @@ switch ($_GET["op"]) {
 		     	$sub_array[] = $row["mes"];
 		     	$sub_array[] = $row["anio"];
 		     	$sub_array[] = $row["unidadDelProduc"];
-		     	$sub_array[] = '<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-		     	$sub_array[] = '<button type="button" onClick="eliminar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+		     	$sub_array[] = '<div class="cbtns">
+		     	<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>
+      			<button type="button" onClick="eliminar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="glyphicon glyphicon-edit"></i></button></div>';
 		      	$data[] = $sub_array;
 		      }
 

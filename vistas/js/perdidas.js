@@ -1,6 +1,6 @@
 var tabla;
  
-//funcion que se ejecuta al inicio
+//funcion que se ejecuta al inicio 
 function init(){
 	listar();
 	//cuando se de click al boton submit se ejecuta la funcion guardar
@@ -10,7 +10,7 @@ function init(){
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
-		$(".modal-title").text("Agregar perdida");
+		$(".modal-title").text("Agregar Pérdida");
 	});
 
 }
@@ -106,29 +106,33 @@ function mostrar(id_perdida){
 	 });
  
 }  
-	//la funcion guardaryeditar(e); se llama cuando se da click al boton submit
-	function guardaryeditar(e){
-		e.preventDefault(); // no se activa la accion predeterminada del evento
-		var formData = new FormData($("#perdida_form")[0]);
+ //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
+function guardaryeditar(e)
+{
+ e.preventDefault(); //No se activará la acción predeterminada del evento
+ var formData = new FormData($("#perdida_form")[0]);
 
-	    $.ajax({
-	     	url: "../ajax/perdida.php?op=guardaryeditar",
-	       	type: "POST",
-	       	data: formData,
-	       	contentType: false,
-	       	processData: false,
+   $.ajax({
+     url: "../ajax/perdida.php?op=guardaryeditar",
+       type: "POST",
+       data: formData,
+       contentType: false,
+       processData: false,
 
-	       	success: function(datos){
-	      		console.log(datos);
-		       	$('#perdida_form')[0].reset();
-		       	$('#perdidaModal').modal('hide');
-		       	$('#resultados_ajax').html(datos);
-		       	$('#perdida_data').DataTable().ajax.reload();
-		        limpiar();
-	       }
+       success: function(datos)
+       {
+      console.log(datos);
+       $('#perdida_form')[0].reset();
+       $('#perdidaModal').modal('hide');
+       $('#resultados_ajax').html(datos);
+       $('#perdida_data').DataTable().ajax.reload();
+               limpiar();
 
-	   	});
-	}
+       }
+
+   });
+
+}
 
 function eliminar(id_perdida){
 

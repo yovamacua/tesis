@@ -32,10 +32,9 @@
                                 <tr>
                                   <th>Fecha</th>
                                   <th>donante</th>
-                                  <th>Descripcion</th>
+                                  <th>Descripción</th>
                                   <th>Cantidad</th>
-                                  <th width="10%">Editar</th>
-                                  <th width="10%">Eliminar</th>
+                                  <th>Acciones</th>
                                   </tr>
                               </thead>
                             <tbody>
@@ -59,7 +58,6 @@
                  <h4 class="modal-title">Agregar Donación</h4>
                </div>
 
-          <div class="modal-body">
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
           $( function() {
@@ -67,30 +65,33 @@
           } );
           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>Fecha</label>
+              <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
+            </div>
+            <div class="form-group col-md-6">
+              <label>Donante</label>
+              <input type="text" name="donante" id="donante" class="form-control" placeholder="nombre del donante" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+          </div>
+        </div>
 
-          <label>Fecha</label>
-          <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
-          <br />
-
-          <label>Donante</label>
-          <input type="text" name="donante" id="donante" class="form-control" placeholder="nombre del donante" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-          <br />
-
-          <label>Descripcion</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-          <br />
-
-          <label>Cantidad</label>
-          <input type="number" step="any" name="cantidad" id="cantidad" class="form-control" placeholder="cantidad" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-          <br />
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Descripción</label>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Cantidad</label>
+            <input type="number" step="any" name="cantidad" id="cantidad" class="form-control" placeholder="cantidad" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+          </div>
+        </div>
  
-               </div>
-               <div class="modal-footer">
-                  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-                  <input type="hidden" name="id_donacion" id="id_donacion"/>
-                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
-                  <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-               </div>
+                <div class="modal-footer">
+                 <input type="hidden" name="id_usuario" id="id_usuario"/>
+                 <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+              <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+              </div>
             </div>
          </form>
       </div>

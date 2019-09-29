@@ -37,18 +37,18 @@
        <li class="">
         <a href="perdidas.php">
           <i class="fa fa-tasks" aria-hidden="true"></i> <span>Perdidas</span>
-          <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">20</i>
-          </span>
         </a>
       </li>
 
       <li class="">
         <a href="donaciones.php">
           <i class="fa fa-tasks" aria-hidden="true"></i> <span>Donaciones</span>
-          <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">20</i>
-          </span>
+        </a>
+      </li>
+
+      <li class="">
+        <a href="gastos.php">
+          <i class="fa fa-tasks" aria-hidden="true"></i> <span>Gastos</span>
         </a>
       </li>
 
