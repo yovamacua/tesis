@@ -82,7 +82,7 @@ try{
             $sql->bindValue(5, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_producto"], PDO::PARAM_INT);
             $sql->bindValue(7, $_POST["stock"], PDO::PARAM_INT);
-              echo $sql->execute();
+               $sql->execute();
 
               
             } catch (PDOException $ex) {

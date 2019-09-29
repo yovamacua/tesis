@@ -1,0 +1,283 @@
+<?php 
+//llamo a la conexion de la base de datos 
+  require_once("../config/conexion.php");
+  //llamo al modelo Producto
+  require_once("../modelos/Venta.php");
+  require_once("mensajes.php");
+  require_once("../modelos/Productos.php");
+  $productos = new Producto();
+  $venta = new Ventas();
+
+ $id_usuario = isset($_POST["id_usuario"]);
+ $estado=isset($_POST["estado"]);
+ $idventas=isset($_POST["idventas"]);
+$numero_venta=isset($_POST["numero_venta"]);
+$total_pagar=isset($_POST["total_pagar"]);
+$id_producto=isset( $_POST["id_producto"]);
+$precio_venta=isset( $_POST["precio_venta"]);
+$cantidad=isset( $_POST["cantidad"]);
+
+   switch($_GET["op"]){
+   case "guardaryeditar":
+
+      /*verificamos si existe el producto en la base de datos, si ya existe un registro con la categoria entonces no se registra la categoria*/
+      
+      //importante: se debe poner el $_POST sino no funciona
+       $datos = $venta->get_venta_por_id($_POST["idventas"]);
+
+    
+             /*si el id no existe entonces lo registra
+             importante: se debe poner el $_POST sino no funciona*/
+            if(empty($_POST["idventas"])){
+
+            /*verificamos si existe el producto en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
+
+                 if(is_array($datos)==true and count($datos)==0){
+
+                    //no existe el producto por lo tanto hacemos el registros
+
+      $venta->registro_ventas($total_pagar,$numero_venta,$id_usuario,$_POST["id_producto"], $_POST["cantidad"],$_POST["precio_venta"]);
+
+
+
+                    $messages[]="La venta se realizo existosamente";
+
+                 } //cierre de validacion de $datos 
+
+
+                    /*si ya existe el producto entonces aparece el mensaje*/
+                      else {
+
+                          $errors[]="la venta no se realizo";
+                      }
+
+          }//cierre de empty
+
+
+     //mensaje success
+     if (isset($messages)){
+        echo exito($messages);
+      }
+   //fin success
+
+   //mensaje error
+         if (isset($errors)){
+      
+      echo error($messages);
+      }
+
+   //fin mensaje error
+
+
+     break;
+   	case "listar":
+
+     $datos=$venta->getventas();
+ 	 $data= Array();
+
+    	foreach ($datos as $row) {
+ 			$sub_array = array();
+       if($row["estado"] == 1){
+            $est = 'ACEPTADO';
+            $atrib = '<span class="label bg-green">Aceptado</span>';
+             $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>'.
+          ' <button class="btn btn-danger" onClick="anularventa('.$row["idventas"].','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="btn btn-danger btn-md fa fa-close">Anular</button>';
+          }else{
+                $est = 'ANULADO';
+                $atrib='<span class="label bg-red">Anulado</span>';
+                 $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
+
+            }
+     
+         
+                 $sub_array[] = $row["usuario"];
+                   $sub_array[] = $row["fechaventa"];
+                 $sub_array[] = $row["numero_venta"];
+                 $sub_array[] = $row["total_pagar"];
+              
+	       
+             $sub_array[] =$atrib;
+       
+          /*$sub_array[]='<button class="btn btn-warning btn-md mostrar" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye">Mostrar</i></button>';*/
+         
+
+           $data[]=$sub_array;
+ 		}
+
+ 		$results = array(
+ 			"sEcho"=>1, //Información para el datatables
+ 			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
+ 			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+ 			"aaData"=>$data);
+ 		echo json_encode($results);
+      
+     break;
+     case "anular":
+      //los parametros idventas y estado vienen por via ajax
+              $datos = $venta->get_venta_por_id($_POST["idventas"]);
+                //valida el id del usuario
+                 if(is_array($datos)==true and count($datos)>0){
+                  //anula  la venta
+                    $venta->anularventa($_POST["idventas"],$_POST["estado"]);
+                      $messages[]=" La venta se anulo";
+     }else {
+       $errors[]="No  se puede anular la venta";
+     }
+
+if (isset($messages)){
+        echo exito($messages);
+      }
+   //fin success
+
+   //mensaje error
+         if (isset($errors)){
+      
+      echo error($errors);
+      }
+                 break;
+      case  'listarProductoVenta':
+   $datos=$productos->get_productos();
+   $data= Array();
+
+     foreach($datos as $row){
+ $sub_array = array();
+      if($row["stock"]<=1){
+                      
+                     $stock = $row["stock"];
+                     $atributo = "badge bg-red-active";
+                     $sub_array[] = ' <button type="button" class="btn btn-danger btn-md fa fa-close"></button>';
+                            
+         
+          } else {
+
+             $stock = $row["stock"];
+                     $atributo = "badge bg-green";
+                      $sub_array[] = ' <button class="btn btn-warning" onclick="agregarDetalle('.$row["id_producto"].',\''.$row["producto"].'\','.$row["precio_venta"].')" <span class="fa fa-plus">+</span></button>';
+                   }
+    
+    
+         
+                 $sub_array[] = $row["producto"];
+                   $sub_array[] = $row["categoria"];
+               $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'
+                  </span>';
+                 $sub_array[] = $row["precio_venta"];
+                  /* $sub_array[] = ' <button type="button" onClick="gregarDetalle('.$row["id_producto"].','.$row["producto"].');" name="estado" id="'.$row["id_producto"].'" class="btn btn-danger btn-md fa fa-close">Agregar</button>';*/
+
+           $data[]=$sub_array;
+    }
+    $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+  break;
+
+  case "buscar_ventas_fecha":
+          
+     $datos=$venta->lista_busca_registros_fecha($_POST["fecha_inicial"], $_POST["fecha_final"]);
+
+     //Vamos a declarar un array
+   $data= Array();
+
+    foreach($datos as $row)
+      {
+        $sub_array = array();
+
+        $est = '';
+        
+         $atrib = "btn btn-danger btn-md estado";
+        if($row["estado"] == 1){
+          $est = 'PAGADO';
+          $atrib = "btn btn-success btn-md estado";
+        }
+        else{
+          if($row["estado"] == 0){
+            $est = 'ANULADO';
+           
+          } 
+        }
+
+        
+         $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
+         
+         $sub_array[] = $row["vendedor"];
+         $sub_array[] = $row["total_pagar"];
+         $sub_array[] = $row["numero_venta"];
+         $sub_array[] = date("d-m-Y",strtotime($row["fechaventa"]));
+
+           /*IMPORTANTE: poner \' cuando no sea numero, sino no imprime*/
+                 $sub_array[] = '<button type="button" onClick="cambiarEstado('.$row["idventas"].',\''.$row["numero_venta"].'\','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="'.$atrib.'">'.$est.'</button>';
+                
+        $data[] = $sub_array;
+      }
+
+
+
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+
+
+     break;
+     case "buscar_ventas_fecha_mes":
+
+      
+      $datos= $venta->lista_busca_registros_fecha_mes($_POST["mes"],$_POST["ano"]);
+
+
+        //Vamos a declarar un array
+      $data= Array();
+
+        foreach($datos as $row)
+        {
+            $sub_array = array();
+
+            $est = '';
+            
+             $atrib = "btn btn-danger btn-md estado";
+            if($row["estado"] == 1){
+              $est = 'PAGADO';
+              $atrib = "btn btn-success btn-md estado";
+            }
+            else{
+              if($row["estado"] == 0){
+                $est = 'ANULADO';
+               
+              } 
+          }
+
+        
+       
+      $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
+        
+         $sub_array[] = $row["vendedor"];
+         $sub_array[] = $row["total_pagar"];
+         $sub_array[] = $row["numero_venta"];
+         $sub_array[] = date("d-m-Y", strtotime($row["fechaventa"]));
+           /*IMPORTANTE: poner \' cuando no sea numero, sino no imprime*/
+                 $sub_array[] = '<button type="button" onClick="cambiarEstado('.$row["idventas"].',\''.$row["numero_venta"].'\','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="'.$atrib.'">'.$est.'</button>';
+                
+        $data[] = $sub_array;
+        
+        }
+
+
+      $results = array(
+      "sEcho"=>1, //Información para el datatables
+      "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+      "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+      "aaData"=>$data);
+    echo json_encode($results);
+
+
+     break;
+
+ }
+
+ ?>
