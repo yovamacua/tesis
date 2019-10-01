@@ -137,12 +137,12 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
 
      <form action="" method="post">
        <div class="form-group has-feedback">
-         <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto">
+         <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto" autocomplete="off">
          <span class="glyphicon glyphicon-user form-control-feedback"></span>
          <span class="error_form" id="error_correo"></span>
        </div>
        <div class="form-group has-feedback">
-         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required">
+         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required" autocomplete="off">
          <span class="glyphicon glyphicon-lock form-control-feedback"></span>
          <span class="error_form" id="error_password"></span>
        </div>

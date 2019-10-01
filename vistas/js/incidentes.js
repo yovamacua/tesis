@@ -119,7 +119,7 @@ function guardaryeditar(e)
 
        success: function(datos)
        {
-      console.log(datos);
+      //console.log(datos);
        $('#incidente_form')[0].reset();
        $('#incidenteModal').modal('hide');
        $('#resultados_ajax').html(datos);

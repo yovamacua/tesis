@@ -73,7 +73,7 @@ padding: 1%;
 
 .alert-success{
   position: fixed;
-  bottom: 0;
+  bottom: 20px;
   right: 5px;
   width: 30%;
   background-color: white!important;
@@ -159,7 +159,9 @@ body.classList.add("sidebar-collapse");
   <!--Fin-Contenido-->
 
 <?php
+ $invalidar = 1;
   require_once("footer.php");
+
 ?>
 <script>
 $(document).ready(function(){

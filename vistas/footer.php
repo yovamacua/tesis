@@ -67,7 +67,10 @@
 <script src="js/bootbox.min.js"></script>
 
 <!-- boton bonito resposive -->
+<?php
+if (isset($invalidar)) {
+}else{ ?>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/r-2.2.0/sl-1.2.3/datatables.min.js"></script>
-
+  <?php } ?>
 </body>
 </html>

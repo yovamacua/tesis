@@ -32,7 +32,7 @@ $result = $query;
         {
  $sub_array = array();
 
- $sub_array[] = '<div id="'.$fila["id_entrada"].'" data-id="'.$fila["id_entrada"].'" ><div class="handle"></div></div>';
+ $sub_array[] = '<div class="mvdown" id="'.$fila["id_entrada"].'" data-id="'.$fila["id_entrada"].'" ><div class="handle"></div></div>';
 
  $sub_array[] = '<div id="'.$fila["id_entrada"].'" onkeypress="return (this.innerText.length <= 100)" ondblclick="this.contentEditable=true;" class="update" data-id="'.$fila["id_entrada"].'" data-column="ActGeneral">' . $fila["ActGeneral"] . '</div>';
 
