@@ -174,7 +174,7 @@ $(document).ready(function(){
   update  : function(event, ui)
   {
    var page_id_array = new Array();
-   $('tbody#sortable tr td div').each(function(){
+   $('tbody#sortable tr td div.mvdown').each(function(){
     page_id_array.push($(this).attr("id"));
     $.blockUI({
       message: '<img src="../public/plugins/BlockUI/loading.gif" /><br><h3> Procesando... por favor espere.</h3>',
@@ -295,6 +295,7 @@ $(function() {
   if(contador == 0)
    {
     var html = '<tr class="special">';
+    html += '<td id="data0"></td>';
    html += '<td contenteditable id="data1" onkeypress="return (this.innerText.length <= 100)"></td>';
    html += '<td contenteditable id="data2" onkeypress="return (this.innerText.length <= 100)"></td>';
    html += '<td contenteditable id="data3" onkeypress="return (this.innerText.length <= 100)"></td>';
