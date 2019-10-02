@@ -3,6 +3,7 @@
     if(isset($_SESSION["id_usuario"])){
 ?>
 <?php
+$activar = 'item_partidas';
   require_once("header.php");
 ?>
   <!--Contenido-->

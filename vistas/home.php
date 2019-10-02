@@ -3,7 +3,9 @@
     if(isset($_SESSION["correo"])){
 ?>
 
-<?php require_once("header.php");?>
+<?php
+$activar = 'item_home';
+require_once("header.php");?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->

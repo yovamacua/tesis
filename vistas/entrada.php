@@ -100,12 +100,28 @@ cursor: default;
     cursor: move;
     background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAH0lEQVQIW2OcN2/efwYgSEpKYgTRjBgCIFFkAFaGDAC2jQgFaRPeawAAAABJRU5ErkJggg==) repeat;
 }
+[contenteditable="true"]:active,
+[contenteditable="true"]:focus{
+border:dashed 1px black;
+-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+padding: 0.2rem!important;
+}
+.special td:focus{border:dashed 1px black;
+-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+padding: 0.2rem!important;}
+
 /*.table-responsive{overflow-x: visible!important;}*/
 .ui-sortable-handle{background-color:white!important;cursor: move!important;}
 .ui-sortable-helper{background-color:#f9f9f9!important; height:auto!important;cursor: -webkit-grabbing!important; cursor: grabbing!important;}
 thead>tr>th:first-child{padding: 5px!important;}
 table>tbody>tr>td:first-child{padding: 5px!important;}
-
+body{font-size: 15px!important;}
+.panel-body{padding: 0px!important;}
+.col-md-12{padding: 0px!important;}
 </style>
 <!--- Cargar sidebar menu colapsado -->
 <script type="text/javascript">
@@ -139,7 +155,7 @@ body.classList.add("sidebar-collapse");
                              <th scope="col">Plazo <br>Inicio</th>
                              <th scope="col">Plazo <br>Fin</th>
                              <th scope="col">Indicador<br>de Logro</th>
-                             <th scope="col">Acción</th>
+                             <th scope="col"></th>
                             </tr>
                            </thead>
                            <tbody id="sortable">

@@ -54,7 +54,7 @@ $result = $query;
 
  $sub_array[] = '<div onkeypress="return (this.innerText.length <= 10)"  ondblclick="this.contentEditable=true;" class="update" data-id="'.$fila["id_entrada"].'" data-column="Logro">' . $fila["Logro"] . '</div>';
 
- $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete" id="'.$fila["id_entrada"].'">Borrar</button>';
+ $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete hint--left" aria-label="Eliminar Registro" id="'.$fila["id_entrada"].'"><i style="font-size: 18px;" class="fa fa-trash"></i></button>';
 
  $data[] = $sub_array;
         }

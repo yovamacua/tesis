@@ -4,9 +4,10 @@
 ?>
 
 <?php
-  require_once("header.php");
+//crear esta variable para indicar si esta activo o no el item
+$activar = 'item_usuarios';
+require_once("header.php");
 ?>
-
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">

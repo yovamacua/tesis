@@ -7,27 +7,29 @@
     <!-- sidebar menu: : style can be found in sidebar.less -->
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MENU</li>
-      <li class="">
+      <li <?php if(isset($activar) and $activar == 'item_home'){?>class="active"<?php }else{?> class=""<?php }?> >
+
         <a href="home.php">
           <i class="fa fa-home" aria-hidden="true"></i> <span>Inicio</span>
         </a>
 
       </li>
-      <li class="">
+      <!-- linea de codigo para validar el color -->
+      <li <?php if(isset($activar) and $activar == 'item_usuarios'){?>class="active"<?php }else{?> class=""<?php }?> >
         <a href="usuarios.php">
           <i class="fa fa-user" aria-hidden="true"></i> <span>Usuarios</span>
         </a>
 
       </li>
 
-       <li class="">
+      <li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active"<?php }else{?> class=""<?php }?> >
         <a href="incidentes.php">
           <i class="fa fa-list" aria-hidden="true"></i> <span>Incidentes</span>
         </a>
 
       </li>
 
-      <li class="">
+      <li <?php if(isset($activar) and  $activar == 'item_partidas'){?>class="active"<?php }else{?> class=""<?php }?> >
        <a href="partidas.php">
          <i class="fa fa-list" aria-hidden="true"></i> <span>Partidas</span>
        </a>
