@@ -9,14 +9,22 @@ $activar = 'item_incidentes';
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        <section class="content-header">
+      <h1>
+        Administración de Incidentes
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+        <li><i class="fa fa-book"></i> Incidentes</li>
+      </ol>
+    </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Listado de Incidentes</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#incidenteModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Incidente</button></h1>
                         <div class="box-tools pull-right">
@@ -24,15 +32,14 @@ $activar = 'item_incidentes';
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive">
+                    <div class="panel-body table-responsive tabla-top">
                           <table id="incidente_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="5%">Titulo</th>
-                                <th width="5%">Descripcion</th>
-                                <th width="5%">Fecha</th>
-                                <th width="5%">Editar</th>
-                                <th width="5%">Eliminar</th>
+                                <th>Titulo</th>
+                                <th>Descripcion</th>
+                                <th>Fecha</th>
+                                <th width="15%">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -58,12 +65,14 @@ $activar = 'item_incidentes';
         <div class="modal-body">
 
           <label>Titulo</label>
-          <input type="text" name="titulo" id="titulo" class="form-control" placeholder="Titulo" required/>
+          <input type="text" maxlength="50" name="titulo" id="titulo" class="form-control" placeholder="Titulo" required/>
+          <span class="error_form" id="error_titulo"></span>
           <br />
 
 
-          <label>Descripcion</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required/>
+          <label>Descripción</label>
+          <textarea rows="4" maxlength="500" cols="50" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+          <span class="error_form" id="error_descripcion"></span>
           <br />
 
           <!--- codigo para mostrar calendario jquery IU -->
@@ -76,6 +85,7 @@ $activar = 'item_incidentes';
 
           <label>Fecha</label>
           <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
+          <span class="error_form" id="error_fecha"></span>
           <br />
 
         </div>

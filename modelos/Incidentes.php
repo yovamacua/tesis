@@ -26,23 +26,27 @@
         }
         //método para insertar registros
 
-        public function registrar_incidentes($titulo,$descripcion,$fecha,$id_usuario){
+        public function registrar_incidentes($titulo,$descripcion,$id_usuario){
            $conectar= parent::conexion();
            parent::set_names();
 
            $sql="insert into incidentes
            values(null,?,?,?,?);";
 
+          $date = $_POST["fecha"];
+          $date_inicial = str_replace('-', '-', $date);
+          $fecha = date("Y-m-d",strtotime($date_inicial));
+
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["titulo"]);
           $sql->bindValue(2,$_POST["descripcion"]);
-          $sql->bindValue(3,$_POST["fecha"]);
+          $sql->bindValue(3,$fecha);
 		      $sql->bindValue(4,$_POST["id_usuario"]);
 		      $sql->execute();
 
         }
 
-        public function editar_incidentes($id_incidente,$titulo,$descripcion,$fecha,$id_usuario){
+        public function editar_incidentes($id_incidente,$titulo,$descripcion,$id_usuario){
 
         	$conectar=parent::conexion();
         	parent::set_names();
@@ -56,10 +60,14 @@
             id_incidente=?
         	";
 
+            $date = $_POST["fecha"];
+            $date_inicial = str_replace('-', '-', $date);
+            $fecha = date("Y-m-d",strtotime($date_inicial));
+
         	  $sql=$conectar->prepare($sql);
 		          $sql->bindValue(1,$_POST["titulo"]);
 		          $sql->bindValue(2,$_POST["descripcion"]);
-              $sql->bindValue(3,$_POST["fecha"]);
+              $sql->bindValue(3,$fecha);
 		          $sql->bindValue(4,$_POST["id_usuario"]);
 		          $sql->bindValue(5,$_POST["id_incidente"]);
 		          $sql->execute();

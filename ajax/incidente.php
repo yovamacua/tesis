@@ -16,20 +16,22 @@
       switch($_GET["op"]){
           case "guardaryeditar":
 
+      // se reciben las variables y se valida si el formato es correcto
+  if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["titulo"]) or 
+      !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["descripcion"]) or $_POST["fecha"] == '')
+      {
+        $errors[]="Formatos de Información no validos";
+        echo  error($errors);
+      }else{
+
       $datos = $incidentes->get_nombre_incidentes($_POST["titulo"]);
 	       	   /*si el titulo no existe entonces lo registra
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["id_incidente"])){
-	       	  /*verificamos si el incidente existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
-			       	   if(is_array($datos)==true and count($datos)==0){
-			       	   	  //no existe la categoria por lo tanto hacemos el registros
 		 $incidentes->registrar_incidentes($titulo,$descripcion,$fecha,$id_usuario);
 			       	   	  $messages[]="El incidente se registró correctamente";
-			       	   } //cierre de validacion de $datos
+ //cierre de validacion de $datos
 			       	      /*si ya existes el titulo del incidente entonces aparece el mensaje*/
-				              else {
-				              	  $errors[]="Existe un incidente con el mismo titulo";
-				              }
 
 			    }//cierre de empty
 
@@ -38,6 +40,7 @@
 	             $incidentes-> editar_incidentes($id_incidente,$titulo,$descripcion,$fecha,$id_usuario);
 	            	  $messages[]="El incidente se editó correctamente";
 	            }
+      }
      //mensaje success
      if (isset($messages)){
   				echo exito($messages);
@@ -85,8 +88,7 @@
       $sub_array[] = $row["titulo"];
       $sub_array[] = $row["descripcion"];
       $sub_array[] = $row["fecha"];
-     $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_incidente"].');"  id="'.$row["id_incidente"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-     $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_incidente"].');"  id="'.$row["id_incidente"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+     $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["id_incidente"].');"  id="'.$row["id_incidente"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button> &nbsp; <button type="button" onClick="eliminar('.$row["id_incidente"].');"  id="'.$row["id_incidente"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }
 

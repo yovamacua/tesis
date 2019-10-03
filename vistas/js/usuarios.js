@@ -247,18 +247,12 @@ $(function() {
                error_password2 === false &&
                error_estado === false) 
             {
-               // si todo funciona las barratia de color boton se reseta despues del submit
-            var pass1 = $("#password1").val();
+               // si todo funciona las barrita de color boton se reseta despues del submit
             $("#password1").css("border-bottom","1px solid #d2d6de");
-            var pass2 = $("#password2").val();
             $("#password2").css("border-bottom","1px solid #d2d6de");
-            var email = $("#email").val();
             $("#email").css("border-bottom","1px solid #d2d6de");
-            var usuario = $("#usuario").val();
             $("#usuario").css("border-bottom","1px solid #d2d6de");
-            var nombre = $("#nombre").val();
             $("#nombre").css("border-bottom","1px solid #d2d6de");
-            var apellido = $("#apellido").val();
             $("#apellido").css("border-bottom","1px solid #d2d6de");
             guardaryeditar(e);
             } else {

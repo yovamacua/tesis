@@ -1,14 +1,139 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario de usuario
+$(function() {
+   //creando variables y ocultando campos de error
+         $("#error_titulo").hide();
+         $("#error_descripcion").hide();
+         $("#error_fecha").hide();
+
+
+   // se declaran variables con valor false para ver si pasa o no la validacion
+         var error_titulo = false;
+         var error_descripcion = false;
+         var error_fecha = false;
+
+   // se ejecuta funcion en el id del control cuando se pierde el foco
+         $("#titulo").focusout(function(){
+            campo_titulo();
+         });
+
+         $("#descripcion").focusout(function(){
+            campo_descripcion();
+         });
+
+         $("#fecha").focusout(function(){
+            campo_fecha();
+         });
+
+         
+         // funciones para validar
+         function campo_fecha() {
+            var fecha = document.getElementById("fecha").value;
+            if (fecha.length <=0)
+               {
+               $("#error_fecha").html("Debe colocar una fecha");
+               $("#error_fecha").css("color","red");
+               $("#error_fecha").show();
+               error_fecha = true;
+            }else{
+            $("#error_fecha").hide();
+            $("#fecha").css("border-bottom","2px solid #34F458");
+            var error_fecha = false;
+            }
+         }
+
+
+         function campo_descripcion() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var descripcion = $("#descripcion").val();
+            if (pattern.test(descripcion) && descripcion !== '') {
+               $("#error_descripcion").hide();
+               $("#descripcion").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_descripcion").css("position","absolute");
+               $("#error_descripcion").css("color","red");
+               $("#error_descripcion").show();
+               $("#descripcion").css("border-bottom","2px solid #F90A0A");
+               error_descripcion = true;
+            }
+            var descripcion = $("#descripcion").val().length;
+            if (descripcion <= 0) {
+              $("#error_descripcion").html("No se permiten campos vacios");
+               $("#error_descripcion").css("position","absolute");
+               $("#error_descripcion").css("color","red");
+               $("#error_descripcion").show();
+               $("#descripcion").css("border-bottom","2px solid #F90A0A");
+               error_descripcion = true;
+            }
+         }
+
+          function campo_titulo() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var titulo = $("#titulo").val();
+            if (pattern.test(titulo) && titulo !== '') {
+               $("#error_titulo").hide();
+               $("#titulo").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_titulo").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_titulo").css("position","absolute");
+               $("#error_titulo").css("color","red");
+               $("#error_titulo").show();
+               $("#titulo").css("border-bottom","2px solid #F90A0A");
+               error_titulo = true;
+            }
+            var titulo = $("#titulo").val().length;
+            if (titulo <= 0) {
+              $("#error_titulo").html("No se permiten campos vacios");
+               $("#error_titulo").css("position","absolute");
+               $("#error_titulo").css("color","red");
+               $("#error_titulo").show();
+               $("#titulo").css("border-bottom","2px solid #F90A0A");
+               error_titulo = true;
+            }
+         }
+
+         // se valida el formulario
+         $("#incidente_form").on("submit",function(e){
+         // asignacion de valor a vaiables
+         error_fecha = false;
+         error_descripcion = false;
+         error_titulo = false;
+
+
+         // se invoca a las funciones para tener el valor de las variables
+         campo_titulo();
+         campo_fecha();
+         campo_descripcion();
+
+
+         //comparacion
+            if (error_titulo === false &&
+               error_descripcion === false &&
+               error_fecha === false) 
+            {
+          // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#titulo").css("border-bottom","1px solid #d2d6de");
+            $("#descripcion").css("border-bottom","1px solid #d2d6de");
+            $("#fecha").css("border-bottom","1px solid #d2d6de");
+            guardaryeditar(e);
+            } else {
+               // se muestra un mensaje si los campos no estan correctos
+               alert("Complete/Revise los campos");
+               return false;
+            }
+         });
+});
+
+// FIN VALIDACION FORMULARIO
+
+
 //Función que se ejecuta al inicio
 function init(){
 
  listar();
-
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#incidente_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- })
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
@@ -21,7 +146,7 @@ function limpiar()
 $('#titulo').val("");
 $('#descripcion').val("");
 $('#fecha').val("");
- $('#id_incidente').val("");
+$('#id_incidente').val("");
 }
 
 //Función Listar
