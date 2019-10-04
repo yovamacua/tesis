@@ -28,25 +28,47 @@ thead tr th:last-child {background: white!important; pointer-events: none;}
 @media (max-width: 320px) {
   /*** vista usuarios **/
   .tabla-top { margin-top: 0rem!important;}
+
+  /*** vista entrada **/
+    .loghide{display: none!important;}
+    .fixmobile{width: 65%!important;}
+    .addbottom {z-index: 1!important;}
 }
 
 /* Smartphones */
 @media (min-width: 321px) and (max-width: 480px) {
   /*** vista usuarios **/
   .tabla-top { margin-top: 0rem!important;}
+
+   /*** vista entrada **/
+  .loghide{display: none!important;}
+  .fixmobile{width: 45%!important;}
+  .addbottom {z-index: 1!important;}
 }
 
 /* Smartphones to Tablets */
 @media (min-width: 481px) and (max-width: 767px) {
   /*** vista usuarios **/
   .tabla-top { margin-top: 0rem!important;}
+
+   /*** vista entrada **/
+  .loghide{display: none!important;}
+  .fixmobile{width: 30%!important;}
+  .addbottom {z-index: 1!important;}
 }
 
 /* Tablets */
-@media (min-width: 768px) and (max-width: 992px) {  }
+@media (min-width: 768px) and (max-width: 992px) {
+
+   /*** vista entrada **/
+  .loghide{display: none!important;}
+}
 
 /* Desktop */
-@media (min-width: 993px) and (max-width: 1199px) {  }
+@media (min-width: 993px) and (max-width: 1199px) {
+  /*** vista entrada **/
+  .loghide{display: none!important;}
+}
 
 /* Large Display */
 @media (min-width: 1200px) {  }

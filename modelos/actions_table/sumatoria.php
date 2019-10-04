@@ -9,5 +9,5 @@ $result1 = $statement1->fetchAll();
 foreach ($result1 as $row) {
 $final =  $row['SUM(Financiero)'];
 }
-return '<span class="sumaview">Total: '.number_format($final, 2).'</span> - Informacion Cargada';
+return '<span class="sumaview">Total: '.number_format($final, 2).'</span><span class="loghide"> - Información Cargada</span>';
 }

@@ -10,7 +10,7 @@
 <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
 <script src="../public/bower_components/jquery-ui/jquery-ui.min.js"></script>
-<script src='../public/bower_components/jquery-ui/ui/i18n/datepicker-es.js' type='text/javascript'></script>
+<script src="../public/bower_components/jquery-ui/ui/i18n/datepicker-es.js" charset="UTF-8"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
@@ -65,6 +65,23 @@
 
   <!--LIBRERIA DE MENSAJE MODAL-->
 <script src="js/bootbox.min.js"></script>
+
+
+<script>
+!function(a){a.fn.datepicker.dates.es={days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],daysShort:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],today:"Hoy",monthsTitle:"Meses",clear:"Borrar",weekStart:1,format:"dd/mm/yyyy"}}(jQuery);  
+
+      $('#fecha').datepicker({
+      /*dateFormat: 'dd-mm-yy',
+      autoclose: true*/
+       format: "dd/mm/yyyy",
+        /*clearBtn: true, */
+        language: "es",
+        autoclose: false,
+        /*keyboardNavigation: false,*/
+        todayHighlight: true
+    })
+
+</script>
 
 <!-- boton bonito resposive -->
 <?php

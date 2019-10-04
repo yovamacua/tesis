@@ -75,14 +75,6 @@ $activar = 'item_incidentes';
           <span class="error_form" id="error_descripcion"></span>
           <br />
 
-          <!--- codigo para mostrar calendario jquery IU -->
-          <script>
-          $( function() {
-            $( "#fecha" ).datepicker();
-          } );
-          </script>
-          <!--- fin codigo para mostrar calendario jquery IU -->
-
           <label>Fecha</label>
           <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
           <span class="error_form" id="error_fecha"></span>

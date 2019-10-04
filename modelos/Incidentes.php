@@ -34,7 +34,7 @@
            values(null,?,?,?,?);";
 
           $date = $_POST["fecha"];
-          $date_inicial = str_replace('-', '-', $date);
+          $date_inicial = str_replace('/', '-', $date);
           $fecha = date("Y-m-d",strtotime($date_inicial));
 
           $sql=$conectar->prepare($sql);
@@ -61,7 +61,7 @@
         	";
 
             $date = $_POST["fecha"];
-            $date_inicial = str_replace('-', '-', $date);
+            $date_inicial = str_replace('/', '-', $date);
             $fecha = date("Y-m-d",strtotime($date_inicial));
 
         	  $sql=$conectar->prepare($sql);

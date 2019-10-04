@@ -57,7 +57,7 @@ padding: 1%;
 }
 
 .addbottom{
-      z-index: 9999!important;
+      z-index: 9999;
       width: 60px;
       height: 60px;
       background: #F44336;
@@ -127,10 +127,18 @@ body{font-size: 15px!important;}
 <script type="text/javascript">
 var body = document.body;
 body.classList.add("sidebar-collapse");
+$(function prueba() {
+        if (screen.width < 1280) 
+          bootbox.alert("La resolución de su pantalla es: <b>" + screen.width + "px</b> Se recomienda una resolución mayor para su correcta visualización", function() {
+                console.log();
+            });
+      })
 </script>
+
+
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
+      <div class="content-wrapper" onload="prueba()">
         <!-- Main content -->
         <section class="content">
              <h2 style="margin-top: 0.5rem!important;">Administrar Cuenta</h2>
@@ -164,7 +172,7 @@ body.classList.add("sidebar-collapse");
                            <input type="hidden" name="page_order_list" id="page_order_list" />
                          </div>
                         </div>
-                          <div id="alert_message"><div class="alert alert-success"><?php echo $final; ?>&nbsp; </div></div>
+                          <div id="alert_message"><div class="alert fixmobile alert-success"><?php echo $final; ?>&nbsp; </div></div>
                           <a href="#" class="scroll-down"><button type="button" name="add" id="add" class="addbottom">+</button>
                           </a>
                     </div>
@@ -307,6 +315,7 @@ $(function() {
   var Logro = $('#data8').text();
   var Inicio = $('#data9').text();
   var Fin = $('#data10').text();
+  
 
   if(contador == 0)
    {
@@ -329,7 +338,7 @@ $(function() {
    }else{
         alert("Solo puede crear un campo a la vez");
    }
-
+document.getElementById("data1").focus();
 
   });
 

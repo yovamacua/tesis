@@ -21,7 +21,7 @@ foreach ($result1 as $row) {
   $final =  $row['SUM(Financiero)'];
  	}
 
-echo '<span class="sumaview">Total: '.number_format($final, 2).'</span> - Informacion Eliminada';
+echo '<span class="sumaview">Total: '.number_format($final, 2).'</span> <span class="loghide">- Informacion Eliminada</span>';
 
 }
 

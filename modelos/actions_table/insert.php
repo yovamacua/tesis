@@ -65,7 +65,7 @@ $result1 = $statement1->fetchAll();
 foreach ($result1 as $row) {
   $sumado =  $row['SUM(Financiero)'];
  	}
-echo '<span class="sumaview">Total: '.number_format($sumado, 2).'</span> - Informacion Guardada';
+echo '<span class="sumaview">Total: '.number_format($sumado, 2).'</span><span class="loghide"> - Informacion Guardada</span>';
 
 }
 
