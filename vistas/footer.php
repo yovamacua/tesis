@@ -88,6 +88,15 @@
 if (isset($invalidar)) {
 }else{ ?>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/r-2.2.0/sl-1.2.3/datatables.min.js"></script>
+<<<<<<< Updated upstream
   <?php } ?>
+=======
+<!--GRAFICA COMPRAS Y VENTAS-->
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+>>>>>>> Stashed changes
 </body>
 </html>

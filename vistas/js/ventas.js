@@ -2,8 +2,7 @@ var tabla;
 
 var tabla_ventas;
 
-var tabla_ventas_mes;
-
+var tabla_ventas_mes
 //Función que se ejecuta al inicio
 function init(){
 	mostrarformulario(false);
@@ -32,8 +31,8 @@ function limpiar()
 
     $("#id_producto").val("");
 	//$("#id_usuario").val("");
-    $("#categoria").val("");
 	$('#producto').val("");
+	//$('#fila0').remove();
     $('#numero_venta').val("");
 	$('#precio_venta').val("");
 	$('#total_pagar').val("");
@@ -51,6 +50,8 @@ function mostrarformulario(flag)
 		$("#formularioregistros").show();
 		//$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
+		$("#ventasfechas").hide();
+		$("#ocultar").hide();
 		listarProductoVenta();
 		$("#letra").show();
 		$("#btnGuardar").hide();
@@ -61,6 +62,8 @@ function mostrarformulario(flag)
 	else
 	{
         $("#listadoregistros").show();
+        $("#ventasfechas").show();
+        $("#ocultar").show();
 		$("#formularioregistros").hide();
 		$("#letra").hide();
 		$("#btnagregar").show();
@@ -69,7 +72,9 @@ function mostrarformulario(flag)
 //Función cancelarform
 function cancelarform()
 {
+	
 	limpiar();
+	//location.reload();
 	mostrarformulario(false);
 	
 }
@@ -225,7 +230,7 @@ function listarProductoVenta()
 //var impuesto=13;
 var cont=0;
 var detalles=0;
-function agregarDetalle(id_producto,producto,precio_venta)
+function agregarDetalle(id_producto,producto,precio_venta,stock)
   {
   	var cantidad=1;
     
@@ -233,18 +238,21 @@ function agregarDetalle(id_producto,producto,precio_venta)
     if (id_producto!="")
     {
     	var subtotal=cantidad*precio_venta;
-    	var fila='<tr class="filas" id="fila'+cont+'">'+
+    	var fila='<tr class="filas" style="text-align: center" id="fila'+cont+'">'+
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
-    	'<td><input type="hidden" name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
-    	'<td><input type="number" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-    	'<td><input type="number" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+'"></td>'+
+    	'<td><input type="hidden"  name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
+    	'<td><input type="text" style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
+    	'<td><input type="text" style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+    	'<td><input type="text"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+'"></td>'+
     	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-    	'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
+    	//'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
     	'</tr>';
     	cont++;
     	detalles=detalles+1;
     	$('#detalles').append(fila);
     	modificarSubototales();
+
+
     }
     else
     {
@@ -253,22 +261,54 @@ function agregarDetalle(id_producto,producto,precio_venta)
   }
   function modificarSubototales()
   {
+    var stock = document.getElementsByName("stock[]");  	
   	var cant = document.getElementsByName("cantidad[]");
     var prec = document.getElementsByName("precio_venta[]");
     var desc = document.getElementsByName("descuento[]");
     var sub = document.getElementsByName("subtotal");
+  
+    var i=0;
+     while(i <cant.length){
+          var inpC=cant[i];
+    	var inpP=prec[i];
+    	var inpS=sub[i];
+    	var inpK= stock[i];   
+    	if(inpC.value >= inpK.value){
 
-    for (var i = 0; i <cant.length; i++) {
+    		alert("producto insuficiente");
+    	} else{
+           inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
+       document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
+
+    	}
+      
+            
+    		
+     	i++;
+     }
+
+   /* for (var i = 0; i <cant.length; i++) {
     	var inpC=cant[i];
     	var inpP=prec[i];
     	var inpS=sub[i];
+var inpK= stock[i]; 
+    		if(inpC.value >= inpK.value){
 
-    	inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
-    	document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
-    }
+    		alert("producto insuficiente");
+    	} else{
+           inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
+       document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
+
+    	}
+    	
+    }*/
     calcularTotales();
 
   }
+
+
+
+
   function calcularTotales(){
   	var sub = document.getElementsByName("subtotal");
   	var total = 0.0;
@@ -305,6 +345,9 @@ function agregarDetalle(id_producto,producto,precio_venta)
 function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activará la acción predeterminada del evento
+	bootbox.confirm("¿Está Seguro de realizar la compra?", function(result){
+ if(result)
+ {
 	var formData = new FormData($("#formulario")[0]);
 
 
@@ -335,8 +378,10 @@ function guardaryeditar(e)
 		    }
 
 		});
-
+		}
+  });//bootbox
 }
+
 
  //anular venta
        //importante:id_usuario, est se envia por post via ajax
@@ -466,6 +511,7 @@ function guardaryeditar(e)
 	         }//cerrando condicional de las fechas
 
 	    });
+      
 //FECHA VENTA POR MES
 
            $(document).on("click","#btn_venta_fecha_mes", function(){
@@ -571,5 +617,33 @@ function guardaryeditar(e)
 	        }//cerrando condicional de las fechas
 
 	    });
+
+function mostrar(idventas)
+{
+	$.post("../ajax/venta.php?op=mostrar",{idventas : idventas}, function(data, status)
+	{
+		//data = JSON.parse(data);
+		data =JSON.parse(data);		
+		mostrarformulario(true);
+
+		$("#idventa").val(data.idventa);
+		//$("#idventa").selectpicker('refresh');
+		$("#nombre").val(data.usuario);
+		//$("#nombre").selectpicker('refresh');
+		$("#fecha").val(data.fecha);
+		$("#numero_venta").val(data.numero_venta); 
+		//Ocultar y mostrar los botones
+		$("#btnGuardar").hide();
+		$("#btnCancelar").show();
+		$("#btnAgregarArt").hide();
+ 	});
+
+ 	$.post("../ajax/venta.php?op=listarDetalle&id="+idventas,function(r){
+	        $("#detalles").html(r);
+	});	
+}
+
+
+
 
 init();

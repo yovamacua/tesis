@@ -15,6 +15,7 @@ $numero_venta=isset($_POST["numero_venta"]);
 $total_pagar=isset($_POST["total_pagar"]);
 $id_producto=isset( $_POST["id_producto"]);
 $precio_venta=isset( $_POST["precio_venta"]);
+$fechaventa=isset($_POST["fecha"]);
 $cantidad=isset( $_POST["cantidad"]);
 
    switch($_GET["op"]){
@@ -36,7 +37,7 @@ $cantidad=isset( $_POST["cantidad"]);
 
                     //no existe el producto por lo tanto hacemos el registros
 
-      $venta->registro_ventas($total_pagar,$numero_venta,$id_usuario,$_POST["id_producto"], $_POST["cantidad"],$_POST["precio_venta"]);
+      $venta->registro_ventas($total_pagar,$numero_venta,$id_usuario,$_POST["id_producto"], $_POST["cantidad"],$_POST["precio_venta"],$_POST["fecha"]);
 
 
 
@@ -152,7 +153,7 @@ if (isset($messages)){
 
              $stock = $row["stock"];
                      $atributo = "badge bg-green";
-                      $sub_array[] = ' <button class="btn btn-warning" onclick="agregarDetalle('.$row["id_producto"].',\''.$row["producto"].'\','.$row["precio_venta"].')" <span class="fa fa-plus">+</span></button>';
+                      $sub_array[] = ' <button class="btn btn-warning" onclick="agregarDetalle('.$row["id_producto"].',\''.$row["producto"].'\','.$row["precio_venta"]. ','.$row["stock"].')" <span class="fa fa-plus">+</span></button>';
                    }
     
     
@@ -189,7 +190,7 @@ if (isset($messages)){
         
          $atrib = "btn btn-danger btn-md estado";
         if($row["estado"] == 1){
-          $est = 'PAGADO';
+          $est = 'ACEPTADO';
           $atrib = "btn btn-success btn-md estado";
         }
         else{
@@ -200,7 +201,7 @@ if (isset($messages)){
         }
 
         
-         $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
+         $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
          
          $sub_array[] = $row["vendedor"];
          $sub_array[] = $row["total_pagar"];
@@ -242,7 +243,7 @@ if (isset($messages)){
             
              $atrib = "btn btn-danger btn-md estado";
             if($row["estado"] == 1){
-              $est = 'PAGADO';
+              $est = 'ACEPTADO';
               $atrib = "btn btn-success btn-md estado";
             }
             else{
@@ -254,7 +255,7 @@ if (isset($messages)){
 
         
        
-      $sub_array[] = '<button class="btn btn-warning detalle" id="'.$row["numero_venta"].'"  data-toggle="modal" data-target="#detalle_venta"><i class="fa fa-eye"></i></button>';
+      $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
         
          $sub_array[] = $row["vendedor"];
          $sub_array[] = $row["total_pagar"];
@@ -277,6 +278,104 @@ if (isset($messages)){
 
 
      break;
+     case "mostrar":
+     //selecciona del incidente
+  //el parametro id_incidente se envia por AJAX cuando se edita la categoria
+  $datos=$venta->Mostrar($_POST["idventas"]);
+          // si existe el id del incidnete entonces recorre el array
+        if(is_array($datos)==true and count($datos)>0){
+            foreach($datos as $row)
+            {
+              $output["idventas"] = $row["idventas"];
+              $output["usuario"] = $row["vendedor"];
+              $output["fecha"] = $row["fecha"];  //date("d-m-Y", strtotime($row["fecha"]));
+              $output["numero_venta"] = $row["numero_venta"];
+        
+            }
+              echo json_encode($output);
+          } else {
+                 //si no existe la categoria entonces no recorre el array
+                $errors[]="la categoria  no existe";
+          }
+
+         //inicio de mensaje de error
+        if(isset($errors)){
+          ?>
+          <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Error!</strong>
+              <?php
+                foreach ($errors as $error) {
+                    echo $error;
+                  }
+                ?>
+          </div>
+          <?php
+            }
+          //fin de mensaje de error
+   break;
+   case "listarDetalle":
+     //selecciona del incidente
+     $id=$_GET['id'];
+     $total=0;
+  //el parametro id_incidente se envia por AJAX cuando se edita la categoria
+  $datos=$venta->listardetalle($id);
+          // si existe el id del incidnete entonces recorre el array
+
+        if(is_array($datos)==true and count($datos)>0){
+    
+   $html= " <thead style='background-color:#A9D0F5'>
+                                    <th>Opciones</th>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio Venta</th>
+                                    <th>Subtotal</th>
+                                </thead>";
+            foreach($datos as $row)
+            {
+
+        $subtotal=round($row['subtotal'] * 100) / 100;
+       //
+        $html.="'<tr>'<td></td>'+
+      '<td>".$row['producto']."</td>'+
+      '<td>".$row['cantidad']."</td>'+
+      '<td>".$row['precio_venta']."</td>'+
+      '<td>".$subtotal."</td>'
+      '</tr>'";
+        $total= $total+$subtotal;
+            }
+
+            $html .= '<tfoot>
+                                    <th>TOTAL</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>$/'.$total.'</th> 
+                                </tfoot';
+                                    echo $html;
+                               
+          } else {
+                 //si no existe la categoria entonces no recorre el array
+                $errors[]="los detalle  no existe";
+          }
+
+         //inicio de mensaje de error
+        if(isset($errors)){
+          ?>
+          <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Error!</strong>
+              <?php
+                foreach ($errors as $error) {
+                    echo $error;
+                  }
+                ?>
+          </div>
+          <?php
+            }
+          //fin de mensaje de error
+   break;
+ 
 
  }
 

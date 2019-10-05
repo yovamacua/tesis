@@ -95,12 +95,13 @@ $resultado1=$sql2->fetchAll(PDO::FETCH_ASSOC);
       $sql = $conectar->prepare($sql);
       $sql-> bindValue(1, $_POST["idventas"], PDO::PARAM_INT);
      $sql-> execute();
-
+ 
       return  $resultado = $sql->fetchAll();
       //$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
           //echo json_encode($resultado);
     }
-    public function registro_ventas($total_pagar,$numero_venta,$id_usuario,$id_producto, $cantidad,$precio_venta){
+    // metodo para registrar las ventas realizada
+    public function registro_ventas($total_pagar,$numero_venta,$id_usuario,$id_producto, $cantidad,$precio_venta, $fecha){
       try{
 
             $conectar=parent::conexion();
@@ -110,19 +111,26 @@ $resultado1=$sql2->fetchAll(PDO::FETCH_ASSOC);
           /*$total_pagar=23.50;
           $numero_venta='002-0015';
           $id_usuario=1;*/
-          $sql="call registrar_venta(curdate(),?,?,?,?);";
+          $date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha= date("Y-m-d", strtotime($date));
+          $sql="call registrar_venta(?,?,?,?,?);";
 
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $_POST["total_pagar"], PDO::PARAM_STR);
-            $sql->bindValue(2, $estado);
-            $sql->bindValue(3, $_POST["numero_venta"], PDO::PARAM_STR);
-            $sql->bindValue(4, $_POST["id_usuario"], PDO::PARAM_INT);
+             $sql->bindValue(1, $fecha);
+            $sql->bindValue(2, $_POST["total_pagar"], PDO::PARAM_STR);
+            $sql->bindValue(3, $estado);
+            $sql->bindValue(4, $_POST["numero_venta"], PDO::PARAM_STR);
+            $sql->bindValue(5, $_POST["id_usuario"], PDO::PARAM_INT);
             $sql->execute();
              $resultado =$sql->fetchAll();
+            
+             // for  que permite recuperar el ultimo id insertado
          foreach($resultado as $row){
 
                  $id_venta=$output["@id"]=$row["@id"];
            }
+
  $array_id_producto=$_POST['id_producto'];
   $array_cantidad=$_POST['cantidad'];
   $array_precio_venta=$_POST['precio_venta'];
@@ -153,13 +161,15 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
           echo $ex->getMessage();
          }
-         $this-> registrar_detalleventas($id);
+         //$this-> registrar_detalleventas($id);
+         print_r(_POST);
      }
 
 
      //consultar de venta por fecha
      public function lista_busca_registros_fecha($fecha_inicial, $fecha_final){
       $conectar= parent::conexion();
+        parent::set_names();
 
             $date_inicial = $_POST["fecha_inicial"];
             $date = str_replace('/', '-', $date_inicial);
@@ -184,6 +194,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
        public function lista_busca_registros_fecha_mes($mes, $ano){
 
           $conectar= parent::conexion();
+            parent::set_names();
 
 
           //variables que vienen por POST VIA AJAX
@@ -205,9 +216,279 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
 
         }
+        public function Mostrar($idventas)
+        {
+           $conectar= parent::conexion();
+            parent::set_names();
+            $sql="select v.idventas,concat(u.nombres,' ', u.apellidos) as vendedor , date(v.fechaventa) as fecha,v.numero_venta 
+            from ventas as v 
+               inner join usuarios as u on v.id_usuario=u.id_usuario where idventas=?;";
+             $sql =$conectar->prepare($sql);
+             $sql->bindValue(1,$idventas);
+             $sql->execute();
+             return $resultado =$sql->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+
+        public function listardetalle($idventas)
+        {
+          $conectar= parent::conexion();
+          parent::set_names();
+          $sql="select d.id_detalle,p.producto , d.cantidad, d.precio_venta , d.id_ventas,(d.cantidad * d.precio_venta) as subtotal from detalleventas as d
+           inner join producto as p on p.id_producto=d.id_producto 
+             where d.id_ventas=?;";
+        $sql= $conectar->prepare($sql);
+        $sql->bindValue(1,$idventas);
+        $sql->execute();
+            return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+// reportes de ventas 
+
+        public function get_ventas_reporte_general()
+        {
+          $conectar=parent::conexion();
+           parent::set_names();
+
+           $sql="SELECT MONTHname(fechaventa) as mes, MONTH(fechaventa) as numero_mes, YEAR(fechaventa) as año, SUM(total_pagar) as total_venta
+        FROM ventas where estado='1' GROUP BY YEAR(fechaventa) desc, month(fechaventa) desc;";
+        $sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        // SUMA EL TOTAL DE VENTAS POR AÑOS
+
+      public function suma_ventas_total_ano()
+      {
+        $conectar=parent::conexion();
+           parent::set_names();
+           $sql="SELECT YEAR(fechaventa) as año,SUM(total_pagar) as total_venta_año FROM ventas where estado='1' GROUP BY YEAR(fechaventa) desc;";
+           $sql=$conectar->prepare($sql);
+           $sql->execute();
+           return $resultado=$sql->fetchAll();
+          /* $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+          echo json_encode($resultado);*/
+      }
+      // SUMA TOTAL DE VENTAS POR AÑOS PARA LA GRAFICAS
+
+      public function suma_ventas_total_grafica()
+      {
+       $conectar=parent::conexion();
+           parent::set_names();
+           $sql="SELECT YEAR(fechaventa) as año,SUM(total_pagar) as total_venta_año FROM ventas where estado='1' GROUP BY YEAR(fechaventa) desc;";
+           $sql=$conectar->prepare($sql);
+           $sql->execute();
+            $resultado=$sql->fetchAll();
+
+            // recorre el array y se imprime
+            foreach ($resultado as $row) {
+              $año= $output["año"]=$row["año"];
+              $total= $output["total_venta_año"]=$row["total_venta_año"];
+
+              echo $grafica= "{name:'".$año."', y:".$total."},";
+            }
+      }
+        // SUMA TOTAL DE VENTAS CANCELADA POR AÑOS PARA LA GRAFICAS
+
+        public function suma_ventas_cancelada_total_grafica()
+        {
+          $conectar=parent::conexion();
+           parent::set_names();
+           $sql="SELECT YEAR(fechaventa) as año,SUM(total_pagar) as total_venta_año FROM ventas where estado='0' GROUP BY YEAR(fechaventa) desc;";
+            $sql=$conectar->prepare($sql);
+           $sql->execute();
+
+           $resultado= $sql->fetchAll();
+
+           //recorrer el array y se imprime
+           foreach($resultado as $row){
+
+            $año=$output["año"]=$row["año"];
+            $total=$output["total_venta_año"]=$row["total_venta_año"];
+            echo $grafica= "{name:'".$año."', y:".$total."},";
+           }
+ 
+
+        }
+        // SUMA TOTAL DE VENTAS POR MES PARA LA GRAFICAS
+
+       public  function sumas_ventas_anio_mes_grafica($fecha)
+        {
+         $conectar=parent::conexion();
+           parent::set_names();
+            //se usa para traducir el mes en la grafica
+       //imprime la fecha por separado ejemplo: dia, mes y año
+          $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+          //SI EXISTE EL ENVIO POST ENTONCES SE MUESTRA LA FECHA SELECCIONADA
+        if(isset($_POST["year"])){
+
+          $fecha=$_POST["year"];
+
+          $sql="SELECT YEAR(fechaventa) as año, MONTHname(fechaventa) as mes, SUM(total_pagar) as total_venta_mes FROM ventas 
+        WHERE YEAR(fechaventa)=? and estado ='1'
+        GROUP BY MONTHname(fechaventa) desc;";
+
+           $sql=$conectar->prepare($sql);
+           $sql->bindValue(1,$fecha);
+            $sql->execute();
+          
+
+           $resultado= $sql->fetchAll();
+        // recorre el array y se imprime
+        foreach ($resultado as $row){
+
+          $año=$output["mes"]=$meses[date("n", strtotime($row["mes"]))-1];
+          $total=$output["total_venta_mes"]=$row["total_venta_mes"];
+         echo $grafica= "{name:'".$año."', y:".$total."},";
+        }
+        }else{
+         //sino se envia el POST, entonces se mostraria los datos del año actual cuando se abra la pagina por primera vez
+         $fecha_inicial=date("Y");
+
+         $sql="SELECT YEAR(fechaventa) as año, MONTHname(fechaventa) as mes, SUM(total_pagar) as total_venta_mes FROM ventas 
+        WHERE YEAR(fechaventa)=? and estado ='1' 
+        GROUP BY MONTHname(fechaventa) desc;";
+         $sql=$conectar->prepare($sql);
+           $sql->bindValue(1,$fecha_inicial);
+           $sql->execute();
+
+           $resultado= $sql->fetchAll();
+           foreach($resultado as $row){
+
+            $año=$output["mes"]=$meses[date("n", strtotime($row["mes"]))-1];
+          $total=$output["total_venta_mes"]=$row["total_venta_mes"];
+         echo $grafica= "{name:'".$año."', y:".$total."},";
+           }
+        } // cierre del else
 
     }
-  //$venta = new Ventas();
+
+
+   public function get_year_ventas(){
+
+        $conectar=parent::conexion();
+
+          $sql="select year(fechaventa) as fecha from ventas group by year(fechaventa) asc";
+          
+
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+          return $resultado= $sql->fetchAll();
+
+
+     }
+     public function get_ventas_mensual($fecha){
+
+
+        $conectar=parent::conexion();
+      
+      if(isset($_POST["year"])){
+
+          $fecha=$_POST["year"];
+
+        $sql="select MONTHname(fechaventa) as mes, MONTH(fechaventa) as numero_mes, YEAR(fechaventa) as año, SUM(total_pagar) as total_venta
+        from ventas where YEAR(fechaventa)=? and estado='1' group by MONTHname(fechaventa) desc;";
+          
+            
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$fecha);
+          $sql->execute();
+         return $resultado= $sql->fetchAll();
+          /*$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+          echo json_encode($resultado);*/
+
+
+        } else {
+
+          //sino se envia el POST, entonces se mostraria los datos del año actual cuando se abra la pagina por primera vez
+
+          $fecha_inicial=date("Y");
+
+             $sql="select MONTHname(fechaventa) as mes, MONTH(fechaventa) as numero_mes, YEAR(fechaventa) as año, SUM(total_pagar) as total_venta
+        from ventas where YEAR(fechaventa)=? and estado='1' group by MONTHname(fechaventa) desc;";
+          
+
+         $sql=$conectar->prepare($sql);
+          $sql->bindValue(1,$fecha_inicial);
+          $sql->execute();
+            return $resultado= $sql->fetchAll();
+
+
+
+        }
+     }
+  // ventas anual actual
+      public function get_ventas_anio_actual(){
+
+        $conectar=parent::conexion();
+        parent::set_names();
+
+        $sql="SELECT YEAR(fechaventa) as año, MONTHname(fechaventa) as mes, SUM(total_pagar) as total_venta_mes FROM ventas
+        WHERE YEAR(fechaventa)=YEAR(CURDATE()) 
+        and estado='1' GROUP BY MONTHname(fechaventa) desc;";
+
+        $sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll();
+
+    }
+ //metodo de llanado para grafica
+    public function get_ventas_anio_actual_grafica(){
+
+       $conectar=parent::conexion();
+       parent::set_names();
+
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+       
+       $sql="SELECT  MONTHname(fechaventa) as mes, SUM(total_pagar) as total_venta_mes FROM ventas
+        WHERE YEAR(fechaventa)=YEAR(CURDATE()) and estado='1' GROUP BY MONTHname(fechaventa) desc";
+           
+           $sql=$conectar->prepare($sql);
+           $sql->execute();
+
+           $resultado= $sql->fetchAll();
+             
+             //recorro el array y lo imprimo
+           foreach($resultado as $row){
+
+
+          $mes= $output["mes"]=$meses[date("n", strtotime($row["mes"]))-1];
+          $total = $output["total_venta_mes"]=$row["total_venta_mes"];
+
+         echo $grafica= "{name:'".$mes."', y:".$total."},";
+
+           }
+ 
+    }
+     /*public function get_venta_por_fecha($id_usuario,$fecha_inicial,$fecha_final){
+
+        $conectar=parent::conexion();
+        parent::set_names();
+            
+          
+            $date_inicial = $_POST["datepicker"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha_inicial = date("Y-m-d", strtotime($date));
+
+          
+            $date_final = $_POST["datepicker2"];
+            $date = str_replace('/', '-', $date_final);
+            $fecha_final = date("Y-m-d", strtotime($date));
+
+
+        $sql="select * from detalle_ventas where cedula_cliente=? and fecha_venta>=? and fecha_venta<=? and estado='1';";
+
+    
+        $sql=$conectar->prepare($sql);
+
+        $sql->bindValue(1,$id_usuario);
+        $sql->bindValue(2,$fecha_inicial);
+        $sql->bindValue(3,$fecha_final);
+        $sql->execute();
+
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);*/
+        }
+ $venta = new Ventas();
    //$venta-> get_venta_por_id();
    //$venta ->anularventa();*/
          /* $total_pagar=45.00;
@@ -217,9 +498,8 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
             $precio_venta= 10;
             $id_producto=13;  */
+$fecha='2019';
 
-/*$id=34;
-$estado=0;
-  $venta-> anularventa($id,$estado);*/
+  $venta-> get_ventas_mensual($fecha);
 
    ?>

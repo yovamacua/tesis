@@ -107,18 +107,20 @@
                      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                             <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
                               <thead style="background-color:#A9D0F5">
-                                    <th>Opciones</th>
-                                    <th>Producto</th>
-                                    <th>Cantidad</th>
-                                    <th>Precio Venta</th>
-                                    <th>Subtotal</th>
+                                    <th  width="10%">Opciones</th>
+                                    <th  width="10%">Producto</th>
+                                    <th  width="10%">stock</th>
+                                    <th  width="10%">Cantidad</th>
+                                    <th  width="10%">Precio Venta</th>
+                                    <th  width="10%">Subtotal</th>
                                 </thead>
                                 <tfoot>
                                     <th>TOTAL</th>
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th><h4 id="total">$/. 0.00</h4><input type="hidden" name="total_pagar" id="total_pagar"></th> 
+                                    <th></th>
+                                    <th style="text-align: center"><h4 id="total">$/. 0.00</h4><input type="hidden" name="total_pagar" id="total_pagar"></th> 
                                 </tfoot>
                                 <tbody>
                                   
@@ -157,11 +159,11 @@
         <div class="panel-body table-responsive">
           <table id="tblarticulos" class="table table-striped table-bordered table-condensed table-hover" >
             <thead>
-                <th width="15%">Opciones</th>
-                <th width="15%">Producto</th>
-                <th width="15%">Categoría</th>
-                <th width="15%">Stock</th>
-                <th width="15%">Precio Venta</th>
+                <th width="10%">Opciones</th>
+                <th width="10%">Producto</th>
+                <th width="10%">Categoría</th>
+                <th width="10%">Stock</th>
+                <th width="10%">Precio Venta</th>
             </thead>
             <tbody>
               
