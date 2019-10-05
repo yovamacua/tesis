@@ -1,14 +1,75 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario de usuario
+$(function() {
+   //creando variables y ocultando campos de error
+         $("#error_nombrecuenta").hide();
+
+   // se declaran variables con valor false para ver si pasa o no la validacion
+         var error_nombrecuenta = false;
+
+   // se ejecuta funcion en el id del control cuando se pierde el foco
+         $("#error_nombrecuenta").focusout(function(){
+            campo_nombrecuenta();
+         });
+
+         
+         function campo_nombrecuenta() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var nombrecuenta = $("#nombrecuenta").val();
+            if (pattern.test(nombrecuenta) && nombrecuenta !== '') {
+               $("#error_nombrecuenta").hide();
+               $("#nombrecuenta").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_nombrecuenta").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_nombrecuenta").css("position","absolute");
+               $("#error_nombrecuenta").css("color","red");
+               $("#error_nombrecuenta").show();
+               $("#nombrecuenta").css("border-bottom","2px solid #F90A0A");
+               error_nombrecuenta = true;
+            }
+            var nombrecuenta = $("#nombrecuenta").val().length;
+            if (nombrecuenta <= 0) {
+              $("#error_nombrecuenta").html("No se permiten campos vacios");
+               $("#error_nombrecuenta").css("position","absolute");
+               $("#error_nombrecuenta").css("color","red");
+               $("#error_nombrecuenta").show();
+               $("#nombrecuenta").css("border-bottom","2px solid #F90A0A");
+               nombrecuenta = true;
+            }
+         }
+
+         // se valida el formulario
+         $("#cuenta_form").on("submit",function(e){
+         // asignacion de valor a vaiables
+         error_nombrecuenta = false;
+
+         // se invoca a las funciones para tener el valor de las variables
+         campo_nombrecuenta();
+
+         //comparacion
+            if (error_nombrecuenta === false) 
+            {
+          // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#nombrecuenta").css("border-bottom","1px solid #d2d6de");
+            guardaryeditar(e);
+            } else {
+               // se muestra un mensaje si los campos no estan correctos
+               alert("Complete/Revise los campos");
+               return false;
+            }
+         });
+});
+
+// FIN VALIDACION FORMULARIO
+
+
+
 //Función que se ejecuta al inicio
 function init(){
 
  listar();
-
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#cuenta_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- })
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){

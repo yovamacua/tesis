@@ -88,7 +88,7 @@ cursor: default;
 
 .sumaview{display: inline-flex;
   background: red;
-  padding: 0.5rem;
+  padding: 0.45rem;
   color: white;
   font-weight: 700;}
 

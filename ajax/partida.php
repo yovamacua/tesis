@@ -21,15 +21,13 @@
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["id_partida"])){
 	       	  /*verificamos si el partida existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
-			       	   if(is_array($datos)==true and count($datos)==0){
+	
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
 		 $partidas->registrar_partidas($nombrepartida,$responsable,$id_usuario);
 			       	   	  $messages[]="La partida se registró correctamente";
-			       	   } //cierre de validacion de $datos
+			       	    //cierre de validacion de $datos
 			       	      /*si ya existes el titulo del partida entonces aparece el mensaje*/
-				              else {
-				              	  $errors[]="Existe un partida con el mismo nombre de partida";
-				              }
+				      
 
 			    }//cierre de empty
 
@@ -83,9 +81,8 @@
         $sub_array = array();
       $sub_array[] = $row["nombrepartida"];
       $sub_array[] = $row["responsable"];
-      $sub_array[] = '<a href="cuenta.php?id='.$row["id_partida"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar</button></a>';
-     $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-     $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+      $sub_array[] = '<div class="cbtns"><a href="cuenta.php?id='.$row["id_partida"].'&partida='.$row["nombrepartida"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Nueva Cuenta</button></a></div>';
+     $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;<button type="button" onClick="eliminar('.$row["id_partida"].');"  id="'.$row["id_partida"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }
 

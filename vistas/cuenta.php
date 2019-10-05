@@ -2,12 +2,13 @@
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
       //validar que no viene vacio o redirecciona
-      if (isset($_GET['id'])) {
+      if (isset($_GET['id']) and isset($_GET['partida'])) {
        $identificador = $_GET['id'];
+      $partida = $_GET['partida'];
      }else{
        $redireccion = Conectar::ruta()."vistas/partidas.php";?>
       <script type="text/javascript">
-       alert("Debe seleccionar una partida primero")
+       alert("Información insuficiente")
        self.location = '<?php echo $redireccion; ?>'
        </script>
        <?php
@@ -19,14 +20,23 @@
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+  <section class="content-header">
+      <h1>
+       Cuentas asociadas a la partida: <b><?php echo $partida;?></b>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+        <li><a href="partidas.php"><i class="fa fa-file-text-o"></i> Partidas</a></li>
+        <li><i class="fa fa-clipboard"></i> Cuentas</li>
+      </ol>
+    </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Cuentas</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#cuentaModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar una cuenta</button></h1>
                         <div class="box-tools pull-right">
@@ -34,14 +44,13 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive">
-                          <table id="cuenta_data" class="table table-bordered table-striped">
+                    <div class="panel-body table-responsive tabla-top">
+                          <table id="cuenta_data" class="table table-bordered table-striped noarrows2">
                             <thead>
                                 <tr>
-                                <th width="55%">Nombre de la cuenta</th>
-                                <th width="15%">Agregar</th>
-                                <th width="15%">Editar</th>
-                                <th width="15%">Eliminar</th>
+                                <th width="50%">Nombre de la cuenta</th>
+                                <th width="30%" style="background: white!important; pointer-events: none;">Agregar</th>
+                                <th width="20%">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,6 +77,7 @@
 
           <label>Nombre de la cuenta</label>
           <input type="text" name="nombrecuenta" id="nombrecuenta" class="form-control" placeholder="Titulo" required/>
+          <span class="error_form" id="error_nombrecuenta"></span>
           <br />
 
         </div>

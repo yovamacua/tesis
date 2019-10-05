@@ -31,9 +31,14 @@ $activar = 'item_incidentes';
                         </div>
                     </div>
                     <!-- /.box-header -->
+                    <style type="text/css">
+                      .showbreak tbody tr td:nth-child(2){
+                        white-space: pre!important;            
+                      }
+                    </style>
                     <!-- centro -->
                     <div class="panel-body table-responsive tabla-top">
-                          <table id="incidente_data" class="table table-bordered table-striped">
+                          <table id="incidente_data" class="table table-bordered table-striped showbreak">
                             <thead>
                                 <tr>
                                 <th>Titulo</th>
@@ -71,7 +76,7 @@ $activar = 'item_incidentes';
 
 
           <label>Descripción</label>
-          <textarea rows="4" maxlength="500" cols="50" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+          <textarea rows="4" maxlength="500" style=" word-break: break-all;    max-width: 100% !important;" cols="50" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
           <span class="error_form" id="error_descripcion"></span>
           <br />
 

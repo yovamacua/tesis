@@ -4,6 +4,10 @@ thead tr th:last-child {background: white!important; pointer-events: none;}
 .content-header>.breadcrumb {font-size: 15px!important;}
 
 
+.sidebar-mini:not(.sidebar-mini-expand-feature).sidebar-collapse .sidebar-menu>li.active:hover>a>span {
+    background: #5b6368;
+}
+
 .alert{margin-bottom: 0px!important;}
 .boton-top{
     width: 50%!important;

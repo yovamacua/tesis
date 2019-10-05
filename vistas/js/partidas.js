@@ -1,14 +1,112 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario de usuario
+$(function() {
+   //creando variables y ocultando campos de error
+         $("#error_nombrepartida").hide();
+         $("#error_responsable").hide();
+
+
+   // se declaran variables con valor false para ver si pasa o no la validacion
+         var error_nombrepartida = false;
+         var error_responsable = false;
+
+   // se ejecuta funcion en el id del control cuando se pierde el foco
+         $("#nombrepartida").focusout(function(){
+            campo_nombrepartida();
+         });
+
+         $("#responsable").focusout(function(){
+            campo_responsable();
+         });
+
+         
+         function campo_nombrepartida() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var nombrepartida = $("#nombrepartida").val();
+            if (pattern.test(nombrepartida) && nombrepartida !== '') {
+               $("#error_nombrepartida").hide();
+               $("#nombrepartida").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_nombrepartida").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_nombrepartida").css("position","absolute");
+               $("#error_nombrepartida").css("color","red");
+               $("#error_nombrepartida").show();
+               $("#nombrepartida").css("border-bottom","2px solid #F90A0A");
+               error_nombrepartida = true;
+            }
+            var nombrepartida = $("#nombrepartida").val().length;
+            if (nombrepartida <= 0) {
+              $("#error_nombrepartida").html("No se permiten campos vacios");
+               $("#error_nombrepartida").css("position","absolute");
+               $("#error_nombrepartida").css("color","red");
+               $("#error_nombrepartida").show();
+               $("#nombrepartida").css("border-bottom","2px solid #F90A0A");
+               error_nombrepartida = true;
+            }
+         }
+
+          function campo_responsable() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var responsable = $("#responsable").val();
+            if (pattern.test(responsable) && responsable !== '') {
+               $("#error_responsable").hide();
+               $("#responsable").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_responsable").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_responsable").css("position","absolute");
+               $("#error_responsable").css("color","red");
+               $("#error_responsable").show();
+               $("#error_responsable").css("border-bottom","2px solid #F90A0A");
+               error_responsable = true;
+            }
+            var responsable = $("#responsable").val().length;
+            if (responsable <= 0) {
+              $("#error_responsable").html("No se permiten campos vacios");
+               $("#error_responsable").css("position","absolute");
+               $("#error_responsable").css("color","red");
+               $("#error_responsable").show();
+               $("#responsable").css("border-bottom","2px solid #F90A0A");
+               error_responsable = true;
+            }
+         }
+
+         // se valida el formulario
+         $("#partida_form").on("submit",function(e){
+         // asignacion de valor a vaiables
+         error_nombrepartida = false;
+         error_responsable = false;
+
+
+         // se invoca a las funciones para tener el valor de las variables
+         campo_responsable();
+         campo_nombrepartida();
+
+
+         //comparacion
+            if (error_nombrepartida === false &&
+               error_responsable === false) 
+            {
+          // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#responsable").css("border-bottom","1px solid #d2d6de");
+            $("#nombrepartida").css("border-bottom","1px solid #d2d6de");
+            guardaryeditar(e);
+            } else {
+               // se muestra un mensaje si los campos no estan correctos
+               alert("Complete/Revise los campos");
+               return false;
+            }
+         });
+});
+
+// FIN VALIDACION FORMULARIO
+
+
 //Función que se ejecuta al inicio
 function init(){
 
  listar();
-
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#partida_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- })
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
