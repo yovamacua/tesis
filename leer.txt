@@ -14,3 +14,7 @@ referencias a las tablas de los permisos que borre.
 esta comentada
 
 - Mantenimiento de tabla usuario, solo falta opcion "eliminar"
+
+
+Quitar extension php
+https://www.youtube.com/watch?v=w_YkHYels2Q

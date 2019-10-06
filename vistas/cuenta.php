@@ -5,6 +5,10 @@
       if (isset($_GET['id']) and isset($_GET['partida'])) {
        $identificador = $_GET['id'];
       $partida = $_GET['partida'];
+      unset( $_SESSION["seleccion_partida"] ); 
+      unset( $_SESSION["nombre_partida"] ); 
+      $_SESSION["seleccion_partida"] = $identificador;
+      $_SESSION["nombre_partida"] = $partida;
      }else{
        $redireccion = Conectar::ruta()."vistas/partidas.php";?>
       <script type="text/javascript">
@@ -16,6 +20,7 @@
 ?>
 <?php
   require_once("header.php");
+
 ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->

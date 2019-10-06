@@ -20,15 +20,10 @@
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["id_cuenta"])){
 	       	  /*verificamos si el cuenta existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
-			       	   if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
-		 $cuentas->registrar_cuentas($nombrecuenta,$id_partida);
+		    $cuentas->registrar_cuentas($nombrecuenta,$id_partida);
 			       	   	  $messages[]="La cuenta se registró correctamente";
-			       	   } //cierre de validacion de $datos
-			       	      /*si ya existes el titulo del cuenta entonces aparece el mensaje*/
-				              else {
-				              	  $errors[]="Existe un cuenta con el mismo nombre de cuenta";
-				              }
+			      //cierre de validacion de $datos
 
 			    }//cierre de empty
 
@@ -72,15 +67,16 @@
     			}
 	        //fin de mensaje de error
 	 break;
-        case "listar":
-     $datos=$cuentas->get_cuentas();
+  case "listar":
+     $identificador = $_SESSION["seleccion_partida"];
+     $datos=$cuentas->get_cuentas($identificador);
  	 $data= Array();
 
      foreach($datos as $row)
       {
         $sub_array = array();
       $sub_array[] = $row["nombrecuenta"];
-      $sub_array[] = '<div class="cbtns"><a href="entrada.php?identificador='.$row["id_cuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Detalle de Entrada</button></a></div>';
+      $sub_array[] = '<div class="cbtns"><a href="entrada.php?identificador='.$row["id_cuenta"].'&nombrecuenta='.$row["nombrecuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Detalle de Entrada</button></a></div>';
      $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i> </button>&nbsp;<button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }

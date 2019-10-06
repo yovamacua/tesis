@@ -4,11 +4,12 @@
    class cuentas extends Conectar{
        //método para seleccionar registros
 
-   	   public function get_cuentas(){
+   	   public function get_cuentas($identificador){
    	   	  $conectar=parent::conexion();
    	   	  parent::set_names();
-   	   	  $sql="select * from cuentas";
+   	   	  $sql="select * from cuentas where id_partida = ?";
    	   	  $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $identificador);
    	   	  $sql->execute();
    	   	  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
    	   }

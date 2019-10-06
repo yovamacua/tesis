@@ -2,18 +2,21 @@
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
       //validar que no viene vacio o redirecciona
-      if (isset($_GET['identificador'])) {
+      if (isset($_GET['identificador']) or
+               isset($_GET['nombrecuenta'])) {
        $identificador = $_GET['identificador'];
+       $nombre = $_GET['nombrecuenta'];
      }else{
        $redireccion = Conectar::ruta()."vistas/cuenta.php";?>
       <script type="text/javascript">
-       alert("Debe seleccionar una cuenta primero")
+       alert("información Insuficiente")
        self.location = '<?php echo $redireccion; ?>'
        </script>
        <?php
      }
 ?>
 <?php
+$activar = 'item_partidas';
   require_once("header.php");
   $conectar = new Conectar();
   $conectar =  $conectar->conexion();
@@ -127,7 +130,7 @@ body{font-size: 15px!important;}
 <script type="text/javascript">
 var body = document.body;
 body.classList.add("sidebar-collapse");
-$(function prueba() {
+$(function resolucion() {
         if (screen.width < 1280) 
           bootbox.alert("La resolución de su pantalla es: <b>" + screen.width + "px</b> Se recomienda una resolución mayor para su correcta visualización", function() {
                 console.log();
@@ -138,10 +141,21 @@ $(function prueba() {
 
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" onload="prueba()">
+      <div class="content-wrapper" onload="resolucion()">
+          <section class="content-header">
+      <h1>
+       Administrar información de la cuenta: <b><?php echo $nombre;?></b>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+        <li><a href="partidas.php"><i class="fa fa-file-text-o"></i> Partidas</a></li>
+        <li><a href="cuenta.php?id=<?php echo $_SESSION["seleccion_partida"]; ?>&partida=<?php echo $_SESSION["nombre_partida"]; ?>"><i class="fa fa-clipboard"></i> Cuentas</a></li>
+        <li><i class="fa fa-list-alt"></i> Detalles de cuenta</li>
+      </ol>
+
+    </section>
         <!-- Main content -->
         <section class="content">
-             <h2 style="margin-top: 0.5rem!important;">Administrar Cuenta</h2>
             <div class="row">
               <div class="col-md-12">
                     <!-- /.box-header -->
@@ -201,7 +215,7 @@ $(document).ready(function(){
    $('tbody#sortable tr td div.mvdown').each(function(){
     page_id_array.push($(this).attr("id"));
     $.blockUI({
-      message: '<img src="../public/plugins/BlockUI/loading.gif" /><br><h3> Procesando... por favor espere.</h3>',
+      message: '<img src="../public/plugins/BlockUI/loading.gif" /><br><h3> Procesando...</h3>',
        css: {
             border: 'none',
             padding: '20px',
@@ -212,7 +226,6 @@ $(document).ready(function(){
             color: '#fff'
         }
      });
-    setTimeout($.unblockUI, 2000);
    });
    $.ajax({
     url:"../modelos/actions_table/update-row.php",
@@ -220,7 +233,7 @@ $(document).ready(function(){
     data:{page_id_array:page_id_array},
     success:function(data)
     {
-     //alert(data);
+      setTimeout($.unblockUI, data);
     }
    });
   }
