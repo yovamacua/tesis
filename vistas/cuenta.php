@@ -53,8 +53,10 @@
                           <table id="cuenta_data" class="table table-bordered table-striped noarrows2">
                             <thead>
                                 <tr>
-                                <th width="50%">Nombre de la cuenta</th>
-                                <th width="30%" style="background: white!important; pointer-events: none;">Agregar</th>
+                                <th width="20%">Nombre de la cuenta</th>
+                                <th width="20%">Objetivo</th>
+                                <th width="20%">Estrategia</th>
+                                <th width="20%" style="background: white!important; pointer-events: none;">Agregar</th>
                                 <th width="20%">Acciones</th>
                                 </tr>
                             </thead>
@@ -83,6 +85,16 @@
           <label>Nombre de la cuenta</label>
           <input type="text" name="nombrecuenta" id="nombrecuenta" class="form-control" placeholder="Titulo" required/>
           <span class="error_form" id="error_nombrecuenta"></span>
+          <br />
+
+          <label>Objetivo</label>
+          <input type="text" name="objetivo" id="objetivo" class="form-control" placeholder="Objetivo" required/>
+          <span class="error_form" id="error_objetivo"></span>
+          <br />
+
+          <label>Estrategia</label>
+          <input type="text" name="estrategia" id="estrategia" class="form-control" placeholder="Estrategia" required/>
+          <span class="error_form" id="error_estrategia"></span>
           <br />
 
         </div>

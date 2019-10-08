@@ -5,15 +5,24 @@ var tabla;
 $(function() {
    //creando variables y ocultando campos de error
          $("#error_nombrecuenta").hide();
-
+         $("#error_objetivo").hide();
+         $("#error_estrategia").hide();
    // se declaran variables con valor false para ver si pasa o no la validacion
          var error_nombrecuenta = false;
-
+         var error_objetivo = false;
+         var error_estrategia = false;
    // se ejecuta funcion en el id del control cuando se pierde el foco
-         $("#error_nombrecuenta").focusout(function(){
+         $("#nombrecuenta").focusout(function(){
             campo_nombrecuenta();
          });
 
+         $("#objetivo").focusout(function(){
+            campo_objetivo();
+         });
+
+         $("#estrategia").focusout(function(){
+            campo_estrategia();
+         });
          
          function campo_nombrecuenta() {
             var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
@@ -36,7 +45,57 @@ $(function() {
                $("#error_nombrecuenta").css("color","red");
                $("#error_nombrecuenta").show();
                $("#nombrecuenta").css("border-bottom","2px solid #F90A0A");
-               nombrecuenta = true;
+               error_nombrecuenta = true;
+            }
+         }
+
+         function campo_objetivo() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var objetivo = $("#objetivo").val();
+            if (pattern.test(objetivo) && objetivo !== '') {
+               $("#error_objetivo").hide();
+               $("#objetivo").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_objetivo").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_objetivo").css("position","absolute");
+               $("#error_objetivo").css("color","red");
+               $("#error_objetivo").show();
+               $("#objetivo").css("border-bottom","2px solid #F90A0A");
+               error_objetivo = true;
+            }
+            var objetivo = $("#objetivo").val().length;
+            if (objetivo <= 0) {
+              $("#error_objetivo").html("No se permiten campos vacios");
+               $("#error_objetivo").css("position","absolute");
+               $("#error_objetivo").css("color","red");
+               $("#error_objetivo").show();
+               $("#objetivo").css("border-bottom","2px solid #F90A0A");
+               error_objetivo = true;
+            }
+         }
+
+         function campo_estrategia() {
+            var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+            var estrategia = $("#estrategia").val();
+            if (pattern.test(estrategia) && estrategia !== '') {
+               $("#error_estrategia").hide();
+               $("#estrategia").css("border-bottom","2px solid #34F458");
+            } else {
+               $("#error_estrategia").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+               $("#error_estrategia").css("position","absolute");
+               $("#error_estrategia").css("color","red");
+               $("#error_estrategia").show();
+               $("#estrategia").css("border-bottom","2px solid #F90A0A");
+               error_estrategia = true;
+            }
+            var estrategia = $("#estrategia").val().length;
+            if (estrategia <= 0) {
+              $("#error_estrategia").html("No se permiten campos vacios");
+               $("#error_estrategia").css("position","absolute");
+               $("#error_estrategia").css("color","red");
+               $("#error_estrategia").show();
+               $("#estrategia").css("border-bottom","2px solid #F90A0A");
+               error_estrategia = true;
             }
          }
 
@@ -44,15 +103,21 @@ $(function() {
          $("#cuenta_form").on("submit",function(e){
          // asignacion de valor a vaiables
          error_nombrecuenta = false;
-
+         error_objetivo = false;
+         error_estrategia = false;
          // se invoca a las funciones para tener el valor de las variables
          campo_nombrecuenta();
-
+        campo_estrategia();
+         campo_objetivo();
          //comparacion
-            if (error_nombrecuenta === false) 
+            if (error_nombrecuenta === false &&
+              error_objetivo == false &&
+              error_estrategia == false) 
             {
           // si todo funciona las barrita de color boton se reseta despues del submit
             $("#nombrecuenta").css("border-bottom","1px solid #d2d6de");
+            $("#objetivo").css("border-bottom","1px solid #d2d6de");
+            $("#estrategia").css("border-bottom","1px solid #d2d6de");
             guardaryeditar(e);
             } else {
                // se muestra un mensaje si los campos no estan correctos
@@ -80,7 +145,9 @@ function init(){
 function limpiar()
 {
 $('#nombrecuenta').val("");
- $('#id_cuenta').val("");
+$('#objetivo').val("");
+$('#estrategia').val("");
+$('#id_cuenta').val("");
 }
 
 //Función Listar
@@ -150,11 +217,13 @@ function mostrar(id_cuenta)
  {
    data = JSON.parse(data);
 
-       $('#cuentaModal').modal('show');
-       $('#nombrecuenta').val(data.nombrecuenta);
-       $('.modal-title').text("Editar cuenta");
-       $('#id_cuenta').val(id_cuenta);
-       $('#action').val("Edit");
+      $('#cuentaModal').modal('show');
+      $('#nombrecuenta').val(data.nombrecuenta);
+      $('#objetivo').val(data.objetivo);
+      $('#estrategia').val(data.estrategia);
+      $('.modal-title').text("Editar cuenta");
+      $('#id_cuenta').val(id_cuenta);
+      $('#action').val("Edit");
    });
  }
 
@@ -178,7 +247,7 @@ function guardaryeditar(e)
        $('#cuentaModal').modal('hide');
        $('#resultados_ajax').html(datos);
        $('#cuenta_data').DataTable().ajax.reload();
-               limpiar();
+      limpiar();
        }
 
    });

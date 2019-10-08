@@ -21,7 +21,7 @@ $(function() {
             campo_responsable();
          });
 
-         
+
          function campo_nombrepartida() {
             var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
             var nombrepartida = $("#nombrepartida").val();
@@ -58,7 +58,7 @@ $(function() {
                $("#error_responsable").css("position","absolute");
                $("#error_responsable").css("color","red");
                $("#error_responsable").show();
-               $("#error_responsable").css("border-bottom","2px solid #F90A0A");
+               $("#responsable").css("border-bottom","2px solid #F90A0A");
                error_responsable = true;
             }
             var responsable = $("#responsable").val().length;
@@ -86,7 +86,7 @@ $(function() {
 
          //comparacion
             if (error_nombrepartida === false &&
-               error_responsable === false) 
+               error_responsable === false)
             {
           // si todo funciona las barrita de color boton se reseta despues del submit
             $("#responsable").css("border-bottom","1px solid #d2d6de");

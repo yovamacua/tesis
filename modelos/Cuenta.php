@@ -27,28 +27,31 @@
         }
         //método para insertar registros
 
-        public function registrar_cuentas($nombrecuenta,$id_partida){
+        public function registrar_cuentas($nombrecuenta,$id_partida,$objetivo,$estrategia){
            $conectar= parent::conexion();
            parent::set_names();
 
            $sql="insert into cuentas
-           values(null,?,?);";
+           values(null,?,?,?,?);";
 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["id_partida"]);
           $sql->bindValue(2,$_POST["nombrecuenta"]);
+          $sql->bindValue(3,$_POST["objetivo"]);
+          $sql->bindValue(4,$_POST["estrategia"]);
 
 		      $sql->execute();
 
         }
 
-        public function editar_cuentas($id_cuenta,$nombrecuenta,$id_partida){
-
+        public function editar_cuentas($id_cuenta,$nombrecuenta,$id_partida, $estrategia, $objetivo){
         	$conectar=parent::conexion();
         	parent::set_names();
 
         	$sql="update cuentas set
             nombrecuenta=?,
+            objetivo=?,
+            estrategia=?,
             id_partida=?
             where
             id_cuenta=?
@@ -56,8 +59,10 @@
 
         	  $sql=$conectar->prepare($sql);
 		          $sql->bindValue(1,$_POST["nombrecuenta"]);
-		          $sql->bindValue(2,$_POST["id_partida"]);
-		          $sql->bindValue(3,$_POST["id_cuenta"]);
+              $sql->bindValue(2,$_POST["objetivo"]);
+              $sql->bindValue(3,$_POST["estrategia"]);
+		          $sql->bindValue(4,$_POST["id_partida"]);
+		          $sql->bindValue(5,$_POST["id_cuenta"]);
 		          $sql->execute();
 
               //print_r($_POST);
@@ -81,8 +86,21 @@
            $sql=$conectar->prepare($sql);
            $sql->bindValue(1,$id_cuenta);
            $sql->execute();
-
+        //elimina entradas asociadas a esa cuenta 
+          $sql2="delete from entrada where id_cuenta=?";
+           $sql2=$conectar->prepare($sql2);
+           $sql2->bindValue(1,$id_cuenta);
+           $sql2->execute();
            return $resultado=$sql->fetch();
+        }
+
+        public function get_cuenta_por_id_partida($id_partida){
+          $conectar= parent::conexion();
+          $sql="select * from cuentas where id_partida=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $id_partida);
+          $sql->execute();
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         }
    }
 ?>

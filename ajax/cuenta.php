@@ -10,9 +10,20 @@
    $id_cuenta=isset($_POST["id_cuenta"]);
    $nombrecuenta=isset($_POST["nombrecuenta"]);
    $id_partida=isset($_POST["id_partida"]);
+  $estrategia=isset($_POST["estrategia"]);
+  $objetivo=isset($_POST["objetivo"]);
 
       switch($_GET["op"]){
           case "guardaryeditar":
+
+          // se reciben las variables y se valida si el formato es correcto
+if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["nombrecuenta"]) or
+ !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["estrategia"]) or
+    !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["objetivo"]))
+          {
+            $errors[]="Formatos de Información no validos";
+            echo  error($errors);
+          }else{
 
       $datos = $cuentas->get_nombre_cuentas($_POST["nombrecuenta"]);
 
@@ -21,7 +32,7 @@
 	          if(empty($_POST["id_cuenta"])){
 	       	  /*verificamos si el cuenta existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
-		    $cuentas->registrar_cuentas($nombrecuenta,$id_partida);
+		  $cuentas->registrar_cuentas($nombrecuenta,$id_partida,$estrategia,$objetivo);
 			       	   	  $messages[]="La cuenta se registró correctamente";
 			      //cierre de validacion de $datos
 
@@ -29,9 +40,10 @@
 
 	            else {
 	            	/*si ya existe entonces editamos el cuenta*/
-	             $cuentas-> editar_cuentas($id_cuenta,$nombrecuenta,$id_partida);
+	             $cuentas-> editar_cuentas($id_cuenta,$nombrecuenta,$id_partida,$objetivo,$estrategia);
 	            	  $messages[]="El cuenta se editó correctamente";
 	            }
+          }
      //mensaje success
      if (isset($messages)){
   				echo exito($messages);
@@ -54,7 +66,9 @@
     				{
               $output["id_cuenta"] = $row["id_cuenta"];
               $output["nombrecuenta"] = $row["nombrecuenta"];
-    				}
+              $output["objetivo"] = $row["objetivo"];
+              $output["estrategia"] = $row["estrategia"];
+              }
               echo json_encode($output);
 	        } else {
                  //si no existe la categoria entonces no recorre el array
@@ -76,7 +90,9 @@
       {
         $sub_array = array();
       $sub_array[] = $row["nombrecuenta"];
-      $sub_array[] = '<div class="cbtns"><a href="entrada.php?identificador='.$row["id_cuenta"].'&nombrecuenta='.$row["nombrecuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Agregar Detalle de Entrada</button></a></div>';
+      $sub_array[] = $row["objetivo"];
+      $sub_array[] = $row["estrategia"];
+      $sub_array[] = '<div class="cbtns"><a href="entrada.php?identificador='.$row["id_cuenta"].'&nombrecuenta='.$row["nombrecuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar Detalle de Entrada</button></a></div>';
      $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i> </button>&nbsp;<button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }
@@ -96,7 +112,7 @@
   $datos= $cuentas->get_cuentas_por_id($_POST["id_cuenta"]);
      if(is_array($datos)==true and count($datos)>0){
           $cuentas->eliminar_cuenta($_POST["id_cuenta"]);
-          $messages[]="El registro de la cuenta se eliminó exitosamente";
+          $messages[]="La cuenta se eliminó exitosamente";
      }else {
        $errors[]="No hay registro que borrar";
      }
