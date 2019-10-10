@@ -92,8 +92,26 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["
       $sub_array[] = $row["nombrecuenta"];
       $sub_array[] = $row["objetivo"];
       $sub_array[] = $row["estrategia"];
-      $sub_array[] = '<div class="cbtns"><a href="entrada.php?identificador='.$row["id_cuenta"].'&nombrecuenta='.$row["nombrecuenta"].'"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar Detalle de Entrada</button></a></div>';
-     $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i> </button>&nbsp;<button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
+      $sub_array[] = '
+      <div class="cbtns">
+      <a href="entrada.php?identificador='.$row["id_cuenta"].'&nombrecuenta='.$row["nombrecuenta"].'">
+      <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar Entrada</button>
+      </a>
+      </div>';
+     $sub_array[] = '
+     <div class="cbtns">
+     <button type="button" onClick="mostrar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>
+     
+     &nbsp;
+      <a href="reportes/reporte-excel-cuenta.php?selector='.$row["id_cuenta"].'" download>
+      <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
+      </a>
+
+     &nbsp; 
+
+     <button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'.$row["id_cuenta"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+
+     </div>';
       $data[] = $sub_array;
       }
 

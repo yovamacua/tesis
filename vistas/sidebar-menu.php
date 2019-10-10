@@ -24,14 +24,14 @@
 
       <li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active"<?php }else{?> class=""<?php }?> >
         <a href="incidentes.php">
-          <i class="fa fa-list" aria-hidden="true"></i> <span>Incidentes</span>
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Incidentes</span>
         </a>
 
       </li>
 
       <li <?php if(isset($activar) and  $activar == 'item_partidas'){?>class="active"<?php }else{?> class=""<?php }?> >
        <a href="partidas.php">
-         <i class="fa fa-list" aria-hidden="true"></i> <span>Partidas</span>
+         <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Partidas</span>
        </a>
 
      </li>
