@@ -89,9 +89,9 @@ switch ($_GET["op"]) {
 					$output["mes"] = $row["mes"];
 					$output["anio"] = $row["anio"];
 					$output["unidadDelProduc"] = $row["unidadDelProduc"];
-
-					echo json_encode($output);
+					
 				}
+					echo json_encode($output);
 
 			}else{
 				//si no existe el registro no se recorre el array

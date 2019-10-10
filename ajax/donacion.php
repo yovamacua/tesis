@@ -83,9 +83,9 @@ switch ($_GET["op"]) {
           $output["donante"] = $row["donante"];
           $output["descripcion"] = $row["descripcion"];
           $output["cantidad"] = $row["cantidad"];
-
-          echo json_encode($output);
+          
         }
+          echo json_encode($output);
 
       }else{
         //si no existe el registro no se recorre el array

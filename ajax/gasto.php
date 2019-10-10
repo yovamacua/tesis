@@ -13,7 +13,7 @@
 	$fecha = isset($_POST["fecha"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$precio = isset($_POST["precio"]);
-	$id_usuario=isset($_POST["id_usuario"]);
+	$id_usuario = isset($_POST["id_usuario"]);
  
 switch ($_GET["op"]) { 
 
@@ -27,7 +27,7 @@ switch ($_GET["op"]) {
 			       	   	  //no existe el gasto por lo tanto hacemos el registros
 		 			$gastos->registrar_gastos($fecha, $descripcion, $precio, $id_usuario);
 			       	   	  
-			       	   	  $messages[]="El gasto se registró correctamente";
+			       	   	  $messages[]= "El gasto se registró correctamente";
 			    }else {
 				    
 				    $errors[]="Existe un gasto con el mismo id";
@@ -68,7 +68,7 @@ switch ($_GET["op"]) {
 				</div>
 			<?php
 			}
-		break;
+		break; 
 		
 		case 'mostrar':
 			# selecciona el id de el gasto
@@ -81,9 +81,9 @@ switch ($_GET["op"]) {
 					$output["fecha"] = $row["fecha"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["precio"] = $row["precio"];
-
-					echo json_encode($output);
+					
 				}
+					echo json_encode($output);
 
 			}else{
 				//si no existe el registro no se recorre el array

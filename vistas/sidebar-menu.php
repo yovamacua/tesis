@@ -38,19 +38,25 @@
 
        <li class="">
         <a href="perdidas.php">
-          <i class="fa fa-tasks" aria-hidden="true"></i> <span>Perdidas</span>
+          <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Perdidas</span>
         </a>
       </li>
 
       <li class="">
         <a href="donaciones.php">
-          <i class="fa fa-tasks" aria-hidden="true"></i> <span>Donaciones</span>
+          <i class="fa fa-user" aria-hidden="true"></i> <span>Donaciones</span>
         </a>
       </li>
 
       <li class="">
         <a href="gastos.php">
-          <i class="fa fa-tasks" aria-hidden="true"></i> <span>Gastos</span>
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Gastos</span>
+        </a>
+      </li>
+
+      <li class="">
+        <a href="capacitaciones.php">
+          <i class="fa fa-suitcase" aria-hidden="true"></i> <span>Capacitaciones</span>
         </a>
       </li>
 

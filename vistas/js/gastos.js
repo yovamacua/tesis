@@ -10,7 +10,7 @@ function init(){
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
-		$(".modal-title").text("Agregar gasto");
+		$(".modal-title").text("Agregar Gasto");
 	});
 
 }
@@ -20,7 +20,7 @@ function limpiar(){
 	$('#fecha').val("");
 	$('#descripcion').val("");
 	$('#precio').val("");
-	$('#id_usuario').val("");
+	$('#id_gasto').val("");
 
 }
 

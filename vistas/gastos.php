@@ -5,7 +5,6 @@
 
 <?php
   require_once("header.php");
-   
 ?>
 
   <!--Contenido-->
@@ -49,15 +48,15 @@
   <!--Fin-Contenido-->
   <!--FORMULARIO VENTANA MODAL-->
   <div id="gastoModal" class="modal fade">
-      <div class="modal-dialog">
-         <form method="post" id="gasto_form">
-            <div class="modal-content">
-               <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                 <h4 class="modal-title">Agregar Gasto</h4>
-               </div>
+    <div class="modal-dialog">
+      <form method="post" id="gasto_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Agregar Gasto</h4>
+          </div>
 
-         
+          
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
           $( function() {
@@ -78,21 +77,17 @@
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-12">
-          <label>Descripción</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
-        </div>  
+          <div class="form-group col-md-12">
+            <label>Descripción</label>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+          </div>  
+        </div> 
 
-          
-          
- 
-               </div>
                <div class="modal-footer">
-                  <input type="show" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
-                  <input type="show" name="id_gasto" id="id_gasto"/>
+                  <input type="show" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                   <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-               </div>
+              </div>
             </div>
          </form>
       </div>

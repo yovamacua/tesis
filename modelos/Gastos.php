@@ -43,6 +43,8 @@
 			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["id_usuario"]);
 			$sql-> execute();
+
+			print_r($_POST);
 		}
  
 		//editar gastos
