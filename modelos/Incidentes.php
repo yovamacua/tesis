@@ -13,6 +13,27 @@
    	   	  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
    	   }
 
+      public function get_incidentes_fecha($fecha, $fecha2){
+          
+          $conectar=parent::conexion();
+          parent::set_names();
+          $sql="select * from incidentes where fecha BETWEEN ? AND ? LIMIT 10";
+
+          $date = $_POST["fecha"];
+          $date_inicial = str_replace('/', '-', $date);
+          $fecha = date("Y-m-d",strtotime($date_inicial));
+          
+          $date2 = $_POST["fecha2"];
+          $date_inicial2 = str_replace('/', '-', $date2);
+          $fecha2 = date("Y-m-d",strtotime($date_inicial2));
+
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $fecha);
+          $sql->bindValue(2, $fecha2);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+       }
+
    	    //método para mostrar los datos de un registro a modificar
         public function get_incidentes_por_id($id_incidente){
 

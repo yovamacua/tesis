@@ -4,11 +4,12 @@
    class partidas extends Conectar{
        //método para seleccionar registros
 
-   	   public function get_partidas(){
+   	   public function get_partidas($iduse){
    	   	  $conectar=parent::conexion();
    	   	  parent::set_names();
-   	   	  $sql="select * from partidas";
+   	   	  $sql="select * from partidas where id_usuario = ?";
    	   	  $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $iduse);
    	   	  $sql->execute();
    	   	  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
    	   }

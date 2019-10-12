@@ -3,7 +3,7 @@
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
     </div>
-    <strong>Proyeto CampoEscuela - Salcoatitan &copy; 2019  <a href="https://www.usonsonate.edu.sv">Universidad De Sonsonate</a></strong>
+    <strong>Proyeto CampoEscuela - Salcoatitan &copy; 2019  <a href="https://www.usonsonate.edu.sv" target="_blank">Universidad De Sonsonate</a></strong>
   </footer>
 
 <!-- jQuery 3 -->
@@ -71,6 +71,17 @@
 !function(a){a.fn.datepicker.dates.es={days:["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"],daysShort:["Dom","Lun","Mar","Mié","Jue","Vie","Sáb"],daysMin:["Do","Lu","Ma","Mi","Ju","Vi","Sa"],months:["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"],monthsShort:["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"],today:"Hoy",monthsTitle:"Meses",clear:"Borrar",weekStart:1,format:"dd/mm/yyyy"}}(jQuery);  
 
       $('#fecha').datepicker({
+      /*dateFormat: 'dd-mm-yy',
+      autoclose: true*/
+       format: "dd/mm/yyyy",
+        /*clearBtn: true, */
+        language: "es",
+        autoclose: false,
+        /*keyboardNavigation: false,*/
+        todayHighlight: true
+    })
+
+      $('#fecha2').datepicker({
       /*dateFormat: 'dd-mm-yy',
       autoclose: true*/
        format: "dd/mm/yyyy",

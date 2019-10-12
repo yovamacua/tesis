@@ -84,7 +84,8 @@
 	        //fin de mensaje de error
 	 break;
         case "listar":
-     $datos=$partidas->get_partidas();
+        $iduse = $_SESSION["id_usuario"];
+     $datos=$partidas->get_partidas($iduse);
  	 $data= Array();
 
      foreach($datos as $row)

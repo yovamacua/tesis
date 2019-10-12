@@ -8,25 +8,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 if (isset( $_GET['selector'])) {
        $selector = $_GET['selector'];
 
-# Nuestra base de datos
-function obtenerBD(){
-    try {
-        $conexion = new PDO("mysql:host=".DBHOST.";dbname=".DBNAME, DBUSER, DBPASS);
-        $conexion->query("set names utf8;");
-        $conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
-        return $conexion;
-    } catch (Exception $e) {
-        exit("Error obteniendo BD: " . $e->getMessage());
-        return null;
-    }
-}
+# Conexion base de datos
+$bd = new Conectar();
+$bd =  $bd->conexion();
 
-
- 
-# Obtener base de datos
-$bd = obtenerBD();
 $documento = new Spreadsheet();
 $documento
     ->getProperties()
@@ -108,6 +93,12 @@ $encabezado = ["Generales", "Especificas", "Responsable", "Académico", "Técnic
 # El último argumento es por defecto A1 pero lo pongo para que se explique mejor
 $hojaDeCuentas->fromArray($encabezado, null, 'A8');
 
+$consulta1 = "SELECT * from entrada WHERE id_cuenta = '".$selector."'";
+$sentencia1 = $bd->prepare($consulta1);
+$sentencia1->execute();
+$result1 = $sentencia1->fetchAll();
+
+if (count($result1) > 0) {
 
 # Obtener cuentas de BD
 $consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector."' AND  c.id_partida  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
@@ -231,6 +222,10 @@ header('Content-disposition: attachment; filename=' .$archivogenerado);
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 readfile($archivogenerado);
 unlink($archivogenerado);
+}else{
+    echo "Esta cuenta no posee información";
+}
+
  }else{
 	 $redireccion = Conectar::ruta()."vistas";?>
       <script type="text/javascript">

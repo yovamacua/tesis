@@ -22,18 +22,31 @@
 
       </li>
 
-      <li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active"<?php }else{?> class=""<?php }?> >
-        <a href="incidentes.php">
-          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Incidentes</span>
+<li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active treeview"<?php }else{?> class="treeview"<?php }?> >
+        <a href="#">
+          <i class="fa fa-paperclip" aria-hidden="true"></i> <span>Incidentes</span>
+          <span class="pull-right-container badge bg-blue">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
         </a>
 
+          <ul class="treeview-menu">
+  <li><a href="incidentes.php">
+          <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Registar Incidente</span>
+        </a>
+  </li>
+  <li><a href="reporte_incidente.php">
+          <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Reporte de Incidentes</span>
+        </a>
+  </li>
+
+        </ul>
       </li>
 
       <li <?php if(isset($activar) and  $activar == 'item_partidas'){?>class="active"<?php }else{?> class=""<?php }?> >
        <a href="partidas.php">
          <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>Partidas</span>
        </a>
-
      </li>
 
        <li class="">

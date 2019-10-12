@@ -145,7 +145,13 @@ $(function resolucion() {
           <section class="content-header">
       <h1>
        Administrar información de la cuenta: <b><?php echo $nombre;?></b>
+        <a href="reportes/reporte-excel-cuenta.php?selector=<?php echo $identificador ?>" download><span class="btn btn-info btn-md hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></span></a>
+      </a>
       </h1>
+
+ 
+
+
       <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
         <li><a href="partidas.php"><i class="fa fa-file-text-o"></i> Partidas</a></li>
