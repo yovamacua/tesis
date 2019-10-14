@@ -119,6 +119,12 @@ function limpiar()
 $('#nombrepartida').val("");
 $('#titulo').val("");
  $('#id_partida').val("");
+
+ /** limpiado validacion al perder el foco **/
+  $("#error_nombrepartida").hide();
+  $("#error_responsable").hide();
+  $("#responsable").css("border-bottom","1px solid #d2d6de");
+  $("#nombrepartida").css("border-bottom","1px solid #d2d6de");
 }
 
 //Función Listar

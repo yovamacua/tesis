@@ -147,6 +147,14 @@ $('#titulo').val("");
 $('#descripcion').val("");
 $('#fecha').val("");
 $('#id_incidente').val("");
+
+/** reinicia la validacion cuando se sale de la ventana modal **/
+$("#titulo").css("border-bottom","1px solid #d2d6de");
+$("#descripcion").css("border-bottom","1px solid #d2d6de");
+$("#fecha").css("border-bottom","1px solid #d2d6de");
+$("#error_titulo").hide();
+$("#error_descripcion").hide();
+$("#error_fecha").hide();
 }
 
 //Función Listar

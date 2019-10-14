@@ -77,7 +77,7 @@
              /*si ya existe entonces editamos el usuario*/
             $usuarios->editar_usuario($id_usuario,$nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado);
             /*si edita el usuario aparece siguente mensaje*/
-                             $messages[]="El usuario se editó correctamente";
+                             $messages[]="La informacion se actualizo correctamente";
 	                     }
                  } else {
                  	  /*si las 2 constraseñas no coinciden, entonces se muestra el mensaje de error*/
@@ -181,6 +181,9 @@
       $sub_array[] = date("d-m-Y",strtotime($row["fecha_ingreso"]));
       //botones con valores de los campos en el id
       $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado('.$row["id_usuario"].','.$row["estado"].');" name="estado" id="'.$row["id_usuario"].'" class="'.$atrib.' hint--top" aria-label="Cambiar Estado">'.$est.'</button>
+
+<button type="button" onClick="pass('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>
+
       <button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
       <button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
 	     $data[]=$sub_array;

@@ -5,7 +5,10 @@
    $incidentes=new Incidentes();
 ?>
 <!-- INICIO DEL HEADER - LIBRERIAS -->
-<?php require_once("header.php");?>
+<?php 
+$activar = 'item_incidentes';
+$activar2 = 'item_incidentes2';
+require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 <script src="../public/plugins/pdf/jspdf/dist/jspdf.min.js"></script>
@@ -25,21 +28,21 @@
    <div class="panel-default col-md-12">
         
         <div class="panel-body box">
-            <form  action="reporte_incidente.php" class="form-inline" method="post">
+            <form  action="reporte_incidente.php" class="form-inline" method="GET">
 
 <?php
-if (empty($_POST['fecha'])) {
+if (empty($_GET['fecha'])) {
 	$fch = '';
 	echo "<style>#GenerarMysql{pointer-events: none;}</style>";
 }else{
-	$fch = $_POST['fecha'];
+	$fch = $_GET['fecha'];
 	echo "<style>#GenerarMysql{pointer-events: auto;}</style>";
 }
 
-if (empty($_POST['fecha2'])) {
+if (empty($_GET['fecha2'])) {
 	$fch2 = '';
 }else{
-	$fch2 = $_POST['fecha2'];
+	$fch2 = $_GET['fecha2'];
 }
  ?>
 <div class="form-row" style="text-align: center;">
@@ -89,14 +92,14 @@ if (empty($_POST['fecha2'])) {
                    <?php
 
 			   	  //si existe el envia del post entonces se llama al metodo
-			   	  if(isset($_POST["fecha"]) and isset($_POST["fecha2"])){
-			      $datos= $incidentes->get_incidentes_fecha($_POST["fecha"], $_POST["fecha2"]);
-	$f1 = $_POST["fecha"];
-	$date = $_POST["fecha"];
+			   	  if(isset($_GET["fecha"]) and isset($_GET["fecha2"])){
+			      $datos= $incidentes->get_incidentes_fecha($_GET["fecha"], $_GET["fecha2"]);
+	$f1 = $_GET["fecha"];
+	$date = $_GET["fecha"];
     $date_inicial = str_replace('/', '-', $date);
     $fecha = date("Y-m-d",strtotime($date_inicial));
-	$f2 = $_POST["fecha2"];
-	$date2 = $_POST["fecha2"];
+	$f2 = $_GET["fecha2"];
+	$date2 = $_GET["fecha2"];
     $date_inicial2 = str_replace('/', '-', $date2);
     $fecha2 = date("Y-m-d",strtotime($date_inicial2));
 
@@ -105,7 +108,7 @@ if (empty($_POST['fecha2'])) {
 					$fecha = '01/01/2000';
 						$f2 = 0;
 						$fecha2 = '01/01/2000';
-			      	$datos= $incidentes->get_incidentes();
+			      	$datos= $incidentes->get_incidentes_limit();
 			      } 
 			       for($i=0;$i<count($datos);$i++){
     			     ?>
@@ -191,4 +194,6 @@ var today = months[d.getMonth()]+' '+d.getDate();
 });
 </script>
 <?php
-   }
+   } else {
+        header("Location:".Conectar::ruta()."vistas/index.php");
+  }

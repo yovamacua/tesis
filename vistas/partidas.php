@@ -56,7 +56,7 @@ $activar = 'item_partidas';
     <!--FORMULARIO VENTANA MODAL-->
   <div id="partidaModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="partida_form">
+    <form method="post" id="partida_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -74,7 +74,7 @@
     <!--FORMULARIO VENTANA MODAL-->
   <div id="cuentaModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="cuenta_form">
+    <form method="post" id="cuenta_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>

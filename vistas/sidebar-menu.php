@@ -22,20 +22,21 @@
 
       </li>
 
-<li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active treeview"<?php }else{?> class="treeview"<?php }?> >
+<li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
         <a href="#">
           <i class="fa fa-paperclip" aria-hidden="true"></i> <span>Incidentes</span>
-          <span class="pull-right-container badge bg-blue">
+          <span class="pull-right-container badge movarrow bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
           </span>
         </a>
 
           <ul class="treeview-menu">
-  <li><a href="incidentes.php">
+<li <?php if(isset($activar1) and $activar1 == 'item_incidentes1'){?>class="active"<?php }else{?><?php }?> >
+  <a href="incidentes.php">
           <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Registar Incidente</span>
         </a>
   </li>
-  <li><a href="reporte_incidente.php">
+  <li <?php if(isset($activar2) and $activar2 == 'item_incidentes2'){?>class="active"<?php }else{?><?php }?> ><a href="reporte_incidente.php">
           <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Reporte de Incidentes</span>
         </a>
   </li>

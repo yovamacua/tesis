@@ -82,7 +82,20 @@ $(function() {
                $("#error_password1").hide();
                $("#password1").css("border-bottom","2px solid #34F458");
             }
-         }
+
+          var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.#$%&'()*+,-./:;<=>?@^_`{|}~\s]*$/;
+            var pass11 = $("#password1").val();
+            if (pattern.test(pass11)) {
+            } else {
+              $("#error_password1").html("Caracteres No Permitidos");
+               $("#error_password1").css("position","absolute");
+               $("#error_password1").css("color","red");
+               $("#error_password1").show();
+               $("#password1").css("border-bottom","2px solid #F90A0A");
+               error_password1 = true;
+            }
+
+}
 
          function campo_password2() {
             var pass1 = $("#password1").val()
@@ -270,6 +283,8 @@ $(function() {
 	 //cambia el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 			$(".modal-title").text("Agregar Usuario");
+      $(".ofield").show();
+      $(".ofield2").show();
 	  });
   }
 
@@ -284,6 +299,22 @@ $(function() {
 	$('#email').val("");
 	$('#estado').val("");
 	$('#id_usuario').val("");
+
+  /** limpiado validacion al perder foco **/
+        $("#error_nombre").hide();
+        $("#error_apellido").hide();
+        $("#error_usuario").hide();
+        $("#error_cargo").hide();
+        $("#error_email").hide();
+        $("#error_password1").hide();
+        $("#error_password2").hide();
+        $("#error_estado").hide();
+        $("#password1").css("border-bottom","1px solid #d2d6de");
+        $("#password2").css("border-bottom","1px solid #d2d6de");
+        $("#email").css("border-bottom","1px solid #d2d6de");
+        $("#usuario").css("border-bottom","1px solid #d2d6de");
+        $("#nombre").css("border-bottom","1px solid #d2d6de");
+        $("#apellido").css("border-bottom","1px solid #d2d6de");
    }
 
     //function listar
@@ -348,23 +379,52 @@ $(function() {
     }
 
      //Mostrar datos del usuario en la ventana modal del formulario
-     function mostrar(id_usuario){
+function pass(id_usuario){
      $.post("../ajax/usuario.php?op=mostrar",{id_usuario : id_usuario}, function(data, status)
-		{
+    {
       //analiza una cadena de texto como json
         data = JSON.parse(data);
+        var nm = data.nombre;
+        $('.ofield').hide();
+        $('.ofield2').show();
+        //evento para ventana modal
+        $('#nombre').val(data.nombre);
+        $('#apellido').val(data.apellido);
+        $('#cargo').val(data.cargo);
+        $('#usuario').val(data.usuario);
+        $("#usuarioModal").modal("show");
+        //$('#password1').val(data.password1);
+        //$('#password2').val(data.password2);
+        $('#email').val(data.correo);
+        $('#estado').val(data.estado);
+        $('.modal-title').text("Cambiar contraseña de usuario: "+nm);
+        $('#id_usuario').val(id_usuario);
+        $('#action').val("Edit");
+    });
+}
+
+     //Mostrar datos del usuario en la ventana modal del formulario
+function mostrar(id_usuario){
+     $.post("../ajax/usuario.php?op=mostrar",{id_usuario : id_usuario}, function(data, status)
+		{
+      var cero = '0000001';
+      //analiza una cadena de texto como json
+        data = JSON.parse(data);
+        var nm = data.nombre;
         //evento para ventana modal
         $("#usuarioModal").modal("show");
+        $('.ofield').show();
+        $('.ofield2').hide();
         //valor del formulario
         $('#nombre').val(data.nombre);
 				$('#apellido').val(data.apellido);
 				$('#cargo').val(data.cargo);
 				$('#usuario').val(data.usuario);
-				//$('#password1').val(data.password1);
-				//$('#password2').val(data.password2);
+				$('#password1').val(cero);
+				$('#password2').val(cero);
 				$('#email').val(data.correo);
 				$('#estado').val(data.estado);
-				$('.modal-title').text("Editar Usuario");
+				$('.modal-title').text("Editar Usuario: "+nm);
 				$('#id_usuario').val(id_usuario);
 				$('#action').val("Edit");
 		});

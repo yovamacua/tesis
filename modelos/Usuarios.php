@@ -27,10 +27,6 @@
           header("Location:".Conectar::ruta()."vistas/index.php?m=2");
          exit();
         }
-      /*   else if(!preg_match("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){12,15}$/", $password)) {
-      header("Location:".Conectar::ruta()."vistas/index.php?m=1");
-      exit();
-    } */
 
      else {
           $sql= "select * from usuarios where correo=? or usuario=? and password=? and estado=?";
@@ -99,23 +95,24 @@
    	    public function editar_usuario($id_usuario,$nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado){
              $conectar=parent::conexion();
              parent::set_names();
-             //consulta para editar la informacion
-             $sql="update usuarios set
-              nombres=?,
-              apellidos=?,
-              correo=?,
-              cargo=?,
-              usuario=?,
-              password=?,
-              password2=?,
-              estado = ?
+
+if ($_POST["password1"] == '0000001' and $_POST["password2"] == '0000001') {
+ $sql="update usuarios set nombres=?, apellidos=?,
+              correo=?, cargo=?, usuario=?, estado = ?
               where id_usuario=? ";
 
-              //echo $sql;
-
-              //se le pasa la consulta
              $sql=$conectar->prepare($sql);
-             //informacion capturada de los formulario y se le pasan a la consulta
+             $sql->bindValue(1,$_POST["nombre"]);
+             $sql->bindValue(2,$_POST["apellido"]);
+             $sql->bindValue(3,$_POST["email"]);
+             $sql->bindValue(4,$_POST["cargo"]);
+             $sql->bindValue(5,$_POST["usuario"]);
+             $sql->bindValue(6,$_POST["estado"]);
+             $sql->bindValue(7,$_POST["id_usuario"]);
+             $sql->execute();
+}else{
+    $sql="update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ? where id_usuario=? ";
+             $sql=$conectar->prepare($sql);
              $sql->bindValue(1,$_POST["nombre"]);
              $sql->bindValue(2,$_POST["apellido"]);
              $sql->bindValue(3,$_POST["email"]);
@@ -126,10 +123,8 @@
              $sql->bindValue(8,$_POST["estado"]);
              $sql->bindValue(9,$_POST["id_usuario"]);
              $sql->execute();
-
-             //print_r($_POST);
    	    }
-
+}
 
         //mostrar los datos del usuario por el id
    	    public function get_usuario_por_id($id_usuario){

@@ -58,36 +58,36 @@ require_once("header.php");
   <!--FORMULARIO VENTANA MODAL-->
   <div id="usuarioModal" class="modal fade">
       <div class="modal-dialog">
-         <form method="post" id="usuario_form">
+         <form method="post" id="usuario_form" autocomplete="off">
             <div class="modal-content">
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
                  <h4 class="modal-title">Agregar Usuario</h4>
                </div>
-           <div class="form-row">
+           <div class="form-row ofield" style="margin-top: 1.2rem!important;">
              <div class="form-group col-md-6">
-<label>Nombres</label>
+<label clas>Nombres*</label>
 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="25" required="" autofocus="autofocus" />
 <span class="error_form" id="error_nombre"></span>
               </div>
 
               <div class="form-group col-md-6">
-<label>Apellidos</label>
+<label>Apellidos*</label>
 <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellidos" maxlength="25" required=""/>
 <span class="error_form" id="error_apellido"></span>
                </div>
              </div>
 
-             <div class="form-row">
+             <div class="form-row  ofield">
                <div class="form-group col-md-6">
-<label>Usuario</label>
+<label>Usuario*</label>
 <input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Usuario" maxlength="15" required=""/>
 <span class="error_form" id="error_usuario"></span>
                   </div>
 
 
                 <div class="form-group col-md-6">
-<label>Cargo</label>
+<label>Cargo*</label>
    <select class="form-control" id="cargo" name="cargo">
       <option value="">-- Selecciona cargo --</option>
       <option value="1">Administrador</option>
@@ -97,31 +97,31 @@ require_once("header.php");
                 </div>
                </div>
 
-               <div class="form-row">
+               <div class="form-row  ofield">
                  <div class="form-group col-md-12">
-<label>Correo</label>
+<label>Correo*</label>
 <input type="email" name="email" id="email" class="form-control" placeholder="Correo" required=""/>
 <span class="error_form" id="error_email"></span>
                   </div>
                  </div>
 
-               <div class="form-row">
+               <div class="form-row ofield2">
                  <div class="form-group col-md-6">
-<label>Password</label>
+<label>Password*</label>
 <input  type="password" name="password1" id="password1" class="form-control" placeholder="Password" required="" maxlength="20"/>
 <span class="error_form" id="error_password1" ></span>
                   </div>
                   
                   <div class="form-group col-md-6">
-<label>Repita Password</label>
+<label>Repita Password* </label>
 <input type="password" name="password2" id="password2" class="form-control" placeholder="Repita Password" required="" maxlength="20"/>
 <span class="error_form" id="error_password2"></span>
                    </div>
                  </div>
 
-                 <div class="form-row">
+                 <div class="form-row  ofield">
                     <div class="form-group col-md-12">
-                      <label>Estado</label>
+                      <label>Estado*</label>
 <select class="form-control" id="estado" name="estado" required="">
     <option value="">-- Selecciona estado --</option>
     <option value="1" selected>Activo</option>
@@ -131,7 +131,15 @@ require_once("header.php");
                      </div>
                     </div>
 
-               <div class="modal-footer">
+                 <div class="form-row  ofield2">
+                    <div class="form-group col-md-12">
+ 
+<div>- Los campos con * (asterisco) son obligatorios<br>
+- La contraseña solo admite letras numeros y los caracteres: #$%&'()*+,-./:;<=>?@[]^_`{|}~</div>
+                     </div>
+                    </div>
+
+               <div class="modal-footer" style="border: none!important;">
                  <input type="hidden" name="id_usuario" id="id_usuario"/>
                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
@@ -140,6 +148,8 @@ require_once("header.php");
          </form>
       </div>
     </div>
+
+
 <?php
   require_once("footer.php");
 ?>

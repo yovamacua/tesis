@@ -148,6 +148,14 @@ $('#nombrecuenta').val("");
 $('#objetivo').val("");
 $('#estrategia').val("");
 $('#id_cuenta').val("");
+
+/** reinicia validacion al perder el foco **/
+  $("#error_nombrecuenta").hide();
+  $("#error_objetivo").hide();
+  $("#error_estrategia").hide();
+  $("#nombrecuenta").css("border-bottom","1px solid #d2d6de");
+  $("#objetivo").css("border-bottom","1px solid #d2d6de");
+  $("#estrategia").css("border-bottom","1px solid #d2d6de");
 }
 
 //Función Listar

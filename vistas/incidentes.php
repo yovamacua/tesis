@@ -4,6 +4,7 @@
 ?>
 <?php
 $activar = 'item_incidentes';
+$activar1 = 'item_incidentes1';
   require_once("header.php");
 ?>
   <!--Contenido-->
@@ -61,7 +62,7 @@ $activar = 'item_incidentes';
     <!--FORMULARIO VENTANA MODAL-->
   <div id="incidenteModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="incidente_form">
+    <form method="post" id="incidente_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>

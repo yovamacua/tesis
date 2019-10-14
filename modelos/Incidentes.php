@@ -13,17 +13,26 @@
    	   	  return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
    	   }
 
+    public function get_incidentes_limit(){
+          $conectar=parent::conexion();
+          parent::set_names();
+          $sql="select * from incidentes limit 10";
+          $sql=$conectar->prepare($sql);
+          $sql->execute();
+          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+       }
+
       public function get_incidentes_fecha($fecha, $fecha2){
           
           $conectar=parent::conexion();
           parent::set_names();
-          $sql="select * from incidentes where fecha BETWEEN ? AND ? LIMIT 10";
+          $sql="select * from incidentes where fecha BETWEEN ? AND ?";
 
-          $date = $_POST["fecha"];
+          $date = $_GET["fecha"];
           $date_inicial = str_replace('/', '-', $date);
           $fecha = date("Y-m-d",strtotime($date_inicial));
           
-          $date2 = $_POST["fecha2"];
+          $date2 = $_GET["fecha2"];
           $date_inicial2 = str_replace('/', '-', $date2);
           $fecha2 = date("Y-m-d",strtotime($date_inicial2));
 

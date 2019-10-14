@@ -135,7 +135,7 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
 
      <p class="text-center pad text-bold bg-primary margin-bottom"><i class="fa fa-user icon-title"></i> Ingrese sus datos</p>
 
-     <form action="" method="post">
+     <form action="" method="post" autocomplete="off">
        <div class="form-group has-feedback">
          <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto" autocomplete="off">
          <span class="glyphicon glyphicon-user form-control-feedback"></span>
