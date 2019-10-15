@@ -83,7 +83,7 @@ $(function() {
                $("#password1").css("border-bottom","2px solid #34F458");
             }
 
-          var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.#$%&'()*+,-./:;<=>?@^_`{|}~\s]*$/;
+          var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.#$%&*+,-./:;<=>?@^_`{|}~\s]*$/;
             var pass11 = $("#password1").val();
             if (pattern.test(pass11)) {
             } else {

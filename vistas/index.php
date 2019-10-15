@@ -102,13 +102,9 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
                      <div class="alert alert-danger alert-dismissible">
                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                        <h4><i class="icon fa fa-ban"></i> Los campos estan vacios</h4>
-
                  </div>
                  <?php
                  break;
-
-
-
               }
 
           }
@@ -125,10 +121,7 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
          </div>
        </div>
    </div>
-   <!-- Javascript -->
-   <script src="../assets/js/jquery-1.8.2.min.js"></script>
-   <script src="../assets/js/scripts.js"></script>
-   <!--/container-fluid-->
+     <!--/container-fluid-->
  <!-- FIN MENSAJES DE ALERTA-->
 
  <!--login-box-msg-->
@@ -163,62 +156,17 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
        </div>
      </form>
 
-<script type="text/javascript">
-  
-$(function() {
-   //creando variables y ocultando campos de error
-         $("#error_correo").hide();
-         $("#error_password").hide();
-                
-   // se ejecuta funcion en el id del control cuando se pierde el foco
-         $("#correo").focusout(function(){
-            campo_correo();
-         });
-
-         $("#password").focusout(function(){
-            campo_password();
-         });
-       
-       function campo_correo() {
-            var correo = $("#correo").val().length;
-            if (correo <= 0) {
-               $("#error_correo").html("Debe completar este campo");
-               $("#error_correo").show();
-               $("#correo").css("border-bottom","2px solid #F90A0A");
-               $("#error_correo").css("color","red");
-            } else {
-               $("#error_correo").hide();
-               $("#correo").css("border-bottom","1px solid #d2d6de");
-            }
-         }
-
-       function campo_password() {
-            var password = $("#password").val().length;
-            if (password <= 0) {
-               $("#error_password").html("Debe completar este campo");
-               $("#error_password").show();
-               $("#password").css("border-bottom","2px solid #F90A0A");
-               $("#error_password").css("color","red");
-            } else {
-               $("#error_password").hide();
-               $("#password").css("border-bottom","1px solid #d2d6de");
-            }
-         }        
- });
-
-
-
-</script>
-
    </div>
    <!-- /.login-box-body -->
 
  </div>
  <!-- /.login-box -->
  <!-- jQuery 3 -->
+
  <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
  <!-- Bootstrap 3.3.7 -->
  <script src="../public/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+ <script src="../vistas/js/login.js"></script>
  </body>
  </html>
 <?php

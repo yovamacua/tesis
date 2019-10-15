@@ -135,7 +135,7 @@ require_once("header.php");
                     <div class="form-group col-md-12">
  
 <div>- Los campos con * (asterisco) son obligatorios<br>
-- La contraseña solo admite letras numeros y los caracteres: #$%&'()*+,-./:;<=>?@[]^_`{|}~</div>
+- La contraseña solo admite letras numeros y los caracteres: #$%&*+,-./:;<=>?@[]^_`{|}~</div>
                      </div>
                     </div>
 
