@@ -45,7 +45,6 @@
 			$sql-> bindValue(5, $_POST["id_usuario"]);
 			$sql-> execute();
 
-			print_r($_POST);
 		}
  
 		//editar donaciones

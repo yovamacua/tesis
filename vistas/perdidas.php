@@ -36,7 +36,7 @@
                                   <th>Precio Producto</th>
                                   <th>Mes</th>
                                   <th>Año</th>
-                                  <th>Unidad Producto</th>
+                                  <th>Unidad de Medida</th>
                                   <th>Acciones</th>
                                   </tr>
                               </thead>
@@ -78,8 +78,13 @@
               <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control"placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
             </div>
             <div class="form-group col-md-6">
-              <label>Unidad Producto</label>
-              <input type="text" name="unidadDelProduc" id="unidadDelProduc" class="form-control" placeholder="Unidad del Producto"required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <label>Unid. Medida</label>
+                <select class="selectpicker form-control"id="unidadDelProduc" name="unidadDelProduc" required>
+                  <option value="">-- Seleccione unidad --</option>
+                  <option value="kilo">kilo</option>
+                  <option value="Gramo">Gramo</option>
+                  <option value="Libra">Libra</option>
+                </select>
             </div>
           </div>
 
@@ -104,6 +109,7 @@
 
               <div class="modal-footer">
                  <input type="show" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                 <input type="show" name="id_perdida" id="id_perdida"/>
                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
               <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>

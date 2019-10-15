@@ -48,7 +48,6 @@
 			$sql-> bindValue(8, $_POST["id_usuario"]);
 			$sql-> execute();
 
-			print_r($_POST);
 		}
  
 		//editar perdidas
