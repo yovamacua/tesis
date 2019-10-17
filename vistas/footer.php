@@ -99,8 +99,7 @@
 if (isset($invalidar)) {
 }else{ ?>
 <script type="text/javascript" src="../public/datatables/datatables.min.js"></script>
-
-  <?php } ?>
+<?php } ?>
 <!--GRAFICA COMPRAS Y VENTAS-->
 
 <script src="http://code.highcharts.com/highcharts.js"></script>

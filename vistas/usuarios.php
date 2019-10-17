@@ -131,11 +131,11 @@ require_once("header.php");
                      </div>
                     </div>
 
-                 <div class="form-row  ofield2">
+                 <div class="form-row">
                     <div class="form-group col-md-12">
  
-<div>- Los campos con * (asterisco) son obligatorios<br>
-- La contraseña solo admite letras numeros y los caracteres: #$%&*+,-./:;<=>?@[]^_`{|}~</div>
+<div><span class="ofield">- Los campos con * (asterisco) son obligatorios<br></span>
+<span class="ofield2">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras, números y al menos un carácter especial <strong>!@#$%</strong></span></div>
                      </div>
                     </div>
 

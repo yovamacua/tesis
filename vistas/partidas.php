@@ -64,15 +64,17 @@ $activar = 'item_partidas';
         </div>
         <div class="modal-body">
 
-          <label>Nombre Partida</label>
+          <label>Nombre Partida*</label>
           <input type="text" name="nombrepartida" id="nombrepartida" class="form-control" placeholder="Nombre Partida" required/>
           <span class="error_form" id="error_nombrepartida"></span>
           <br />
 
-          <label>Responsable</label>
+          <label>Responsable*</label>
           <input type="text" name="responsable" id="responsable" class="form-control" placeholder="Responsable" required/>
           <span class="error_form" id="error_responsable"></span>
           <br />
+          - Los campos con * (asterisco) son obligatorios
+          <br/>
 
         </div>
         <div class="modal-footer">

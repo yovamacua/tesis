@@ -82,21 +82,22 @@
         </div>
         <div class="modal-body">
 
-          <label>Nombre de la cuenta</label>
+          <label>Nombre de la cuenta*</label>
           <input type="text" name="nombrecuenta" id="nombrecuenta" class="form-control" placeholder="Titulo" required/>
           <span class="error_form" id="error_nombrecuenta"></span>
           <br />
 
-          <label>Objetivo</label>
+          <label>Objetivo*</label>
           <input type="text" name="objetivo" id="objetivo" class="form-control" placeholder="Objetivo" required/>
           <span class="error_form" id="error_objetivo"></span>
           <br />
 
-          <label>Estrategia</label>
+          <label>Estrategia*</label>
           <input type="text" name="estrategia" id="estrategia" class="form-control" placeholder="Estrategia" required/>
           <span class="error_form" id="error_estrategia"></span>
           <br />
-
+          - Los campos con * (asterisco) son obligatorios
+          <br/>
         </div>
         <div class="modal-footer">
           <input type="hidden" name="id_partida" id="id_partida" value="<?php echo $identificador; ?>" />

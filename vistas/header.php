@@ -24,10 +24,6 @@
   <link rel="stylesheet" href="../public/css/hint.css">
 
 
-  <!-- DataTables -->
-
-  <!--<link rel="stylesheet" href="../public/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">-->
-
   <link rel="stylesheet" href="../public/datatables/jquery.dataTables.min.css">
   <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
   <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
@@ -58,8 +54,32 @@
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+<!-- jQuery 3 -->
+<script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="../public/bower_components/jquery-ui/jquery-ui.min.js"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+  <div class="loader"></div>
+  
+  <script type="text/javascript">
+$(document).ready(function()  {
+    $(".loader").fadeOut("slow");
+});
+
+
+function saliendo(){
+     bootbox.confirm("¿Está Seguro de salir del sistema?", function(result){
+   if(result)
+   {
+    location = 'logout.php';
+   }
+  });
+}
+
+</script>
 <div class="wrapper">
 
   <header class="main-header">
@@ -101,7 +121,7 @@
               </li>
               <li class="user-footer">
                  <div class="pull-left">
-                   <a href="#" class="btn btn-default btn-flat" onclick="mostrar_perfil('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Perfil</a>
+                   <a href="mi_perfil.php" class="btn btn-default btn-flat">Perfil</a>
                  </div>
                  <div class="pull-right">
                    <a href="#" onclick="saliendo();" class="btn btn-default btn-flat">Cerrar</a>
@@ -115,78 +135,13 @@
     </nav>
   </header>
 
+<div id="resultados_ajax" class="text-center"></div>
+
   <?php require_once("sidebar-menu.php");?>
 
-  <div id="resultados_ajax" class="text-center"></div>
-   <!--FORMULARIO PERFIL USUARIO MODAL-->
-  <div id="perfilModal" class="modal fade">
-    <div class="modal-dialog">
-      <form action="" class="form-horizontal" method="post" id="perfil_form">
-        <div class="modal-content">
-
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Editar Perfil</h4>
-          </div>
-          <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="inputText1" class="col-lg-1 control-label">Nombres</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="nombre_perfil" name="nombre_perfil" placeholder="Nombres" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                    </div>
-                </div>
-
-                  <div class="form-group">
-                    <label for="inputText1" class="col-lg-1 control-label">Apellidos</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="apellido_perfil" name="apellido_perfil" placeholder="Apellidos" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                    </div>
-                </div>
-
-                 <div class="form-group">
-                    <label for="inputText1" class="col-lg-1 control-label">Usuario</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="usuario_perfil" name="usuario_perfil" placeholder="Nombres" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
-                    </div>
-                </div>
-
-                 <div class="form-group">
-                    <label for="inputText3" class="col-lg-1 control-label">Password</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="password" class="form-control" id="password1_perfil" name="password1_perfil" placeholder="Password" required>
-                    </div>
-                </div>
-
-                 <div class="form-group">
-                    <label for="inputText3" class="col-lg-1 control-label">Repita Password</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="password" class="form-control" id="password2_perfil" name="password2_perfil" placeholder="Repita Password" required>
-                    </div>
-                </div>
-
-                  <div class="form-group">
-                    <label for="inputText4" class="col-lg-1 control-label">Correo</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="email" class="form-control" id="email_perfil" name="email_perfil" placeholder="Correo" required="required">
-                    </div>
-                  </div>
-            </div>
-                   <!--modal-body-->
-
-          <div class="modal-footer">
-          <input type="hidden" name="id_usuario_perfil" id="id_usuario_perfil"/>
-            <button type="submit" name="action" id="" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
 
    <!--FIN FORMULARIO PERFIL USUARIO MODAL-->
   <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
-  <script type="text/javascript" src="js/perfil.js"></script>
 
   <?php
        } else {

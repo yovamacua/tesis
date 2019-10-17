@@ -80,10 +80,7 @@ box-shadow: 0px 0px 34px -4px rgba(0,0,0,0.75);
 
 
              if(isset($_GET["m"])) {
-
             switch($_GET["m"]){
-
-
                 case "1";
                 ?>
 

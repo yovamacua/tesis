@@ -19,9 +19,16 @@
 
     if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["correo"])){
         if (!preg_match('/^[A-z0-9\\._-]+@[A-z0-9][A-z0-9-]*(\\.[A-z0-9_-]+)*\\.([A-z]{2,6})$/', $_POST["correo"])){
-        $vl1 = 1;
+          $vl1 = 1;
       }
     }
+
+
+    if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password"]))
+      {
+        $vl1 = 1;
+      } 
+
       // valida si los campos son enviados vacios o no corresponden al formato correcto
         if(empty($correo) or empty($password) or $vl1 !=0){
           header("Location:".Conectar::ruta()."vistas/index.php?m=2");
@@ -96,7 +103,7 @@
              $conectar=parent::conexion();
              parent::set_names();
 
-if ($_POST["password1"] == '0000001' and $_POST["password2"] == '0000001') {
+if ($_POST["password1"] == '@123456a' and $_POST["password2"] == '@123456a') {
  $sql="update usuarios set nombres=?, apellidos=?,
               correo=?, cargo=?, usuario=?, estado = ?
               where id_usuario=? ";

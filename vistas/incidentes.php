@@ -44,7 +44,7 @@ $activar1 = 'item_incidentes1';
                                 <tr>
                                 <th>Titulo</th>
                                 <th>Descripcion</th>
-                                <th>Fecha</th>
+                                <th>Fecha Incidente</th>
                                 <th width="15%">Acciones</th>
                                 </tr>
                             </thead>
@@ -70,21 +70,23 @@ $activar1 = 'item_incidentes1';
         </div>
         <div class="modal-body">
 
-          <label>Titulo</label>
+          <label>Titulo*</label>
           <input type="text" maxlength="50" name="titulo" id="titulo" class="form-control" placeholder="Titulo" required/>
           <span class="error_form" id="error_titulo"></span>
           <br />
 
 
-          <label>Descripción</label>
+          <label>Descripción*</label>
           <textarea rows="4" maxlength="500" style=" word-break: break-all;    max-width: 100% !important;" cols="50" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
           <span class="error_form" id="error_descripcion"></span>
           <br />
 
-          <label>Fecha</label>
+          <label>Fecha*</label>
           <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
           <span class="error_form" id="error_fecha"></span>
           <br />
+          - Los campos con * (asterisco) son obligatorios
+          <br/>
 
         </div>
         <div class="modal-footer">

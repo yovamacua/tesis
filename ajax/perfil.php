@@ -60,23 +60,30 @@
               //si ya existe entonces editamos el usuario y sus permisos
 
             $perfil->editar_perfil($id_usuario_perfil,$nombre_perfil,$apellido_perfil,$email_perfil,$usuario_perfil,$password1_perfil,$password2_perfil);
-                $messages[]="El usuario se editó correctamente";
+                $_SESSION["nombre"] = $_POST["nombre_perfil"]; ?>
+<script type="text/javascript">
+  bootbox.alert({
+    message: "La información se ha actualizado correctamente! Se actualizara la pagina.",
+    callback: function () {
+        location.reload();
+    }
+})
+</script>
+                <?php
+               # $messages[]="La informacion se actualizo correctamente";
             }//cierre condicional $datos
      }//cierre de condicional del password
-    else {
-        $errors[]="El password no coincide";
+    else { ?>
+               <script type="text/javascript">
+  bootbox.alert({
+    message: "Fallo la actualización, intentelo de nuevo",
+    callback: function () {
+        location.reload();
     }
-                 //mensaje success
-                 if (isset($messages)){
-                      echo exito($messages);
-                    }
-   //fin success
-
-               //mensaje error
-                     if (isset($errors)){
-                       echo  error($errors);
-                  }
-   //fin mensaje error
-        break;
+})
+        </script>
+        <?php
+    }
+                 
    }
 ?>

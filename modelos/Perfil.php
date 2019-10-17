@@ -27,18 +27,10 @@
 
        public function editar_perfil($id_usuario_perfil,$nombre_perfil,$apellido_perfil,$email_perfil,$usuario_perfil,$password1_perfil,$password2_perfil){
           $conectar=parent::conexion();
-          $sql="update usuarios set
 
-                 nombres=?,
-                 apellidos=?,
-                 correo=?,
-
-                 usuario=?,
-                 password=?,
-                 password2=?
-                 where
-                 id_usuario=?
-          ";
+if ($_POST["password1_perfil"] == '@123456a' and $_POST["password2_perfil"] == '@123456a') {
+     $sql="update usuarios set nombres=?, apellidos=?,
+          correo=?, usuario=? where id_usuario=?";
 
           //echo $sql;
 
@@ -48,10 +40,23 @@
           $sql->bindValue(2,$_POST["apellido_perfil"]);
           $sql->bindValue(3,$_POST["email_perfil"]);
           $sql->bindValue(4,$_POST["usuario_perfil"]);
-          $sql->bindValue(5,$_POST["password1_perfil"]);
-          $sql->bindValue(6,$_POST["password2_perfil"]);
+          $sql->bindValue(5,$_POST["id_usuario_perfil"]);
+          $sql->execute();
+} else{         
+          $sql="update usuarios set nombres=?, apellidos=?,
+          correo=?, usuario=?, password=?, password2=?  where id_usuario=?";
+
+          $sql=$conectar->prepare($sql);
+
+          $sql->bindValue(1,$_POST["nombre_perfil"]);
+          $sql->bindValue(2,$_POST["apellido_perfil"]);
+          $sql->bindValue(3,$_POST["email_perfil"]);
+          $sql->bindValue(4,$_POST["usuario_perfil"]);
+          $sql->bindValue(5,sha1($_POST["password1_perfil"]));
+          $sql->bindValue(6,sha1($_POST["password2_perfil"]));
           $sql->bindValue(7,$_POST["id_usuario_perfil"]);
           $sql->execute();
         }
+      }
    }
 ?>

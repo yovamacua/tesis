@@ -57,27 +57,26 @@
    $datos = $usuarios->get_correo_del_usuario($_POST["email"]);
    //validacion que los 2 password enviados sean iguales
    if($password1 == $password2){
-   /*si el id no existe entonces lo registra
-	 importante: se debe poner el $_POST sino no funciona*/
+
 
 	 if(empty($_POST["id_usuario"])){
      /*si coincide password1 y password2 entonces verificamos si ya
      existe el correo en la base de datos, si existe no se registra el usuario*/
        	   if(is_array($datos)==true and count($datos)==0){
              //no existe el usuario por lo tanto hacemos el registros
-                  $usuarios->registrar_usuario($nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado);
+            $usuarios->registrar_usuario($nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado);
             /*si se registra el usuario aparece siguente mensaje*/
-                         $messages[]="El usuario se registró correctamente";
-	                     	   } else {
+            $messages[]="El usuario se registró correctamente";
+	             } else {
              /*si NO se registra el usuario aparece siguente mensaje*/
-                                    $messages[]="El correo ya esta registrado";
+            $messages[]="El correo ya esta registrado";
 	                     	   }
 	                     } //cierre de la validacion empty que valida el id usuario no sea vacio
 	                     else {
              /*si ya existe entonces editamos el usuario*/
             $usuarios->editar_usuario($id_usuario,$nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado);
             /*si edita el usuario aparece siguente mensaje*/
-                             $messages[]="La informacion se actualizo correctamente";
+            $messages[]="La informacion se actualizo correctamente";
 	                     }
                  } else {
                  	  /*si las 2 constraseñas no coinciden, entonces se muestra el mensaje de error*/
@@ -182,9 +181,11 @@
       //botones con valores de los campos en el id
       $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado('.$row["id_usuario"].','.$row["estado"].');" name="estado" id="'.$row["id_usuario"].'" class="'.$atrib.' hint--top" aria-label="Cambiar Estado">'.$est.'</button>
 
+ <button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
+
 <button type="button" onClick="pass('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>
 
-      <button type="button" onClick="mostrar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
+     
       <button type="button" onClick="eliminar('.$row["id_usuario"].');"  id="'.$row["id_usuario"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
 	     $data[]=$sub_array;
      }

@@ -71,23 +71,13 @@ $(function() {
          }
 
          function campo_password1() {
-            var pass1 = $("#password1").val().length;
-            if (pass1 < 6) {
-               $("#error_password1").html("Minimo 6 caracteres");
-               $("#error_password1").show();
-               $("#password1").css("border-bottom","2px solid #F90A0A");
-               $("#error_password1").css("color","red");
-               error_password1 = true;
-            } else {
-               $("#error_password1").hide();
-               $("#password1").css("border-bottom","2px solid #34F458");
-            }
-
-          var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.#$%&*+,-./:;<=>?@^_`{|}~\s]*$/;
+            var pattern = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/
             var pass11 = $("#password1").val();
             if (pattern.test(pass11)) {
+              $("#error_password1").hide();
+               $("#password1").css("border-bottom","2px solid #34F458");
             } else {
-              $("#error_password1").html("Caracteres No Permitidos");
+              $("#error_password1").html("Contraseña no valida");
                $("#error_password1").css("position","absolute");
                $("#error_password1").css("color","red");
                $("#error_password1").show();
@@ -407,7 +397,7 @@ function pass(id_usuario){
 function mostrar(id_usuario){
      $.post("../ajax/usuario.php?op=mostrar",{id_usuario : id_usuario}, function(data, status)
 		{
-      var cero = '0000001';
+      var cero = '@123456a';
       //analiza una cadena de texto como json
         data = JSON.parse(data);
         var nm = data.nombre;
