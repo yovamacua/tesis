@@ -249,6 +249,9 @@ function mostrar_perfil(id_usuario_perfil)
 				$('#password1_perfil').val(cero);
 				$('#password2_perfil').val(cero);
 				$('#email_perfil').val(data.correo);
+            $("#upload_usuario_imagen").show();
+            $(".group-span-filestyle .badge").hide();
+            $('#upload_usuario_imagen').html(data.usuario_imagen);
 				$('.modal-title').text("Editar Información");
 				$('#id_usuario_perfil').val(id_usuario_perfil);
 				$('#action').val("Edit");
@@ -256,6 +259,11 @@ function mostrar_perfil(id_usuario_perfil)
 				limpiar();
 		});
 	}
+
+
+function retorno(){
+ window.location="../vistas/mi_perfil.php?m=1";
+}
 
 function editar_pass(id_usuario_perfil)
 {
@@ -301,12 +309,50 @@ function editar_perfil(e)
 
 		    success: function(datos)
 		    {
-		         console.log(datos);
 
 				$('#perfilModal').modal('hide');
-				$('#resultados_ajax').html(datos);
-				limpiar();
+            retorno();
 		    }
 		});
       }//cierre del condicional
 }
+
+function validarImagen(obj){
+    var uploadFile = obj.files[0];
+    $(".group-span-filestyle .badge").show();
+    if (!window.FileReader) {
+        alert('El navegador no soporta la lectura de archivos');
+        return;
+    }
+    if (!(/\.(jpg|png)$/i).test(uploadFile.name)) {
+        alert('Formato de imagen no valido');
+         $('#usuario_imagen').val("");
+        $(".group-span-filestyle .badge").hide();
+    }
+    else {
+        var img = new Image();
+        img.onload = function () {
+            if (uploadFile.size > 1000000)
+            {
+                alert('El peso de la imagen no puede ser mayor a un 1Mb')
+                $('#usuario_imagen').val("");
+                $(".group-span-filestyle .badge").hide();
+            }
+        };
+        img.src = URL.createObjectURL(uploadFile);
+    }                 
+}
+
+function quitar_imagen(){
+{
+     bootbox.confirm("¿Está Seguro de eliminar la imagen de usuario?", function(result){
+   if(result)
+   {
+   window.location="../ajax/perfil.php?op=quitar_imagen";
+         }
+    });
+  }
+
+   
+}
+

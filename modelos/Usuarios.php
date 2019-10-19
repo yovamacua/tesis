@@ -50,6 +50,7 @@
                $_SESSION["id_usuario"] = $resultado["id_usuario"];
                $_SESSION["correo"] = $resultado["correo"];
                $_SESSION["nombre"] = $resultado["nombres"];
+               $_SESSION["imagen"] = $resultado["usuario_imagen"];
                 header("Location:".Conectar::ruta()."vistas/home.php");
                  exit();
               } else {
@@ -62,7 +63,6 @@
   }
 
 }
-
 
        //llamar a todos los campos de la tabla usuarios
        public function get_usuarios(){
@@ -81,10 +81,11 @@
 
              $conectar=parent::conexion();
              parent::set_names();
-             $sql="insert into usuarios values(null,?,?,?,?,?,?,?,now(),?);";
+
+              $sql="insert into usuarios values(null,?,?,?,?,?,?,?,now(),?,?);";
              //se le pasa la consulta
              $sql=$conectar->prepare($sql);
-
+              $usuario_imagen = 'imagen_usuario_general.png';
             //informacion capturada de los formulario y se le pasan a la consulta
              $sql->bindValue(1, $_POST["nombre"]);
              $sql->bindValue(2, $_POST["apellido"]);
@@ -94,6 +95,7 @@
              $sql->bindValue(6, sha1($_POST["password1"]));
              $sql->bindValue(7, sha1($_POST["password2"]));
              $sql->bindValue(8, $_POST["estado"]);
+             $sql->bindValue(9, $usuario_imagen);
              //se ejecuta
              $sql->execute();
    	    }
@@ -102,10 +104,11 @@
    	    public function editar_usuario($id_usuario,$nombre,$apellido,$email,$cargo,$usuario,$password1,$password2,$estado){
              $conectar=parent::conexion();
              parent::set_names();
+        $usuario_imagen = 'imagen_usuario_general.png';
 
 if ($_POST["password1"] == '@123456a' and $_POST["password2"] == '@123456a') {
  $sql="update usuarios set nombres=?, apellidos=?,
-              correo=?, cargo=?, usuario=?, estado = ?
+              correo=?, cargo=?, usuario=?, estado = ?, usuario_imagen = ?
               where id_usuario=? ";
 
              $sql=$conectar->prepare($sql);
@@ -115,10 +118,11 @@ if ($_POST["password1"] == '@123456a' and $_POST["password2"] == '@123456a') {
              $sql->bindValue(4,$_POST["cargo"]);
              $sql->bindValue(5,$_POST["usuario"]);
              $sql->bindValue(6,$_POST["estado"]);
-             $sql->bindValue(7,$_POST["id_usuario"]);
+             $sql->bindValue(7, $usuario_imagen);
+             $sql->bindValue(8,$_POST["id_usuario"]);
              $sql->execute();
 }else{
-    $sql="update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ? where id_usuario=? ";
+    $sql="update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ?, usuario_imagen = ? where id_usuario=? ";
              $sql=$conectar->prepare($sql);
              $sql->bindValue(1,$_POST["nombre"]);
              $sql->bindValue(2,$_POST["apellido"]);
@@ -128,7 +132,8 @@ if ($_POST["password1"] == '@123456a' and $_POST["password2"] == '@123456a') {
              $sql->bindValue(6,sha1($_POST["password1"]));
              $sql->bindValue(7,sha1($_POST["password2"]));
              $sql->bindValue(8,$_POST["estado"]);
-             $sql->bindValue(9,$_POST["id_usuario"]);
+             $sql->bindValue(9, $usuario_imagen);
+             $sql->bindValue(10,$_POST["id_usuario"]);
              $sql->execute();
    	    }
 }

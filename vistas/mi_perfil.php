@@ -8,7 +8,45 @@
   require_once("header.php");
  ?>
   <script type="text/javascript" src="js/perfil.js"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+     setTimeout(function() {
+         $(".alert-success").fadeOut(1000);
+ },2500);
+});
+</script>
+
+<style type="text/css">
+  .testp{z-index: 1031 !important;
+position: relative !important;
+width: 32rem;
+margin-bottom: -6rem;
+float: right;
+margin-top: 0.2rem;}
+  .iconfix .glyphicon-folder-open{padding-right: 1rem!important;}
+</style>
   <!--Contenido-->
+  <?php
+  if(isset($_GET["m"])) {
+            switch($_GET["m"]){
+                case "1";
+                ?><div id="resultados_ajax" class="text-center testp">  <div class="alert alert-success" role="alert">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              Se ha actualizado la información </div>
+          </div>
+                 <?php
+                 break;
+              case "2";
+                ?><div id="resultados_ajax" class="text-center testp">  <div class="alert alert-success" role="alert">
+              <button type="button" class="close" data-dismiss="alert">×</button>
+              Se ha eliminado la imagen de usuario</div>
+          </div>
+                 <?php
+                 break;
+              }
+
+          }
+             ?>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
                 <section class="content-header">
@@ -38,6 +76,7 @@
             $datos= $Perfil->get_usuario_por_id($_SESSION['id_usuario']);
               for($i=0;$i<count($datos);$i++){
                ?>            
+<div class="form-group col-md-6">
 <dl class="dl-horizontal">
                  <dt>Nombre(s):</dt>
                 <dd><?php echo $datos[$i]["nombres"]?></dd>
@@ -51,15 +90,27 @@
                 <dd><?php echo $datos[$i]["fecha_ingreso"]?></dd>
               </dl>
 
-
-              <?php
-                 }//cierre del for                                              
+   <?php
+           }//cierre del for                                              
 ?>
-                   <a href="#" class="btn btn-default btn-flat" onclick="mostrar_perfil('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Editar Perfil</a>
-
+               <div style="text-align: center;">
+                <a href="#" class="btn btn-default btn-flat" onclick="mostrar_perfil('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Editar Perfil</a>
 &nbsp;
                    <a href="#" class="btn btn-default btn-flat" onclick="editar_pass('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Cambiar Contraseña</a>
-                   
+                 </div>
+                   </div>
+
+<div class="form-group col-md-6" style="text-align: center;">
+ <?php $imagen = $_SESSION["imagen"]; ?>
+  <img src="upload/<?php echo $imagen; ?>" class="img-thumbnail" width="200"/>
+       <br><br>
+       <?php 
+       if ($imagen == "imagen_usuario_general.png") {              
+       }else{ ?>
+        <a href="#" class="btn btn-default btn-flat" onclick="quitar_imagen('<?php echo $_SESSION["id_usuario"]?>')" >Eliminar Imagen</a>
+      <?php }?>
+
+</div>
                     </div>
                     <!--Fin centro -->
               </div><!-- /.col -->
@@ -76,76 +127,83 @@
 </style>
   <div id="perfilModal" class="modal fade">
     <div class="modal-dialog">
-      <form action="mi_perfil.php" class="form-horizontal" autocomplete="off" method="post" id="perfil_form">
+        <form action="mi_perfil.php" autocomplete="off" method="post" id="perfil_form">
         <div class="modal-content">
-
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Editar Perfil</h4>
           </div>
-          <div class="modal-body">
 
-                <div class="form-group ofield2">
-                    <label for="inputText1" class="col-lg-1 control-label">Nombres*</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="nombre_perfil" name="nombre_perfil" placeholder="Nombres" required>
+
+           <div class="form-row ofield2" style="margin-top: 1.2rem!important;">
+             <div class="form-group col-md-6">
+<label clas>Nombres*</label>
+                     <input type="text" class="form-control" id="nombre_perfil" name="nombre_perfil" placeholder="Nombres" required>
                       <span class="error_form" id="error_nombre_perfil"></span>
-                    </div>
-                </div>
+              </div>
 
-                  <div class="form-group ofield2">
-                    <label for="inputText1" class="col-lg-1 control-label">Apellidos*</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="apellido_perfil" name="apellido_perfil" placeholder="Apellidos" required >
+              <div class="form-group col-md-6">
+<label>Apellidos*</label>
+<input type="text" class="form-control" id="apellido_perfil" name="apellido_perfil" placeholder="Apellidos" required >
                       <span class="error_form" id="error_apellido_perfil"></span>
-                    </div>
-                </div>
+               </div>
+             </div>
 
-                 <div class="form-group ofield2">
-                    <label for="inputText1" class="col-lg-1 control-label">Usuario*</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="text" class="form-control" id="usuario_perfil" name="usuario_perfil" placeholder="Nombres" required >
+           <div class="form-row ofield2">
+             <div class="form-group col-md-6">
+<label clas>Usuario*</label>
+<input type="text" class="form-control" id="usuario_perfil" name="usuario_perfil" placeholder="Nombres" required >
                       <span class="error_form" id="error_usuario_perfil"></span>
-                    </div>
-                </div>
+                    
+              </div>
 
-                 <div class="form-group ofield">
-                    <label for="inputText3" class="col-lg-2 col-lg-offset-1 control-label">Password*</label>
-                    <div class="col-lg-8">
-                      <input type="password" class="form-control" id="password1_perfil" name="password1_perfil" placeholder="Password" required>
-                      <span class="error_form" id="error_password1_perfil"></span>
-                    </div>
-                </div>
+              <div class="form-group col-md-6">
+<label>Correo*</label>
+                   <input type="email" class="form-control" id="email_perfil" name="email_perfil" placeholder="Correo" required="required">
+                      <span class="error_form" id="error_email_perfil"></span>
+               </div>
+             </div>
 
-                 <div class="form-group ofield">
-                    <label for="inputText3" class="col-lg-3 control-label">Repita Password*</label>
-                    <div class="col-lg-8">
+
+           <div class="form-row ofield">
+             <div class="form-group col-md-6">
+<label clas>Password*</label>
+<input type="password" class="form-control" id="password1_perfil" name="password1_perfil" placeholder="Password" required>
+<span class="error_form" id="error_password1_perfil"></span>
+              </div>
+
+              <div class="form-group col-md-6">
+<label>Repita Password*</label>
                       <input type="password" class="form-control" id="password2_perfil" name="password2_perfil" placeholder="Repita Password" required>
                     <span class="error_form" id="error_password2_perfil"></span>
-                    </div>
-                </div>
+               </div>
+             </div>
 
-                  <div class="form-group ofield2">
-                    <label for="inputText4" class="col-lg-1 control-label">Correo*</label>
-                    <div class="col-lg-9 col-lg-offset-1">
-                      <input type="email" class="form-control" id="email_perfil" name="email_perfil" placeholder="Correo" required="required">
-                      <span class="error_form" id="error_email_perfil"></span>
+                 <div class="form-row ofield2 iconfix" style="text-align: center;">
+                  <style type="text/css">
+                    .bootstrap-filestyle{display: grid!important;} 
+                  </style>
+                    <div class="form-group col-md-6">
+<input type="file" id="usuario_imagen" onchange="validarImagen(this);"  name="usuario_imagen"><br>
+                   </div>
+<div class="form-group col-md-6">
+<span id="upload_usuario_imagen"></span>
+                     </div>
                     </div>
-                  </div>
+
+
+
+
+
                             <div class="col-lg-12">
-<div><span class="ofield2">- Los campos con * (asterisco) son obligatorios<br></span>
+<div><span class="ofield2">- Los campos con * (asterisco) son obligatorios<br>-Formatos de imagen validos: jpg y png menor a 1 MB</span>
 <span class="ofield">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras, números y al menos un carácter especial <strong>!@#$%</strong><br><br></span></div>
 </div>
-            </div>
-
-
-
-                   <!--modal-body-->
-
-          <div class="modal-footer" style="border-top: none!important;">
-          <input type="hidden" name="id_usuario_perfil" id="id_usuario_perfil"/>
-            <button type="submit" name="action" id="" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+<div style="clear: both;"></div>
+  <div class="modal-footer" style="border-top: none!important;">
+        <input type="hidden" name="id_usuario_perfil" id="id_usuario_perfil"/>
+           <button type="submit" name="action" id="" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar </button>
+         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
           </div>
         </div>
       </form>

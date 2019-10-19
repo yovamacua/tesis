@@ -111,11 +111,13 @@ function saliendo(){
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
-                 <i class="fa fa-user" aria-hidden="true"></i>
-
+                <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                 <i class="fa fa-user" aria-hidden="true"></i>-->
                 <p>
-                   <?php echo $_SESSION["nombre"]?>
+                   <?php echo $_SESSION["nombre"];
+                   $imagen = $_SESSION["imagen"];
+                   ?><br>
+  <img src="upload/<?php echo $imagen; ?>" class="img-thumbnail" width="80"/>
                   <!-- <small>Administrador desde Noviembre 2017</small> -->
                 </p>
               </li>

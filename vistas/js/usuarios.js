@@ -289,7 +289,6 @@ $(function() {
 	$('#email').val("");
 	$('#estado').val("");
 	$('#id_usuario').val("");
-
   /** limpiado validacion al perder foco **/
         $("#error_nombre").hide();
         $("#error_apellido").hide();
@@ -383,8 +382,8 @@ function pass(id_usuario){
         $('#cargo').val(data.cargo);
         $('#usuario').val(data.usuario);
         $("#usuarioModal").modal("show");
-        //$('#password1').val(data.password1);
-        //$('#password2').val(data.password2);
+        $('#password1').val("");
+        $('#password2').val("");
         $('#email').val(data.correo);
         $('#estado').val(data.estado);
         $('.modal-title').text("Cambiar contraseña de usuario: "+nm);

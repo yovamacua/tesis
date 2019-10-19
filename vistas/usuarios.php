@@ -8,6 +8,7 @@
 $activar = 'item_usuarios';
 require_once("header.php");
 ?>
+
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -98,10 +99,20 @@ require_once("header.php");
                </div>
 
                <div class="form-row  ofield">
-                 <div class="form-group col-md-12">
+                 <div class="form-group col-md-6">
 <label>Correo*</label>
 <input type="email" name="email" id="email" class="form-control" placeholder="Correo" required=""/>
 <span class="error_form" id="error_email"></span>
+                  </div>
+
+                                   <div class="form-group col-md-6">
+                      <label>Estado*</label>
+<select class="form-control" id="estado" name="estado" required="">
+    <option value="">-- Selecciona estado --</option>
+    <option value="1" selected>Activo</option>
+    <option value="0">Inactivo</option>
+</select>
+<span class="error_form" id="error_estado"></span>
                   </div>
                  </div>
 
@@ -118,18 +129,6 @@ require_once("header.php");
 <span class="error_form" id="error_password2"></span>
                    </div>
                  </div>
-
-                 <div class="form-row  ofield">
-                    <div class="form-group col-md-12">
-                      <label>Estado*</label>
-<select class="form-control" id="estado" name="estado" required="">
-    <option value="">-- Selecciona estado --</option>
-    <option value="1" selected>Activo</option>
-    <option value="0">Inactivo</option>
-</select>
-<span class="error_form" id="error_estado"></span>
-                     </div>
-                    </div>
 
                  <div class="form-row">
                     <div class="form-group col-md-12">
