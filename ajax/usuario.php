@@ -7,6 +7,13 @@ require_once "../config/conexion.php";
 para verificar si el usuario tiene registros asociados en las tablas de la base de datos*/
 require_once "../modelos/Incidentes.php";
 require_once "../modelos/Partidas.php";
+require_once "../modelos/Perdidas.php";
+require_once "../modelos/Capacitaciones.php";
+require_once "../modelos/Donaciones.php";
+require_once "../modelos/Gastos.php";
+require_once "../modelos/Venta.php";
+require_once "../modelos/Productos.php";
+require_once "../modelos/Categorias.php";
 
 /*AGREGAR LAS TABLAS QUE FALTAN AL TERMINAR PROYECTO */
 
@@ -201,13 +208,35 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
         // si no existe entonces se puede eliminar el usuario
         $incidente = new Incidentes();
         $partida   = new Partidas();
+        $perdidas = new Perdidas();
+        $capacitaciones = new Capacitaciones();
+        $donaciones = new Donaciones();
+        $gastos = new Gastos();
+        $venta = new Ventas();
+        $productos = new Producto();
+        $categorias = new Categorias();
 
         $inc = $incidente->get_incidente_por_id_usuario($_POST["id_usuario"]);
         $par = $partida->get_partida_por_id_usuario($_POST["id_usuario"]);
+        $per = $perdidas->get_perdida_por_id_usuario($_POST["id_usuario"]);
+        $cap = $capacitaciones->get_capacitaciones_por_id_usuario($_POST["id_usuario"]);
+        $don = $donaciones->get_donaciones_por_id_usuario($_POST["id_usuario"]);
+        $gas = $gastos->get_gastos_por_id_usuario($_POST["id_usuario"]);
+        $ven = $venta->get_venta_por_id_usuario($_POST["id_usuario"]);
+        $pro = $productos->get_producto_por_id_usuario($_POST["id_usuario"]);
+        $cat = $categorias->get_categoria_por_id_usuario($_POST["id_usuario"]);
+
 
         if (
             is_array($inc) == true and count($inc) > 0 or
-            is_array($par) == true and count($par) > 0
+            is_array($par) == true and count($par) > 0 or
+            is_array($per) == true and count($per) > 0 or
+            is_array($cap) == true and count($cap) > 0 or
+            is_array($don) == true and count($don) > 0 or
+            is_array($gas) == true and count($gas) > 0 or
+            is_array($ven) == true and count($ven) > 0 or
+            is_array($pro) == true and count($pro) > 0 or
+            is_array($cat) == true and count($cat) > 0
         ) {
             //si existe el usuario en las tablas, no se elimina.
             $errors[] = "El usuario existe en los registros, no se puede eliminar";

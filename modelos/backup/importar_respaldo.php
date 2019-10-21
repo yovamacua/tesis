@@ -50,15 +50,6 @@ for($i = 0; $i < (count($sql)-1); $i++){
 $con->query("SET FOREIGN_KEY_CHECKS=1");
 $con->close();
 unlink($destino);
-/* if($totalErrors<=0){
-	echo "Restauración completada con éxito";
-			header("location: /dev/main.php?module=respaldo&alert=2");
-
-}else{
-	echo "Ocurrio un error inesperado, no se pudo hacer la restauración completamente";
-	header("location: /dev/main.php?module=respaldo&alert=3");
-
-} */
 
 }else {echo "No valido";}
 $redireccion = Conectar::ruta()."vistas/respaldo.php?msj=1";?>

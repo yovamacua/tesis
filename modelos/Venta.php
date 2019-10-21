@@ -460,6 +460,21 @@ foreach ($array_id_producto as $clave=>$id_producto) {
            }
  
     }
+
+
+        /****** Bloque agregado ******/
+
+          public function get_venta_por_id_usuario($id_usuario){
+          $conectar= parent::conexion();
+          $sql="select * from ventas where id_usuario=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $id_usuario);
+          $sql->execute();
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /****** Fin bloque agregado ******/
+
      /*public function get_venta_por_fecha($id_usuario,$fecha_inicial,$fecha_final){
 
         $conectar=parent::conexion();

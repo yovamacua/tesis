@@ -116,6 +116,20 @@ try{
 
            return $resultado=$sql->fetch();
         }
+
+        /****** Bloque agregado ******/
+
+          public function get_producto_por_id_usuario($id_usuario){
+          $conectar= parent::conexion();
+          $sql="select * from producto where id_usuario=?";
+          $sql=$conectar->prepare($sql);
+          $sql->bindValue(1, $id_usuario);
+          $sql->execute();
+          return $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        /****** Fin bloque agregado ******/
+
        }
     
 

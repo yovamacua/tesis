@@ -41,16 +41,15 @@ class Perfil extends Conectar
         return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function upload_image($user) {
+    public function upload_image($user,$numero) {
             if(isset($_FILES["usuario_imagen"]))
             {
-
             $string = $_FILES['usuario_imagen']['name'];
             $lastDot = strrpos($string, ".");
             $string = str_replace(".", "", substr($string, 0, $lastDot)) . substr($string, $lastDot);
 
               $extension = explode('.', $string);
-              $new_name = $user.".".$extension[1];
+              $new_name = $user.$numero.".".$extension[1];
               $destination = '../vistas/upload/' . $new_name;
               if (file_exists($destination)) {
                 unlink($destination);
@@ -71,13 +70,13 @@ class Perfil extends Conectar
             $usuario_imagen = '';
             if($_FILES["usuario_imagen"]["name"] != '')
             {
-              $usuario_imagen = $subirimg->upload_image($_POST["nombre_perfil"]);
+              $usuario_imagen = $subirimg->upload_image($_POST["nombre_perfil"], $_POST["id_usuario_perfil"]);
             }else
              {          
             $usuario_imagen= $_POST["hidden_usuario_imagen"];
             }
 
-        if ($_POST["password1_perfil"] == '@123456a' and $_POST["password2_perfil"] == '@123456a') {
+        if ($_POST["password1_perfil"] == '@123456axxxxx' and $_POST["password2_perfil"] == '@123456axxxxx') {
             $sql = "update usuarios set nombres=?, apellidos=?,
           correo=?, usuario=?, usuario_imagen = ? where id_usuario=?";
 

@@ -28,7 +28,6 @@
   <link href="../public/datatables/buttons.dataTables.min.css" rel="stylesheet"/>
   <link href="../public/datatables/responsive.dataTables.min.css" rel="stylesheet"/>
 
-
   <!-- Theme style -->
   <link rel="stylesheet" href="../public/dist/css/AdminLTE.min.css">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -68,7 +67,6 @@
 $(document).ready(function()  {
     $(".loader").fadeOut("slow");
 });
-
 
 function saliendo(){
      bootbox.confirm("¿Está Seguro de salir del sistema?", function(result){

@@ -70,7 +70,7 @@
 
 <script src="../public/bootstrap-filestyle/src/bootstrap-filestyle.min.js"></script>
 <script>
-  $(":file").filestyle({input: false, buttonText: " Imagen de usuario",buttonName: "btn-primary"});
+  $(":file").filestyle({input: false, buttonText: " Seleccionar archivo",buttonName: "btn-primary"});
 </script>
 
 <script>

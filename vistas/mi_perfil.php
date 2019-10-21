@@ -23,7 +23,6 @@ width: 32rem;
 margin-bottom: -6rem;
 float: right;
 margin-top: 0.2rem;}
-  .iconfix .glyphicon-folder-open{padding-right: 1rem!important;}
 </style>
   <!--Contenido-->
   <?php
@@ -183,7 +182,7 @@ margin-top: 0.2rem;}
                   <style type="text/css">
                     .bootstrap-filestyle{display: grid!important;} 
                   </style>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6"><label>Imagen de perfil</label>
 <input type="file" id="usuario_imagen" onchange="validarImagen(this);"  name="usuario_imagen"><br>
                    </div>
 <div class="form-group col-md-6">

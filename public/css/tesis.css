@@ -7,7 +7,7 @@ ul li.active > a{background: #ecf0f547!important;}
 .skin-blue .sidebar-menu .treeview-menu>li>a {
     color: white!important;
 }
-
+.iconfix .glyphicon-folder-open{padding-right: 1rem!important;}
 .loader {
     position: fixed;
     left: 0px;

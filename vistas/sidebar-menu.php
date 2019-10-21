@@ -186,9 +186,9 @@
         </a>
       </li>
 
-      <li class="">
+    <li <?php if(isset($activar) and  $activar == 'item_respaldo'){?>class="active"<?php }else{?> class=""<?php }?> >
        <a href="respaldo.php">
-         <i class="fa fa-list" aria-hidden="true"></i> <span>Respaldo</span>
+         <i class="fa fa-database" aria-hidden="true"></i> <span>Respaldo</span>
        </a>
 
      </li>

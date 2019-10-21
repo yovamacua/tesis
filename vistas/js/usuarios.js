@@ -396,7 +396,7 @@ function pass(id_usuario){
 function mostrar(id_usuario){
      $.post("../ajax/usuario.php?op=mostrar",{id_usuario : id_usuario}, function(data, status)
 		{
-      var cero = '@123456a';
+      var cero = '@123456axxxxx';
       //analiza una cadena de texto como json
         data = JSON.parse(data);
         var nm = data.nombre;

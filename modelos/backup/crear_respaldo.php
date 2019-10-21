@@ -42,12 +42,6 @@ foreach ($result as $row){
 	$dump.=tableDump($link,$row[0]);
 	}
 
-/* if(!empty($dump)){
-	echo '<span style="color: green">Respaldo Realizado</span><br>'."\n";
-}else{
-	echo '<span style="color: red">Respaldo Fallido!</span><br>'."\n";
-} */
-
 $filename = "Respaldo_".date('Y_m_d_H_i_s').".sql";
 
 $fo = fopen("$filename", 'w');
@@ -61,7 +55,6 @@ if(fwrite($fo, $dump))
 else {echo "<span style=\"color: green\">Error al guardar</span>"."\n"; fclose($fo);}
 
 header('Content-Description: File Transfer');
-header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename=' . $filename);
 header('Content-Transfer-Encoding: binary');
 header('Expires: 0');

@@ -238,7 +238,7 @@ function mostrar_perfil(id_usuario_perfil)
 {
 	$.post("../ajax/perfil.php?op=mostrar_perfil",{id_usuario_perfil : id_usuario_perfil}, function(data, status)
 	{
-	var cero = '@123456a';
+	var cero = '@123456axxxxx';
 		data = JSON.parse(data);
 				$('#perfilModal').modal('show');
 				$('.ofield').hide();

@@ -3,16 +3,9 @@
     if(isset($_SESSION["id_usuario"])){
 ?>
 <?php
+$activar = 'item_respaldo';
   require_once("header.php");
-?>
-  <!--Contenido-->
-      <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper">
-        <!-- Main content -->
-        <section class="content">
-
-<?php
-if (empty($_GET['msj'])) {
+  if (empty($_GET['msj'])) {
       echo "";
     }
 
@@ -23,17 +16,23 @@ if (empty($_GET['msj'])) {
               </div>";
     }
 ?>
-
+  <!--Contenido-->
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+                                <section class="content-header">
+      <h1>
+      Restaurar y Respaldar Base de Datos
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+        <li><i class="fa fa-database"></i> Respaldo</li>
+      </ol></section>
+        <!-- Main content -->
+        <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Restaurar y Respaldar Base de Datos</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
-                          <h1 class="box-title">
-                        <div class="box-tools pull-right">
-                        </div>
-                    </div>
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive">
@@ -47,8 +46,19 @@ alert("El respaldo se ha generado y su descarga se ha iniciado.");
             <form method="post" action="../modelos/backup/crear_respaldo.php" style="text-align:center;">
               <fieldset>
                 <legend>Crear Respaldo</legend>
-                <button type="submit" name="Descargar" onclick="Generado()" title="Descargar base de datos" class="btn btn-primary btn-info"> Crear y Descargar Respaldo <span class="glyphicon glyphicon-download-alt"></span>
+                <button type="submit" name="Descargar" onclick="Generado()" title="Descargar base de datos" class="btn btn-primary btn-info"> Crear y Descargar Respaldo <span class="glyphicon glyphicon-download-alt" download></span>
                 </button>
+                <div style="text-align: left;">
+                  &nbsp;<br>
+                <ul>
+                 <li>Click sobre el boton "Crear y Descargar Respaldo"</li>
+                 <li>Se Generara y descargara un archivo con extensión .sql
+                  <ul>
+                    <li>El archivo contiene todas las tablas y información generada y almacenada por el sistema.</li>
+                  </ul></li>
+                    <li>Guardar archivo en un lugar seguro y <b>generar un respaldo periodicamente</b></li>
+                  </ul> 
+                </div>
               </fieldset>
             </form>
         </div>
@@ -59,17 +69,26 @@ alert("El respaldo se ha generado y su descarga se ha iniciado.");
                   <!-- Form Name -->
                     <legend>Restaurar Respaldo</legend>
                           <!-- File Button -->
-                            <div class="form-group">
-                              <label class="col-md-4 control-label" for="filebutton">Seleccionar Archivo</label>
-                                <div class="col-md-6">
-                                  <input type="file" name="archivo"  class="form-control" accept=".sql" required>
+                            <div class="form-group iconfix">
+                              <div class="col-md-3"></div>
+                                <div class="col-md-4">
+                                  <input type="file" name="archivo"  class="form-control upbd" accept=".sql" required>
                                       </div>
-                                      <div class="col-md-2">
+                                      <div class="col-md-3">
     <button type="submit" title="Restaurar Respaldo" id="submit" name="Import" class="btn btn-sm btn-primary button-loading" data-loading-text="Cargando...">Importar <i class="fa fa-upload" aria-hidden="true"></i></button>
                                       </div>
+                                      <div class="col-md-3"></div>
                                   </div>
                               </fieldset>
                           </form>
+                                    <div style="text-align: left;">
+                <ul>
+                <li>Seleccionar archivo de respaldo, realizado previamente con la opcion del lado izquierdo.</li>
+                <li>Click Sobre boton importar.</li>
+                <li>Esperar a que el archivo se cargue y procese.</li>
+                <li>Al finalizar el proceso, se restaurara la información que halla sido borrada y se encuentre almacenada en el archivo de respaldo</li>
+                  </ul> 
+                </div>
                       </div>
                     </div>
                     <!--Fin centro -->
