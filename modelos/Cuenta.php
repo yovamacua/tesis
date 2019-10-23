@@ -1,6 +1,14 @@
 <?php
 
   require_once("../config/conexion.php");
+
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+  
    class cuentas extends Conectar{
        //método para seleccionar registros
 
@@ -36,9 +44,9 @@
 
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["id_partida"]);
-          $sql->bindValue(2,$_POST["nombrecuenta"]);
-          $sql->bindValue(3,$_POST["objetivo"]);
-          $sql->bindValue(4,$_POST["estrategia"]);
+          $sql->bindValue(2,substr($_POST["nombrecuenta"], 0, 50));
+          $sql->bindValue(3,substr($_POST["objetivo"], 0, 150));
+          $sql->bindValue(4,substr($_POST["estrategia"], 0, 150));
 
 		      $sql->execute();
 
@@ -48,24 +56,15 @@
         	$conectar=parent::conexion();
         	parent::set_names();
 
-        	$sql="update cuentas set
-            nombrecuenta=?,
-            objetivo=?,
-            estrategia=?,
-            id_partida=?
-            where
-            id_cuenta=?
-        	";
+        	$sql="update cuentas set nombrecuenta=?, objetivo=?, estrategia=?, id_partida=? where id_cuenta=?";
 
         	  $sql=$conectar->prepare($sql);
-		          $sql->bindValue(1,$_POST["nombrecuenta"]);
-              $sql->bindValue(2,$_POST["objetivo"]);
-              $sql->bindValue(3,$_POST["estrategia"]);
+          $sql->bindValue(2,substr($_POST["nombrecuenta"], 0, 50));
+          $sql->bindValue(3,substr($_POST["objetivo"], 0, 150));
+          $sql->bindValue(4,substr($_POST["estrategia"], 0, 150));
 		          $sql->bindValue(4,$_POST["id_partida"]);
 		          $sql->bindValue(5,$_POST["id_cuenta"]);
 		          $sql->execute();
-
-              //print_r($_POST);
         }
 
 

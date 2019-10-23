@@ -13,6 +13,13 @@ $id_partida   = isset($_POST["id_partida"]);
 $estrategia   = isset($_POST["estrategia"]);
 $objetivo     = isset($_POST["objetivo"]);
 
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 switch ($_GET["op"]) {
     case "guardaryeditar":
 

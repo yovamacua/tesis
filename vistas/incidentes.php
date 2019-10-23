@@ -77,7 +77,7 @@ $activar1 = 'item_incidentes1';
 
 
           <label>Descripción*</label>
-          <textarea rows="4" maxlength="500" style=" word-break: break-all;    max-width: 100% !important;" cols="50" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+          <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
           <span class="error_form" id="error_descripcion"></span>
           <br />
 

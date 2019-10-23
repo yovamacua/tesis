@@ -121,7 +121,7 @@ $(function() {
             guardaryeditar(e);
             } else {
                // se muestra un mensaje si los campos no estan correctos
-               alert("Complete/Revise los campos");
+                 bootbox.alert("Complete/Revise los campos");
                return false;
             }
          });

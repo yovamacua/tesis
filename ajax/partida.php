@@ -14,6 +14,13 @@ $nombrepartida = isset($_POST["nombrepartida"]);
 $responsable   = isset($_POST["responsable"]);
 $id_usuario    = isset($_POST["id_usuario"]);
 
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 switch ($_GET["op"]) {
     case "guardaryeditar":
 

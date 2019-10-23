@@ -137,13 +137,13 @@ margin-top: 0.2rem;}
            <div class="form-row ofield2" style="margin-top: 1.2rem!important;">
              <div class="form-group col-md-6">
 <label clas>Nombres*</label>
-                     <input type="text" class="form-control" id="nombre_perfil" name="nombre_perfil" placeholder="Nombres" required>
+                     <input type="text" class="form-control" id="nombre_perfil" name="nombre_perfil" maxlength="50" placeholder="Nombres" required>
                       <span class="error_form" id="error_nombre_perfil"></span>
               </div>
 
               <div class="form-group col-md-6">
 <label>Apellidos*</label>
-<input type="text" class="form-control" id="apellido_perfil" name="apellido_perfil" placeholder="Apellidos" required >
+<input type="text" class="form-control" id="apellido_perfil" name="apellido_perfil" placeholder="Apellidos" maxlength="50" required >
                       <span class="error_form" id="error_apellido_perfil"></span>
                </div>
              </div>
@@ -151,14 +151,14 @@ margin-top: 0.2rem;}
            <div class="form-row ofield2">
              <div class="form-group col-md-6">
 <label clas>Usuario*</label>
-<input type="text" class="form-control" id="usuario_perfil" name="usuario_perfil" placeholder="Nombres" required >
+<input type="text" class="form-control" maxlength="50" id="usuario_perfil" name="usuario_perfil" placeholder="Nombres" required >
                       <span class="error_form" id="error_usuario_perfil"></span>
                     
               </div>
 
               <div class="form-group col-md-6">
 <label>Correo*</label>
-                   <input type="email" class="form-control" id="email_perfil" name="email_perfil" placeholder="Correo" required="required">
+                   <input type="email" class="form-control" id="email_perfil" name="email_perfil" maxlength="100" placeholder="Correo" required="required">
                       <span class="error_form" id="error_email_perfil"></span>
                </div>
              </div>
@@ -167,13 +167,13 @@ margin-top: 0.2rem;}
            <div class="form-row ofield">
              <div class="form-group col-md-6">
 <label clas>Password*</label>
-<input type="password" class="form-control" id="password1_perfil" name="password1_perfil" placeholder="Password" required>
+<input type="password" class="form-control" id="password1_perfil" name="password1_perfil" maxlength="20" placeholder="Password" required>
 <span class="error_form" id="error_password1_perfil"></span>
               </div>
 
               <div class="form-group col-md-6">
 <label>Repita Password*</label>
-                      <input type="password" class="form-control" id="password2_perfil" name="password2_perfil" placeholder="Repita Password" required>
+                      <input type="password" class="form-control" id="password2_perfil" maxlength="20" name="password2_perfil" placeholder="Repita Password" required>
                     <span class="error_form" id="error_password2_perfil"></span>
                </div>
              </div>
@@ -183,7 +183,7 @@ margin-top: 0.2rem;}
                     .bootstrap-filestyle{display: grid!important;} 
                   </style>
                     <div class="form-group col-md-6"><label>Imagen de perfil</label>
-<input type="file" id="usuario_imagen" onchange="validarImagen(this);"  name="usuario_imagen"><br>
+<input type="file" accept="image/*" id="usuario_imagen" onchange="validarImagen(this);"  name="usuario_imagen"><br>
                    </div>
 <div class="form-group col-md-6">
 <span id="upload_usuario_imagen"></span>

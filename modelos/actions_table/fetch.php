@@ -1,5 +1,13 @@
 <?php
 require_once "../../config/conexion.php";
+
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 $conectar = new Conectar();
 $conectar = $conectar->conexion();
 $iden     = $_GET['valor'];
@@ -36,23 +44,23 @@ foreach ($filas as $fila) {
 
     $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)" ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="ActEspecifica">' . $fila["ActEspecifica"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Responsable">' . $fila["Responsable"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 50)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Responsable">' . $fila["Responsable"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Academico">' . $fila["Academico"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 50)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Academico">' . $fila["Academico"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Tecnico">' . $fila["Tecnico"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 50)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Tecnico">' . $fila["Tecnico"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 9) && restrictAlphabets(event);" ondblclick="this.contentEditable=true;"  class="update" data-id="' . $fila["id_entrada"] . '" data-column="Financiero">' . $fila["Financiero"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 15) && restrictAlphabets(event);" ondblclick="this.contentEditable=true;"  class="update" data-id="' . $fila["id_entrada"] . '" data-column="Financiero">' . $fila["Financiero"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Infraestructura">' . $fila["Infraestructura"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 150)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Infraestructura">' . $fila["Infraestructura"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 100)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Inicio">' . $fila["Inicio"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 20)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Inicio">' . $fila["Inicio"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 10)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Fin">' . $fila["Fin"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 20)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Fin">' . $fila["Fin"] . '</div>';
 
-    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 10)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Logro">' . $fila["Logro"] . '</div>';
+    $sub_array[] = '<div onkeypress="return (this.innerText.length <= 150)"  ondblclick="this.contentEditable=true;" class="update" data-id="' . $fila["id_entrada"] . '" data-column="Logro">' . $fila["Logro"] . '</div>';
 
-    $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete hint--left" aria-label="Eliminar Registro" id="' . $fila["id_entrada"] . '"><i style="font-size: 18px;" class="fa fa-trash"></i></button>';
+    $sub_array[] = '<button type="button" name="delete" class="btn btn-danger btn-xs delete hint--left" aria-label="Eliminar Registro" id="' . $fila["id_entrada"] . '"><i style="font-size: 18px;" class="fa fa-trash"> </i></button>';
 
     $data[] = $sub_array;
 }

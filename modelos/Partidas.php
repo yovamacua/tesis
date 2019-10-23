@@ -1,6 +1,15 @@
 <?php
 
   require_once("../config/conexion.php");
+
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
+
    class partidas extends Conectar{
        //método para seleccionar registros
 
@@ -35,8 +44,8 @@
            values(null,?,?,?);";
 
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$_POST["nombrepartida"]);
-          $sql->bindValue(2,$_POST["responsable"]);
+          $sql->bindValue(1,substr($_POST["nombrepartida"], 0, 50));
+          $sql->bindValue(2,substr($_POST["responsable"], 0, 50));
 		      $sql->bindValue(3,$_POST["id_usuario"]);
 		      $sql->execute();
 
@@ -56,8 +65,8 @@
         	";
 
         	  $sql=$conectar->prepare($sql);
-		          $sql->bindValue(1,$_POST["nombrepartida"]);
-		          $sql->bindValue(2,$_POST["responsable"]);
+            $sql->bindValue(1,substr($_POST["nombrepartida"], 0, 50));
+            $sql->bindValue(2,substr($_POST["responsable"], 0, 50));
 		          $sql->bindValue(3,$_POST["id_usuario"]);
 		          $sql->bindValue(4,$_POST["id_partida"]);
 		          $sql->execute();

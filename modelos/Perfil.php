@@ -2,6 +2,14 @@
 //conexión a la base de datos
 require_once "../config/conexion.php";
 
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
+
 class Perfil extends Conectar
 {
     //método para mostrar los datos de un registro a modificar
@@ -67,8 +75,8 @@ class Perfil extends Conectar
 
          require_once("Perfil.php");
             $subirimg = new Perfil();                
-            $usuario_imagen = '';
-            if($_FILES["usuario_imagen"]["name"] != '')
+            if($_FILES["usuario_imagen"]["name"] != '' and 
+                round(intval($_FILES['usuario_imagen']['size'])/1048576, 2) < 1)
             {
               $usuario_imagen = $subirimg->upload_image($_POST["nombre_perfil"], $_POST["id_usuario_perfil"]);
             }else
@@ -80,14 +88,12 @@ class Perfil extends Conectar
             $sql = "update usuarios set nombres=?, apellidos=?,
           correo=?, usuario=?, usuario_imagen = ? where id_usuario=?";
 
-            //echo $sql;
-
             $sql = $conectar->prepare($sql);
 
-            $sql->bindValue(1, $_POST["nombre_perfil"]);
-            $sql->bindValue(2, $_POST["apellido_perfil"]);
-            $sql->bindValue(3, $_POST["email_perfil"]);
-            $sql->bindValue(4, $_POST["usuario_perfil"]);
+            $sql->bindValue(1, substr($_POST["nombre_perfil"], 0, 50));
+            $sql->bindValue(2, substr($_POST["apellido_perfil"], 0, 50));
+            $sql->bindValue(3, substr($_POST["email_perfil"], 0, 100));
+            $sql->bindValue(4, substr($_POST["usuario_perfil"], 0, 100));
             $sql->bindValue(5, $usuario_imagen);
             $sql->bindValue(6, $_POST["id_usuario_perfil"]);
             $_SESSION["imagen"] = $usuario_imagen;
@@ -97,11 +103,11 @@ class Perfil extends Conectar
           correo=?, usuario=?, password=?, password2=?, usuario_imagnen = ?  where id_usuario=?";
 
             $sql = $conectar->prepare($sql);
-
-            $sql->bindValue(1, $_POST["nombre_perfil"]);
-            $sql->bindValue(2, $_POST["apellido_perfil"]);
-            $sql->bindValue(3, $_POST["email_perfil"]);
-            $sql->bindValue(4, $_POST["usuario_perfil"]);
+            
+            $sql->bindValue(1, substr($_POST["nombre_perfil"], 0, 50));
+            $sql->bindValue(2, substr($_POST["apellido_perfil"], 0, 50));
+            $sql->bindValue(3, substr($_POST["email_perfil"], 0, 100));
+            $sql->bindValue(4, substr($_POST["usuario_perfil"], 0, 100));
             $sql->bindValue(5, sha1($_POST["password1_perfil"]));
             $sql->bindValue(6, sha1($_POST["password2_perfil"]));
             $sql->bindValue(7, $usuario_imagen);

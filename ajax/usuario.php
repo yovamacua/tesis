@@ -39,6 +39,13 @@ $password1 = isset($_POST["password1"]);
 $password2 = isset($_POST["password2"]);
 $estado = isset($_POST["estado"]);
 
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 // switch para seleccionar opcion segun parametro enviado en la url
 switch ($_GET["op"]) {
     case "guardaryeditar":

@@ -2,6 +2,13 @@
   //conexion a la base de datos
    require_once("../config/conexion.php");
 
+    if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
     class Usuarios extends Conectar {
 
     public function login(){
@@ -87,11 +94,11 @@
              $sql=$conectar->prepare($sql);
               $usuario_imagen = 'imagen_usuario_general.png';
             //informacion capturada de los formulario y se le pasan a la consulta
-             $sql->bindValue(1, $_POST["nombre"]);
-             $sql->bindValue(2, $_POST["apellido"]);
-             $sql->bindValue(3, $_POST["email"]);
+             $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
+             $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
+             $sql->bindValue(3, substr($_POST["email"], 0, 100));
              $sql->bindValue(4, $_POST["cargo"]);
-             $sql->bindValue(5, $_POST["usuario"]);
+             $sql->bindValue(5, substr($_POST["usuario"], 0, 50));
              $sql->bindValue(6, sha1($_POST["password1"]));
              $sql->bindValue(7, sha1($_POST["password2"]));
              $sql->bindValue(8, $_POST["estado"]);
@@ -110,20 +117,20 @@ if ($_POST["password1"] == '@123456axxxxx' and $_POST["password2"] == '@123456ax
               correo=?, cargo=?, usuario=?, estado = ? where id_usuario=? ";
 
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1,$_POST["nombre"]);
-             $sql->bindValue(2,$_POST["apellido"]);
-             $sql->bindValue(3,$_POST["email"]);
+             $sql->bindValue(1,substr($_POST["nombre"], 0, 50));
+             $sql->bindValue(2,substr($_POST["apellido"], 0, 50));
+             $sql->bindValue(3,substr($_POST["email"], 0, 100));
              $sql->bindValue(4,$_POST["cargo"]);
-             $sql->bindValue(5,$_POST["usuario"]);
+             $sql->bindValue(5,substr($_POST["usuario"], 0, 50));
              $sql->bindValue(6,$_POST["estado"]);
              $sql->bindValue(7,$_POST["id_usuario"]);
              $sql->execute();
 }else{
     $sql="update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ? where id_usuario=? ";
              $sql=$conectar->prepare($sql);
-             $sql->bindValue(1,$_POST["nombre"]);
-             $sql->bindValue(2,$_POST["apellido"]);
-             $sql->bindValue(3,$_POST["email"]);
+             $sql->bindValue(1,substr($_POST["nombre"], 0, 50));
+             $sql->bindValue(2,substr($_POST["apellido"], 0, 50));
+             $sql->bindValue(3,substr($_POST["email"], 0, 100));
              $sql->bindValue(4,$_POST["cargo"]);
              $sql->bindValue(5,$_POST["usuario"]);
              $sql->bindValue(6,sha1($_POST["password1"]));

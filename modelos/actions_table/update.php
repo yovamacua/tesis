@@ -1,5 +1,12 @@
 <?php
 require_once "../../config/conexion.php";
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 $conectar = new Conectar();
 $conectar = $conectar->conexion();
 $iden     = $_GET['valor'];

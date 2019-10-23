@@ -1,6 +1,14 @@
 <?php
 
   require_once("../config/conexion.php");
+
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+  
    class Incidentes extends Conectar{
        //método para seleccionar registros
 
@@ -68,8 +76,8 @@
           $fecha = date("Y-m-d",strtotime($date_inicial));
 
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$_POST["titulo"]);
-          $sql->bindValue(2,$_POST["descripcion"]);
+          $sql->bindValue(1,substr($_POST["titulo"], 0, 50));
+          $sql->bindValue(2,substr($_POST["descripcion"], 0, 250));
           $sql->bindValue(3,$fecha);
 		      $sql->bindValue(4,$_POST["id_usuario"]);
 		      $sql->execute();
@@ -95,8 +103,8 @@
             $fecha = date("Y-m-d",strtotime($date_inicial));
 
         	  $sql=$conectar->prepare($sql);
-		          $sql->bindValue(1,$_POST["titulo"]);
-		          $sql->bindValue(2,$_POST["descripcion"]);
+              $sql->bindValue(1,substr($_POST["titulo"], 0, 50));
+              $sql->bindValue(2,substr($_POST["descripcion"], 0, 250));
               $sql->bindValue(3,$fecha);
 		          $sql->bindValue(4,$_POST["id_usuario"]);
 		          $sql->bindValue(5,$_POST["id_incidente"]);

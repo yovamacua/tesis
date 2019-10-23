@@ -67,14 +67,14 @@ require_once("header.php");
                </div>
            <div class="form-row ofield" style="margin-top: 1.2rem!important;">
              <div class="form-group col-md-6">
-<label clas>Nombres*</label>
-<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="25" required="" autofocus="autofocus" />
+<label>Nombres*</label>
+<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombres" maxlength="50" required="" autofocus="autofocus" />
 <span class="error_form" id="error_nombre"></span>
               </div>
 
               <div class="form-group col-md-6">
 <label>Apellidos*</label>
-<input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellidos" maxlength="25" required=""/>
+<input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellidos" maxlength="50"  required=""/>
 <span class="error_form" id="error_apellido"></span>
                </div>
              </div>
@@ -82,7 +82,7 @@ require_once("header.php");
              <div class="form-row  ofield">
                <div class="form-group col-md-6">
 <label>Usuario*</label>
-<input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Usuario" maxlength="15" required=""/>
+<input type="text"  name="usuario" id="usuario" class="form-control" placeholder="Usuario" maxlength="50" required=""/>
 <span class="error_form" id="error_usuario"></span>
                   </div>
 
@@ -101,7 +101,7 @@ require_once("header.php");
                <div class="form-row  ofield">
                  <div class="form-group col-md-6">
 <label>Correo*</label>
-<input type="email" name="email" id="email" class="form-control" placeholder="Correo" required=""/>
+<input type="email" name="email" id="email" class="form-control" placeholder="Correo" maxlength="100" required=""/>
 <span class="error_form" id="error_email"></span>
                   </div>
 

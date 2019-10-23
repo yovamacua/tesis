@@ -6,16 +6,16 @@ $conectar = $conectar->conexion();
 $iden = $_GET['valor'];
 
 if (isset($_POST["ActGeneral"], $_POST["ActEspecifica"], $_POST["Responsable"], $_POST["Academico"], $_POST["Tecnico"], $_POST["Financiero"], $_POST["Infraestructura"], $_POST["Infraestructura"], $_POST["Logro"], $_POST["Inicio"], $_POST["Fin"])) {
-    $ActGeneral      = $_POST["ActGeneral"];
-    $ActEspecifica   = $_POST["ActEspecifica"];
-    $Responsable     = $_POST["Responsable"];
-    $Academico       = $_POST["Academico"];
-    $Tecnico         = $_POST["Tecnico"];
+    $ActGeneral      = substr($_POST["ActGeneral"], 0, 100);
+    $ActEspecifica   = substr($_POST["ActEspecifica"], 0, 100);
+    $Responsable     = substr($_POST["Responsable"], 0, 50);
+    $Academico       = substr($_POST["Academico"], 0, 50);
+    $Tecnico         = substr($_POST["Tecnico"], 0, 50);
     $Financiero      = $_POST["Financiero"];
-    $Infraestructura = $_POST["Infraestructura"];
-    $Logro           = $_POST["Logro"];
-    $Inicio          = $_POST["Inicio"];
-    $Fin             = $_POST["Fin"];
+    $Infraestructura = substr($_POST["Infraestructura"], 0, 150);
+    $Logro           = substr($_POST["Logro"], 0, 200);
+    $Inicio          = substr($_POST["Inicio"], 0, 15);
+    $Fin             = substr($_POST["Fin"], 0, 15);
 
 //validando campos vacios  o con espacio
     if ($ActGeneral == '') {$ActGeneral = '&nbsp;';}

@@ -21,12 +21,19 @@ $password1_perfil = isset($_POST["password1_perfil"]);
 $password2_perfil = isset($_POST["password2_perfil"]);
 $usuario_imagen = isset($_POST["hidden_usuario_imagen"]);
 
+ if (!isset($_SESSION['id_usuario'])) { ?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+    }
+
 switch ($_GET["op"]) {
 
     case 'quitar_imagen':
         if (isset($_SESSION['id_usuario'])) {
                $datos = $perfil->quitar_imagen(); 
-        }  
+        } 
         ?>
          <script type="text/javascript">
         window.location="../vistas/mi_perfil.php?m=2";
