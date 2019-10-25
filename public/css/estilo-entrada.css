@@ -1,0 +1,87 @@
+#user_data_processing{display: none!important;}
+   tbody tr td:nth-child(7):before {
+   content: "$";
+   float: left;
+   }
+   tbody tr td:nth-child(7) div{margin-left: 1.5rem; }
+   #user_data{width: auto!important;}
+   .table>thead>tr>th{text-align: center!important;}
+   body
+   {
+   margin:0;
+   padding:0;
+   background-color:#f1f1f1;
+   }
+   .box
+   {
+   width: 98%;
+   padding: 1%;
+   background-color:#fff;
+   border:1px solid #ccc;
+   border-radius:5px;
+   box-sizing:border-box;
+   }
+   #user_data_filter:before {
+   content: '';
+   display: block;
+   clear: both;
+   }
+   .addbottom{
+   z-index: 9999;
+   width: 60px;
+   height: 60px;
+   background: #F44336;
+   right: 6px;
+   bottom: 21px;
+   position: fixed;
+   border: none;
+   outline: none;
+   color: #FFF;
+   font-size: 36px;
+   border-radius: 0px 3px 3px 0px;
+   }
+   .alert-success{
+   position: fixed;
+   bottom: 20px;
+   right: 5px;
+   width: 30%;
+   background-color: white!important;
+   border-color: black;
+   color: black!important;
+   }
+   th{
+   pointer-events: none;
+   cursor: default;
+   }
+   .sumaview{display: inline-flex;
+   background: red;
+   padding: 0.45rem;
+   color: white;
+   font-weight: 700;}
+   .handle {
+   width:12px;
+   margin: 5px 0 0 0;
+   height:34px;
+   cursor: move;
+   background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAH0lEQVQIW2OcN2/efwYgSEpKYgTRjBgCIFFkAFaGDAC2jQgFaRPeawAAAABJRU5ErkJggg==) repeat;
+   }
+   [contenteditable="true"]:active,
+   [contenteditable="true"]:focus{
+   border:dashed 1px black;
+   -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   padding: 0.2rem!important;
+   }
+   .special td:focus{border:dashed 1px black;
+   -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+   padding: 0.2rem!important;}
+   .ui-sortable-handle{background-color:white!important;cursor: move!important;}
+   .ui-sortable-helper{background-color:#f9f9f9!important; height:auto!important;cursor: -webkit-grabbing!important; cursor: grabbing!important;}
+   thead>tr>th:first-child{padding: 5px!important;}
+   table>tbody>tr>td:first-child{padding: 5px!important;}
+   body{font-size: 15px!important;}
+   .panel-body{padding: 0px!important;}
+   .col-md-12{padding: 0px!important;}
