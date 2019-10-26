@@ -1,25 +1,28 @@
 <?php
+#incluye conecion
 require_once "../../config/conexion.php";
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+#valida que exista session
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
-    
+}
+
+#instancia y creación de objeto conexión
 $conectar = new Conectar();
 $conectar = $conectar->conexion();
 
-
-
 $iden = $_GET['valor'];
 
+#eliminar registro
 if (isset($_POST["id"])) {
     $sql = "DELETE FROM entrada WHERE id_entrada = '" . $_POST["id"] . "'";
     $sql = $conectar->prepare($sql);
     $sql->execute();
 
+#calculo de sumatoria
     $query1     = "SELECT SUM(Financiero) FROM entrada WHERE id_cuenta ='" . $iden . "'";
     $statement1 = $conectar->prepare($query1);
     $statement1->execute();

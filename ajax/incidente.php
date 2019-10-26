@@ -24,14 +24,12 @@ switch ($_GET["op"]) {
         } else {
 
             $datos = $incidentes->get_nombre_incidentes($_POST["titulo"]);
-            /*si el titulo no existe entonces lo registra
-            importante: se debe poner el $_POST sino no funciona*/
+            /*si el incidente no existe entonces lo registra*/
             if (empty($_POST["id_incidente"])) {
                 $incidentes->registrar_incidentes($titulo, $descripcion, $fecha, $id_usuario);
                 $messages[] = "El incidente se registró correctamente";
-                //cierre de validacion de $datos
+                //cierre de validacion
                 /*si ya existes el titulo del incidente entonces aparece el mensaje*/
-
             } //cierre de empty
 
             else {
@@ -85,8 +83,12 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["titulo"];
             $sub_array[] = $row["descripcion"];
             $sub_array[] = $row["fecha"];
-            $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button> &nbsp; <button type="button" onClick="eliminar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
-            $data[]      = $sub_array;
+            $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button> &nbsp;
+
+            <button type="button" onClick="eliminar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+
+            </div>';
+            $data[] = $sub_array;
         }
 
         $results = array(

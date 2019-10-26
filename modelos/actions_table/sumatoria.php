@@ -1,12 +1,13 @@
 <?php
-
- if (!isset($_SESSION['id_usuario'])) { ?>
+#valida que exista la session
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
+#funcion para sumar valores
 function sumar($conectar, $unico)
 {
     $query1     = "SELECT SUM(Financiero) FROM entrada WHERE id_cuenta =" . $unico . "";

@@ -19,27 +19,27 @@ $email_perfil      = isset($_POST["email_perfil"]);
 $usuario_perfil   = isset($_POST["usuario_perfil"]);
 $password1_perfil = isset($_POST["password1_perfil"]);
 $password2_perfil = isset($_POST["password2_perfil"]);
-$usuario_imagen = isset($_POST["hidden_usuario_imagen"]);
+$usuario_imagen   = isset($_POST["hidden_usuario_imagen"]);
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
 switch ($_GET["op"]) {
 
     case 'quitar_imagen':
         if (isset($_SESSION['id_usuario'])) {
-               $datos = $perfil->quitar_imagen(); 
-        } 
+            $datos = $perfil->quitar_imagen();
+        }
         ?>
          <script type="text/javascript">
         window.location="../vistas/mi_perfil.php?m=2";
         </script>
         <?php
-        break;
+break;
 
     case 'mostrar_perfil':
         //selecciona el id del usuario
@@ -47,20 +47,17 @@ switch ($_GET["op"]) {
         // si existe el id del usuario entonces recorre el array
         if (is_array($datos) == true and count($datos) > 0) {
             foreach ($datos as $row) {
-                $output["nombre"]   = $row["nombres"];
-                $output["apellido"] = $row["apellidos"];
+                $output["nombre"]         = $row["nombres"];
+                $output["apellido"]       = $row["apellidos"];
                 $output["usuario_perfil"] = $row["usuario"];
                 $output["password1"]      = $row["password"];
                 $output["password2"]      = $row["password2"];
                 $output["correo"]         = $row["correo"];
-            if($row["usuario_imagen"] != '')
-                    {
-     $output['usuario_imagen'] = '<img src="upload/'.$row["usuario_imagen"].'" class="img-thumbnail" width="150" height="25" /><input type="hidden" name="hidden_usuario_imagen" value="'.$row["usuario_imagen"].'" />';
-                    }
-                    else
-                    {
-        $output['usuario_imagen'] = '<input type="hidden" name="hidden_usuario_imagen" value="" />';
-                    }
+                if ($row["usuario_imagen"] != '') {
+                    $output['usuario_imagen'] = '<img src="upload/' . $row["usuario_imagen"] . '" class="img-thumbnail" width="150" height="25" /><input type="hidden" name="hidden_usuario_imagen" value="' . $row["usuario_imagen"] . '" />';
+                } else {
+                    $output['usuario_imagen'] = '<input type="hidden" name="hidden_usuario_imagen" value="" />';
+                }
             }
             echo json_encode($output);
         } else {
@@ -83,9 +80,8 @@ switch ($_GET["op"]) {
             if (is_array($datos) == true and count($datos) > 0) {
                 //si ya existe entonces editamos el usuario y sus permisos
 
-                $perfil->editar_perfil($id_usuario_perfil, $nombre_perfil, $apellido_perfil, $email_perfil, $usuario_perfil, $password1_perfil, $password2_perfil,$usuario_imagen);
+                $perfil->editar_perfil($id_usuario_perfil, $nombre_perfil, $apellido_perfil, $email_perfil, $usuario_perfil, $password1_perfil, $password2_perfil, $usuario_imagen);
                 $_SESSION["nombre"] = $_POST["nombre_perfil"];
-# $messages[]="La informacion se actualizo correctamente";
             } //cierre condicional $datos
         } //cierre de condicional del password
         else {?>

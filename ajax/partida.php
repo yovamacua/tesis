@@ -14,12 +14,12 @@ $nombrepartida = isset($_POST["nombrepartida"]);
 $responsable   = isset($_POST["responsable"]);
 $id_usuario    = isset($_POST["id_usuario"]);
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
 switch ($_GET["op"]) {
     case "guardaryeditar":
@@ -36,14 +36,13 @@ switch ($_GET["op"]) {
             /*si el titulo no existe entonces lo registra
             importante: se debe poner el $_POST sino no funciona*/
             if (empty($_POST["id_partida"])) {
-                /*verificamos si el partida existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
+                /*verificamos si existe en la base de datos, si ya existe un registro entonces no se registra*/
 
-                //no existe la categoria por lo tanto hacemos el registros
+                //no existe  por lo tanto hacemos el registros
                 $partidas->registrar_partidas($nombrepartida, $responsable, $id_usuario);
                 $messages[] = "La partida se registró correctamente";
                 //cierre de validacion de $datos
-                /*si ya existes el titulo del partida entonces aparece el mensaje*/
-
+                /*si ya existes entonces aparece el mensaje*/
             } //cierre de empty
 
             else {
@@ -96,9 +95,14 @@ switch ($_GET["op"]) {
             $sub_array   = array();
             $sub_array[] = $row["nombrepartida"];
             $sub_array[] = $row["responsable"];
-            $sub_array[] = '<div class="cbtns"><a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta</button></a></div>';
-            $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;<button type="button" onClick="eliminar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button></div>';
-            $data[]      = $sub_array;
+            $sub_array[] = '<div class="cbtns">
+            <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta</button></a></div>';
+            $sub_array[] = '
+            <div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
+
+            <button type="button" onClick="eliminar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+            </div>';
+            $data[] = $sub_array;
         }
 
         $results = array(

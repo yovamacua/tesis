@@ -13,12 +13,12 @@ $id_partida   = isset($_POST["id_partida"]);
 $estrategia   = isset($_POST["estrategia"]);
 $objetivo     = isset($_POST["objetivo"]);
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
 switch ($_GET["op"]) {
     case "guardaryeditar":
@@ -36,14 +36,12 @@ switch ($_GET["op"]) {
             /*si el titulo no existe entonces lo registra
             importante: se debe poner el $_POST sino no funciona*/
             if (empty($_POST["id_cuenta"])) {
-                /*verificamos si el cuenta existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
-                //no existe la categoria por lo tanto hacemos el registros
+                /*verificamos si el cuenta existe en la base de datos */
+                //no existe la cuenta por lo tanto hacemos el registros
                 $cuentas->registrar_cuentas($nombrecuenta, $id_partida, $estrategia, $objetivo);
                 $messages[] = "La cuenta se registró correctamente";
                 //cierre de validacion de $datos
-
             } //cierre de empty
-
             else {
                 /*si ya existe entonces editamos el cuenta*/
                 $cuentas->editar_cuentas($id_cuenta, $nombrecuenta, $id_partida, $objetivo, $estrategia);
@@ -64,9 +62,9 @@ switch ($_GET["op"]) {
 
     case 'mostrar':
         //selecciona del cuenta
-        //el parametro id_cuenta se envia por AJAX cuando se edita la categoria
+        //el parametro id_cuenta se envia por AJAX cuando se edita la cuenta
         $datos = $cuentas->get_cuentas_por_id($_POST["id_cuenta"]);
-        // si existe el id del incidnete entonces recorre el array
+        // si existe el id del incidente entonces recorre el array
         if (is_array($datos) == true and count($datos) > 0) {
             foreach ($datos as $row) {
                 $output["id_cuenta"]    = $row["id_cuenta"];
@@ -76,7 +74,7 @@ switch ($_GET["op"]) {
             }
             echo json_encode($output);
         } else {
-            //si no existe la categoria entonces no recorre el array
+            //si no existe la cuenta entonces no recorre el array
             $errors[] = "La cuenta no existe";
         }
 

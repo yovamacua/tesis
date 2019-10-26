@@ -1,19 +1,24 @@
 <?php
+#incluir conexion
 require_once "../../config/conexion.php";
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+#valida que exista sessión
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
+#objeto de tipo conexion
 $conectar = new Conectar();
 $conectar = $conectar->conexion();
 $iden     = $_GET['valor'];
 
+#consulta bd
 $query = "SELECT * FROM entrada WHERE id_cuenta = " . $iden . "";
 
+#proceso de busqueda
 $buscar = $_POST["search"]["value"];
 
 if ($buscar != '') {
@@ -34,6 +39,7 @@ $query .= ' ORDER BY Orden';
 $data   = array();
 $result = $query;
 
+#impresión de la tabla
 $filas = $conectar->query($result);
 foreach ($filas as $fila) {
     $sub_array = array();

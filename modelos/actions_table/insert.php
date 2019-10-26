@@ -1,10 +1,22 @@
 <?php
+#incluye conexion
 require_once "../../config/conexion.php";
+
+#valida que exista sessión
+if (!isset($_SESSION['id_usuario'])) {?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+}
+
+#objeto de tipo conexion
 $conectar = new Conectar();
 $conectar = $conectar->conexion();
 
 $iden = $_GET['valor'];
 
+#proceso de inserción de información
 if (isset($_POST["ActGeneral"], $_POST["ActEspecifica"], $_POST["Responsable"], $_POST["Academico"], $_POST["Tecnico"], $_POST["Financiero"], $_POST["Infraestructura"], $_POST["Infraestructura"], $_POST["Logro"], $_POST["Inicio"], $_POST["Fin"])) {
     $ActGeneral      = substr($_POST["ActGeneral"], 0, 100);
     $ActEspecifica   = substr($_POST["ActEspecifica"], 0, 100);
@@ -52,6 +64,7 @@ VALUES('$iden', '$ActGeneral', '$ActEspecifica', '$Responsable', '$Academico', '
     $sql = $conectar->prepare($sql);
     $sql->execute();
 
+#sumatoria de valores
     $query1     = "SELECT SUM(Financiero) FROM entrada WHERE id_cuenta ='" . $iden . "'";
     $statement1 = $conectar->prepare($query1);
     $statement1->execute();

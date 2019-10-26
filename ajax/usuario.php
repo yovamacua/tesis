@@ -37,27 +37,27 @@ $cargo     = isset($_POST["cargo"]);
 $usuario   = isset($_POST["usuario"]);
 $password1 = isset($_POST["password1"]);
 $password2 = isset($_POST["password2"]);
-$estado = isset($_POST["estado"]);
+$estado    = isset($_POST["estado"]);
 
- if (!isset($_SESSION['id_usuario'])) { ?>
+if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-    }
+}
 
 // switch para seleccionar opcion segun parametro enviado en la url
 switch ($_GET["op"]) {
     case "guardaryeditar":
 
 // se reciben las variables y se valida si el formato es correcto
-if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
+        if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
             !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["apellido"]) or
             !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["usuario"]) or
             $_POST["cargo"] < 0 or
             !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $_POST["email"]) or
             $_POST["estado"] < 0 or
-            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password1"]) or 
+            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password1"]) or
             !preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password2"])) {
             $errors[] = "Formatos de Información no validos";
             echo error($errors);
@@ -105,8 +105,7 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
             // fin validacion
         }
         //fin mensaje error
-        // fin bloque de mensaje de notificacion
-        break; // fin del primer caso
+        break;
 
 //inicio otro caso
     case "mostrar":
@@ -126,7 +125,7 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
                 $output["password1"] = $row["password"];
                 $output["password2"] = $row["password2"];
                 $output["estado"]    = $row["estado"];
-             }
+            }
             //devuelve datos de registro de usuario
 
             echo json_encode($output);
@@ -213,15 +212,18 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
 
         //verificamos si el usuario existe en las tablas si existe entonces el usuario no se elimina,
         // si no existe entonces se puede eliminar el usuario
-        $incidente = new Incidentes();
-        $partida   = new Partidas();
-        $perdidas = new Perdidas();
+
+        #funcion para validar que el usuario no halla generado información dentro del sistema
+
+        $incidente      = new Incidentes();
+        $partida        = new Partidas();
+        $perdidas       = new Perdidas();
         $capacitaciones = new Capacitaciones();
-        $donaciones = new Donaciones();
-        $gastos = new Gastos();
-        $venta = new Ventas();
-        $productos = new Producto();
-        $categorias = new Categorias();
+        $donaciones     = new Donaciones();
+        $gastos         = new Gastos();
+        $venta          = new Ventas();
+        $productos      = new Producto();
+        $categorias     = new Categorias();
 
         $inc = $incidente->get_incidente_por_id_usuario($_POST["id_usuario"]);
         $par = $partida->get_partida_por_id_usuario($_POST["id_usuario"]);
@@ -232,7 +234,6 @@ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre"]) or
         $ven = $venta->get_venta_por_id_usuario($_POST["id_usuario"]);
         $pro = $productos->get_producto_por_id_usuario($_POST["id_usuario"]);
         $cat = $categorias->get_categoria_por_id_usuario($_POST["id_usuario"]);
-
 
         if (
             is_array($inc) == true and count($inc) > 0 or
