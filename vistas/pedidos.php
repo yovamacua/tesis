@@ -145,8 +145,8 @@
         </div>
 
         <div class="modal-footer">
-          <input type="show" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-          <input type="show" name="id_detallepedido" id="id_detallepedido"/>
+          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+          <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
           <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiardetalle()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
         </div>

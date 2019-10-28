@@ -23,10 +23,10 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
-                      <h1 class="box-title" ><label id="letra">Capacitacion</label></h1>
+                      <h1 class="box-title" ><label id="letra">Capacitación</label></h1>
                       <h1 class="box-title" ><label id="letra1">Listado de Capacitados</label></h1>
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="mostrarformulario(true)"   data-target="#capacitacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Capacitacion</button></h1>
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="mostrarformulario(true)"   data-target="#capacitacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Capacitación</button></h1>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
@@ -35,7 +35,7 @@
                           <table id="capacitacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="12%">No Capacitacion</th>
+                                <th width="12%">No. de Capacitación</th>
                                 <th>Fecha</th>
                                 <th>Nombre del Grupo</th>
                                 <th>Cargo</th>
@@ -83,7 +83,7 @@
                         <div class="form-group table-responsive">
 
                           <div class="form-group table-responsive" id="numcapacitacion">
-                            <label for="" class="col-lg-3 control-label">No Capacitacion:</label>
+                            <label for="" class="col-lg-3 control-label">No. de Capacitación:</label>
                             <div class="col-lg-9">
                               <input type="show" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>" equired style="width:10%;" readonly="readonly"/>
                             </div> 
@@ -110,10 +110,10 @@
                             <table id="detallecapacitados_data" class="table table-bordered table-striped">
                               <thead>
                                   <tr>
-                                  <th width="12%">No Capacitacion</th>
+                                  <th width="12%">No. de Capacitación</th>
                                   <th>Nombre</th>
                                   <th>Apellido</th>
-                                  <th>Contacto</th>
+                                  <th>DUI</th>
                                   <th>Procedencia</th>
                                   <th>Acciones</th>
                                   </tr>
@@ -168,8 +168,8 @@
 
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label>Contacto</label>
-            <input type="text" name="contacto" id="contacto" class="form-control" placeholder="contacto" required/>
+            <label>DUI</label>
+            <input type="text" name="dui" id="dui" class="form-control" placeholder="DUI" required/>
           </div>
           <div class="form-group col-md-6">
             <label>Procedencia</label>
@@ -179,7 +179,7 @@
 
         <div class="form-row">
           <div class="form-group col-md-12">
-              <label>No Capacitacion:</label> 
+              <label>No. de Capacitación:</label> 
                 <input type="show" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>" equired style="width:10%;"/>
           </div> 
         </div>

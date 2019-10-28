@@ -10,7 +10,7 @@ function init(){
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
-		$(".modal-title").text("Agregar donación");
+		$(".modal-title").text("Agregar Donación");
 	});
 
 }
@@ -94,7 +94,7 @@ function mostrar(id_donacion){
 	 		$('#donante').val(data.donante);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#cantidad').val(data.cantidad);
-	 		$('.modal-title').text("Editar Donacion");
+	 		$('.modal-title').text("Editar donación");
 	 		$('#id_donacion').val(id_donacion);
 	 		$('#action').val("Edit");
 	 });

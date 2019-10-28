@@ -78,7 +78,7 @@ switch ($_GET["op"]) {
 
 				foreach ($datos as $row) {
 				
-					$output["fecha"] = $row["fecha"];
+					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
 					$output["descripcion"] = $row["descripcion"];
 					$output["precio"] = $row["precio"];
 					
@@ -113,7 +113,7 @@ switch ($_GET["op"]) {
 		    foreach($datos as $row){
 		        $sub_array = array();
 		      
-		      	$sub_array[] = $row["fecha"];
+		      	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $row["precio"];
 		     	$sub_array[] = '<div class="cbtns">

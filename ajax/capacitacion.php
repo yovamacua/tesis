@@ -18,7 +18,7 @@
   $id_detallecapacitados = isset($_POST["id_detallecapacitados"]);
   $nombres = isset($_POST["nombres"]);
   $apellidos = isset($_POST["apellidos"]);
-  $contactos = isset($_POST["contactos"]);
+  $dui = isset($_POST["dui"]);
   $procedencia = isset($_POST["procedencia"]);
 
       switch($_GET["op"]){
@@ -87,7 +87,7 @@
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
           if(is_array($datos)==true and count($datos)==0){
                     //no existe el capacitado por lo tanto hacemos el registros
-          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $contacto, $procedencia, $id_capacitacion);
+          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
                     
                     $messages[]= "El capacitado se registró correctamente";
           }else {
@@ -97,7 +97,7 @@
 
           }else {
                 /*si ya existe entonces editamos el capacitado*/
-               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $contacto, $procedencia, $id_capacitacion);
+               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
 
                   $messages[]="El capacitado se editó correctamente";
               }
@@ -139,7 +139,7 @@
 	        if(is_array($datos)==true and count($datos)>0){
     				foreach($datos as $row)
     				{
-              $output["fecha"] = $row["fecha"];
+              $output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
               $output["nombreGrupo"] = $row["nombreGrupo"];
               $output["cargo"] = $row["cargo"];
               $output["encargado"] = $row["encargado"];
@@ -180,7 +180,7 @@
         
           $output["nombres"] = $row["nombres"];
           $output["apellidos"] = $row["apellidos"];
-          $output["contacto"] = $row["contacto"];
+          $output["dui"] = $row["dui"];
           $output["procedencia"] = $row["procedencia"];
           $output["id_detallecapacitados"] = $row["id_detallecapacitados"];
           $output["id_capacitacion"] = $row["id_capacitacion"];
@@ -216,7 +216,7 @@
         {
           $sub_array = array();
           $sub_array[] = $row["id_capacitacion"];
-          $sub_array[] = $row["fecha"];
+          $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
           $sub_array[] = $row["nombreGrupo"];
           $sub_array[] = $row["cargo"];
           $sub_array[] = $row["encargado"];
@@ -247,7 +247,7 @@
           $sub_array[] = $row["id_capacitacion"];
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
-          $sub_array[] = $row["contacto"];
+          $sub_array[] = $row["dui"];
           $sub_array[] = $row["procedencia"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>

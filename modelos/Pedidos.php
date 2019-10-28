@@ -66,7 +66,7 @@ require_once("../config/conexion.php");
             $sql->bindValue(2, $fecha);
             $sql->bindValue(3, $_POST["id_pedido"]);
             $sql->execute();
-            print_r($_POST);
+            
         }
 
         //método para eliminar un registro

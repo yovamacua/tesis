@@ -1,4 +1,4 @@
-<?php 
+<?php
   //llamar a la conexion de la base de datos
   require_once("../config/conexion.php");
  
@@ -79,7 +79,7 @@ switch ($_GET["op"]) {
 
         foreach ($datos as $row) {
         
-          $output["fecha"] = $row["fecha"];
+          $output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
           $output["donante"] = $row["donante"];
           $output["descripcion"] = $row["descripcion"];
           $output["cantidad"] = $row["cantidad"];
@@ -115,7 +115,7 @@ switch ($_GET["op"]) {
         foreach($datos as $row){
             $sub_array = array();
           
-            $sub_array[] = $row["fecha"];
+          $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
           $sub_array[] = $row["donante"];
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["cantidad"];

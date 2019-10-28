@@ -36,9 +36,13 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
 			$sql = "insert into gastos values(null,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
-			$sql-> bindValue(1, $_POST["fecha"]);
+			$sql-> bindValue(1, $fecha);
 			$sql-> bindValue(2, $_POST["descripcion"]);
 			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["id_usuario"]);
@@ -52,6 +56,10 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
 			$sql = "update gastos set
             fecha=?,
             descripcion=?,
@@ -62,7 +70,7 @@
 
 			$sql = $conectar->prepare($sql);
 
-			$sql-> bindValue(1, $_POST["fecha"]);
+			$sql-> bindValue(1, $fecha);
 			$sql-> bindValue(2, $_POST["descripcion"]);
 			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["id_usuario"]);

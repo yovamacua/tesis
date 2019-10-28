@@ -32,14 +32,18 @@
           $conectar = parent::conexion();
           parent::set_names();
 
+            $date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
             $sql = "insert into capacitaciones values(null,?,?,?,?,?);";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1,$_POST["fecha"]);
-            $sql->bindValue(2,$_POST["nombreGrupo"]);
-            $sql->bindValue(3,$_POST["cargo"]);
-            $sql->bindValue(4,$_POST["encargado"]);
-            $sql->bindValue(5,$_POST["id_usuario"]);
+            $sql->bindValue(1, $fecha);
+            $sql->bindValue(2, $_POST["nombreGrupo"]);
+            $sql->bindValue(3, $_POST["cargo"]);
+            $sql->bindValue(4, $_POST["encargado"]);
+            $sql->bindValue(5, $_POST["id_usuario"]);
             $sql->execute();
 
         }
@@ -49,6 +53,10 @@
 
           $conectar = parent::conexion();
           parent::set_names();
+
+            $date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
 
             $sql = "update capacitaciones set
               fecha=?,
@@ -60,7 +68,7 @@
               id_capacitacion=?";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $_POST["fecha"]);
+            $sql->bindValue(1, $fecha);
             $sql->bindValue(2, $_POST["nombreGrupo"]);
             $sql->bindValue(3, $_POST["cargo"]);
             $sql->bindValue(4, $_POST["encargado"]);

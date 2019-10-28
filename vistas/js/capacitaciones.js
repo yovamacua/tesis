@@ -25,7 +25,7 @@ function limpiar()
 {
   $('#nombres').val("");
 	$('#apellidos').val("");
-  $('#contacto').val("");
+  $('#dui').val("");
   $('#procedencia').val("");
 	$('#id_capacitacion').val("");
   $('#id_detallecapacitados').val("");
@@ -222,7 +222,7 @@ function mostrardetalle(id_detallecapacitados)
        $('#detallecapacitadosModal').modal('show');
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
-       $('#contacto').val(data.contacto);
+       $('#dui').val(data.dui);
        $('#procedencia').val(data.procedencia);
        $('#id_capacitacion').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");

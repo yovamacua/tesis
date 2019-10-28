@@ -78,12 +78,13 @@
               <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control"placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
             </div>
             <div class="form-group col-md-6">
-              <label>Unid. Medida</label>
+              <label>Unidad de Medida</label>
                 <select class="selectpicker form-control"id="unidadDelProduc" name="unidadDelProduc" required>
-                  <option value="">-- Seleccione unidad --</option>
+                  <option value="">-- Seleccione la Unidad --</option>
                   <option value="kilo">kilo</option>
-                  <option value="Gramo">Gramo</option>
-                  <option value="Libra">Libra</option>
+                  <option value="Gramo">gramo</option>
+                  <option value="Libra">libra</option>
+                  <option value="Libra">unidad</option>
                 </select>
             </div>
           </div>
@@ -108,8 +109,8 @@
  
 
               <div class="modal-footer">
-                 <input type="show" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-                 <input type="show" name="id_perdida" id="id_perdida"/>
+                 <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                 <input type="hidden" name="id_perdida" id="id_perdida"/>
                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
               <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>

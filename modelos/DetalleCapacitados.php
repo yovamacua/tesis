@@ -30,7 +30,7 @@
         }
 
         //método para insertar registros
-        public function registrar_detallecapacitados($nombres, $apellidos, $contacto, $procedencia, $id_capacitacion){
+        public function registrar_detallecapacitados($nombres, $apellidos, $dui, $procedencia, $id_capacitacion){
           $conectar = parent::conexion();
           parent::set_names();
 
@@ -39,7 +39,7 @@
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1,$_POST["nombres"]);
             $sql->bindValue(2,$_POST["apellidos"]);
-            $sql->bindValue(3,$_POST["contacto"]);
+            $sql->bindValue(3,$_POST["dui"]);
             $sql->bindValue(4,$_POST["procedencia"]);
             $sql->bindValue(5,$_POST["id_capacitacion"]);
             $sql->execute();
@@ -48,7 +48,7 @@
         }
 
         // metodo para editar las categorias
-        public function editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $contacto, $procedencia, $id_capacitacion){
+        public function editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $procedencia, $id_capacitacion){
 
           $conectar = parent::conexion();
           parent::set_names();
@@ -56,7 +56,7 @@
             $sql = "update detallecapacitados set
               nombres=?,
               apellidos=?,
-              contacto=?,
+              dui=?,
               procedencia=?,
               id_capacitacion=?
               where
@@ -65,7 +65,7 @@
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1, $_POST["nombres"]);
             $sql->bindValue(2, $_POST["apellidos"]);
-            $sql->bindValue(3, $_POST["contacto"]);
+            $sql->bindValue(3, $_POST["dui"]);
             $sql->bindValue(4, $_POST["procedencia"]);
             $sql->bindValue(5, $_POST["id_capacitacion"]);
             $sql->bindValue(6, $_POST["id_detallecapacitados"]);

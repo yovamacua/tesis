@@ -1,4 +1,4 @@
-<?php  
+<?php
 	//conexion a la base de datos
 	require_once("../config/conexion.php");
   
@@ -36,9 +36,13 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
 			$sql = "insert into donaciones values(null,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
-			$sql-> bindValue(1, $_POST["fecha"]);
+			$sql-> bindValue(1, $fecha);
 			$sql-> bindValue(2, $_POST["donante"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["cantidad"]);
@@ -53,6 +57,10 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
 			$sql = "update donaciones set
             fecha=?,
             donante=?,
@@ -64,7 +72,7 @@
 
 			$sql = $conectar->prepare($sql);
 
-			$sql-> bindValue(1, $_POST["fecha"]);
+			$sql-> bindValue(1, $fecha);
 			$sql-> bindValue(2, $_POST["donante"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["cantidad"]);
