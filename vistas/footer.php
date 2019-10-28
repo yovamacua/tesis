@@ -64,7 +64,7 @@
          $('#fecha').datepicker({
          /*dateFormat: 'dd-mm-yy',
          autoclose: true*/
-          format: "dd/mm/yyyy",
+          format: "yyyy-mm-dd",
            /*clearBtn: true, */
            language: "es",
            autoclose: false,
@@ -75,7 +75,7 @@
          $('#fecha2').datepicker({
          /*dateFormat: 'dd-mm-yy',
          autoclose: true*/
-          format: "dd/mm/yyyy",
+          format: "yyyy-mm-dd",
            /*clearBtn: true, */
            language: "es",
            autoclose: false,

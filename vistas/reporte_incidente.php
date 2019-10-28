@@ -87,7 +87,7 @@
       <div class="box">
          <div>
          	<!--- tabla mostrando resultados -->
-            <table class="table table-bordered">
+            <table class="table table-bordered" style="white-space: pre!important;">
                <thead>
                   <tr>
                      <th width="25%">Titulo</th>
@@ -175,11 +175,14 @@
    pdf.text(15,40,"Fecha Fin: "+fechafin);
    pdf.text(15,50,"Reporte Creado por: "+creador);
    
+
    //contenido del reporte
    var columns = ["Titulo", "Descripcion", "Fecha"];
    var data = [
    <?php foreach($users as $c):?>
-    ["<?php echo $c->titulo; ?>", "<?php echo $c->descripcion; ?>", "<?php echo $c->fecha; ?>"],
+   ["<?php echo $c->titulo; ?>", 
+   "<?php echo str_replace('
+', '\n', $c->descripcion); ?>", "<?php echo $c->fecha; ?>"],
    <?php endforeach; ?>  
      ];
    

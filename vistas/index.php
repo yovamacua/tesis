@@ -26,6 +26,9 @@ else{
     <title>Acceso</title>
     <!-- Indicar al navegador que responda al ancho de la pantalla -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../public/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../public/images/favicon.ico" type="image/x-icon">
     <!-- Libreria Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="../public/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Libreria Font Awesome -->

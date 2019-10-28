@@ -42,10 +42,11 @@ class Usuarios extends Conectar
                 exit();
             } else {
                 $sql = "select * from usuarios where correo=? or usuario=? and password=? and estado=?";
+$encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                 $sql = $conectar->prepare($sql);
                 $sql->bindValue(1, $correo);
                 $sql->bindValue(2, $correo);
-                $sql->bindValue(3, sha1($password));
+                $sql->bindValue(3, $encriptar1);
                 $sql->bindValue(4, $estado);
                 $sql->execute();
                 $resultado = $sql->fetch();
@@ -93,14 +94,18 @@ class Usuarios extends Conectar
         //se le pasa la consulta
         $sql            = $conectar->prepare($sql);
         $usuario_imagen = 'imagen_usuario_general.png';
+
+$encriptar1 = crypt($_POST["password1"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+$encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
         //informacion capturada de los formulario y se le pasan a la consulta
         $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
         $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
         $sql->bindValue(3, substr($_POST["email"], 0, 100));
         $sql->bindValue(4, $_POST["cargo"]);
         $sql->bindValue(5, substr($_POST["usuario"], 0, 50));
-        $sql->bindValue(6, sha1($_POST["password1"]));
-        $sql->bindValue(7, sha1($_POST["password2"]));
+        $sql->bindValue(6, $encriptar1);
+        $sql->bindValue(7, $encriptar2);
         $sql->bindValue(8, $_POST["estado"]);
         $sql->bindValue(9, $usuario_imagen);
         //se ejecuta
@@ -129,13 +134,15 @@ class Usuarios extends Conectar
         } else {
             $sql = "update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ? where id_usuario=? ";
             $sql = $conectar->prepare($sql);
+$encriptar1 = crypt($_POST["password1"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+$encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
             $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
             $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
             $sql->bindValue(3, substr($_POST["email"], 0, 100));
             $sql->bindValue(4, $_POST["cargo"]);
             $sql->bindValue(5, $_POST["usuario"]);
-            $sql->bindValue(6, sha1($_POST["password1"]));
-            $sql->bindValue(7, sha1($_POST["password2"]));
+            $sql->bindValue(6, $encriptar1);
+            $sql->bindValue(7, $encriptar2);
             $sql->bindValue(8, $_POST["estado"]);
             $sql->bindValue(9, $_POST["id_usuario"]);
             $sql->execute();
