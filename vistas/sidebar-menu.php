@@ -87,19 +87,18 @@
          </li>
 
          <li class="treeview">
-            <a href="compras.php">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Compras</span>
-            <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">10</i>
-            <i class="fa fa-angle-left pull-right"></i>
-            </span>
-            </a>
-            <ul class="treeview-menu">
-               <li><a href="compras.php"><i class="fa fa-circle-o"></i> Compras</a></li>
-               <li><a href="consultar_compras.php"><i class="fa fa-circle-o"></i> Consultar Compras</a></li>
-               <li><a href="consultar_compras_fecha.php"><i class="fa fa-circle-o"></i> Consultar Compras Fecha</a></li>
-               <li><a href="consultar_compras_mes.php"><i class="fa fa-circle-o"></i> Consultar Compras Mes</a></li>
-            </ul>
+           <a href="pedidos.php">
+             <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Pedidos</span>
+             <span class="pull-right-container badge bg-blue">
+               <i class="fa fa-angle-left pull-right"></i>
+             </span>
+           </a>
+
+           <ul class="treeview-menu">
+             <li><a href="pedidos.php"><i class="fa fa-circle-o"></i> Pedidos</a></li>
+             <li><a href="insumos.php"><i class="fa fa-circle-o"></i> Insumos</a></li>
+           </ul>
+
          </li>
 
          <li class="">
