@@ -149,7 +149,7 @@
                <div class="form-group col-md-12">
 
                   <div><span class="ofield">- Los campos con * (asterisco) son obligatorios<br></span>
-                     <span class="ofield2">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras, números y al menos un carácter especial <strong>!@#$%</strong></span>
+                     <span class="ofield2">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras y números</span>
                   </div>
 
                </div>

@@ -32,7 +32,7 @@ class Usuarios extends Conectar
                 }
             }
 
-            if (!preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password"])) {
+            if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["password"])) {
                 $vl1 = 1;
             }
 
@@ -56,6 +56,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                     $_SESSION["id_usuario"] = $resultado["id_usuario"];
                     $_SESSION["correo"]     = $resultado["correo"];
                     $_SESSION["nombre"]     = $resultado["nombres"];
+                    $_SESSION["usuario"]    = $resultado["usuario"];
                     $_SESSION["imagen"]     = $resultado["usuario_imagen"];
                     header("Location:" . Conectar::ruta() . "vistas/home.php");
                     exit();
@@ -118,7 +119,7 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
         $conectar = parent::conexion();
         parent::set_names();
 
-        if ($_POST["password1"] == '@123456axxxxx' and $_POST["password2"] == '@123456axxxxx') {
+        if ($_POST["password1"] == '123456axxxxx' and $_POST["password2"] == '123456axxxxx') {
             $sql = "update usuarios set nombres=?, apellidos=?,
               correo=?, cargo=?, usuario=?, estado = ? where id_usuario=? ";
 

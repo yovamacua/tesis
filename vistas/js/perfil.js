@@ -45,7 +45,7 @@ $(function() {
 
     // funciones para validar
     function campo_password1() {
-        var pattern = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var pass11 = $("#password1_perfil").val();
         if (pattern.test(pass11)) {
             $("#error_password1_perfil").hide();
@@ -238,7 +238,7 @@ function mostrar_perfil(id_usuario_perfil) {
     $.post("../ajax/perfil.php?op=mostrar_perfil", {
         id_usuario_perfil: id_usuario_perfil
     }, function(data, status) {
-        var cero = '@123456axxxxx';
+        var cero = '123456axxxxx';
         data = JSON.parse(data);
         $('#perfilModal').modal('show');
         $('.ofield').hide();

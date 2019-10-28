@@ -82,7 +82,7 @@ class Perfil extends Conectar
             $usuario_imagen = $_POST["hidden_usuario_imagen"];
         }
 
-        if ($_POST["password1_perfil"] == '@123456axxxxx' and $_POST["password2_perfil"] == '@123456axxxxx') {
+        if ($_POST["password1_perfil"] == '123456axxxxx' and $_POST["password2_perfil"] == '123456axxxxx') {
             $sql = "update usuarios set nombres=?, apellidos=?,
           correo=?, usuario=?, usuario_imagen = ? where id_usuario=?";
 
@@ -102,12 +102,15 @@ class Perfil extends Conectar
 
             $sql = $conectar->prepare($sql);
 
+$encriptar1 = crypt($_POST["password1_perfil"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+$encriptar2 = crypt($_POST["password2_perfil"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
+
             $sql->bindValue(1, substr($_POST["nombre_perfil"], 0, 50));
             $sql->bindValue(2, substr($_POST["apellido_perfil"], 0, 50));
             $sql->bindValue(3, substr($_POST["email_perfil"], 0, 100));
             $sql->bindValue(4, substr($_POST["usuario_perfil"], 0, 100));
-            $sql->bindValue(5, sha1($_POST["password1_perfil"]));
-            $sql->bindValue(6, sha1($_POST["password2_perfil"]));
+            $sql->bindValue(5, $encriptar1);
+            $sql->bindValue(6, $encriptar2);
             $sql->bindValue(7, $usuario_imagen);
             $sql->bindValue(8, $_POST["id_usuario_perfil"]);
             $sql->execute();

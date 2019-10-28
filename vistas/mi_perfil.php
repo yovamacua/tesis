@@ -208,7 +208,7 @@
         <div class="col-lg-12">
           
           <div><span class="ofield2">- Los campos con * (asterisco) son obligatorios<br>-Formatos de imagen validos: jpg y png menor a 1 MB</span>
-            <span class="ofield">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras, números y al menos un carácter especial <strong>!@#$%</strong><br><br></span>
+            <span class="ofield">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras y números<br><br></span>
           </div>
 
         </div>

@@ -95,7 +95,7 @@
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                         <i class="fa fa-user" aria-hidden="true"></i>
-                        <span class="hidden-xs"><?php echo $_SESSION["nombre"]?></span>
+                        <span class="hidden-xs"><?php echo $_SESSION["usuario"]?></span>
                      </a>
                      <ul class="dropdown-menu">
                         <!-- Imagen usuario -->

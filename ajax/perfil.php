@@ -72,6 +72,18 @@ break;
         break;
 
     case 'editar_perfil':
+
+     if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["nombre_perfil"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["apellido_perfil"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["usuario_perfil"]) or
+            !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $_POST["email_perfil"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["password1_perfil"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["password2_perfil"])) 
+     {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+    }else{
+
         //verificamos si el usuario existe en la base de datos, si ya existe un registro con la cedula, nombre o correo entonces no lo registra
         $datos = $perfil->get_usuario_nombre($_POST["email_perfil"]);
 
@@ -94,7 +106,7 @@ break;
 })
         </script>
         <?php
-}
-
+        }
+    }
 }
 ?>

@@ -14,6 +14,7 @@ require_once "../modelos/Gastos.php";
 require_once "../modelos/Venta.php";
 require_once "../modelos/Productos.php";
 require_once "../modelos/Categorias.php";
+require_once "../modelos/Pedidos.php";
 
 /*AGREGAR LAS TABLAS QUE FALTAN AL TERMINAR PROYECTO */
 
@@ -57,8 +58,8 @@ switch ($_GET["op"]) {
             $_POST["cargo"] < 0 or
             !preg_match('/[-0-9a-zA-Z.+_]+@[-0-9a-zA-Z.+_]+.[a-zA-Z]{2,4}/', $_POST["email"]) or
             $_POST["estado"] < 0 or
-            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password1"]) or
-            !preg_match('/^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/', $_POST["password2"])) {
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["password1"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["password2"])) {
             $errors[] = "Formatos de Información no validos";
             echo error($errors);
         } else {
@@ -224,7 +225,9 @@ switch ($_GET["op"]) {
         $venta          = new Ventas();
         $productos      = new Producto();
         $categorias     = new Categorias();
+        $pedidos        = new Pedidos();
 
+        $ped = $pedidos->get_pedidos_por_id_usuario($_POST["id_usuario"]);
         $inc = $incidente->get_incidente_por_id_usuario($_POST["id_usuario"]);
         $par = $partida->get_partida_por_id_usuario($_POST["id_usuario"]);
         $per = $perdidas->get_perdida_por_id_usuario($_POST["id_usuario"]);
@@ -244,7 +247,8 @@ switch ($_GET["op"]) {
             is_array($gas) == true and count($gas) > 0 or
             is_array($ven) == true and count($ven) > 0 or
             is_array($pro) == true and count($pro) > 0 or
-            is_array($cat) == true and count($cat) > 0
+            is_array($cat) == true and count($cat) > 0 or
+            is_array($ped) == true and count($ped) > 0
         ) {
             //si existe el usuario en las tablas, no se elimina.
             $errors[] = "El usuario existe en los registros, no se puede eliminar";

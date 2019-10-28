@@ -70,7 +70,7 @@ $(function() {
     }
 
     function campo_password1() {
-        var pattern = /^(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{6,15}$/
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var pass11 = $("#password1").val();
         if (pattern.test(pass11)) {
             $("#error_password1").hide();
@@ -396,7 +396,7 @@ function mostrar(id_usuario) {
     $.post("../ajax/usuario.php?op=mostrar", {
         id_usuario: id_usuario
     }, function(data, status) {
-        var cero = '@123456axxxxx';
+        var cero = '123456axxxxx';
         //analiza una cadena de texto como json
         data = JSON.parse(data);
         var nm = data.nombre;
