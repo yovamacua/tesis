@@ -18,7 +18,8 @@ class Incidentes extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "select * from incidentes";
+        $sql = "select i.id_incidente, i.titulo, i.descripcion, i.fecha, u.usuario 
+        from incidentes i INNER JOIN usuarios u on (i.id_usuario = u.id_usuario)";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -29,7 +30,8 @@ class Incidentes extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "select * from incidentes limit 10";
+        $sql = "select i.id_incidente, i.titulo, i.descripcion, i.fecha, u.usuario 
+        from incidentes i INNER JOIN usuarios u on (i.id_usuario = u.id_usuario) order by i.fecha ASC limit 10;";
         $sql = $conectar->prepare($sql);
         $sql->execute();
         return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -40,7 +42,9 @@ class Incidentes extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "select * from incidentes where fecha BETWEEN ? AND ?";
+        $sql = "select i.id_incidente, i.titulo, i.descripcion, i.fecha, u.usuario 
+        from incidentes i INNER JOIN usuarios u on (i.id_usuario = u.id_usuario)
+        where i.fecha between ? and ? order by i.fecha ASC;";
 
         $date         = $_GET["fecha"];
         $date_inicial = str_replace('/', '-', $date);

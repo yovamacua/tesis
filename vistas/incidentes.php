@@ -55,9 +55,10 @@
                   <table id="incidente_data" class="table table-bordered table-striped showbreak">
                      <thead>
                         <tr>
-                           <th>Titulo</th>
-                           <th>Descripcion</th>
-                           <th>Fecha Incidente</th>
+                           <th width="20%">Titulo</th>
+                           <th width="30%">Descripción</th>
+                           <th width="10%">Autor</th>
+                           <th width="15%">Fecha Incidente</th>
                            <th width="15%">Acciones</th>
                         </tr>
                      </thead>
