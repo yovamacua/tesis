@@ -172,7 +172,7 @@ $(function() {
             $("#error_nombre").hide();
             $("#nombre").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_nombre").html("Solo letras se permiten letras");
+            $("#error_nombre").html("Solo se permiten letras");
             $("#error_nombre").css("position", "absolute");
             $("#error_nombre").css("color", "red");
             $("#error_nombre").show();
@@ -197,7 +197,7 @@ $(function() {
             $("#error_apellido").hide();
             $("#apellido").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_apellido").html("Solo letras se permiten letras");
+            $("#error_apellido").html("Solo se permiten letras");
             $("#error_apellido").css("position", "absolute");
             $("#error_apellido").css("color", "red");
             $("#error_apellido").show();
