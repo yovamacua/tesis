@@ -30,25 +30,23 @@
         }
 
         //método para insertar registros
-        public function registrar_detallecapacitados($nombres, $apellidos, $dui, $procedencia, $id_capacitacion){
+        public function registrar_detallecapacitados($nombres, $apellidos, $dui, $id_capacitacion){
           $conectar = parent::conexion();
           parent::set_names();
 
-            $sql = "insert into detallecapacitados values(null,?,?,?,?,?);";
+            $sql = "insert into detallecapacitados values(null,?,?,?,?);";
 
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1,$_POST["nombres"]);
             $sql->bindValue(2,$_POST["apellidos"]);
             $sql->bindValue(3,$_POST["dui"]);
-            $sql->bindValue(4,$_POST["procedencia"]);
-            $sql->bindValue(5,$_POST["id_capacitacion"]);
+            $sql->bindValue(4,$_POST["id_capacitacion"]);
             $sql->execute();
 
-            //print_r($_POST);
         }
-
+ 
         // metodo para editar las categorias
-        public function editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $procedencia, $id_capacitacion){
+        public function editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $id_capacitacion){
 
           $conectar = parent::conexion();
           parent::set_names();
@@ -57,7 +55,6 @@
               nombres=?,
               apellidos=?,
               dui=?,
-              procedencia=?,
               id_capacitacion=?
               where
               id_detallecapacitados=?";
@@ -66,9 +63,8 @@
             $sql->bindValue(1, $_POST["nombres"]);
             $sql->bindValue(2, $_POST["apellidos"]);
             $sql->bindValue(3, $_POST["dui"]);
-            $sql->bindValue(4, $_POST["procedencia"]);
-            $sql->bindValue(5, $_POST["id_capacitacion"]);
-            $sql->bindValue(6, $_POST["id_detallecapacitados"]);
+            $sql->bindValue(4, $_POST["id_capacitacion"]);
+            $sql->bindValue(5, $_POST["id_detallecapacitados"]);
             $sql->execute();
         }
 

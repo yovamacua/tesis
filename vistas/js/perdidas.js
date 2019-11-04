@@ -100,7 +100,7 @@ function mostrar(id_perdida){
 	 		$('#mes').val(data.mes);
 	 		$('#anio').val(data.anio);
 	 		$('#unidadDelProduc').val(data.unidadDelProduc);
-	 		$('.modal-title').text("Editar Perdida");
+	 		$('.modal-title').text("Editar Pérdida");
 	 		$('#id_perdida').val(id_perdida);
 	 		$('#action').val("Edit");
 	 });

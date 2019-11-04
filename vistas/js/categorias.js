@@ -12,13 +12,13 @@ function init(){
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
-     $(".modal-title").text("Agregar Categoria");
+     $(".modal-title").text("Agregar Categoría");
    });
 }
 
 function limpiar()
 {
-$('#categoria').val("");
+  $('#categoria').val("");
 	$('#descripcion').val("");
 	$('#id_categoria').val("");;
 }

@@ -21,17 +21,16 @@ function init(){
    });
 }
 
-function limpiar()
+function limpiardetalle()
 {
   $('#nombres').val("");
 	$('#apellidos').val("");
   $('#dui').val("");
-  $('#procedencia').val("");
 	$('#id_capacitacion').val("");
   $('#id_detallecapacitados').val("");
 }
 
-function limpiardetalle()
+function limpiar()
 {
   $('#fecha').val("");
   $('#nombreGrupo').val("");
@@ -72,11 +71,12 @@ function verdetalle(){
 }
 
 //Función cancelarform
-// function cancelarform()
-// {
-//   mostrarformulario(false).reload();
-//   listar();
-// }
+function cancelarform()
+{
+  limpiar();
+  location.reload();
+  mostrarformulario(false);
+}
 
 //Función Listar
 function listar()
@@ -223,7 +223,6 @@ function mostrardetalle(id_detallecapacitados)
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
-       $('#procedencia').val(data.procedencia);
        $('#id_capacitacion').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallecapacitados').val(id_detallecapacitados);//AGREGAR EL ID DEL DETALLE

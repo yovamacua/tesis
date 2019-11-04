@@ -64,7 +64,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar Isumo</h4>
+            <h4 class="modal-title">Agregar Insumo</h4>
           </div>
 
           <div class="form-row">
@@ -78,8 +78,9 @@
             <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
                   <option value="">-- Seleccione unidad --</option>
                   <option value="kilo">kilo</option>
-                  <option value="Gramo">gramo</option>
-                  <option value="Libra">libra</option>
+                  <option value="gramo">gramo</option>
+                  <option value="libra">libra</option>
+                  <option value="unidad">unidad</option>
                 </select>
           </div>
         </div>
@@ -108,7 +109,7 @@
 
           <div class="form-group col-md-6">
             <label>Categoría</label>
-              <select class="form-control" id="categoria" name="categoria" >
+              <select class="form-control" id="idcategoria" name="idcategoria" >
                 <option  value="0">Seleccione la Categoría</option>
                   <?php
                      for($i=0; $i<sizeof($cat);$i++){

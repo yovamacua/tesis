@@ -19,7 +19,6 @@
   $nombres = isset($_POST["nombres"]);
   $apellidos = isset($_POST["apellidos"]);
   $dui = isset($_POST["dui"]);
-  $procedencia = isset($_POST["procedencia"]);
 
       switch($_GET["op"]){
         case "guardaryeditar":
@@ -87,7 +86,7 @@
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
           if(is_array($datos)==true and count($datos)==0){
                     //no existe el capacitado por lo tanto hacemos el registros
-          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
+          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $id_capacitacion);
                     
                     $messages[]= "El capacitado se registró correctamente";
           }else {
@@ -97,7 +96,7 @@
 
           }else {
                 /*si ya existe entonces editamos el capacitado*/
-               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
+               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $id_capacitacion);
 
                   $messages[]="El capacitado se editó correctamente";
               }
@@ -181,7 +180,6 @@
           $output["nombres"] = $row["nombres"];
           $output["apellidos"] = $row["apellidos"];
           $output["dui"] = $row["dui"];
-          $output["procedencia"] = $row["procedencia"];
           $output["id_detallecapacitados"] = $row["id_detallecapacitados"];
           $output["id_capacitacion"] = $row["id_capacitacion"];
         }
@@ -248,7 +246,6 @@
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
           $sub_array[] = $row["dui"];
-          $sub_array[] = $row["procedencia"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="glyphicon glyphicon-edit"></i></button></div>';

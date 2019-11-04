@@ -1,4 +1,5 @@
-var tabla;
+var tabla; 
+
 //Función que se ejecuta al inicio
 function init(){
   mostrarformulario(false);
@@ -24,12 +25,16 @@ function init(){
 function limpiardetalle()
 {
   $('#nombreInsumo').val("");
-	$('#cantidad').val("");
+  $('#cantidad').val("");
   $('#descripcion').val("");
-	$('#unidadMedida').val("");
-  $('#precioUnitario').val("");
-  $('#id_pedido').val("");
+  $('#unidadMedida').val("");
   $('#id_detallepedido').val("");
+  v1 = document.getElementById("id_pedido").value;
+  p1 = v1;
+  document.getElementById("id_pedido").value = p1;
+  v2 = document.getElementById("fecha").value;
+  p2 = v2;
+  document.getElementById("fecha").value = p2;
 }
 
 function limpiar()
@@ -54,8 +59,16 @@ function mostrarformulario(flag)
     $("#letra").hide();
     $("#pedidoModal").hide();
   }else{
-    listarDetallePedido();
+    //listarDetallePedido(id_pedido);
   }
+}
+
+//Función cancelarform
+function cancelarform()
+{
+  limpiar();
+  location.reload();
+  mostrarformulario(false);
 }
 
   function verdetalle(id_pedido){
@@ -70,8 +83,11 @@ function mostrarformulario(flag)
        $('#fecha').val(data.fecha);
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
     });
-  listarDetallePedido();
-  $("#btnGuardarCap").hide();
+      document.getElementById('fecha').readOnly = true; 
+      document.getElementById('fecha').disabled = true;
+      document.getElementById('id_pedido').disabled = true;
+      listarDetallePedido(id_pedido);
+      $("#btnGuardarCap").hide();
 }
 
 //Función Listar
@@ -91,7 +107,7 @@ function listar()
           type : "get",
           dataType : "json",
           error: function(e){
-          console.log(e.responseText);
+            console.log(e.responseText);
           }
         },
         "bDestroy": true,
@@ -131,27 +147,24 @@ function listar()
  }).DataTable();
 }
 
-//Función Listar
-function listarDetallePedido()//id_pedido
+//Función listarDetallePedido
+function listarDetallePedido(id_pedido)
 {
-  // var id_pedido1 = document.getElementsByName("id_pedido1");
-  // if(id_pedido1 === id_pedido){
-          
+
   tabla=$('#detallepedidos_data').dataTable(
   {
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
     dom: 'Bfrtip',//Definimos los elementos del control de tabla
-    buttons: [
-               
-              ],
+    buttons: [ ],
     "ajax":
        {
-          url: '../ajax/pedido.php?op=listardetalle',
-          type : "get",
-          dataType : "json",
+          url:"../ajax/pedido.php?op=listardetalle&id="+id_pedido,
+          method:"POST",
+          data:{id_pedido:id_pedido},
+
           error: function(e){
-          console.log(e.responseText);
+            console.log(e.responseText);
           }
         },
         "bDestroy": true,
@@ -189,9 +202,10 @@ function listarDetallePedido()//id_pedido
         }//cerrando language
 
     }).DataTable();
-  //} 
+    $('#detallepedidos_data').DataTable().ajax.reload();
 }
 
+//Función mostrar para mostrar datos en el modal des pedido
 function mostrar(id_pedido)
 {
  $.post("../ajax/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
@@ -208,14 +222,11 @@ function mostrar(id_pedido)
        $('.modal-title').text("Editar Pedido");
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
-       // if($("#id_pedido").val().length == 0){
-       //    listarDetallePedido(id_pedido).hide();//id_pedido
-       //  }else{
-       //listarDetallePedido();
-       //  }  
+       
     });
   }
 
+//Función mostrardetalle para mostrar datos en el modal des detallepedido
 function mostrardetalle(id_detallepedido)
 {
  $.post("../ajax/pedido.php?op=mostrardetalle",{id_detallepedido : id_detallepedido}, function(data, status)
@@ -227,7 +238,6 @@ function mostrardetalle(id_detallepedido)
        $('#cantidad').val(data.cantidad);
        $('#descripcion').val(data.descripcion);
        $('#unidadMedida').val(data.unidadMedida);
-       $('#precioUnitario').val(data.precioUnitario);
        $('#id_pedido1').val(data.id_pedido); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallepedido').val(id_detallepedido);//AGREGAR EL ID DEL DETALLE
@@ -236,7 +246,7 @@ function mostrardetalle(id_detallepedido)
     });
   }
 
- //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
+//funcion guardaryeditar(e); se llama cuando se da click al boton submit del pedido_form
 function guardaryeditar(e)
 {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -261,6 +271,7 @@ function guardaryeditar(e)
    });
 }
 
+//funcion guardaryeditardetalle(e); se llama cuando se da click al boton submit del detallepedidos_form
 function guardaryeditardetalle(e)
 {
   e.preventDefault(); //No se activará la acción predeterminada del evento
@@ -285,6 +296,7 @@ function guardaryeditardetalle(e)
    });
 }
 
+//funcion eliminar pedido
 function eliminar(id_pedido){
 
   bootbox.confirm("¿Está Seguro de eliminar el pedido?", function(result){
@@ -297,7 +309,6 @@ function eliminar(id_pedido){
 
           success:function(data)
           {
-            //alert(data);
             $("#resultados_ajax").html(data);
             $("#pedido_data").DataTable().ajax.reload();
           }
@@ -306,6 +317,7 @@ function eliminar(id_pedido){
   });//bootbox
 }
 
+//funcion eliminar detallepedido
 function eliminar_detallepedidos(id_detallepedido){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
@@ -321,10 +333,9 @@ function eliminar_detallepedidos(id_detallepedido){
 
           success:function(data)
           {
-            //alert(data);
             $("#resultados_ajax").html(data);
-            $("#detallecapacitados_data").DataTable().ajax.reload();
-            listarDetallePedido();
+            $("#detallepedidos_data").DataTable().ajax.reload();
+            listarDetallePedido(id_pedido);
           }
       });
     }

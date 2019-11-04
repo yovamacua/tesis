@@ -11,13 +11,13 @@
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Listado de Categorias</h2>
+             <h2>Listado de Categorías</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#categoriaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Categoria</button></h1>
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#categoriaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Categoría</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                           <table id="categoria_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="5%">Categoria</th>
+                                <th width="5%">Categoría</th>
                                 <th width="5%">Descripcion</th>
                                 <th width="5%">Editar</th>
                                 <th width="5%">Eliminar</th>
@@ -51,11 +51,11 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Categoria</h4>
+          <h4 class="modal-title">Agregar Categoría</h4>
         </div>
         <div class="modal-body">
 
-          <label>Categoria</label>
+          <label>Categoría</label>
           <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Titulo" required/>
           <br />
 

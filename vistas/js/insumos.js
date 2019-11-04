@@ -1,4 +1,4 @@
-var tabla;
+var tabla; 
  
 //funcion que se ejecuta al inicio
 function init(){
@@ -21,7 +21,7 @@ function limpiar(){
 	$('#unidaMedida').val("");
 	$('#descripcion').val("");
 	$('#idpedido').val("");
-	$('#categoria').val("");
+	$('#idcategoria').val("");
 	$('#id_insumo').val("");
 
 }
@@ -90,7 +90,7 @@ function mostrar(id_insumo){
 	 		$('#unidaMedida').val(data.unidaMedida);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#idpedido').val(data.idpedido);
-	 		$('#categoria').val(data.categoria);
+	 		$('#idcategoria').val(data.idcategoria);
 	 		$('.modal-title').text("Editar Insumo");
 	 		$('#id_insumo').val(id_insumo);
 	 		$('#action').val("Edit");

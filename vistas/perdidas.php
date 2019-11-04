@@ -58,7 +58,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar Perdida</h4>
+            <h4 class="modal-title">Agregar Pérdida</h4>
           </div>
 
           <div class="form-row">
@@ -82,9 +82,9 @@
                 <select class="selectpicker form-control"id="unidadDelProduc" name="unidadDelProduc" required>
                   <option value="">-- Seleccione la Unidad --</option>
                   <option value="kilo">kilo</option>
-                  <option value="Gramo">gramo</option>
-                  <option value="Libra">libra</option>
-                  <option value="Libra">unidad</option>
+                  <option value="gramo">gramo</option>
+                  <option value="libra">libra</option>
+                  <option value="unidad">unidad</option>
                 </select>
             </div>
           </div>

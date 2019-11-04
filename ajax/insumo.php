@@ -1,4 +1,4 @@
-<?php 
+<?php
 	//llamar a la conexion de la base de datos
 	require_once("../config/conexion.php");
  
@@ -14,7 +14,7 @@
 	$unidadMedida = isset($_POST["unidadMedida"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$idpedido = isset($_POST["idpedido"]);
-	$idcategoria = isset($_POST["categoria"]);
+	$idcategoria = isset($_POST["idcategoria"]);
  
 switch ($_GET["op"]) { 
 
@@ -83,7 +83,7 @@ switch ($_GET["op"]) {
 					$output["unidadMedida"] = $row["unidadMedida"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["idpedido"] = $row["idpedido"];
-					$output["categoria"] = $row["categoria"];
+					$output["idcategoria"] = $row["idcategoria"];
 					
 				}
 					echo json_encode($output);
@@ -120,7 +120,7 @@ switch ($_GET["op"]) {
 		      	$sub_array[] = $row["unidadMedida"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $row["idpedido"];
-		     	$sub_array[] = $row["categoria"];
+		     	$sub_array[] = $row["idcategoria"];
 		     	$sub_array[] = '<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>
       			<button type="button" onClick="eliminar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="glyphicon glyphicon-edit"></i></button></div>';

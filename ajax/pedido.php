@@ -17,7 +17,6 @@
   $cantidad = isset($_POST["cantidad"]);
   $descripcion = isset($_POST["descripcion"]);
   $unidadMedida = isset($_POST["unidadMedida"]);
-  $precioUnitario = isset($_POST["precioUnitario"]);
 
       switch($_GET["op"]){
         case "guardaryeditar":
@@ -85,7 +84,7 @@
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
           if(is_array($datos)==true and count($datos)==0){
                     //no existe el capacitado por lo tanto hacemos el registros
-          $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $precioUnitario, $id_pedido);
+          $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
                     
                     $messages[]= "El insumo se registró correctamente";
           }else {
@@ -95,7 +94,7 @@
 
           }else {
                 /*si ya existe entonces editamos el capacitado*/
-               $detallepedidos->editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $unidadMedida, $precioUnitario, $id_pedido);
+               $detallepedidos->editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
 
                   $messages[]="El insumo se editó correctamente";
               }
@@ -179,7 +178,6 @@
           $output["cantidad"] = $row["cantidad"];
           $output["descripcion"] = $row["descripcion"];
           $output["unidadMedida"] = $row["unidadMedida"];
-          $output["precioUnitario"] = $row["precioUnitario"];
           $output["id_detallepedido"] = $row["id_detallepedido"];
           $output["id_pedido"] = $row["id_pedido"];
         }
@@ -233,9 +231,8 @@
 
     //listar detallecapacitados
     case 'listardetalle':
-      //$id=$_GET["id_pedido"];
-      $datos=$detallepedidos->get_detallepedidos();//get_detallepedido($id)get_detallepedido_por_idpedido($_POST["id_pedido"]);
-      $data= Array();
+      $datos = $detallepedidos->get_detallepedido($_POST["id_pedido"]);
+      $data = Array();
 
         foreach($datos as $row){
 
@@ -245,7 +242,6 @@
           $sub_array[] = $row["cantidad"];
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["unidadMedida"];
-          $sub_array[] = $row["precioUnitario"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminar_detallepedidos('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="glyphicon glyphicon-edit"></i></button></div>';
