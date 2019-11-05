@@ -9,7 +9,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select * from insumos";
+			$sql = "select i.id_insumo, i.cantidad, i.unidadMedida, i.descripcion, i.idpedido, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 

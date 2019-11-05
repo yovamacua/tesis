@@ -1,6 +1,10 @@
 <?php
   require_once("../config/conexion.php");
   if(isset($_SESSION["id_usuario"])){ 
+
+  require_once("../modelos/Productos.php");
+     $producto = new Producto();
+     $p = $producto->get_productos();
 ?>
 
 <?php
@@ -64,7 +68,17 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre del Producto</label>
-              <input type="text" name="nombreProduc" id="nombreProduc" class="form-control" placeholder="Nombre del Producto" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <!-- <input type="text" name="idproducto" id="idproducto" class="form-control" placeholder="Nombre del Producto" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/> -->
+              <select class="form-control" id="idproducto" name="idproducto" >
+                <option  value="0">Seleccione el Producto</option>
+                  <?php
+                     for($i=0; $i<sizeof($p);$i++){
+                       ?>
+                        <option value="<?php echo $p[$i]["id_producto"]?>"><?php echo $p[$i]["producto"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
             </div>
             <div class="form-group col-md-6">
               <label>Cantidad</label>
