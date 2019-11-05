@@ -9,7 +9,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select * from perdidas";
+			$sql = "select pr.producto, p.cantidad, p.descripcion, p.precioProduc, p.mes, p.anio, p.unidadDelProduc from perdidas p inner join producto pr on pr.id_producto = p.idproducto";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 
@@ -31,14 +31,14 @@
 		}
 
 		//registrar perdidas
-		public function registrar_perdidas($nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
+		public function registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
 			$sql = "insert into perdidas values(null,?,?,?,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
-			$sql-> bindValue(1, $_POST["nombreProduc"]);
+			$sql-> bindValue(1, $_POST["idproducto"]);
 			$sql-> bindValue(2, $_POST["cantidad"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["precioProduc"]);
@@ -51,13 +51,13 @@
 		}
  
 		//editar perdidas
-		public function editar_perdida($id_perdida, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
+		public function editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
 			$sql = "update perdidas set
-            nombreProduc=?,
+            idproducto=?,
             cantidad=?,
             descripcion=?,
             precioProduc=?,
@@ -70,7 +70,7 @@
 
 			$sql = $conectar->prepare($sql);
 
-			$sql-> bindValue(1, $_POST["nombreProduc"]);
+			$sql-> bindValue(1, $_POST["idproducto"]);
 			$sql-> bindValue(2, $_POST["cantidad"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["precioProduc"]);

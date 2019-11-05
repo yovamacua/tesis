@@ -82,7 +82,9 @@ switch ($_GET["op"]) {
             $sub_array   = array();
             $sub_array[] = $row["titulo"];
             $sub_array[] = $row["descripcion"];
+            $sub_array[] = $row["usuario"];
             $sub_array[] = $row["fecha"];
+
             $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button> &nbsp;
 
             <button type="button" onClick="eliminar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>

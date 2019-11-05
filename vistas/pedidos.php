@@ -1,7 +1,10 @@
 <?php 
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
-      isset($_GET["id_pedido"]);
+
+      require_once("../modelos/Pedidos.php");
+      $pedido = new Pedidos();
+      $p = $pedido->get_pedido();
 ?>
 
 <?php
@@ -53,7 +56,7 @@
                         <div class="form-group table-responsive" style="width: 70%;">
                           <label for="" class="col-lg-3 control-label">No. Pedido:</label>
                             <div class="col-lg-9">
-                              <input type="text" name="id_pedido" id="id_pedido" class="form-control"  equired style="width:10%;" readonly="readonly"/>
+                              <input type="text" name="id_pedido" id="id_pedido" class="form-control" required style="width:10%;" readonly="readonly" />
                             </div> 
                         </div> 
                           
@@ -70,7 +73,6 @@
                                   <th>Cantidad</th>
                                   <th>Descripcion</th>
                                   <th>Unidad de Medida</th>
-                                  <th>Precio Unitario</th>
                                   <th>Acciones</th>
                                   </tr>
                               </thead>
@@ -80,7 +82,7 @@
 
                           <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap"><i class="fa fa-save"></i> Registrar Pedido</button>
 
-                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="limpiar()"><i class="fa fa-arrow-circle-left"></i> <a href="pedidos.php"><font color=white>Cancelar</font></a></button>
+                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></a></button>
                           
                           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
 
@@ -118,29 +120,35 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Descripcion</label>
+          <div class="form-group col-md-12">
+            <label>Descripción</label>
             <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required/>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Unidad de Medida</label>
-            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
-                  <option value="">-- Seleccione unidad --</option>
-                  <option value="kilo">kilo</option>
-                  <option value="Gramo">gramo</option>
-                  <option value="Libra">libra</option>
-                </select>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label>Precio Unitario</label>
-            <input type="number" name="precioUnitario" id="precioUnitario" class="form-control" placeholder="0.00" required/>
+            <label>Unidad de Medida</label>
+            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
+                  <option value="">-- Seleccione unidad --</option>
+                  <option value="kilo">kilo</option>
+                  <option value="gramo">gramo</option>
+                  <option value="libra">libra</option>
+                  <option value="unidad">unidad</option>
+                </select>
           </div>
           <div class="form-group col-md-6">
             <label>No. de Pedido</label> 
-            <input type="number" name="id_pedido" id="id_pedido1" class="form-control" value="<?php echo $_GET["id_pedido"];?>" placeholder="No. de Pedido" required/>
+            <select class="form-control" id="id_pedido" name="id_pedido" >
+                <option  value="0">Seleccione el No. de Pedido</option>
+                  <?php
+                     for($i=0; $i<sizeof($p);$i++){
+                       ?>
+                        <option value="<?php echo $p[$i]["id_pedido"]?>"><?php echo $p[$i]["id_pedido"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
           </div> 
         </div>
 

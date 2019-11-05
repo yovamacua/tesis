@@ -54,13 +54,13 @@
                }
                 ?>
             <div class="form-row" style="text-align: center;">
-               <div class="form-group col-md-4">
+               <div class="form-group col-md-3">
 
                   <label for="Fecha Inicial">Fecha Inicial</label><br>
                   <input style="width: 100%;background: white;" type="text" id="fecha" name="fecha"  autocomplete="off" class="form-control" value="<?php echo $fch; ?>"placeholder="Fecha" required readonly />
 
                </div>
-               <div class="form-group col-md-4">
+               <div class="form-group col-md-3">
 
                   <label for="Fecha Final">Fecha Final</label><br>
                   <input style="width: 100%;background: white;"type="text" id="fecha2" name="fecha2" value="<?php echo $fch2; ?>" autocomplete="off" class="form-control" placeholder="Fecha" required readonly/>
@@ -75,6 +75,13 @@
                   <br>
 
                   <a href="# "id="GenerarMysql" class="btn btn-default">Generar PDF </a>   
+
+               </div>
+
+               <div class="form-group col-md-2">
+                  <br>
+
+                  <a href="reporte_incidente.php " class="btn btn-default">Limpiar</a>   
 
                </div>
             </div>
@@ -92,7 +99,8 @@
                   <tr>
                      <th width="25%">Titulo</th>
                      <th width="50%">Descripcion</th>
-                     <th width="25%">Fecha</th>
+                     <th width="10%">Autor</th>
+                     <th width="15%">Fecha</th>
                   </tr>
                </thead>
                <tbody>
@@ -124,6 +132,7 @@
                   <tr>
                      <td><?php echo $datos[$i]["titulo"]?></td>
                      <td><?php echo $datos[$i]["descripcion"]?></td>
+                     <td><?php echo $datos[$i]["usuario"]?></td>
                      <td><?php echo $datos[$i]["fecha"]?></td>
                   </tr>
                   <?php
@@ -143,8 +152,9 @@
 	#codigo para generar informacion de el reporte pdf
    $conectar = new Conectar();
    $conectar =  $conectar->conexion();
-   $sql = "SELECT * FROM incidentes where fecha 
-   		BETWEEN '".$fecha."' AND '".$fecha2."'";
+   $sql = "SELECT i.titulo, i.descripcion, i.fecha, u.usuario 
+        from incidentes i INNER JOIN usuarios u on (i.id_usuario = u.id_usuario)
+        where i.fecha BETWEEN '".$fecha."' AND '".$fecha2."' order by i.fecha ASC";
    $hoy = getdate();
    $stmt = $conectar->query($sql);
    $users = array();
@@ -177,12 +187,13 @@
    
 
    //contenido del reporte
-   var columns = ["Titulo", "Descripcion", "Fecha"];
+   var columns = ["Titulo", "Descripcion", "Autor", "Fecha"];
    var data = [
    <?php foreach($users as $c):?>
-   ["<?php echo $c->titulo; ?>", 
+   ["<?php echo str_replace('
+', '\n', $c->titulo); ?>", 
    "<?php echo str_replace('
-', '\n', $c->descripcion); ?>", "<?php echo $c->fecha; ?>"],
+', '\n', $c->descripcion); ?>", "<?php echo $c->usuario; ?>","<?php echo $c->fecha; ?>"],
    <?php endforeach; ?>  
      ];
    

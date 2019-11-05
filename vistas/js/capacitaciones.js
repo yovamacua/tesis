@@ -21,17 +21,16 @@ function init(){
    });
 }
 
-function limpiar()
+function limpiardetalle()
 {
   $('#nombres').val("");
 	$('#apellidos').val("");
   $('#dui').val("");
-  $('#procedencia').val("");
 	$('#id_capacitacion').val("");
   $('#id_detallecapacitados').val("");
 }
 
-function limpiardetalle()
+function limpiar()
 {
   $('#fecha').val("");
   $('#nombreGrupo').val("");
@@ -48,7 +47,6 @@ function mostrarformulario(flag)
   {
     $("#letra").show();
     $("#capacitacionModal").show();
-    listarDetalleCapacitados();
     $("#add_button").hide();
     $("#listadoregistros").hide();
     $("#letra1").hide();
@@ -61,10 +59,10 @@ function mostrarformulario(flag)
   }
 }
 
-function verdetalle(){
+function verdetalle(id_capacitacion){
   $("#letra1").show();
   $("#capacitadosModal").show();
-  listarDetalleCapacitados();
+  listarDetalleCapacitados(id_capacitacion);
   $("#letra").hide();
   $("#capacitacionModal").hide();
   $("#add_button").hide();
@@ -72,11 +70,12 @@ function verdetalle(){
 }
 
 //Función cancelarform
-// function cancelarform()
-// {
-//   mostrarformulario(false).reload();
-//   listar();
-// }
+function cancelarform()
+{
+  limpiar();
+  location.reload();
+  mostrarformulario(false);
+}
 
 //Función Listar
 function listar()
@@ -136,7 +135,7 @@ function listar()
 }
 
 //Función Listar
-function listarDetalleCapacitados()
+function listarDetalleCapacitados(id_capacitacion)
 {
   tabla=$('#detallecapacitados_data').dataTable(//detallecapacitados_form
   {
@@ -148,9 +147,10 @@ function listarDetalleCapacitados()
             ], 
     "ajax":
         {
-          url: '../ajax/capacitacion.php?op=listardetalle',
-          type : "get",
-          dataType : "json",
+          url:"../ajax/capacitacion.php?op=listardetalle&id="+id_capacitacion,
+          method:"POST",
+          data:{id_capacitacion:id_capacitacion},
+
           error: function(e){
             console.log(e.responseText);
           }
@@ -223,7 +223,6 @@ function mostrardetalle(id_detallecapacitados)
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
-       $('#procedencia').val(data.procedencia);
        $('#id_capacitacion').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallecapacitados').val(id_detallecapacitados);//AGREGAR EL ID DEL DETALLE

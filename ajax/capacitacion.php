@@ -1,4 +1,4 @@
-<?php
+<?php 
  //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
   require_once("../modelos/Capacitaciones.php");
@@ -19,7 +19,6 @@
   $nombres = isset($_POST["nombres"]);
   $apellidos = isset($_POST["apellidos"]);
   $dui = isset($_POST["dui"]);
-  $procedencia = isset($_POST["procedencia"]);
 
       switch($_GET["op"]){
         case "guardaryeditar":
@@ -87,7 +86,7 @@
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
           if(is_array($datos)==true and count($datos)==0){
                     //no existe el capacitado por lo tanto hacemos el registros
-          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
+          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $id_capacitacion);
                     
                     $messages[]= "El capacitado se registró correctamente";
           }else {
@@ -97,7 +96,7 @@
 
           }else {
                 /*si ya existe entonces editamos el capacitado*/
-               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $procedencia, $id_capacitacion);
+               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $id_capacitacion);
 
                   $messages[]="El capacitado se editó correctamente";
               }
@@ -173,6 +172,7 @@
       case 'mostrardetalle':
       # selecciona el id de el capacitado
       //el parametro id_detallecapacitados se envia por AJAX cuando se edita el capacitado
+      //y permite el filtrado de capacitados
       $datos = $detallecapacitados->get_detallecapacitados_por_id($_POST["id_detallecapacitados"]);
       if(is_array($datos)==true and count($datos)>0){
 
@@ -181,7 +181,6 @@
           $output["nombres"] = $row["nombres"];
           $output["apellidos"] = $row["apellidos"];
           $output["dui"] = $row["dui"];
-          $output["procedencia"] = $row["procedencia"];
           $output["id_detallecapacitados"] = $row["id_detallecapacitados"];
           $output["id_capacitacion"] = $row["id_capacitacion"];
         }
@@ -221,7 +220,7 @@
           $sub_array[] = $row["cargo"];
           $sub_array[] = $row["encargado"];
           $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="verdetalle();" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
+          <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitacion" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="glyphicon glyphicon-edit"></i></button></div>';
           $data[] = $sub_array;
@@ -238,7 +237,7 @@
 
     //listar detallecapacitados
     case 'listardetalle':
-      $datos=$detallecapacitados->get_detallecapacitados();
+      $datos=$detallecapacitados->get_detallecapacitados($_POST["id_capacitacion"]);
       $data= Array();
 
         foreach($datos as $row){
@@ -248,7 +247,6 @@
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
           $sub_array[] = $row["dui"];
-          $sub_array[] = $row["procedencia"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="glyphicon glyphicon-edit"></i></button></div>';

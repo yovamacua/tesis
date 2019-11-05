@@ -17,7 +17,7 @@ function init(){
 
 //funcion que limpia los campos del formulario
 function limpiar(){
-	$('#nombreProduc').val("");
+	$('#idproducto').val("");
 	$('#cantidad').val("");
 	$('#descripcion').val("");
 	$('#precioProduc').val("");
@@ -93,14 +93,14 @@ function mostrar(id_perdida){
         data = JSON.parse(data);
 
 	 		$('#perdidaModal').modal("show");
-	 		$('#nombreProduc').val(data.nombreProduc);
+	 		$('#idproducto').val(data.idproducto);
 	 		$('#cantidad').val(data.cantidad);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precioProduc').val(data.precioProduc);
 	 		$('#mes').val(data.mes);
 	 		$('#anio').val(data.anio);
 	 		$('#unidadDelProduc').val(data.unidadDelProduc);
-	 		$('.modal-title').text("Editar Perdida");
+	 		$('.modal-title').text("Editar Pérdida");
 	 		$('#id_perdida').val(id_perdida);
 	 		$('#action').val("Edit");
 	 });

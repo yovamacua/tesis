@@ -1,12 +1,15 @@
-<?php 
+<?php  
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
-      isset($_GET["id_capacitacion"]);
 
       require_once("../modelos/Capacitaciones.php");
       require_once("../modelos/DetalleCapacitados.php");
       $capacitaciones = new Capacitaciones();
       $detalleCapacitados = new DetalleCapacitados();
+
+      require_once("../modelos/Capacitaciones.php");
+      $cap = new Capacitaciones();
+      $c = $cap->get_capacitacion();
 ?>
 
 <?php
@@ -35,7 +38,7 @@
                           <table id="capacitacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="12%">No. de Capacitación</th>
+                                <th width="12%">No. Capacitación</th>
                                 <th>Fecha</th>
                                 <th>Nombre del Grupo</th>
                                 <th>Cargo</th>
@@ -83,15 +86,15 @@
                         <div class="form-group table-responsive">
 
                           <div class="form-group table-responsive" id="numcapacitacion">
-                            <label for="" class="col-lg-3 control-label">No. de Capacitación:</label>
+                            <label for="" class="col-lg-3 control-label">No. Capacitación:</label>
                             <div class="col-lg-9">
                               <input type="show" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>" equired style="width:10%;" readonly="readonly"/>
                             </div> 
                           </div> 
                           
-                          <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap"><i class="fa fa-save"></i> Registrar Capacitacion</button>
+                          <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap"><i class="fa fa-save"></i> Registrar Capacitación</button>
 
-                          <button id="btnCancelar" class="btn btn-danger" type="button"><i class="fa fa-arrow-circle-left"></i> <a href="capacitaciones.php"><font color=white>Cancelar</font></a></button>
+                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></a></button>
                           
                           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                           
@@ -110,11 +113,10 @@
                             <table id="detallecapacitados_data" class="table table-bordered table-striped">
                               <thead>
                                   <tr>
-                                  <th width="12%">No. de Capacitación</th>
+                                  <th width="12%">No. Capacitación</th>
                                   <th>Nombre</th>
                                   <th>Apellido</th>
                                   <th>DUI</th>
-                                  <th>Procedencia</th>
                                   <th>Acciones</th>
                                   </tr>
                               </thead>
@@ -146,14 +148,6 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Agregar Capacitado</h4>
         </div>
-
-          <!--- codigo para mostrar calendario jquery IU -->
-          <script>
-          $( function() {
-            $( "#fecha" ).datepicker();
-          } );
-          </script>
-          <!--- fin codigo para mostrar calendario jquery IU -->
         
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -172,15 +166,17 @@
             <input type="text" name="dui" id="dui" class="form-control" placeholder="DUI" required/>
           </div>
           <div class="form-group col-md-6">
-            <label>Procedencia</label>
-            <input type="text" name="procedencia" id="procedencia" class="form-control" placeholder="Procedencia" required/>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-12">
-              <label>No. de Capacitación:</label> 
-                <input type="show" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>" equired style="width:10%;"/>
+            <label>No. de Capacitación</label> 
+            <select class="form-control" id="id_capacitacion" name="id_capacitacion" >
+                <option  value="0">Seleccione el No. de Capacitación</option>
+                  <?php
+                     for($i=0; $i<sizeof($c);$i++){
+                       ?>
+                        <option value="<?php echo $c[$i]["id_capacitacion"]?>"><?php echo $c[$i]["id_capacitacion"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
           </div> 
         </div>
 

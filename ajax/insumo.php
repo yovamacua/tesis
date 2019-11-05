@@ -1,4 +1,4 @@
-<?php 
+<?php
 	//llamar a la conexion de la base de datos
 	require_once("../config/conexion.php");
  
@@ -14,7 +14,7 @@
 	$unidadMedida = isset($_POST["unidadMedida"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$idpedido = isset($_POST["idpedido"]);
-	$idcategoria = isset($_POST["categoria"]);
+	$idcategoria = isset($_POST["idcategoria"]);
  
 switch ($_GET["op"]) { 
 
@@ -83,7 +83,7 @@ switch ($_GET["op"]) {
 					$output["unidadMedida"] = $row["unidadMedida"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["idpedido"] = $row["idpedido"];
-					$output["categoria"] = $row["categoria"];
+					$output["idcategoria"] = $row["idcategoria"];
 					
 				}
 					echo json_encode($output);

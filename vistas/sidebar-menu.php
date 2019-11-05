@@ -46,49 +46,43 @@
 
          <li class="">
             <a href="perdidas.php">
-            <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Perdidas</span>
+            <i class="fa fa-minus-square" aria-hidden="true"></i> <span>Perdidas</span>
             </a>
          </li>
 
          <li class="">
             <a href="donaciones.php">
-            <i class="fa fa-user" aria-hidden="true"></i> <span>Donaciones</span>
+            <i class="fa fa-gift" aria-hidden="true"></i> <span>Donaciones</span>
             </a>
          </li>
 
          <li class="">
             <a href="gastos.php">
-            <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Gastos</span>
+            <i class="fa fa-money" aria-hidden="true"></i> <span>Gastos</span>
             </a>
          </li>
 
          <li class="">
             <a href="capacitaciones.php">
-            <i class="fa fa-suitcase" aria-hidden="true"></i> <span>Capacitaciones</span>
+            <i class="fa fa-book" aria-hidden="true"></i> <span>Capacitaciones</span>
             </a>
          </li>
 
          <li class="">
             <a href="categorias.php">
-            <i class="fa fa-users"></i> <span>Categoria</span>
-            <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">5</i>
-            </span>
+            <i class="fa fa-users" aria-hidden="true"></i> <span>Categoria</span>
             </a>
          </li>
 
          <li class="">
             <a href="productos.php">
-            <i class="fa fa-users"></i> <span>Producto</span>
-            <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">5</i>
-            </span>
+            <i class="fa fa-lemon-o" aria-hidden="true"></i> <span>Producto</span>
             </a>
          </li>
 
          <li class="treeview">
            <a href="pedidos.php">
-             <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span>Pedidos</span>
+             <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span>Pedidos</span>
              <span class="pull-right-container badge bg-blue">
                <i class="fa fa-angle-left pull-right"></i>
 
@@ -107,31 +101,21 @@
 
 
            <ul class="treeview-menu">
-             <li><a href="pedidos.php"><i class="fa fa-circle-o"></i> Pedidos</a></li>
-             <li><a href="insumos.php"><i class="fa fa-circle-o"></i> Insumos</a></li>
+             <li><a href="pedidos.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Pedidos</a></li>
+             <li><a href="insumos.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Insumos</a></li>
            </ul>
 
          </li>
 
-         <li class="">
-            <a href="clientes.php">
-            <i class="fa fa-users"></i> <span>Clientes</span>
-            <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">3</i>
-            </span>
-            </a>
-         </li>
-
          <li class="treeview">
             <a href="ventas.php">
-            <i class="fa fa-suitcase" aria-hidden="true"></i> <span>Ventas</span>
+            <i class="fa fa-usd" aria-hidden="true"></i> <span>Ventas</span>
             <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-bell pull-right">8</i>
             <i class="fa fa-angle-left pull-right"></i>
             </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="ventas.php"><i class="fa fa-circle-o"></i> Ventas</a></li>
+               <li><a href="ventas.php"><i class="fa fa-usd"></i> Ventas</a></li>
                <li><a href="consultar_ventas.php"><i class="fa fa-circle-o"></i> Consultar Ventas</a></li>
                <li><a href="consultar_ventas_fecha.php"><i class="fa fa-circle-o"></i> Consultar Ventas Fecha</a></li>
                <li><a href="consultar_ventas_mes.php"><i class="fa fa-circle-o"></i> Consultar Ventas Mes</a></li>
@@ -160,9 +144,9 @@
             </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="reporte_general_ventas.php"><i class="fa fa-circle-o"></i>Reporte General Ventas</a></li>
-               <li><a href="reporte_ventas_mensual.php"><i class="fa fa-circle-o"></i> Reporte Mensual Ventas</a></li>
-               <li><a href="reporte_ventas_cliente.php"><i class="fa fa-circle-o"></i> Reporte Ventas-Cliente</a></li>
+               <li><a href="reporte_general_ventas.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reporte General Ventas</a></li>
+               <li><a href="reporte_ventas_mensual.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte Mensual Ventas</a></li>
+               <li><a href="reporte_ventas_cliente.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte Ventas-Cliente</a></li>
             </ul>
          </li>
 

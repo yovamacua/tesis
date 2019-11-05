@@ -91,19 +91,19 @@
             <div class="navbar-custom-menu">
                <ul class="nav navbar-nav">
                   <!-- Informacion de usuario -->
+                  <?php $imagen = $_SESSION["imagen"]; ?>
                   <li class="dropdown user user-menu">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                       
+                        <img src="upload/<?php echo $imagen; ?>" class="img-thumbnail" width="20" style="background-color: transparent!important; padding: 0px!important; "/>&nbsp;
                         <span class="hidden-xs"><?php echo $_SESSION["usuario"]?></span>
                      </a>
                      <ul class="dropdown-menu">
                         <!-- Imagen usuario -->
                         <li class="user-header">
-                           <p>
-                              <?php echo $_SESSION["nombre"];
-                                 $imagen = $_SESSION["imagen"];
-                                 ?><br>
+                           <p><i class="fa fa-user" aria-hidden="true"></i>
+                              <?php echo $_SESSION["nombre"]; ?><br>
                               <img src="upload/<?php echo $imagen; ?>" class="img-thumbnail" width="80"/>
                               <!-- <small>Administrador desde Noviembre 2017</small> -->
                            </p>

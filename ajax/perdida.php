@@ -10,7 +10,7 @@
 	$perdidas = new Perdidas();
 	
 	$id_perdida = isset($_POST["id_perdida"]);
-	$nombreProduc = isset($_POST["nombreProduc"]);
+	$idproducto = isset($_POST["idproducto"]);
 	$cantidad = isset($_POST["cantidad"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$precioProduc = isset($_POST["precioProduc"]);
@@ -29,7 +29,7 @@ switch ($_GET["op"]) {
 	       	  /*verificamos si el incidente existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
-		 			$perdidas->registrar_perdidas($nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+		 			$perdidas->registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
 			       	   	  
 			       	   	  $messages[]="La perdida se registró correctamente";
 			    }else {
@@ -39,7 +39,7 @@ switch ($_GET["op"]) {
 
 			    }else {
 	            	/*si ya existe entonces editamos la perdida*/
-	             $perdidas-> editar_perdida($id_perdida, $nombreProduc, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+	             $perdidas-> editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
 
 	            	  $messages[]="La perdida se editó correctamente";
 	            }
@@ -82,7 +82,7 @@ switch ($_GET["op"]) {
 
 				foreach ($datos as $row) {
 				
-					$output["nombreProduc"] = $row["nombreProduc"];
+					$output["idproducto"] = $row["idproducto"];
 					$output["cantidad"] = $row["cantidad"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["precioProduc"] = $row["precioProduc"];
@@ -120,7 +120,7 @@ switch ($_GET["op"]) {
 
 		    foreach($datos as $row){
 		        $sub_array = array();
-		      	$sub_array[] = $row["nombreProduc"];
+		      	$sub_array[] = $row["producto"];
 		     	$sub_array[] = $row["cantidad"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $row["precioProduc"];
