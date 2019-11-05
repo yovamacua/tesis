@@ -120,7 +120,7 @@
                   <th>Total</th>
                   <th>Numero venta</th>
                   <th>fecha Venta</th>
-                  <th>Estado</th>
+                  <th style="background-color:#A9D0F5 !important">Estado</th>
                   
                  
                 </tr>
@@ -143,7 +143,7 @@
            
               <div class="box-body">
 
-                    <div class="panel-body table-responsive" id="formularioregistros">
+                    <div class=" hidden panel-body table-responsive" id="formularioregistros">
                       
                       
                        <form name="formulario" id="formulario"style="width: 90%;" method="POST">
@@ -180,7 +180,7 @@
                                     <th>Producto</th>
                                     <th>Cantidad</th>
                                     <th>Precio Venta</th>
-                                    <th>Subtotal</th>
+                                    <th style="background-color:#A9D0F5 !important">Subtotal</th>
                                 </thead>
                                 <tfoot>
                                     <th>TOTAL</th>
@@ -197,7 +197,7 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Comprar</button>
 
-                            <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
+                            <button id="btnCancelar" class="btn btn-danger" onclick="cancelar()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                       <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                             
                           </div>

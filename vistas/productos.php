@@ -118,7 +118,7 @@
                   <label>Unid. Medida</label>
                      <select class="selectpicker form-control"id="unidad" name="unidad"   required>
                       <option value="">-- Seleccione unidad --</option>
-                      <option value="kilo">kilo</option>
+                      <option value="Kilo">kilo</option>
                       <option value="Gramo">Gramo</option>
                       <option value="Libra">Libra</option>
                     </select>
