@@ -1,12 +1,15 @@
-<?php 
+<?php  
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
-      isset($_GET["id_capacitacion"]);
 
       require_once("../modelos/Capacitaciones.php");
       require_once("../modelos/DetalleCapacitados.php");
       $capacitaciones = new Capacitaciones();
       $detalleCapacitados = new DetalleCapacitados();
+
+      require_once("../modelos/Capacitaciones.php");
+      $cap = new Capacitaciones();
+      $c = $cap->get_capacitacion();
 ?>
 
 <?php
@@ -164,7 +167,16 @@
           </div>
           <div class="form-group col-md-6">
             <label>No. de Capacitación</label> 
-            <input type="number" name="id_capacitacion" id="id_capacitacion" class="form-control" value="<?php echo $_GET["id_capacitacion"];?>" placeholder="No Capacitacion" required/>
+            <select class="form-control" id="id_capacitacion" name="id_capacitacion" >
+                <option  value="0">Seleccione el No. de Capacitación</option>
+                  <?php
+                     for($i=0; $i<sizeof($c);$i++){
+                       ?>
+                        <option value="<?php echo $c[$i]["id_capacitacion"]?>"><?php echo $c[$i]["id_capacitacion"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
           </div> 
         </div>
 

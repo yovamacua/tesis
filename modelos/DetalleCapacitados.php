@@ -4,13 +4,12 @@
     class DetalleCapacitados extends Conectar{
 
       //método para seleccionar registros
-      public function get_detallecapacitados(){
+      public function get_detallecapacitados($id_capacitacion){
         $conectar = parent::conexion();
         parent::set_names();
 
-          $sql = "select * from detallecapacitados";
+          $sql = "select * from detallecapacitados where id_capacitacion=?";
           $sql = $conectar->prepare($sql);
-          //$sql->bindValue(1, $id_detallecapacitados);
           $sql->bindValue(1, $id_capacitacion);
           $sql->execute();
           return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);

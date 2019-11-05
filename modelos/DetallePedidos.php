@@ -7,8 +7,8 @@
       public function get_detallepedido($id_pedido){
         $conectar= parent::conexion();
         parent::set_names();
+        
         $sql="select * from detallepedidos where id_pedido=?";
-      
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $id_pedido);
         $sql->execute();

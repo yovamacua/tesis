@@ -1,4 +1,4 @@
-<?php
+<?php 
  //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
   require_once("../modelos/Capacitaciones.php");
@@ -172,6 +172,7 @@
       case 'mostrardetalle':
       # selecciona el id de el capacitado
       //el parametro id_detallecapacitados se envia por AJAX cuando se edita el capacitado
+      //y permite el filtrado de capacitados
       $datos = $detallecapacitados->get_detallecapacitados_por_id($_POST["id_detallecapacitados"]);
       if(is_array($datos)==true and count($datos)>0){
 
@@ -219,7 +220,7 @@
           $sub_array[] = $row["cargo"];
           $sub_array[] = $row["encargado"];
           $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="verdetalle();" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
+          <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitacion" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="glyphicon glyphicon-edit"></i></button></div>';
           $data[] = $sub_array;
@@ -236,7 +237,7 @@
 
     //listar detallecapacitados
     case 'listardetalle':
-      $datos=$detallecapacitados->get_detallecapacitados();
+      $datos=$detallecapacitados->get_detallecapacitados($_POST["id_capacitacion"]);
       $data= Array();
 
         foreach($datos as $row){

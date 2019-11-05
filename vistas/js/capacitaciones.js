@@ -47,7 +47,6 @@ function mostrarformulario(flag)
   {
     $("#letra").show();
     $("#capacitacionModal").show();
-    listarDetalleCapacitados();
     $("#add_button").hide();
     $("#listadoregistros").hide();
     $("#letra1").hide();
@@ -60,10 +59,10 @@ function mostrarformulario(flag)
   }
 }
 
-function verdetalle(){
+function verdetalle(id_capacitacion){
   $("#letra1").show();
   $("#capacitadosModal").show();
-  listarDetalleCapacitados();
+  listarDetalleCapacitados(id_capacitacion);
   $("#letra").hide();
   $("#capacitacionModal").hide();
   $("#add_button").hide();
@@ -136,7 +135,7 @@ function listar()
 }
 
 //Función Listar
-function listarDetalleCapacitados()
+function listarDetalleCapacitados(id_capacitacion)
 {
   tabla=$('#detallecapacitados_data').dataTable(//detallecapacitados_form
   {
@@ -148,9 +147,10 @@ function listarDetalleCapacitados()
             ], 
     "ajax":
         {
-          url: '../ajax/capacitacion.php?op=listardetalle',
-          type : "get",
-          dataType : "json",
+          url:"../ajax/capacitacion.php?op=listardetalle&id="+id_capacitacion,
+          method:"POST",
+          data:{id_capacitacion:id_capacitacion},
+
           error: function(e){
             console.log(e.responseText);
           }
