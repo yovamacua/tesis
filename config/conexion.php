@@ -17,7 +17,7 @@ $conn =null; */
 
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','admin12-');
+define('DBPASS','');
 define('DBNAME','campoescuela');
 
 //****************************************

@@ -3,20 +3,14 @@
     if(isset($_SESSION["correo"])){
       /*Se llaman los modelos y se crean los objetos para llamar el numero de registros en el menu lateral izquierdo y en el home*/
       
-      
       require_once("../modelos/Venta.php");
-
+      require_once("../modelos/Perdidas.php");
       
-      // $proveedor = new Proveedor();
-      // $compra = new Compras();
-     //  $cliente = new Cliente();
-       $venta = new Ventas();
+      $venta = new Ventas();
+      $perdidas = new Perdidas();
 
-
-
-        //$datos=$compra->get_compras_anio_actual();
-
-        $datos_venta=$venta->get_ventas_anio_actual()
+      $datos_venta = $venta->get_ventas_anio_actual();
+      $datos = $perdidas->get_perdidas_reporte_general();
 ?>
 
 <?php
@@ -38,30 +32,29 @@ require_once("header.php");?>
 
           <div class="small-box bg-aqua">
             <div class="inner">
-             <a href="<?php echo Conectar::ruta()?>vistas/clientes.php">
-              <h3>2</h3>
-               <h2>CLIENTES</h2>
+             <a href="<?php echo Conectar::ruta()?>vistas/productos.php">
+              <h3>1</h3>
+               <h2>PRODUCTOS</h2>
              </a>
           </div>
             <div class="icon">
-              <i class="fa fa-users" aria-hidden="true"></i>
+              <i class="fa fa-lemon-o" aria-hidden="true"></i>
             </div>
           </div>
         </div>
         <!-- ./col -->
-
 
          <div class="col-lg-3 col-xs-6">
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
            <a href="<?php echo Conectar::ruta()?>vistas/ventas.php">
-              <h3>3</h3>
+              <h3>2</h3>
               <h2>VENTAS</h2>
            </a>
             </div>
             <div class="icon">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <i class="fa fa-usd" aria-hidden="true"></i>
             </div>
 
           </div>
@@ -72,13 +65,13 @@ require_once("header.php");?>
           <!-- small box -->
           <div class="small-box bg-yellow">
             <div class="inner">
-            <a href="<?php echo Conectar::ruta()?>vistas/proveedores.php">
-              <h3>5</h3>
-              <h2>PROVEEDORES</h2>
+            <a href="<?php echo Conectar::ruta()?>vistas/pedidos.php">
+              <h3>3</h3>
+              <h2>PEDIDOS</h2>
              </a>
             </div>
             <div class="icon">
-              <i class="fa fa-truck" aria-hidden="true"></i>
+              <i class="fa fa-shopping-bag" aria-hidden="true"></i>
             </div>
 
           </div>
@@ -88,13 +81,13 @@ require_once("header.php");?>
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-             <a href="<?php echo Conectar::ruta()?>vistas/compras.php">
-              <h3>8</h3>
-              <h2>COMPRAS</h2>
+             <a href="<?php echo Conectar::ruta()?>vistas/donaciones.php">
+              <h3>4</h3>
+              <h2>DONACIONES</h2>
             </a>
             </div>
             <div class="icon">
-              <i class="fa fa-cart-plus" aria-hidden="true"></i>
+              <i class="fa fa-gift" aria-hidden="true"></i>
             </div>
 
           </div>
@@ -106,10 +99,9 @@ require_once("header.php");?>
 
  <!--INICIO CONTENIDO-->
 
-                <h2 class="container-fluid bg-primary text-white text-center mh-50">
-        
-             RESUMEN DE PERDIDA DEL AÑO <?php echo date("Y");?>
-         </h2>
+      <h2 class="container-fluid bg-primary text-white text-center mh-50">
+          RESUMEN DE PERDIDA DEL AÑO <?php echo date("Y");?>
+      </h2>
 
     <!--COMPRAS ACTUAL-->
       <div class="row">
@@ -134,74 +126,64 @@ require_once("header.php");?>
 
              <tbody>
 
-             
-                   <?php
+               <?php
+                
+                $arregloReg = array();
+           
+               for($i=0;$i<count($datos);$i++){
+
+                  array_push($arregloReg, array(
+
+                      "anio" => $datos[$i]["Año"],
+                      "mes" => $datos[$i]["Mes"],
+                      "totalPerdida" => $datos[$i]["totalPerdida"]
+                    )
+
+                  );
+
+                }
+
+             ?>
+
+             <?php  
                     
-                    $arregloReg= array();
-               
-                   /* for($i=0;$i<count($datos);$i++){
-
-
-
-                      array_push($arregloReg, array(
-
-                          "ano" => $datos[$i]["ano"],
-                          "mes" => $datos[$i]["mes"],
-                          "total_compra_mes" => $datos[$i]["total_compra_mes"],
-                           "moneda" => $datos[$i]["moneda"]
-
-                          )
-
-                      );
-
-                    }*/
-
-                 ?>
-
-                 <?php  
-                    
-                    $sumaTotal=0;
+                    $sumaTotal = 0;
 
                     for($i=0;$i<count($arregloReg);$i++){
 
-                     //sumo el total de los años
+                     //sumo el total de los años en porcentajes
                       
-                      $sumaTotal= $sumaTotal + $datos[$i]["total_compra_mes"];
+                      $sumaTotal = $sumaTotal + $datos[$i]["totalPerdida"];
                     }
 
                  ?>
-
 
                  <?php
 
                     for($i=0;$i<count($arregloReg);$i++){
 
-
                      //imprime la fecha por separado ejemplo: dia, mes y año
                       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
  
-                       $fecha= $arregloReg[$i]["mes"];
+                      $fecha = $arregloReg[$i]["mes"];
 
-                       $fecha_mes = $meses[date("n", strtotime($fecha))-1];
+                      $fecha_mes = $meses[$fecha-1];
 
-
-                    //calculo de porcentaje
-
-                     $porcentaje= round($arregloReg[$i]["total_compra_mes"]/$sumaTotal*100,2);
+                      //calculo de porcentaje
+                      $porcentaje = round($arregloReg[$i]["totalPerdida"]/$sumaTotal*100,2);
                 
-
                  ?>
 
 
                 <tr>
-                  <td><?php echo $arregloReg[$i]["ano"]?></td>
+                  <td><?php echo $arregloReg[$i]["anio"]?></td>
                   <td><?php echo $fecha_mes?></td>
                   <td><?php echo $porcentaje?></td>
-                  <td><?php echo $arregloReg[$i]["moneda"]." ".$arregloReg[$i]["total_compra_mes"]?></td>
+                  <td><?php echo "US$"." ".$arregloReg[$i]["totalPerdida"]?></td>
 
 
                   <td class="hidden-xs">
-                     <div class="progress progress-xs">
+                     <div class="progress progress-xs" style="height: 30%" >
 
                        <?php
 
@@ -235,7 +217,7 @@ require_once("header.php");?>
               <?php
 
                        
-                        }//cierre del for
+            }//cierre del for
 
 
               ?>
@@ -259,9 +241,8 @@ require_once("header.php");?>
     </div><!--row-->
 
 
-        <h2 class="container-fluid bg-red text-white text-center mh-50">
-        
-             RESUMEN DE VENTAS DEL AÑO <?php echo date("Y");?>
+        <h2 class="container-fluid bg-red text-white text-center mh-50"> 
+            RESUMEN DE VENTAS DEL AÑO <?php echo date("Y");?>
         </h2>
 
     <!--VENTAS ACTUAL-->
@@ -283,20 +264,17 @@ require_once("header.php");?>
                 <th style="width: 10%">MES</th>
                 <th style="width: 10%">PORCENTAJE(%)</th>
                 <th style="width: 20%">TOTAL</th>
-                <th style="width:30%" class="hidden-xs">BARRA PROGRESO DE VENTAS MENSUALES</th>
+                <th style="width: 30%" class="hidden-xs">BARRA PROGRESO DE VENTAS MENSUALES</th>
               </tr>
             </thead>
 
              <tbody>
 
-             
                    <?php
                     
                     $arregloReg= array();
                
                     for($i=0;$i<count($datos_venta);$i++){
-
-
 
                       array_push($arregloReg, array(
 
@@ -320,7 +298,7 @@ require_once("header.php");?>
 
                      //sumo el total de los años
                       
-                      $sumaTotal= $sumaTotal + $datos_venta[$i]["total_venta_mes"];
+                      $sumaTotal = $sumaTotal + $datos_venta[$i]["total_venta_mes"];
                     }
 
                  ?>
@@ -353,29 +331,27 @@ require_once("header.php");?>
                   <td><?php echo $porcentaje?></td>
                   <td><?php echo "$"." ".$arregloReg[$i]["total_venta_mes"]?></td>
                   <td class="hidden-xs">
-                     <div class="progress progress-xs" style="height: 2%;">
+                     <div class="progress progress-xs" style="height: 30%">
 
                        <?php
 
                        /*poner los colores de la barra de acuerdo al %*/
                            
-                           if($porcentaje>24){
+                          if($porcentaje>24){
 
                             $clase="progress-bar progress-bar-primary";
 
+                          } else if($porcentaje>10 or $porcentaje<24) {
 
-                           } else if($porcentaje>10 or $porcentaje<24) {
-
-                               $clase="progress-bar progress-bar-yellow";
+                            $clase="progress-bar progress-bar-yellow";
                              
-                             } else if($porcentaje<=10) {
+                          } else if($porcentaje<=10) {
 
-                               $clase="progress-bar progress-bar-danger";
+                            $clase="progress-bar progress-bar-danger";
                              
-                             }
+                          }
 
                        ?>
-
 
                         <div class="<?php echo $clase;?>" style="width: <?php echo $porcentaje;?>%">
                         <?php echo $porcentaje;?>%
@@ -387,9 +363,7 @@ require_once("header.php");?>
               <?php
 
                        
-                        }//cierre del for
-
-
+            }//cierre del for
               ?>
 
               <td></td>
@@ -410,10 +384,8 @@ require_once("header.php");?>
      
     </div><!--row-->
 
-  
 
-
- <!--GRAFICA COMPRAS-->
+ <!--GRAFICA PERDIDA-->
     <div class="row">
 
           <div class="col-lg-6 col-xs-12">
@@ -424,10 +396,9 @@ require_once("header.php");?>
 
                <h2 class="bg-primary text-white col-lg-12 text-center">RESUMEN DE PERDIDA DEL AÑO <?php echo date("Y");?></h2>
 
-      
               <!--GRAFICA-->
              
-              <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+              <div id="container_perdidas" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
             
 
                 </div><!--fin box-body-->
@@ -455,8 +426,6 @@ require_once("header.php");?>
       </div><!--col-sm-->
 
     </div><!--fin row-->
-
-
         
            <!--FIN CONTENIDO-->
 
@@ -468,9 +437,6 @@ require_once("header.php");?>
 <script type="text/javascript">
    
    
-
-
-
    /*GRAFICA VENTAS*/
      $(document).ready(function() {
 
@@ -529,11 +495,84 @@ require_once("header.php");?>
           series: [
 
                 {
+            name: 'Brands',
+            colorByPoint: true,
+            data: [
+              <?php echo $datos_grafica = $venta->get_ventas_anio_actual_grafica();?>
+            ]
+
+          }], 
+
+          exporting: {
+                enabled: false
+             }
+      });
+
+});
+
+  //GRAFICA DE PERDIDAS
+  $(document).ready(function() {
+
+      //Highcharts.chart('container', {
+
+      var chart = new Highcharts.Chart({
+      //$('#container').highcharts({
+        
+         chart: {
+            
+              renderTo: 'container_perdidas', 
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: 'pie'
+          },
+
+              exporting: {
+              url: 'http://export.highcharts.com/',
+              enabled: false
+        
+                },
+
+          title: {
+              text: ''
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                showInLegend:true,
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: true,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+
+                           fontSize: '20px'
+                      }
+                  }
+              }
+          },
+           legend: {
+              symbolWidth: 12,
+              symbolHeight: 18,
+              padding: 0,
+              margin: 15,
+              symbolPadding: 5,
+              itemDistance: 40,
+              itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
+          },
+
+          series: [
+
+                {
         name: 'Brands',
         colorByPoint: true,
         data: [
 
-        <?php echo $datos_grafica= $venta->get_ventas_anio_actual_grafica();?>
+        <?php echo $datos_grafica= $perdidas->get_perdidas_anio_actual_grafica();?>
           ]
 
           }], 
@@ -541,9 +580,8 @@ require_once("header.php");?>
           exporting: {
                 enabled: false
              }
-
+             
       });
-
 
 });
 

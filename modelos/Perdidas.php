@@ -82,6 +82,49 @@
 			$sql-> execute();
 		}
 
+		 // reportes de perdidas 
+
+        public function get_perdidas_reporte_general()
+        {
+          $conectar = parent::conexion();
+           parent::set_names();
+
+           	$sql = "SELECT mes as Mes, anio as Año, SUM(precioProduc) as totalPerdida
+					FROM perdidas GROUP BY anio desc, mes desc;";
+        	$sql = $conectar->prepare($sql);
+        	$sql->execute();
+        	return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        //metodo de llanado para grafica
+    	public function get_perdidas_anio_actual_grafica()
+    	{
+
+	       $conectar=parent::conexion();
+	       parent::set_names();
+
+	       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	       
+	       $sql = "SELECT  mes as Mes, SUM(precioProduc) as total_perdida_mes FROM perdidas
+	        GROUP BY mes desc";
+	           
+	        $sql = $conectar->prepare($sql);
+	        $sql->execute();
+
+	        $resultado = $sql->fetchAll();
+	             
+	        //recorro el array y lo imprimo
+	        foreach($resultado as $row){
+	        	$fecha = $arregloReg[$i]["mes"];
+                $fecha_mes = $meses[$fecha-1];
+
+	          	$mes = $output["es"] = $meses[$row["Mes"]-1];
+	          	$total = $output["total_perdida_mes"] = $row["total_perdida_mes"];
+
+	         echo $grafica= "{name:'".$mes."', y:".$total."},";
+
+	        }
+    	}
 
 		//método para eliminar un registro
         public function eliminar_perdida($id_perdida){
