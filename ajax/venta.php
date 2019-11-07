@@ -94,7 +94,7 @@ $cantidad=isset( $_POST["cantidad"]);
                  $sub_array[] = $row["usuario"];
                    $sub_array[] = $row["fechaventa"];
                  $sub_array[] = $row["numero_venta"];
-                 $sub_array[] ="$"." ". $row["total_pagar"];
+                 $sub_array[] = $row["total_pagar"];
               
 	       
              $sub_array[] =$atrib;
@@ -288,7 +288,7 @@ if (isset($messages)){
             {
               $output["idventas"] = $row["idventas"];
               $output["usuario"] = $row["vendedor"];
-              $output["fecha"] =  date("d-m-Y", strtotime($row["fecha"]));
+              $output["fecha"] = $row["fecha"];  //date("d-m-Y", strtotime($row["fecha"]));
               $output["numero_venta"] = $row["numero_venta"];
         
             }
@@ -318,7 +318,7 @@ if (isset($messages)){
      //selecciona del incidente
      $id=$_GET['id'];
      $total=0;
-  
+  //el parametro id_incidente se envia por AJAX cuando se edita la categoria
   $datos=$venta->listardetalle($id);
           // si existe el id del incidnete entonces recorre el array
 

@@ -7,18 +7,16 @@
        require_once("../modelos/Venta.php");
      
        $venta = new Ventas();
-      
     
 ?>
 
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
 <?php require_once("header.php");?>
-
  <!--VISTA MODAL PARA AGREGAR PRODUCTO-->
  <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <div class="content-wrapper" >        
+      <div class="content-wrapper">        
         <!-- Main content -->
         <section class="content">
              
@@ -74,9 +72,9 @@
 
             <div class="box">
            
-              <div class="box-body" >
+              <div class="box-body">
 
-                    <div class=" hidden panel-body table-responsive" id="formularioregistros" >
+                    <div class="panel-body table-responsive" id="formularioregistros">
                       
                       
                        <form name="formulario" id="formulario"style="width: 90%;" method="POST">
@@ -91,16 +89,13 @@
                      <label for="" class="col-lg-3 control-label">Fecha(*)</label>
 
                   <div class="col-lg-9">
-                    <input type="text" class="form-control" id="fecha" name="fecha" style="width:50%;"  />
+                    <input type="date" class="form-control" id="fecha" name="fecha" style="width:50%;"  />
                   </div>
               </div>
                <div class="form-group  ">
-
                      <label for="" class="col-lg-3 control-label">Numero Venta:</label>
               <div class="col-lg-9">
-                   <?php 
-                          $numero_venta = $venta->numeroventa();
-                    ?>
+                    <input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número" style="width:50%;" />
               </div>  
                          
                           <div class="form-group ">
@@ -117,7 +112,7 @@
                                     <th  width="10%">stock</th>
                                     <th  width="10%">Cantidad</th>
                                     <th  width="10%">Precio Venta</th>
-                                    <th  width="10%" style="background-color:#A9D0F5 !important">Subtotal</th>
+                                    <th  width="10%">Subtotal</th>
                                 </thead>
                                 <tfoot>
                                     <th>TOTAL</th>
@@ -135,7 +130,7 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Comprar</button>
 
-                            <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left" ></i> Cancelar</button>
+                            <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Cancelar</button>
                       <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                             
                           </div>

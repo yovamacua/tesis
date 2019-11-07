@@ -47,16 +47,14 @@ function mostrarformulario(flag)
 	if (flag)
 	{
 		$("#listadoregistros").hide();
+		$("#formularioregistros").show();
+		//$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
 		$("#ventasfechas").hide();
 		$("#ocultar").hide();
-		$("#btnGuardar").hide();
-
-		//$("#btnGuardar").prop("disabled",false);
-		//listarProductoVenta();
-        //$("#formularioregistros").show();
-		$("#formularioregistros").removeClass('hidden');
+		listarProductoVenta();
 		$("#letra").show();
+		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").show();
 		detalles=0;
@@ -66,38 +64,19 @@ function mostrarformulario(flag)
         $("#listadoregistros").show();
         $("#ventasfechas").show();
         $("#ocultar").show();
-		$("#btnagregar").show();
-		$("#formularioregistros").addClass('hidden');
+		$("#formularioregistros").hide();
 		$("#letra").hide();
-		
+		$("#btnagregar").show();
 	}
 }
-
-
 //Función cancelarform
 function cancelarform()
 {
 	
 	limpiar();
 	//location.reload();
-	//$("#formularioregistros").load("ventas.php");
-	//$("#formularioregistros").load(location.href + " #formularioregistros");
-	mostrarformulario(false);
-	cargar();
-	
-}
-function cancelar(){
-
-	limpiar();
-	//location.reload();
-	//$("#formularioregistros").load("ventas.php");
-	//$("#formularioregistros").load(location.href + " #formularioregistros");
 	mostrarformulario(false);
 	
-}
-function cargar(){
-
-	window.location.reload();
 }
 //Función Listar
 function listar()
@@ -293,19 +272,17 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
           var inpC=cant[i];
     	var inpP=prec[i];
     	var inpS=sub[i];
-    	var inpK= stock[i];
-
-
-    	if(parseInt(inpC.value)  >= parseInt(inpK.value)) {
+    	var inpK= stock[i];   
+    	if(inpC.value >= inpK.value){
 
     		alert("producto insuficiente");
-    		
     	} else{
            inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
        document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
 
     	}
-    	    
+      
+            
     		
      	i++;
      }

@@ -85,20 +85,8 @@
              <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span>Pedidos</span>
              <span class="pull-right-container badge bg-blue">
                <i class="fa fa-angle-left pull-right"></i>
-
              </span>
            </a>
-
-          </span>
-        </a>
-
-         <ul class="treeview-menu">
-          <li><a href="reporte_general_ventas.php"><i class="fa fa-circle-o"></i>Reporte General Ventas</a></li>
-
-          <li><a href="reporte_ventas_mensual.php"><i class="fa fa-circle-o"></i> Reporte Mensual Ventas</a></li>
-
-           <li><a href="reporte_ventas_Semanal.php"><i class="fa fa-circle-o"></i> Reporte Semanal Ventas</a></li>
-
 
            <ul class="treeview-menu">
              <li><a href="pedidos.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Pedidos</a></li>

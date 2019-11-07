@@ -216,7 +216,6 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
 
         }
-        //metodo para mostrar 
         public function Mostrar($idventas)
         {
            $conectar= parent::conexion();
@@ -230,7 +229,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
              return $resultado =$sql->fetchAll(PDO::FETCH_ASSOC);
 
         }
-// metodo para detalle
+
         public function listardetalle($idventas)
         {
           $conectar= parent::conexion();
@@ -364,7 +363,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
     }
 
-// metodo para obtener el año en la venta
+
    public function get_year_ventas(){
 
         $conectar=parent::conexion();
@@ -378,7 +377,6 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
 
      }
-     // metodo mensual de ventas
      public function get_ventas_mensual($fecha){
 
 
@@ -464,7 +462,6 @@ foreach ($array_id_producto as $clave=>$id_producto) {
     }
 
 
-
         /****** Bloque agregado ******/
 
           public function get_venta_por_id_usuario($id_usuario){
@@ -477,46 +474,6 @@ foreach ($array_id_producto as $clave=>$id_producto) {
         }
 
         /****** Fin bloque agregado ******/
-
-
-// metodo para obtener el valor del numero de venta
-    public function numeroventa(){
-
-       $conectar=parent::conexion();
-        parent::set_names();
-
-     
-        $sql="select numero_venta from ventas;";
-
-        $sql=$conectar->prepare($sql);
-
-        $sql->execute();
-      $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-          foreach($resultado as $k=>$v){
-
-                     $numero_venta["numero_venta"]=$v["numero_venta"];
-
-                   
-              
-                 }
-
-                      
-                        if(empty($numero_venta["numero_venta"]))
-                    {
-                      echo'<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número" style="width:50%;" value="NV00001" />';
-                    }else{
-                        $num     = substr($numero_venta["numero_venta"] , 2);
-                        $dig     = $num + 1;
-                        $fact = str_pad($dig, 5, "0", STR_PAD_LEFT);
-                       // echo '<script>location.reload()</script>';
-                        echo '<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número"  style="width:50%;"  value="NV'.$fact.'" readonly/>';
-                        
-                            }
-
-                           
-    }
- 
-   
 
      /*public function get_venta_por_fecha($id_usuario,$fecha_inicial,$fecha_final){
 
@@ -546,7 +503,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);*/
         }
-// $venta = new Ventas();
+ $venta = new Ventas();
    //$venta-> get_venta_por_id();
    //$venta ->anularventa();*/
          /* $total_pagar=45.00;
@@ -556,8 +513,8 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
             $precio_venta= 10;
             $id_producto=13;  */
-//$fecha='2019';
+$fecha='2019';
 
-  //$venta-> get_ventas_mensual($fecha);
+  $venta-> get_ventas_mensual($fecha);
 
    ?>
