@@ -39,6 +39,7 @@
                             <thead>
                                 <tr>
                                   <th>Cantidad</th>
+                                  <th>Precio</th>
                                   <th>Unidad de Medida</th>
                                   <th>Descripcion</th>
                                   <th>No. Pedido</th>
@@ -74,15 +75,9 @@
             </div>
 
             <div class="form-group col-md-6">
-            <label>Unidad de Medida</label>
-            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
-                  <option value="">-- Seleccione unidad --</option>
-                  <option value="kilo">kilo</option>
-                  <option value="gramo">gramo</option>
-                  <option value="libra">libra</option>
-                  <option value="unidad">unidad</option>
-                </select>
-          </div>
+              <label>Precio</label>
+              <input type="number" name="precio" id="precio" autocomplete="off" class="form-control" placeholder="0.00" required/>
+            </div>
         </div>
 
         <div class="form-row">
@@ -93,7 +88,18 @@
         </div> 
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
+            <label>Unidad de Medida</label>
+            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
+                  <option value="">-- Seleccione unidad --</option>
+                  <option value="kilo">kilo</option>
+                  <option value="gramo">gramo</option>
+                  <option value="libra">libra</option>
+                  <option value="unidad">unidad</option>
+                </select>
+          </div>
+
+          <div class="form-group col-md-4">
              <label>No. de Pedido</label>
               <select class="form-control" id="idpedido" name="idpedido" >
                 <option  value="0">Seleccione el No. de Pedido</option>
@@ -107,7 +113,7 @@
               </select>
           </div>
 
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-4">
             <label>Categoría</label>
               <select class="form-control" id="idcategoria" name="idcategoria" >
                 <option  value="0">Seleccione la Categoría</option>

@@ -11,6 +11,7 @@
  
 	$id_insumo = isset($_POST["id_insumo"]);
 	$cantidad = isset($_POST["cantidad"]);
+	$precio = isset($_POST["precio"]);
 	$unidadMedida = isset($_POST["unidadMedida"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$idpedido = isset($_POST["idpedido"]);
@@ -26,7 +27,7 @@ switch ($_GET["op"]) {
 	       	  /*verificamos si el insumo existe en la base de datos, si ya existe un registro con el insumo entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe el insumo por lo tanto hacemos el registros
-		 			$insumos->registrar_insumo($cantidad, $unidadMedida, $descripcion, $idpedido, $idcategoria);
+		 			$insumos->registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria);
 			       	   	  
 			       	   	  $messages[]= "El insumo se registró correctamente";
 			    }else {
@@ -36,7 +37,7 @@ switch ($_GET["op"]) {
 
 			    }else {
 	            	/*si ya existe entonces editamos el insumo*/
-	             $insumos->editar_insumo($id_insumo, $cantidad, $unidadMedida, $descripcion, $idpedido, $idcategoria);
+	             $insumos->editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria);
 
 	            	  $messages[]="El insumo se editó correctamente";
 	            }
@@ -80,6 +81,7 @@ switch ($_GET["op"]) {
 				foreach ($datos as $row) {
 				
 					$output["cantidad"] = $row["cantidad"];
+					$output["precio"] = $row["precio"];
 					$output["unidadMedida"] = $row["unidadMedida"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["idpedido"] = $row["idpedido"];
@@ -117,6 +119,7 @@ switch ($_GET["op"]) {
 		        $sub_array = array();
 		      
 		      	$sub_array[] = $row["cantidad"];
+		      	$sub_array[] = $row["precio"];
 		      	$sub_array[] = $row["unidadMedida"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $row["idpedido"];

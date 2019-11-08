@@ -21,6 +21,7 @@ function limpiar(){
 	$('#donante').val("");
 	$('#descripcion').val("");
 	$('#cantidad').val("");
+	$('#precio').val("");
 	$('#id_donacion').val("");
 
 }
@@ -94,6 +95,7 @@ function mostrar(id_donacion){
 	 		$('#donante').val(data.donante);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#cantidad').val(data.cantidad);
+	 		$('#precio').val(data.precio);
 	 		$('.modal-title').text("Editar donación");
 	 		$('#id_donacion').val(id_donacion);
 	 		$('#action').val("Edit");
@@ -127,7 +129,7 @@ function mostrar(id_donacion){
 function eliminar(id_donacion){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-	bootbox.confirm("¿Está Seguro de eliminar la donación?", function(result){
+	bootbox.confirm("¿Está seguro de eliminar la donación?", function(result){
 		if(result){
 	    	$.ajax({
 	       		url:"../ajax/donacion.php?op=eliminar_donacion",

@@ -34,6 +34,7 @@
                                   <th>Donante</th>
                                   <th>Descripción</th>
                                   <th>Cantidad</th>
+                                  <th>Precio</th>
                                   <th>Acciones</th>
                                   </tr>
                               </thead>
@@ -77,13 +78,20 @@
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label>Descripción</label>
             <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
           </div>
+        </div>
+
+        <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" step="any" name="cantidad" id="cantidad" class="form-control" placeholder="cantidad" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="number" step="any" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
+          </div>
+           <div class="form-group col-md-6">
+            <label>Precio</label>
+            <input type="number" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
           </div>
         </div>
  

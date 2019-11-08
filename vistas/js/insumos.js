@@ -18,6 +18,7 @@ function init(){
 //funcion que limpia los campos del formulario
 function limpiar(){
 	$('#cantidad').val("");
+	$('#precio').val("");
 	$('#unidaMedida').val("");
 	$('#descripcion').val("");
 	$('#idpedido').val("");
@@ -87,6 +88,7 @@ function mostrar(id_insumo){
 
 	 		$('#insumoModal').modal("show");
 	 		$('#cantidad').val(data.cantidad);
+	 		$('#precio').val(data.precio);
 	 		$('#unidaMedida').val(data.unidaMedida);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#idpedido').val(data.idpedido);

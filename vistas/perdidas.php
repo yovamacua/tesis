@@ -68,7 +68,6 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre del Producto</label>
-              <!-- <input type="text" name="idproducto" id="idproducto" class="form-control" placeholder="Nombre del Producto" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/> -->
               <select class="form-control" id="idproducto" name="idproducto" >
                 <option  value="0">Seleccione el Producto</option>
                   <?php
@@ -80,17 +79,19 @@
                   ?>   
               </select>
             </div>
+
             <div class="form-group col-md-6">
               <label>Cantidad</label>
-              <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad en número" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Precio del Producto</label>
-              <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control"placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
             </div>
+
             <div class="form-group col-md-6">
               <label>Unidad de Medida</label>
                 <select class="selectpicker form-control"id="unidadDelProduc" name="unidadDelProduc" required>
@@ -113,11 +114,12 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Mes</label>
-              <input type="number" name="mes" id="mes" class="form-control" placeholder="mm"required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="number" name="mes" id="mes" class="form-control" autocomplete="off" placeholder="mm" required/>
             </div>
+
             <div class="form-group col-md-6">
               <label>Año</label>
-              <input type="number" name="anio" id="anio" class="form-control" placeholder="AAAA"required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="number" name="anio" id="anio" class="form-control" autocomplete="off" placeholder="AAAA" required />
             </div>
           </div>
  

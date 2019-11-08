@@ -72,7 +72,7 @@
             </div>
             <div class="form-group col-md-6">
             <label>Gasto</label>
-            <input type="number" step="any" name="precio" id="precio" class="form-control" placeholder="0.00" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="number" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
           </div>
         </div>
 

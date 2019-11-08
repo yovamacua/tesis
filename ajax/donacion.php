@@ -14,6 +14,7 @@
   $donante = isset($_POST["donante"]);
   $descripcion = isset($_POST["descripcion"]);
   $cantidad = isset($_POST["cantidad"]);
+  $precio = isset($_POST["precio"]);
   $id_usuario=isset($_POST["id_usuario"]);
  
 switch ($_GET["op"]) { 
@@ -26,7 +27,7 @@ switch ($_GET["op"]) {
             /*verificamos si la donacion existe en la base de datos, si ya existe un registro con la donacion entonces no se registra*/
             if(is_array($datos)==true and count($datos)==0){
                       //no existe la donacion por lo tanto hacemos el registros
-            $donaciones->registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $id_usuario);
+            $donaciones->registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $precio, $id_usuario);
                       
                       $messages[]="La donación se registró correctamente";
             }else {
@@ -36,7 +37,7 @@ switch ($_GET["op"]) {
 
           }else {
                 /*si ya existe entonces editamos la donacion*/
-               $donaciones-> editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $id_usuario);
+               $donaciones-> editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $precio, $id_usuario);
 
                   $messages[]="La donación se editó correctamente";
               }
@@ -83,6 +84,7 @@ switch ($_GET["op"]) {
           $output["donante"] = $row["donante"];
           $output["descripcion"] = $row["descripcion"];
           $output["cantidad"] = $row["cantidad"];
+          $output["precio"] = $row["precio"];
           
         }
           echo json_encode($output);
@@ -119,6 +121,7 @@ switch ($_GET["op"]) {
           $sub_array[] = $row["donante"];
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["cantidad"];
+          $sub_array[] = $row["precio"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación" ><i class="fa fa-pencil-square-o"></i></button>
           <button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación "><i class="glyphicon glyphicon-edit"></i></button></div>';

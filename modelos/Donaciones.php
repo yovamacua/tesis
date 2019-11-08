@@ -31,7 +31,7 @@
 		}
 
 		//registrar donaciones
-		public function registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $id_usuario){
+		public function registrar_donaciones($fecha, $donante, $descripcion, $cantidad, $precio, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
@@ -40,19 +40,20 @@
             $date = str_replace('/', '-', $date_inicial);
             $fecha = date("Y-m-d", strtotime($date));
 
-			$sql = "insert into donaciones values(null,?,?,?,?,?);";
+			$sql = "insert into donaciones values(null,?,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $fecha);
 			$sql-> bindValue(2, $_POST["donante"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["cantidad"]);
-			$sql-> bindValue(5, $_POST["id_usuario"]);
+			$sql-> bindValue(5, $_POST["precio"]);
+			$sql-> bindValue(6, $_POST["id_usuario"]);
 			$sql-> execute();
 
 		}
  
 		//editar donaciones
-		public function editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $id_usuario){
+		public function editar_donacion($id_donacion, $fecha, $donante, $descripcion, $cantidad, $precio, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
@@ -66,6 +67,7 @@
             donante=?,
             descripcion=?,
             cantidad=?,
+            precio=?,
             id_usuario=?
             where
             id_donacion=?";	
@@ -76,8 +78,9 @@
 			$sql-> bindValue(2, $_POST["donante"]);
 			$sql-> bindValue(3, $_POST["descripcion"]);
 			$sql-> bindValue(4, $_POST["cantidad"]);
-			$sql-> bindValue(5, $_POST["id_usuario"]);
-			$sql-> bindValue(6, $_POST["id_donacion"]);
+			$sql-> bindValue(5, $_POST["precio"]);
+			$sql-> bindValue(6, $_POST["id_usuario"]);
+			$sql-> bindValue(7, $_POST["id_donacion"]);
 			$sql-> execute();
 		}
 

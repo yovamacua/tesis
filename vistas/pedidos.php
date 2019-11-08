@@ -32,7 +32,7 @@
                           <table id="pedido_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="12%">No. Pedido</th>
+                                <th width="12%">No. de Pedido</th>
                                 <th>Fecha</th>
                                 <th>Acciones</th>
                                 </tr>
@@ -54,7 +54,7 @@
                         </div> 
 
                         <div class="form-group table-responsive" style="width: 70%;">
-                          <label for="" class="col-lg-3 control-label">No. Pedido:</label>
+                          <label for="" class="col-lg-3 control-label">No. de Pedido:</label>
                             <div class="col-lg-9">
                               <input type="text" name="id_pedido" id="id_pedido" class="form-control" required style="width:10%;" readonly="readonly" />
                             </div> 
@@ -71,7 +71,7 @@
                                   <th width="12%">No. de Pedido</th>
                                   <th>Nombre de Insumo</th>
                                   <th>Cantidad</th>
-                                  <th>Descripcion</th>
+                                  <th>Descripción</th>
                                   <th>Unidad de Medida</th>
                                   <th>Acciones</th>
                                   </tr>
@@ -111,18 +111,19 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Insumo</label>
-            <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" placeholder="Insumo" required/>
+            <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" placeholder="Insumo" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
           </div>
+
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad" class="form-control" placeholder="Cantidad" required/>
+            <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required/>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
           </div>
         </div>
 
@@ -137,6 +138,7 @@
                   <option value="unidad">unidad</option>
                 </select>
           </div>
+
           <div class="form-group col-md-6">
             <label>No. de Pedido</label> 
             <select class="form-control" id="id_pedido" name="id_pedido" >

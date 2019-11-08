@@ -9,7 +9,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select i.id_insumo, i.cantidad, i.unidadMedida, i.descripcion, i.idpedido, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
+			$sql = "select i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.idpedido, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 
@@ -31,32 +31,32 @@
 		}
 
 		//registrar insumos
-		public function registrar_insumo($cantidad, $unidadMedida, $descripcion, $idpedido, $idcategoria){
+		public function registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "insert into insumos values(null,?,?,?,?,?);";
+			$sql = "insert into insumos values(null,?,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $_POST["cantidad"]);
-			$sql-> bindValue(2, $_POST["unidadMedida"]);
-			$sql-> bindValue(3, $_POST["descripcion"]);
-			$sql-> bindValue(4, $_POST["idpedido"]);
-			$sql-> bindValue(5, $_POST["idcategoria"]);
+			$sql-> bindValue(2, $_POST["precio"]);
+			$sql-> bindValue(3, $_POST["unidadMedida"]);
+			$sql-> bindValue(4, $_POST["descripcion"]);
+			$sql-> bindValue(5, $_POST["idpedido"]);
+			$sql-> bindValue(6, $_POST["idcategoria"]);
 			$sql-> execute();
-
-			print_r($_POST);
 
 		}
  
 		//editar insumos
-		public function editar_insumo($id_insumo, $cantidad, $unidadMedida, $descripcion, $idpedido, $idcategoria){
+		public function editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
 			$sql = "update insumos set
             cantidad=?,
+            precio=?,
             unidadMedida=?,
             descripcion=?,
             idpedido=?,
@@ -67,11 +67,12 @@
 			$sql = $conectar->prepare($sql);
 
 			$sql-> bindValue(1, $_POST["cantidad"]);
-			$sql-> bindValue(2, $_POST["unidadMedida"]);
-			$sql-> bindValue(3, $_POST["descripcion"]);
-			$sql-> bindValue(4, $_POST["idpedido"]);
-			$sql-> bindValue(5, $_POST["idcategoria"]);
-			$sql-> bindValue(6, $_POST["id_insumo"]);
+			$sql-> bindValue(2, $_POST["precio"]);
+			$sql-> bindValue(3, $_POST["unidadMedida"]);
+			$sql-> bindValue(4, $_POST["descripcion"]);
+			$sql-> bindValue(5, $_POST["idpedido"]);
+			$sql-> bindValue(6, $_POST["idcategoria"]);
+			$sql-> bindValue(7, $_POST["id_insumo"]);
 			$sql-> execute();
 		}
 
