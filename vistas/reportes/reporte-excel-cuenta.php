@@ -75,9 +75,6 @@ $hojaDeCuentas->getStyle('J7:J8')->getAlignment()->setVertical('center');
 $encabezado = ["FUNCIONAMIENTO DE OFICINA DE AGRONEGOCIOS"];
 $hojaDeCuentas->fromArray($encabezado, null, 'A1');
 
-/*foreach (range('A','J') as $col) {
-  $hojaDeCuentas->getColumnDimension($col)->setAutoSize(true);  
-} */
 
 $encabezado = ["Actividades", "","Responsable", "Recurso","","","","Plazo","","Indicador de Logro"];
 $hojaDeCuentas->fromArray($encabezado, null, 'A7');
@@ -101,7 +98,7 @@ $result1 = $sentencia1->fetchAll();
 if (count($result1) > 0) {
 
 # Obtener cuentas de BD
-$consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector."' AND  c.id_partida  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
+$consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, c.anio, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector."' AND  c.id_partida  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
 $sentencia = $bd->prepare($consulta, [
     PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
 ]);
@@ -118,37 +115,91 @@ while ($cuenta = $sentencia->fetchObject()) {
     $nombrecuenta = $cuenta->nombrecuenta;
     $objetivo = $cuenta->objetivo;
     $estrategia = $cuenta->estrategia;
+    $anio = $cuenta->anio;
+
+    $nombrepartida = str_replace("<br>", " ", $nombrepartida);
+    $nombrepartida = str_replace("<div>", "", $nombrepartida);
+    $nombrepartida = str_replace("</div>", "", $nombrepartida);
+    $nombrecuenta = str_replace("<br>", " ", $nombrecuenta);
+    $nombrecuenta = str_replace("<div>", "", $nombrecuenta);
+    $nombrecuenta = str_replace("</div>", "", $nombrecuenta);
+    $objetivo = str_replace("<br>", " ", $objetivo);
+    $objetivo = str_replace("<div>", "", $objetivo);
+    $objetivo = str_replace("</div>", "", $objetivo);
+    $estrategia = str_replace("<br>", " ", $estrategia);
+    $estrategia = str_replace("<div>", "", $estrategia);
+    $estrategia = str_replace("</div>", "", $estrategia);
 
     # Obtener los datos de la base de datos
     if($cuenta->ActGeneral  == '&nbsp;'){$cuenta->ActGeneral = '';}
     $ActGeneral = $cuenta->ActGeneral;
 
+    $ActGeneral = str_replace("<br>", " ", $ActGeneral);
+    $ActGeneral = str_replace("<div>", "", $ActGeneral);
+    $ActGeneral = str_replace("</div>", "", $ActGeneral);
+
     if($cuenta->ActEspecifica  == '&nbsp;'){$cuenta->ActEspecifica = '';}
     $ActEspecifica = $cuenta->ActEspecifica;
+
+    $ActEspecifica = str_replace("<br>", " ", $ActEspecifica);
+    $ActEspecifica = str_replace("<div>", "", $ActEspecifica);
+    $ActEspecifica = str_replace("</div>", "", $ActEspecifica);
 
     if($cuenta->Responsable  == '&nbsp;'){$cuenta->Responsable = '';}
     $Responsable = $cuenta->Responsable;
 
+    $Responsable = str_replace("<br>", " ", $Responsable);
+    $Responsable = str_replace("<div>", "", $Responsable);
+    $Responsable = str_replace("</div>", "", $Responsable);
+
     if($cuenta->Academico  == '&nbsp;'){$cuenta->Academico = '';}
     $Academico = $cuenta->Academico;
+
+    $Academico = str_replace("<br>", " ", $Academico);
+    $Academico = str_replace("<div>", "", $Academico);
+    $Academico = str_replace("</div>", "", $Academico);
     
     if($cuenta->Tecnico  == '&nbsp;'){$cuenta->Tecnico = '';}
     $Tecnico = $cuenta->Tecnico;
 
+    $Tecnico = str_replace("<br>", " ", $Tecnico);
+    $Tecnico = str_replace("<div>", "", $Tecnico);
+    $Tecnico = str_replace("</div>", "", $Tecnico);
+
     if($cuenta->Financiero  == '&nbsp;'){$cuenta->Financiero = '';}
     $Financiero = $cuenta->Financiero;
+
+    $Financiero = str_replace("<br>", " ", $Financiero);
+    $Financiero = str_replace("<div>", "", $Financiero);
+    $Financiero = str_replace("</div>", "", $Financiero);
 
     if($cuenta->Infraestructura  == '&nbsp;'){$cuenta->Infraestructura = '';}
     $Infraestructura = $cuenta->Infraestructura;
 
+    $Infraestructura = str_replace("<br>", " ", $Infraestructura);
+    $Infraestructura = str_replace("<div>", "", $Infraestructura);
+    $Infraestructura = str_replace("</div>", "", $Infraestructura);
+
     if($cuenta->Logro  == '&nbsp;'){$cuenta->Logro = '';}
     $Logro = $cuenta->Logro;
+
+    $Logro = str_replace("<br>", " ", $Logro);
+    $Logro = str_replace("<div>", "", $Logro);
+    $Logro = str_replace("</div>", "", $Logro);
     
     if($cuenta->Inicio  == '&nbsp;'){$cuenta->Inicio = '';}
     $Inicio = $cuenta->Inicio;
 
+    $Inicio = str_replace("<br>", " ", $Inicio);
+    $Inicio = str_replace("<div>", "", $Inicio);
+    $Inicio = str_replace("</div>", "", $Inicio);
+
     if($cuenta->Fin  == '&nbsp;'){$cuenta->Fin = '';}
     $Fin = $cuenta->Fin;
+
+    $Fin = str_replace("<br>", " ", $Fin);
+    $Fin = str_replace("<div>", "", $Fin);
+    $Fin = str_replace("</div>", "", $Fin);
 
     # Escribirlos en el documento
     $hojaDeCuentas->setCellValueByColumnAndRow(1, $numeroDeFila, $ActGeneral);
@@ -198,17 +249,21 @@ $hojaDeCuentas->setCellValue('B2', $nombrepartida);
 $hojaDeCuentas->setCellValue('A3', "Nombre de cuenta");
 $hojaDeCuentas->setCellValue('B3', $nombrecuenta);
 
-$hojaDeCuentas->setCellValue('A4', "Objetivo");
-$hojaDeCuentas->setCellValue('B4', $objetivo);
+$hojaDeCuentas->setCellValue('A4', "Año");
+$hojaDeCuentas->setCellValue('B4', $anio);
 
-$hojaDeCuentas->setCellValue('A5', "Estrategia");
-$hojaDeCuentas->setCellValue('B5', $estrategia);
+$hojaDeCuentas->setCellValue('A5', "Objetivo");
+$hojaDeCuentas->setCellValue('B5', $objetivo);
 
-$hojaDeCuentas->setCellValue('A6', "Total de Partida");
-$hojaDeCuentas->setCellValue('B6', $total);
+$hojaDeCuentas->setCellValue('A6', "Estrategia");
+$hojaDeCuentas->setCellValue('B6', $estrategia);
 
-$hojaDeCuentas->getStyle('B6')->getNumberFormat()->setFormatCode(\PhpOffice\phpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
-$hojaDeCuentas->getStyle('B6')->getAlignment()->setHorizontal('left');
+$hojaDeCuentas->setCellValue('A7', "Total de Partida");
+$hojaDeCuentas->setCellValue('B7', $total);
+
+$hojaDeCuentas->getStyle('B7')->getNumberFormat()->setFormatCode(\PhpOffice\phpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
+$hojaDeCuentas->getStyle('B7')->getAlignment()->setHorizontal('left');
+$hojaDeCuentas->getStyle('B4')->getAlignment()->setHorizontal('left');
 $hojaDeCuentas->getStyle('F9:F100')->getNumberFormat()->setFormatCode(\PhpOffice\phpSpreadsheet\Style\NumberFormat::FORMAT_CURRENCY_USD_SIMPLE);
 
 $archivogenerado = $nombrepartida.'-'.$nombrecuenta.'.xlsx';

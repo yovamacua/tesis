@@ -232,6 +232,7 @@ function mostrar(id_cuenta) {
         $('#nombrecuenta').val(data.nombrecuenta);
         $('#objetivo').val(data.objetivo);
         $('#estrategia').val(data.estrategia);
+        $('#anio').val(data.anio);
         $('.modal-title').text("Editar cuenta");
         $('#id_cuenta').val(id_cuenta);
         $('#action').val("Edit");

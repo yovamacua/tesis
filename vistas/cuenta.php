@@ -74,10 +74,11 @@
                   <table id="cuenta_data" class="table table-bordered table-striped noarrows2">
                      <thead>
                         <tr>
-                           <th width="20%">Nombre de la cuenta</th>
+                           <th width="15%">Nombre cuenta</th>
                            <th width="20%">Objetivo</th>
                            <th width="20%">Estrategia</th>
-                           <th width="20%" style="background: white!important; pointer-events: none;">Agregar</th>
+                           <th width="10%">Año</th>
+                           <th width="10%" style="background: white!important; pointer-events: none;">Cuenta</th>
                            <th width="20%">Acciones</th>
                         </tr>
                      </thead>
@@ -120,6 +121,20 @@
 
                <label>Estrategia*</label>
                <input type="text" maxlength="150" name="estrategia" id="estrategia" class="form-control" placeholder="Estrategia" required/>
+               <span class="error_form" id="error_estrategia"></span>
+               <br />
+
+               <label>Año*</label><br>
+              <select name="anio" id="anio" data-component="date">';<?php
+              for($year=date('Y')-5; $year<=date('Y')+5; $year++){
+                if($year == date('Y')){
+                  echo '<option value="'.$year.'" selected>'.$year.'</option>';
+                    }else{
+                  echo '<option value="'.$year.'">'.$year.'</option>';
+                  }
+              }
+              ?></select>
+
                <span class="error_form" id="error_estrategia"></span>
                <br />
 
