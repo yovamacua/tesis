@@ -8,15 +8,21 @@ $(function() {
     $("#error_nombrecuenta").hide();
     $("#error_objetivo").hide();
     $("#error_estrategia").hide();
+    $("#error_anio").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_nombrecuenta = false;
     var error_objetivo = false;
     var error_estrategia = false;
+    var error_anio = false;
 
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#nombrecuenta").focusout(function() {
         campo_nombrecuenta();
+    });
+
+    $("#anio").focusout(function() {
+        campo_anio();
     });
 
     $("#objetivo").focusout(function() {
@@ -103,6 +109,20 @@ $(function() {
         }
     }
 
+    function campo_anio() {
+        var anio = document.getElementById("anio").value;
+        if (anio.length <= 2010) {
+            $("#error_anio").html("Debe ingresar un año");
+            $("#error_anio").css("color", "red");
+            $("#error_anio").show();
+            error_anio = true;
+        } else {
+            $("#error_anio").hide();
+            $("#anio").css("border-bottom", "2px solid #34F458");
+            var error_anio = false;
+        }
+    }
+
     // se valida el formulario
     $("#cuenta_form").on("submit", function(e) {
 
@@ -110,21 +130,24 @@ $(function() {
         error_nombrecuenta = false;
         error_objetivo = false;
         error_estrategia = false;
+        error_anio = false;
 
         // se invoca a las funciones para tener el valor de las variables
         campo_nombrecuenta();
         campo_estrategia();
         campo_objetivo();
+        campo_anio();
 
         //comparacion
         if (error_nombrecuenta === false &&
-            error_objetivo == false &&
-            error_estrategia == false) {
-
+            error_objetivo === false &&
+            error_estrategia === false &&
+            error_anio === false) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#nombrecuenta").css("border-bottom", "1px solid #d2d6de");
             $("#objetivo").css("border-bottom", "1px solid #d2d6de");
             $("#estrategia").css("border-bottom", "1px solid #d2d6de");
+            $("#anio").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
         } else {
 
@@ -157,9 +180,11 @@ function limpiar() {
     $("#error_nombrecuenta").hide();
     $("#error_objetivo").hide();
     $("#error_estrategia").hide();
+    $("#error_anio").hide();
     $("#nombrecuenta").css("border-bottom", "1px solid #d2d6de");
     $("#objetivo").css("border-bottom", "1px solid #d2d6de");
     $("#estrategia").css("border-bottom", "1px solid #d2d6de");
+    $("#anio").css("border-bottom", "1px solid #d2d6de");
 }
 
 //Función Listar
@@ -167,6 +192,7 @@ function listar() {
     tabla = $('#cuenta_data').dataTable({
         "aProcessing": true, //Activamos el procesamiento del datatables
         "aServerSide": true, //Paginación y filtrado realizados por el servidor
+          "bStateSave": true,
         dom: 'Bfrtip', //Definimos los elementos del control de tabla
         buttons: [
             /* 'copyHtml5',
@@ -256,7 +282,7 @@ function guardaryeditar(e) {
             $('#cuenta_form')[0].reset();
             $('#cuentaModal').modal('hide');
             $('#resultados_ajax').html(datos);
-            $('#cuenta_data').DataTable().ajax.reload();
+            $('#cuenta_data').DataTable().ajax.reload( null, false );
             limpiar();
         }
 
@@ -278,7 +304,7 @@ function eliminar(id_cuenta) {
 
                 success: function(data) {
                     $("#resultados_ajax").html(data);
-                    $("#cuenta_data").DataTable().ajax.reload();
+                    $("#cuenta_data").DataTable().ajax.reload( null, false);
                 }
             });
         }

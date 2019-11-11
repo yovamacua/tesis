@@ -309,7 +309,9 @@ function listar() {
     tabla = $('#usuario_data').dataTable({
         "aProcessing": true, //Activamos el procesamiento del datatables
         "aServerSide": true, //Paginación y filtrado realizados por el servidor
+        "bStateSave": true,
         dom: 'Bfrtip', //Definimos los elementos del control de tabla
+
         buttons: [ //formato de los tipo de documento a generar
             /*'copyHtml5',
             'excelHtml5',
@@ -435,12 +437,11 @@ function guardaryeditar(e) {
             contentType: false,
             processData: false,
             success: function(datos) {
-                console.log(datos);
 
                 $('#usuario_form')[0].reset();
                 $('#usuarioModal').modal('hide');
                 $('#resultados_ajax').html(datos);
-                $('#usuario_data').DataTable().ajax.reload();
+                $('#usuario_data').DataTable().ajax.reload( null, false );
                 limpiar();
             }
         });
@@ -465,7 +466,7 @@ function cambiarEstado(id_usuario, est) {
                     est: est
                 },
                 success: function(data) {
-                    $('#usuario_data').DataTable().ajax.reload();
+                    $('#usuario_data').DataTable().ajax.reload( null, false);
                 }
             });
         }
@@ -489,7 +490,7 @@ function eliminar(id_usuario) {
                 success: function(data) {
                     //alert(data);
                     $("#resultados_ajax").html(data);
-                    $("#usuario_data").DataTable().ajax.reload();
+                    $("#usuario_data").DataTable().ajax.reload( null, false);
                 }
             });
 

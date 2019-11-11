@@ -130,6 +130,7 @@ function listar() {
     tabla = $('#partida_data').dataTable({
         "aProcessing": true, //Activamos el procesamiento del datatables
         "aServerSide": true, //Paginación y filtrado realizados por el servidor
+        "bStateSave": true,
         dom: 'Bfrtip', //Definimos los elementos del control de tabla
         buttons: [
             /*'copyHtml5',
@@ -154,7 +155,6 @@ function listar() {
         ], //Ordenar (columna,orden)
         //configuraciones para el lenguaje del dataTable
         "language": {
-
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",
             "sZeroRecords": "No se encontraron resultados",
@@ -173,14 +173,11 @@ function listar() {
                 "sNext": "Siguiente",
                 "sPrevious": "Anterior"
             },
-
             "oAria": {
                 "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
             }
-
         } //cerrando language
-
     }).DataTable();
 }
 
@@ -213,11 +210,10 @@ function guardaryeditar(e) {
         contentType: false,
         processData: false,
         success: function(datos) {
-            console.log(datos);
             $('#partida_form')[0].reset();
             $('#partidaModal').modal('hide');
             $('#resultados_ajax').html(datos);
-            $('#partida_data').DataTable().ajax.reload();
+            $('#partida_data').DataTable().ajax.reload( null, false );
             limpiar();
         }
 
@@ -240,7 +236,7 @@ function eliminar(id_partida) {
                 success: function(data) {
                     //alert(data);
                     $("#resultados_ajax").html(data);
-                    $("#partida_data").DataTable().ajax.reload();
+                    $("#partida_data").DataTable().ajax.reload( null, false);
                 }
             });
         }

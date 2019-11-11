@@ -124,8 +124,8 @@
                <span class="error_form" id="error_estrategia"></span>
                <br />
 
-               <label>Año*</label><br>
-              <select name="anio" id="anio" data-component="date">';<?php
+               <label>Año*</label>
+              <select name="anio" id="anio" class="form-control" required="required">';<?php
               for($year=date('Y')-5; $year<=date('Y')+5; $year++){
                 if($year == date('Y')){
                   echo '<option value="'.$year.'" selected>'.$year.'</option>';
@@ -134,8 +134,7 @@
                   }
               }
               ?></select>
-
-               <span class="error_form" id="error_estrategia"></span>
+               <span class="error_form" id="error_anio"></span>
                <br />
 
                - Los campos con * (asterisco) son obligatorios

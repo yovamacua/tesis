@@ -160,6 +160,7 @@ function listar() {
     tabla = $('#incidente_data').dataTable({
         "aProcessing": true, //Activamos el procesamiento del datatables
         "aServerSide": true, //Paginación y filtrado realizados por el servidor
+        "bStateSave": true,
         dom: 'Bfrtip', //Definimos los elementos del control de tabla
         buttons: [
             /* 'copyHtml5',
@@ -251,7 +252,7 @@ function guardaryeditar(e) {
             $('#incidente_form')[0].reset();
             $('#incidenteModal').modal('hide');
             $('#resultados_ajax').html(datos);
-            $('#incidente_data').DataTable().ajax.reload();
+            $('#incidente_data').DataTable().ajax.reload( null, false );
             limpiar();
 
         }
@@ -277,7 +278,7 @@ function eliminar(id_incidente) {
 
                 success: function(data) {
                     $("#resultados_ajax").html(data);
-                    $("#incidente_data").DataTable().ajax.reload();
+                    $("#incidente_data").DataTable().ajax.reload( null, false);
                 }
             });
         }
