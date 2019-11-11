@@ -93,9 +93,12 @@
                   </div>
               </div>
                <div class="form-group  ">
+
                      <label for="" class="col-lg-3 control-label">Numero Venta:</label>
               <div class="col-lg-9">
-                    <input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número" style="width:50%;" />
+                   <?php 
+                          $numero_venta = $venta->numeroventa();
+                    ?>
               </div>  
                          
                           <div class="form-group ">
