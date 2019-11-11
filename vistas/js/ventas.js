@@ -76,7 +76,18 @@ function cancelarform()
 	limpiar();
 	//location.reload();
 	mostrarformulario(false);
+	cargar();
+}
+
+function cancelar(){
+
+	limpiar();
+	mostrarformulario(false);
 	
+}
+function cargar(){
+
+	window.location.reload();
 }
 //Función Listar
 function listar()
