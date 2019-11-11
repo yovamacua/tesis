@@ -8,6 +8,9 @@
 ?>
 
 <?php
+  #variable para mostrar como item activo
+  $activar = 'item_pedidos';
+  $activar1 = 'item_pedidos1';
   require_once("header.php");
 ?>
   <!--Contenido-->

@@ -4,6 +4,8 @@
 ?>
 
 <?php
+  #variable item activo
+  $activar = 'item_gastos';
   require_once("header.php");
 ?>
 

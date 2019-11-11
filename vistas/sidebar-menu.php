@@ -44,66 +44,73 @@
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_perdidas'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="perdidas.php">
             <i class="fa fa-minus-square" aria-hidden="true"></i> <span>Perdidas</span>
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_donaciones'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="donaciones.php">
             <i class="fa fa-gift" aria-hidden="true"></i> <span>Donaciones</span>
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_gastos'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="gastos.php">
             <i class="fa fa-money" aria-hidden="true"></i> <span>Gastos</span>
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_capacitaciones'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="capacitaciones.php">
             <i class="fa fa-book" aria-hidden="true"></i> <span>Capacitaciones</span>
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_categorias'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="categorias.php">
             <i class="fa fa-users" aria-hidden="true"></i> <span>Categoria</span>
             </a>
          </li>
 
-         <li class="">
+         <li <?php if(isset($activar) and  $activar == 'item_productos'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="productos.php">
             <i class="fa fa-lemon-o" aria-hidden="true"></i> <span>Producto</span>
             </a>
          </li>
 
-         <li class="treeview">
-           <a href="pedidos.php">
-             <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span>Pedidos</span>
-             <span class="pull-right-container badge bg-blue">
-               <i class="fa fa-angle-left pull-right"></i>
-             </span>
+          <li <?php if(isset($activar) and $activar == 'item_pedidos'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
+            <a href="#">
+            <i class="fa fa-shopping-bag" aria-hidden="true"></i> <span>Pedidos</span>
+            <span class="pull-right-container badge bg-blue">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
            </a>
 
            <ul class="treeview-menu">
-             <li><a href="pedidos.php"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Pedidos</a></li>
-             <li><a href="insumos.php"><i class="fa fa-shopping-basket" aria-hidden="true"></i> Insumos</a></li>
+                <li <?php if(isset($activar1) and $activar1 == 'item_pedidos1'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="pedidos.php">
+                  <i class="fa fa-shopping-bag" aria-hidden="true"></i><span>Hacer Pedido</span>
+                  </a>
+               </li>
+               <li <?php if(isset($activar2) and $activar2 == 'item_pedidos2'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="insumos.php">
+                  <i class="fa fa-shopping-basket" aria-hidden="true"></i><span>Registar Insumos</span>
+                  </a>
+               </li>
            </ul>
-
          </li>
 
          <li class="treeview">
             <a href="ventas.php">
-            <i class="fa fa-usd" aria-hidden="true"></i> <span>Ventas</span>
+            <i class="fa fa-usd" aria-hidden="true"></i> <span>Venta</span>
             <span class="pull-right-container badge bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="ventas.php"><i class="fa fa-usd"></i> Ventas</a></li>
+               <li><a href="ventas.php"><i class="fa fa-usd"></i>Registar Venta</a></li>
                <li><a href="consultar_ventas.php"><i class="fa fa-circle-o"></i> Consultar Ventas</a></li>
                <li><a href="consultar_ventas_fecha.php"><i class="fa fa-circle-o"></i> Consultar Ventas Fecha</a></li>
                <li><a href="consultar_ventas_mes.php"><i class="fa fa-circle-o"></i> Consultar Ventas Mes</a></li>

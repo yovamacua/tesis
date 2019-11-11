@@ -13,6 +13,8 @@
 ?>
 
 <?php
+  #variable item activo
+  $activar = 'item_capacitaciones';
   require_once("header.php");
 ?>
   <!--Contenido-->

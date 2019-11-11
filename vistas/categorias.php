@@ -3,6 +3,8 @@
     if(isset($_SESSION["id_usuario"])){
 ?>
 <?php
+  #variable item activo
+  $activar = 'item_categorias';
   require_once("header.php");
 ?>
   <!--Contenido-->

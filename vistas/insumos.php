@@ -13,6 +13,9 @@
 ?>
 
 <?php
+  #variable para mostrar como item activo
+  $activar = 'item_pedidos';
+  $activar2 = 'item_pedidos2';
   require_once("header.php");
 ?>
 

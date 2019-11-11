@@ -4,19 +4,17 @@
 
     if(isset($_SESSION["id_usuario"])){
 
-       require_once("../modelos/Categorias.php");
+      require_once("../modelos/Categorias.php");
 
-       $categoria = new Categorias();
+      $categoria = new Categorias();
 
-       $cat = $categoria->get_categoria();
-       
+      $cat = $categoria->get_categoria();     
        
 ?>
 
-
-
 <?php
- 
+  #variable item activo
+  $activar = 'item_productos';
   require_once("header.php");
 
 ?>
@@ -55,18 +53,13 @@
                                 <th width="5%">Stock</th>
                                 <th width="10%">Editar</th>
                                 <th width="10%">Eliminar</th>
-                                
-
-
 
                                 </tr>
                             </thead>
 
                             <tbody>
                               
-
                             </tbody>
-
 
                           </table>
                      
@@ -158,8 +151,6 @@
 
 <script type="text/javascript" src="js/productos.js"></script>
 
-
-
 <?php
    
   } else {
@@ -167,8 +158,6 @@
         header("Location:".Conectar::ruta()."vistas/index.php");
 
   }
-  
-  
 
 ?>
 

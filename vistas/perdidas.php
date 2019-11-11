@@ -8,6 +8,8 @@
 ?>
 
 <?php
+  #variable item activo
+  $activar = 'item_perdidas';
   require_once("header.php");
   
 ?>
