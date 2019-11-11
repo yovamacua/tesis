@@ -96,9 +96,9 @@
 
                      <label for="" class="col-lg-3 control-label">Numero Venta:</label>
               <div class="col-lg-9">
-                   <?php 
+                  <?php 
                           $numero_venta = $venta->numeroventa();
-                    ?>
+                    ?> 
               </div>  
                          
                           <div class="form-group ">
@@ -115,7 +115,7 @@
                                     <th  width="10%">stock</th>
                                     <th  width="10%">Cantidad</th>
                                     <th  width="10%">Precio Venta</th>
-                                    <th  width="10%">Subtotal</th>
+                                    <th  width="10%" style="background-color: #A9D0F5 !important">Subtotal</th>
                                 </thead>
                                 <tfoot>
                                     <th>TOTAL</th>
