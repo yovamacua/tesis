@@ -27,3 +27,81 @@
         
            REPORTE DE VENTAS  SEMANAL
   </div>
+   
+
+  
+ <div class="panel panel-default">
+        
+        <div class="panel-body">
+
+   <div class="row  col-sm-5 col-sm-offset-3">
+        
+        <div class="">
+
+            <form action="reportes/reporte_ventas_Semanal_excel.php" method="post">
+
+                   <div class="form-group">
+                <label for="inputPassword">Fecha Inicial</label>
+               
+                  <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Fecha Inicial" style="width:50%"/>
+              
+              </div>
+
+
+              <div class="form-group">
+                <label for="inputPassword">Fecha Final</label>
+               
+                  <input type="text" class="form-control" id="fecha2" name="fecha2" placeholder="Fecha Inicial" style="width:50%"/>
+              
+              </div>
+
+
+            <div class="form-group">
+
+               <label for="inputPassword" >Categoria</label>
+                 
+                 <select name="categoria" id="categoria" class="form-control" style="width:50%">
+                          
+                <option value="0">SELECCIONE</option>
+
+                  
+                 <?php
+
+                           for($i=0; $i<sizeof($cat);$i++){
+                             
+                             ?>
+                              <option value="<?php echo $cat[$i]["id_categoria"]?>"><?php echo $cat[$i]["categoria"];?></option>
+                             <?php
+                           }
+                        ?>
+
+                 
+                                 
+                 </select>
+            </div>
+
+             <button type="submit" class="btn btn-primary">CONSULTAR</button>
+            
+            
+           </form>
+
+       </div>
+      </div>
+
+    </div>
+</div>
+
+  
+
+
+</div>
+  <!-- /.content-wrapper -->
+
+   
+   <?php require_once("footer.php");?>
+
+  
+<?php
+   }
+
+?>
