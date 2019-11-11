@@ -33,13 +33,9 @@ function listar(){
 	tabla=$('#perdida_data').dataTable({
 	"aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
 		dom: "Bfrtip", //definimos los elementos del control de tabla
-		buttons: [
-			'copyHtml5',
-			'excelHtml5',
-			'csvHtml5',
-			'pdf'
-		],
+		buttons: [],
 
 		"ajax":
 			{
@@ -125,9 +121,8 @@ function guardaryeditar(e)
        $('#perdida_form')[0].reset();
        $('#perdidaModal').modal('hide');
        $('#resultados_ajax').html(datos);
-       $('#perdida_data').DataTable().ajax.reload();
-               limpiar();
-
+       $('#perdida_data').DataTable().ajax.reload(null, false);
+        limpiar();
        }
 
    });
@@ -147,7 +142,7 @@ function eliminar(id_perdida){
 	       		success:function(data){
 		         //alert(data);
 		         $("#resultados_ajax").html(data);
-		         $("#perdida_data").DataTable().ajax.reload();
+		         $("#perdida_data").DataTable().ajax.reload(null, false);
 	       		}
 	     	});
    		}

@@ -46,6 +46,7 @@ function listar()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    "bStateSave" : true,
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [		          
 		            'copyHtml5',
@@ -176,7 +177,7 @@ function guardaryeditar(e)
 	            $('#producto_form')[0].reset();
 				$('#productoModal').modal('hide');
 				$('#resultados_ajax').html(datos);
-				$('#producto_data').DataTable().ajax.reload();
+				$('#producto_data').DataTable().ajax.reload(null, false);
 				
                 limpiar();
 					
@@ -202,16 +203,11 @@ function eliminar(id_producto){
        {
          //alert(data);
          $("#resultados_ajax").html(data);
-         $("#categoria_data").DataTable().ajax.reload();
+         $("#categoria_data").DataTable().ajax.reload(null, false);
        }
      });
    }
   });//bootbox
 }
 
-
-
-
-
-
- init();
+init();

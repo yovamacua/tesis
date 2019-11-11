@@ -97,10 +97,9 @@ function listar()
  {
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
     dom: 'Bfrtip',//Definimos los elementos del control de tabla
-    buttons: [
-               
-              ],
+    buttons: [],
     "ajax":
        {
           url: '../ajax/pedido.php?op=listar',
@@ -265,7 +264,7 @@ function guardaryeditar(e)
           $('#pedido_form')[0].reset();
           $('#pedidoModal').modal('hide');
           $('#resultados_ajax').html(datos);
-          $('#pedido_data').DataTable().ajax.reload();
+          $('#pedido_data').DataTable().ajax.reload(null, false);
           limpiar();
        }
    });
@@ -290,7 +289,7 @@ function guardaryeditardetalle(e)
           $('#detallepedidos_form')[0].reset();
           $('#detallepedidosModal').modal('hide');
           $('#resultados_ajax').html(datos);
-          $('#detallepedidos_data').DataTable().ajax.reload();
+          $('#detallepedidos_data').DataTable().ajax.reload(null, false);
           limpiardetalle();
        }
    });
@@ -310,7 +309,7 @@ function eliminar(id_pedido){
           success:function(data)
           {
             $("#resultados_ajax").html(data);
-            $("#pedido_data").DataTable().ajax.reload();
+            $("#pedido_data").DataTable().ajax.reload(null, false);
           }
       });
     }
@@ -334,7 +333,7 @@ function eliminar_detallepedidos(id_detallepedido){
           success:function(data)
           {
             $("#resultados_ajax").html(data);
-            $("#detallepedidos_data").DataTable().ajax.reload();
+            $("#detallepedidos_data").DataTable().ajax.reload(null, false);
             listarDetallePedido(id_pedido);
           }
       });

@@ -28,15 +28,11 @@ function listar()
 {
  tabla=$('#categoria_data').dataTable(
  {
-   "aProcessing": true,//Activamos el procesamiento del datatables
-     "aServerSide": true,//Paginación y filtrado realizados por el servidor
-     dom: 'Bfrtip',//Definimos los elementos del control de tabla
-     buttons: [
-               'copyHtml5',
-               'excelHtml5',
-               'csvHtml5',
-               'pdf'
-           ],
+    "aProcessing": true,//Activamos el procesamiento del datatables
+    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
+    dom: 'Bfrtip',//Definimos los elementos del control de tabla
+    buttons: [],
    "ajax":
        {
          url: '../ajax/categoria.php?op=listar',
@@ -121,7 +117,7 @@ function guardaryeditar(e)
        $('#categoria_form')[0].reset();
        $('#categoriaModal').modal('hide');
        $('#resultados_ajax').html(datos);
-       $('#categoria_data').DataTable().ajax.reload();
+       $('#categoria_data').DataTable().ajax.reload(null, false);
                limpiar();
 
        }
@@ -148,7 +144,7 @@ function eliminar(id_categoria){
        {
          //alert(data);
          $("#resultados_ajax").html(data);
-         $("#categoria_data").DataTable().ajax.reload();
+         $("#categoria_data").DataTable().ajax.reload(null, false);
        }
      });
    }

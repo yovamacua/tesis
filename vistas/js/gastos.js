@@ -29,14 +29,9 @@ function listar(){
 	tabla=$('#gasto_data').dataTable({
 	"aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
 		dom: "Bfrtip", //definimos los elementos del control de tabla
-		buttons: [
-			'copyHtml5',
-			'excelHtml5',
-			'csvHtml5',
-			'pdf'
-		],
-
+		buttons: [],
 		"ajax":
 			{
 				url: '../ajax/gasto.php?op=listar',
@@ -115,7 +110,7 @@ function mostrar(id_gasto){
 		       	$('#gasto_form')[0].reset();
 		       	$('#gastoModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
-		       	$('#gasto_data').DataTable().ajax.reload();
+		       	$('#gasto_data').DataTable().ajax.reload(null, false);
 		        limpiar();
 	       }
 
@@ -135,7 +130,7 @@ function eliminar(id_gasto){
 	       		success:function(data){
 		         //alert(data);
 		         $("#resultados_ajax").html(data);
-		         $("#gasto_data").DataTable().ajax.reload();
+		         $("#gasto_data").DataTable().ajax.reload(null, false);
 	       		}
 	     	});
    		}

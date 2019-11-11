@@ -32,6 +32,7 @@ function listar(){
 	tabla = $('#insumo_data').dataTable({
 	"aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
 		dom: "Bfrtip", //definimos los elementos del control de tabla
 		buttons: [],
 
@@ -116,7 +117,7 @@ function mostrar(id_insumo){
 		       	$('#insumo_form')[0].reset();
 		       	$('#insumoModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
-		       	$('#insumo_data').DataTable().ajax.reload();
+		       	$('#insumo_data').DataTable().ajax.reload(null, false);
 		        limpiar();
 	       }
 
@@ -136,7 +137,7 @@ function eliminar(id_insumo){
 	       		success:function(data){
 		         //alert(data);
 		         $("#resultados_ajax").html(data);
-		         $("#insumo_data").DataTable().ajax.reload();
+		         $("#insumo_data").DataTable().ajax.reload(null, false);
 	       		}
 	     	});
    		}

@@ -84,10 +84,9 @@ function listar()
  {
     "aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
     dom: 'Bfrtip',//Definimos los elementos del control de tabla
-    buttons: [
-               
-              ],
+    buttons: [],
     "ajax":
        {
           url: '../ajax/capacitacion.php?op=listar',
@@ -250,7 +249,7 @@ function guardaryeditar(e)
           $('#capacitacion_form')[0].reset();
           $('#capacitacionModal').modal('hide');
           $('#resultados_ajax').html(datos);
-          $('#capacitacion_data').DataTable().ajax.reload();
+          $('#capacitacion_data').DataTable().ajax.reload(null, false);
           limpiar();
        }
    });
@@ -274,7 +273,7 @@ function guardaryeditardetalle(e)
           $('#detallecapacitados_form')[0].reset();
           $('#detallecapacitadosModal').modal('hide');
           $('#resultados_ajax').html(datos);
-          $('#detallecapacitados_data').DataTable().ajax.reload();
+          $('#detallecapacitados_data').DataTable().ajax.reload(null, false);
           limpiardetalle();
        }
    });
@@ -297,7 +296,7 @@ function eliminar(id_capacitacion){
           {
             //alert(data);
             $("#resultados_ajax").html(data);
-            $("#capacitacion_data").DataTable().ajax.reload();
+            $("#capacitacion_data").DataTable().ajax.reload(null, false);
           }
       });
     }
@@ -321,7 +320,7 @@ function eliminardetalle(id_detallecapacitados){
           {
             //alert(data);
             $("#resultados_ajax").html(data);
-            $("#detallecapacitados_data").DataTable().ajax.reload();
+            $("#detallecapacitados_data").DataTable().ajax.reload(null, false);
           }
       });
     }

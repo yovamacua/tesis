@@ -31,14 +31,9 @@ function listar(){
 	tabla=$('#donacion_data').dataTable({
 	"aProcessing": true,//Activamos el procesamiento del datatables
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
+    "bStateSave" : true,
 		dom: "Bfrtip", //definimos los elementos del control de tabla
-		buttons: [
-			'copyHtml5',
-			'excelHtml5',
-			'csvHtml5',
-			'pdf'
-		],
-
+		buttons: [],
 		"ajax":
 			{
 				url: '../ajax/donacion.php?op=listar',
@@ -119,7 +114,7 @@ function mostrar(id_donacion){
 		       	$('#donacion_form')[0].reset();
 		       	$('#donacionModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
-		       	$('#donacion_data').DataTable().ajax.reload();
+		       	$('#donacion_data').DataTable().ajax.reload(null, false);
 		        limpiar();
 	       }
 
@@ -139,7 +134,7 @@ function eliminar(id_donacion){
 	       		success:function(data){
 		         //alert(data);
 		         $("#resultados_ajax").html(data);
-		         $("#donacion_data").DataTable().ajax.reload();
+		         $("#donacion_data").DataTable().ajax.reload(null, false);
 	       		}
 	     	});
    		}

@@ -85,13 +85,9 @@ function listar()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    "bStateSave" : true,
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],
+	    buttons: [],
 		"ajax":
 				{
 					url: '../ajax/venta.php?op=listar',
@@ -164,6 +160,7 @@ function listarProductoVenta()
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	    "bStateSave" : true,
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
 	    buttons: [
 
@@ -371,7 +368,7 @@ function guardaryeditar(e)
                     y se puede ver en la consola o desde el mensaje de alerta luego pegar la consulta en phpmyadmin*/
 		         console.log(datos);
 	            $('#formulario')[0].reset();
-				$('#ventas_data').DataTable().ajax.reload();
+				$('#ventas_data').DataTable().ajax.reload(null, false);
 
                 limpiar();
 
@@ -395,7 +392,7 @@ function guardaryeditar(e)
 				//toma el valor del id y del estado
 				data:{idventas:idventas, estado:estado},
 				success: function(data){
-        $('#ventas_data').DataTable().ajax.reload();
+        $('#ventas_data').DataTable().ajax.reload(null, false);
         //tabla.ajax.reload();
          $("#idventas").css('visibility', 'hidden');
 
@@ -428,13 +425,9 @@ function guardaryeditar(e)
 	    
 	       "aProcessing": true,//Activamos el procesamiento del datatables
 	       "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	       "bStateSave" : true,
 	      dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	      buttons: [		          
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],
+	      buttons: [],
 
 	         "ajax":{
 	            url:"../ajax/venta.php?op=buscar_ventas_fecha",
@@ -533,13 +526,9 @@ function guardaryeditar(e)
 	        
 	       "aProcessing": true,//Activamos el procesamiento del datatables
 	       "aServerSide": true,//Paginación y filtrado realizados por el servidor
+	       "bStateSave" : true,
 	      dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	      buttons: [		          
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],
+	      buttons: [],
 
 	         "ajax":{
 	            url:"../ajax/venta.php?op=buscar_ventas_fecha_mes",
@@ -642,8 +631,5 @@ function mostrar(idventas)
 	        $("#detalles").html(r);
 	});	
 }
-
-
-
 
 init();
