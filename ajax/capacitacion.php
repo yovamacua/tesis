@@ -220,9 +220,9 @@
           $sub_array[] = $row["cargo"];
           $sub_array[] = $row["encargado"];
           $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
+          <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Agregar Capacitado" ><i class="fa fa-user-plus"></i></button>
           <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitacion" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="glyphicon glyphicon-edit"></i></button></div>';
+          <button type="button" onClick="eliminar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="fa fa-trash"></i></button></div>';
           $data[] = $sub_array;
         }
 

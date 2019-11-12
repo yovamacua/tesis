@@ -214,9 +214,9 @@
           $sub_array[] = $row["id_pedido"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
           $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-md update hint--top" aria-label="Ver Detalle" ><i class="fa fa-pencil-square-o"></i></button>
+          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>
           <button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido "><i class="glyphicon glyphicon-edit"></i></button></div>';
+          <button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido "><i class="fa fa-trash"></i></button></div>';
           $data[] = $sub_array;
         }
 
