@@ -73,6 +73,18 @@
          }
          
       </script>
+
+<script type="text/javascript">
+         function desvanecer() {
+            window.setTimeout(function () {
+         $(".alert").fadeTo(2000, 0).slideUp(2000, function () {
+         });
+         }, 10000);
+      } 
+</script>
+<style type="text/css">
+   
+</style>
       <div class="wrapper">
       <header class="main-header">
          <!-- Logo -->
@@ -122,7 +134,7 @@
             </div>
          </nav>
       </header>
-      <div id="resultados_ajax" class="text-center"></div>
+      <div id="resultados_ajax" class="text-center testp"></div>
       <?php 
       #incluyendo el sidebar
       require_once("sidebar-menu.php");?>

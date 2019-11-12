@@ -48,7 +48,7 @@ switch ($_GET["op"]) {
             else {
                 /*si ya existe entonces editamos el partida*/
                 $partidas->editar_partidas($id_partida, $nombrepartida, $responsable, $id_usuario);
-                $messages[] = "El partida se editó correctamente";
+                $messages[] = "La partida se editó correctamente";
             }
         }
         //mensaje success
@@ -100,7 +100,7 @@ switch ($_GET["op"]) {
             $sub_array[] = '
             <div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
 
-            <button type="button" onClick="eliminar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+            <button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer()"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
             </div>';
             $data[] = $sub_array;
         }

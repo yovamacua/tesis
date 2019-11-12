@@ -1,3 +1,9 @@
+/*formato para mensajito flotante*/
+.testp{z-index: 1031 !important;position: fixed !important;
+ right: 15px; bottom: 1rem!important;}
+.testp .alert .close {padding-left: 1rem!important; }
+/*****/
+
 ul li.active>a {
   background: #ecf0f547!important;
 }

@@ -16,17 +16,9 @@
 <script type="text/javascript" src="js/perfil.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
-  setTimeout(function() { $(".alert-success").fadeOut(1000); },2500);
+  setTimeout(function() { $(".alert-success").fadeOut(2000); },10000);
   });
 </script>
-
-<!-- Estilo sencillo -->
-<style type="text/css">
-  .testp{z-index: 1031 !important;position: relative !important;
-  width: 32rem; margin-bottom: -6rem; float: right; margin-top: 0.2rem;}
-  .form-horizontal .form-group {padding-top: 1rem!important;}
-  .bootstrap-filestyle{display: grid!important;} 
-</style>
 
 <!--Contenido-->
 
