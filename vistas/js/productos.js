@@ -18,7 +18,6 @@ function init(){
 			$(".modal-title").text("Agregar Producto");
 		
 	  });
-
 	
 }
 
@@ -28,7 +27,6 @@ function init(){
 la categoria*/
 function limpiar()
 {
-	
 	
     $("#id_producto").val("");
 	//$("#id_usuario").val("");
@@ -48,12 +46,7 @@ function listar()
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
 	    "bStateSave" : true,
 	    dom: 'Bfrtip',//Definimos los elementos del control de tabla
-	    buttons: [		          
-		            'copyHtml5',
-		            'excelHtml5',
-		            'csvHtml5',
-		            'pdf'
-		        ],
+	    buttons: [],
 		"ajax":
 				{
 					url: '../ajax/producto.php?op=listar',
@@ -140,7 +133,7 @@ function mostrar(id_producto)
 				$('#id_producto').val(id_producto);
 				$('#action').val("Edit");
 				$('#resultados_ajax').html(data);
-				$("#producto_data").DataTable().ajax.reload();
+				$("#producto_data").DataTable().ajax.reload(null, false);
 				
 		});
         
