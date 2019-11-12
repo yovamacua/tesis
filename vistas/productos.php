@@ -51,8 +51,7 @@
                                 <th width="10%">Precio Venta</th>
                                 <th width="10%">Categoría</th>
                                 <th width="5%">Stock</th>
-                                <th width="10%">Editar</th>
-                                <th width="10%">Eliminar</th>
+                                <th width="10%">Acciones</th>
 
                                 </tr>
                             </thead>

@@ -166,8 +166,9 @@
         $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'
                   </span>';
         
-    $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-warning btn-md update"><i class="glyphicon glyphicon-edit"></i> Editar</button>';
-     $sub_array[] = '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md"><i class="glyphicon glyphicon-edit"></i> Eliminar</button>';
+    $sub_array[] = '<div class="cbtns">
+          <button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>
+            <button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }
 
