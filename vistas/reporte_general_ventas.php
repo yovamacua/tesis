@@ -20,7 +20,11 @@
 
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
-<?php require_once("header.php");?>
+<?php 
+#variable para mostrar como item activo
+$activar = 'item_reporteVenta';
+$activar1 = 'item_reporteVenta1';
+require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 

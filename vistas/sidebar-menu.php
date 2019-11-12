@@ -102,36 +102,44 @@
            </ul>
          </li>
 
-         <li class="treeview">
-            <a href="ventas.php">
+         <li <?php if(isset($activar) and $activar == 'item_venta'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
+            <a href="v#">
             <i class="fa fa-usd" aria-hidden="true"></i> <span>Venta</span>
             <span class="pull-right-container badge bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="ventas.php"><i class="fa fa-usd"></i>Registar Venta</a></li>
-               <li><a href="consultar_ventas.php"><i class="fa fa-circle-o"></i> Consultar Ventas</a></li>
-               <li><a href="consultar_ventas_fecha.php"><i class="fa fa-circle-o"></i> Consultar Ventas Fecha</a></li>
-               <li><a href="consultar_ventas_mes.php"><i class="fa fa-circle-o"></i> Consultar Ventas Mes</a></li>
+                <li <?php if(isset($activar1) and $activar1 == 'item_venta1'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="ventas.php">
+                  <i class="fa fa-usd"></i><span>Registar Venta</span>
+                  </a>
+               </li>
+                <li <?php if(isset($activar2) and $activar2 == 'item_venta2'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="consultar_ventas.php">
+                  <i class="fa fa-info-circle"></i><span>Consultar Ventas</span> 
+                  </a>
+               </li>
+                <li <?php if(isset($activar3) and $activar3 == 'item_venta3'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="consultar_ventas_fecha.php">
+                  <i class="fa fa-info-circle"></i><span>Consultar Ventas Fecha</span>
+                  </a>
+               </li>
+               <li <?php if(isset($activar4) and $activar4 == 'item_venta4'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="consultar_ventas_mes.php">
+                  <i class="fa fa-info-circle"></i><span>Consultar Ventas Mes</span> 
+                  </a>
+               </li>
             </ul>
          </li>
 
-         <li class="treeview">
-            <a href="reporte_compras.php">
-            <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Reportes de Compras</span>
-            <span class="pull-right-container badge bg-blue">
-            <i class="fa fa-angle-left pull-right"></i>
-            </span>
+          <li <?php if(isset($activar) and  $activar == 'item_reporteFinanciero'){?>class="active"<?php }else{?> class=""<?php }?> >
+            <a href="reporte_financiero.php">
+            <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Reporte Financiero</span>
             </a>
-            <ul class="treeview-menu">
-               <li><a href="reporte_general_compras.php"><i class="fa fa-circle-o"></i>Reporte General Compras</a></li>
-               <li><a href="reporte_compras_mensual.php"><i class="fa fa-circle-o"></i> Reporte Mensual Compras</a></li>
-               <li><a href="reporte_compras_proveedor.php"><i class="fa fa-circle-o"></i> Reporte Compras-Proveedor</a></li>
-            </ul>
          </li>
 
-         <li class="treeview">
+         <li <?php if(isset($activar) and $activar == 'item_reporteVenta'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
             <a href="reporte_ventas.php">
             <i class="fa fa-pie-chart" aria-hidden="true"></i> <span>Reportes de Ventas</span>
             <span class="pull-right-container badge bg-blue">
@@ -139,9 +147,21 @@
             </span>
             </a>
             <ul class="treeview-menu">
-               <li><a href="reporte_general_ventas.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reporte General Ventas</a></li>
-               <li><a href="reporte_ventas_mensual.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte Mensual Ventas</a></li>
-               <li><a href="reporte_ventas_cliente.php"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reporte Ventas-Cliente</a></li>
+               <li <?php if(isset($activar1) and $activar1 == 'item_reporteVenta1'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="reporte_general_ventas.php">
+                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Reporte General de Ventas</span>
+                  </a>
+               </li>
+               <li <?php if(isset($activar2) and $activar2 == 'item_reporteVenta2'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="reporte_ventas_mensual.php">
+                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i><span>Reporte Mensual de Ventas</span> 
+                  </a>
+               </li>
+               <li <?php if(isset($activar3) and $activar3 == 'item_reporteVenta3'){?>class="active"<?php }else{?><?php }?> >
+                  <a href="reporte_ventas_Semanal.php">
+                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Reportes de Ventas Semanal</span>
+                  </a>
+               </li>
             </ul>
          </li>
 
@@ -150,6 +170,7 @@
             <i class="fa fa-building" aria-hidden="true"></i> <span>Empresa</span>
             </a>
          </li>
+         
          <li <?php if(isset($activar) and  $activar == 'item_respaldo'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="respaldo.php">
             <i class="fa fa-database" aria-hidden="true"></i> <span>Respaldo</span>

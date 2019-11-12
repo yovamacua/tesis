@@ -12,7 +12,11 @@
 
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
-<?php require_once("header.php");?>
+<?php 
+  #variable para mostrar como item activo
+  $activar = 'item_venta';
+  $activar1 = 'item_venta1';
+  require_once("header.php");?>
  <!--VISTA MODAL PARA AGREGAR PRODUCTO-->
  <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->

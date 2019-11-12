@@ -10,7 +10,11 @@
 
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
-<?php require_once("header.php");?>
+<?php 
+  #variable para mostrar como item activo
+  $activar = 'item_venta';
+  $activar4 = 'item_venta4';
+  require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 
