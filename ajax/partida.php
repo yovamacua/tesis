@@ -96,7 +96,9 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["nombrepartida"];
             $sub_array[] = $row["responsable"];
             $sub_array[] = '<div class="cbtns">
-            <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta</button></a></div>';
+            <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'. $partidas->conteo($row["id_partida"]).'</span></button></a>
+            
+            </div>';
             $sub_array[] = '
             <div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
 

@@ -81,6 +81,16 @@ class cuentas extends Conectar
         return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function conteo($cont){
+        $conectar= parent::conexion();      
+        $sql="select * from entrada where id_cuenta = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $cont);
+        $sql->execute();
+        $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $sql->rowCount();   
+      }
+      
     //método para eliminar un registro
     function eliminar_cuenta($id_cuenta)
     {

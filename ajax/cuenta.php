@@ -101,7 +101,7 @@ switch ($_GET["op"]) {
             $sub_array[] = '
       <div class="cbtns">
       <a href="entrada.php?identificador=' . $row["id_cuenta"] . '&nombrecuenta=' . $row["nombrecuenta"] . '">
-      <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar </button>
+      <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar <span class="notistyle">'. $cuentas->conteo($row["id_cuenta"]).'</span></button>
       </a>
       </div>';
             $sub_array[] = '

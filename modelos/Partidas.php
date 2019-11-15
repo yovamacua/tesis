@@ -24,6 +24,16 @@ class partidas extends Conectar
         return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function conteo($cont){
+        $conectar= parent::conexion();      
+        $sql="select * from cuentas where id_partida = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $cont);
+        $sql->execute();
+        $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
+        return $sql->rowCount();   
+      }
+
     //método para mostrar los datos de un registro a modificar
     function get_partidas_por_id($id_partida)
     {
