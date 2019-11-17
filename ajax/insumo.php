@@ -14,6 +14,7 @@
 	$precio = isset($_POST["precio"]);
 	$unidadMedida = isset($_POST["unidadMedida"]);
 	$descripcion = isset($_POST["descripcion"]);
+	$fecha = isset($_POST["fecha"]);
 	$idpedido = isset($_POST["idpedido"]);
 	$idcategoria = isset($_POST["idcategoria"]);
  
@@ -27,7 +28,7 @@ switch ($_GET["op"]) {
 	       	  /*verificamos si el insumo existe en la base de datos, si ya existe un registro con el insumo entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe el insumo por lo tanto hacemos el registros
-		 			$insumos->registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria);
+		 			$insumos->registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria);
 			       	   	  
 			       	   	  $messages[]= "El insumo se registró correctamente";
 			    }else {
@@ -37,7 +38,7 @@ switch ($_GET["op"]) {
 
 			    }else {
 	            	/*si ya existe entonces editamos el insumo*/
-	             $insumos->editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $idpedido, $idcategoria);
+	             $insumos->editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria);
 
 	            	  $messages[]="El insumo se editó correctamente";
 	            }
@@ -84,6 +85,7 @@ switch ($_GET["op"]) {
 					$output["precio"] = $row["precio"];
 					$output["unidadMedida"] = $row["unidadMedida"];
 					$output["descripcion"] = $row["descripcion"];
+					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
 					$output["idpedido"] = $row["idpedido"];
 					$output["idcategoria"] = $row["idcategoria"];
 					
@@ -122,6 +124,7 @@ switch ($_GET["op"]) {
 		      	$sub_array[] = $row["precio"];
 		      	$sub_array[] = $row["unidadMedida"];
 		     	$sub_array[] = $row["descripcion"];
+		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	$sub_array[] = $row["idpedido"];
 		     	$sub_array[] = $row["categoria"];
 		     	$sub_array[] = '<div class="cbtns">

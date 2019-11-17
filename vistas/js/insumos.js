@@ -13,6 +13,11 @@ function init(){
 		$(".modal-title").text("Agregar Insumo");
 	});
 
+	//cambiar el titulo de la ventana modal cuando se da click al boton
+	$("#minus_button").click(function(){
+		$(".modal-title2").text("Descontar Insumo");
+	});
+
 }
 
 //funcion que limpia los campos del formulario
@@ -21,6 +26,7 @@ function limpiar(){
 	$('#precio').val("");
 	$('#unidaMedida').val("");
 	$('#descripcion').val("");
+	$('#fecha').val("");
 	$('#idpedido').val("");
 	$('#idcategoria').val("");
 	$('#id_insumo').val("");
@@ -92,6 +98,7 @@ function mostrar(id_insumo){
 	 		$('#precio').val(data.precio);
 	 		$('#unidaMedida').val(data.unidaMedida);
 	 		$('#descripcion').val(data.descripcion);
+	 		$('#fecha').val(data.fecha);
 	 		$('#idpedido').val(data.idpedido);
 	 		$('#idcategoria').val(data.idcategoria);
 	 		$('.modal-title').text("Editar Insumo");

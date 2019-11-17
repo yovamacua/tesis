@@ -10,6 +10,10 @@
     require_once("../modelos/Pedidos.php");
        $pedido = new Pedidos();
        $p = $pedido->get_pedido();
+
+    require_once("../modelos/Insumos.php");
+       $insumo = new Insumos();
+       $in = $insumo->get_insumos();
 ?>
 
 <?php
@@ -31,7 +35,10 @@
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Insumo</button></h1>
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Entrada de Insumo</button></h1>
+
+                            <h1 class="box-title">
+                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -45,6 +52,7 @@
                                   <th>Precio</th>
                                   <th>Unidad de Medida</th>
                                   <th>Descripcion</th>
+                                  <th>Fecha</th>
                                   <th>No. Pedido</th>
                                   <th>Categoria</th>
                                   <th>Acciones</th>
@@ -71,6 +79,14 @@
             <h4 class="modal-title">Agregar Insumo</h4>
           </div>
 
+          <!--- codigo para mostrar calendario jquery IU -->
+          <script>
+          $( function() {
+            $( "#fecha" ).datepicker();
+          } );
+          </script>
+          <!--- fin codigo para mostrar calendario jquery IU -->
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Cantidad</label>
@@ -79,7 +95,7 @@
 
             <div class="form-group col-md-6">
               <label>Precio</label>
-              <input type="number" name="precio" id="precio" autocomplete="off" class="form-control" placeholder="0.00" required/>
+              <input type="number" step="any" name="precio" id="precio" autocomplete="off" class="form-control" placeholder="0.00" required/>
             </div>
         </div>
 
@@ -91,7 +107,7 @@
         </div> 
 
         <div class="form-row">
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Unidad de Medida</label>
             <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
                   <option value="">-- Seleccione unidad --</option>
@@ -102,7 +118,14 @@
                 </select>
           </div>
 
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
+            <label>fecha</label>
+            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha"/>
+          </div>  
+        </div> 
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
              <label>No. de Pedido</label>
               <select class="form-control" id="idpedido" name="idpedido" >
                 <option  value="0">Seleccione el No. de Pedido</option>
@@ -116,7 +139,7 @@
               </select>
           </div>
 
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-6">
             <label>Categoría</label>
               <select class="form-control" id="idcategoria" name="idcategoria" >
                 <option  value="0">Seleccione la Categoría</option>
@@ -141,6 +164,65 @@
          </form>
       </div>
     </div>
+
+    <!--FORMULARIO VENTANA MODAL-->
+   <div id="kardexinsumoModal" class="modal fade">
+    <div class="modal-dialog">
+      <form method="post" id="kardexinsumo_form">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal2">&times;</button>
+            <h4 class="modal-title2">Descontar Insumo</h4>
+          </div>
+
+          <!-- codigo para mostrar calendario jquery IU -->
+          <script>
+          $( function() {
+            $( "#fecha" ).datepicker();
+          } );
+          </script>
+          <!--- fin codigo para mostrar calendario jquery IU -->
+
+           <div class="form-row">
+            <div class="form-group col-md-12">
+              <label>Insumo</label>
+                <select class="form-control" id="idpedido" name="idpedido" >
+                  <option  value="0">Seleccione el Insumo</option>
+                    <?php
+                       for($i=0; $i<sizeof($p);$i++){
+                         ?>
+                          <option value="<?php echo $in[$i]["id_insumo"]?>"><?php echo $in[$i]["descripcion"];?></option>
+                         <?php
+                       }
+                    ?>   
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label>Cantidad</label>
+            <input type="number" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+          </div>
+        </div> 
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label>fecha</label>
+            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha"/>
+          </div>  
+        </div> 
+
+               <div class="modal-footer">
+                  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                  <input type="hidden" name="id_insumo" id="id_insumo"/>
+                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal2"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+              </div>
+            </div>
+         </form>
+      </div>
+    </div> 
 <?php
   require_once("footer.php");
 ?>
