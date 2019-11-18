@@ -89,7 +89,7 @@
                   <th>Total</th>
                   <th>Numero venta</th>
                   <th>fecha Venta</th>
-                  <th>Estado</th>
+                  <th style="background-color: #A9D0F5 !important">Estado</th>
    
                  
             </tr>

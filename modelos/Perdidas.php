@@ -115,10 +115,10 @@
 	             
 	        //recorro el array y lo imprimo
 	        foreach($resultado as $row){
-	        	$fecha = $arregloReg[$i]["mes"];
-                $fecha_mes = $meses[$fecha-1];
+	        	//$fecha = $arregloReg[$i]["mes"];
+               // $fecha_mes = $meses[$fecha-1];
 
-	          	$mes = $output["es"] = $meses[$row["Mes"]-1];
+	          	$mes = $output["mes"] = $meses[$row["Mes"]-1];
 	          	$total = $output["total_perdida_mes"] = $row["total_perdida_mes"];
 
 	         echo $grafica= "{name:'".$mes."', y:".$total."},";

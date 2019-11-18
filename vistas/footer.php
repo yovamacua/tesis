@@ -91,7 +91,9 @@
 <script type="text/javascript" src="../public/datatables/datatables.min.js"></script>
 <?php } ?>
 <!--GRAFICA COMPRAS Y VENTAS-->
-<script src="http://code.highcharts.com/highcharts.js"></script>
-<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<script src="../public/plugins/Highcharts/highcharts.js"></script>
+<script src="../public/plugins/Highcharts/exporting.js"></script>
+
+
 </body>
 </html>
