@@ -117,7 +117,7 @@ switch ($_GET["op"]) {
 		     	$sub_array[] = $row["categoria"];
 		     	$sub_array[] = '<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>
-      			<button type="button" onClick="eliminar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
+      			<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
 		      	$data[] = $sub_array;
 		      }
 

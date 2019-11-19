@@ -113,7 +113,7 @@ switch ($_GET["op"]) {
           $sub_array[] = $row["precio"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación "><i class="fa fa-trash"></i></button></div>';
+          <button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación "><i class="fa fa-trash"></i></button></div>';
             $data[] = $sub_array;
           }
 

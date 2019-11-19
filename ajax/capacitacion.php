@@ -189,7 +189,7 @@
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Agregar Capacitado" ><i class="fa fa-user-plus"></i></button>
           <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitacion" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="fa fa-trash"></i></button></div>';
+          <button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitacion "><i class="fa fa-trash"></i></button></div>';
           $data[] = $sub_array;
         }
 
@@ -216,7 +216,7 @@
           $sub_array[] = $row["dui"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="glyphicon glyphicon-edit"></i></button></div>';
+          <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="glyphicon glyphicon-edit"></i></button></div>';
             $data[] = $sub_array;
           }
 

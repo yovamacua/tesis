@@ -93,7 +93,7 @@
                               </tbody>
                             </table>
 
-                          <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap"><i class="fa fa-save"></i> Registrar Pedido</button>
+                          <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap" onclick="desvanecer()"><i class="fa fa-save"></i> Registrar Pedido</button>
 
                           <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></a></button>
                           
@@ -170,7 +170,7 @@
         <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
           <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
-          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiardetalle()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
         </div>
       </div>
