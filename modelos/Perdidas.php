@@ -1,6 +1,14 @@
 <?php  
 	//conexion a la base de datos
 	require_once("../config/conexion.php");
+
+	#valida que exista la sessión
+	if (!isset($_SESSION['id_usuario'])) {?>
+	        <script type="text/javascript">
+	        window.location="../vistas/home.php";
+	        </script>
+	    <?php
+	}
   
 	Class Perdidas extends Conectar{
 

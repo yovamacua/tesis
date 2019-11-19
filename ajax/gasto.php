@@ -15,11 +15,24 @@
 	$descripcion = isset($_POST["descripcion"]);
 	$precio = isset($_POST["precio"]);
 	$id_usuario = isset($_POST["id_usuario"]);
+
+	#valida que exista la sessión
+	if (!isset($_SESSION['id_usuario'])) {?>
+	        <script type="text/javascript">
+	        window.location="../vistas/home.php";
+	        </script>
+	    <?php
+	}
  
 switch ($_GET["op"]) { 
-
 	case 'guardaryeditar':
-		$datos = $gastos->get_gastos_por_id($_POST["id_gasto"]);
+		// se reciben las variables y se valida si el formato es correcto
+        if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["descripcion"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
+			$datos = $gastos->get_gastos_por_id($_POST["id_gasto"]);
 	       	/*si el titulo no existe entonces lo registra
 	        importante: se debe poner el $_POST sino no funciona*/
 	        if(empty($_POST["id_gasto"])){
@@ -40,6 +53,7 @@ switch ($_GET["op"]) {
 
 	            	  $messages[]="El gasto se editó correctamente";
 	            }
+	    }
 	     	//mensaje success
 	        if (isset($messages)) {
 	            echo exito($messages);
@@ -50,7 +64,7 @@ switch ($_GET["op"]) {
 	            echo error($errors);
 	        }
 	        //fin mensaje error
-		break; 
+	break; 
 		
 		case 'mostrar':
 			# selecciona el id de el gasto

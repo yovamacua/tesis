@@ -1,5 +1,12 @@
 <?php 
 require_once("../config/conexion.php");
+  #valida que exista la sessión
+  if (!isset($_SESSION['id_usuario'])) {?>
+          <script type="text/javascript">
+          window.location="../vistas/home.php";
+          </script>
+      <?php
+  }
   
     class Pedidos extends Conectar{
 

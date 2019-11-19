@@ -116,29 +116,27 @@
 
                     </div> <!-- /.col -->
 
-                          <div class="panel-body table-responsive" id="capacitadosModal">
-            
-                            <!-- <h4 class="box-title" ><label>Listado de Capacitados</label></h4> -->
+                      <div class="panel-body table-responsive " id="capacitadosModal">
 
-                              <button  id="btnAgregarCap" type="button" class="btn btn-primary" data-toggle="modal"data-target="#detallecapacitadosModal"><span class="fa fa-plus"></span> Agregar Capacitado</button>
+                          <button  id="btnAgregarCap" type="button" class="btn btn-primary" data-toggle="modal"data-target="#detallecapacitadosModal"><span class="fa fa-plus"></span> Agregar Capacitado</button>
 
-                            <table id="detallecapacitados_data" class="table table-bordered table-striped">
-                              <thead>
-                                  <tr>
-                                  <th width="12%">No. Capacitación</th>
-                                  <th>Nombre</th>
-                                  <th>Apellido</th>
-                                  <th>DUI</th>
-                                  <th>Acciones</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                            </table>
+                        <table id="detallecapacitados_data" class="table table-bordered table-striped">
+                          <thead>
+                              <tr>
+                              <th width="12%">No. Capacitación</th>
+                              <th>Nombre</th>
+                              <th>Apellido</th>
+                              <th>DUI</th>
+                              <th>Acciones</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
 
-                            <button id="btnCancelar" class="btn btn-danger" type="button"><i class="fa fa-arrow-circle-left"></i> <a href="capacitaciones.php"><font color=white>Cancelar</font></a></button>
-                            <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-                          </div>
+                        <button id="btnCancelar" class="btn btn-danger" type="button"><i class="fa fa-arrow-circle-left"></i> <a href="capacitaciones.php"><font color=white>Cancelar</font></a></button>
+                        <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                      </div>
                     <!--Fin centro -->
 
                          

@@ -21,9 +21,24 @@
   $apellidos = isset($_POST["apellidos"]);
   $dui = isset($_POST["dui"]);
 
+  #valida que exista la sessión
+  if (!isset($_SESSION['id_usuario'])) {?>
+          <script type="text/javascript">
+          window.location="../vistas/home.php";
+          </script>
+      <?php
+  }
+
       switch($_GET["op"]){
         case "guardaryeditar":
-
+          // se reciben las variables y se valida si el formato es correcto
+        if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["nombreGrupo"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["cargo"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["encargado"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
           $datos = $capacitaciones->get_capacitacion_por_id($_POST["id_capacitacion"]);
 	       	   /*si el titulo no existe entonces lo registra
 	           importante: se debe poner el $_POST sino no funciona*/
@@ -46,6 +61,7 @@
 	                $capacitaciones-> editar_capacitacion($id_capacitacion, $fecha, $nombreGrupo, $cargo, $encargado, $id_usuario);
 	            	  $messages[] = "La capacitacion se editó correctamente";
 	            }
+        }
              //mensaje success
             if (isset($messages)) {
                 echo exito($messages);
@@ -60,27 +76,35 @@
 
       //guardaryeditar detallecapacitados
       case 'guardaryeditardetalle':
-    $datos = $detallecapacitados->get_detallecapacitados_por_id($_POST["id_detallecapacitados"]);
+      // se reciben las variables y se valida si el formato es correcto
+        if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["nombres"])or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["apellidos"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
+          $datos = $detallecapacitados->get_detallecapacitados_por_id($_POST["id_detallecapacitados"]);
           /*si el titulo no existe entonces lo registra
           importante: se debe poner el $_POST sino no funciona*/
           if(empty($_POST["id_detallecapacitados"])){
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
           if(is_array($datos)==true and count($datos)==0){
-                    //no existe el capacitado por lo tanto hacemos el registros
-          $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $id_capacitacion);
+            //no existe el capacitado por lo tanto hacemos el registros
+            $detallecapacitados->registrar_detallecapacitados($nombres, $apellidos, $dui, $id_capacitacion);
                     
-                    $messages[]= "El capacitado se registró correctamente";
+                $messages[]= "El capacitado se registró correctamente";
           }else {
             
             $errors[]="Existe un capacitado con el mismo id";
-        }
+          }
 
           }else {
                 /*si ya existe entonces editamos el capacitado*/
-               $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $id_capacitacion);
+            $detallecapacitados->editar_detallecapacitados($id_detallecapacitados, $nombres, $apellidos, $dui, $id_capacitacion);
 
-                  $messages[]="El capacitado se editó correctamente";
-              }
+            $messages[]="El capacitado se editó correctamente";
+          }
+        }
           //mensaje success
           if (isset($messages)) {
               echo exito($messages);

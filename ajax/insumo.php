@@ -18,11 +18,25 @@
 	$fecha = isset($_POST["fecha"]);
 	$idpedido = isset($_POST["idpedido"]);
 	$idcategoria = isset($_POST["idcategoria"]);
+
+	#valida que exista la sessión
+	if (!isset($_SESSION['id_usuario'])) {?>
+	        <script type="text/javascript">
+	        window.location="../vistas/home.php";
+	        </script>
+	    <?php
+	}
  
 switch ($_GET["op"]) { 
 
 	case 'guardaryeditar':
-		$datos = $insumos->get_insumos_por_id($_POST["id_insumo"]);
+		// se reciben las variables y se valida si el formato es correcto
+        if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["descripcion"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
+			$datos = $insumos->get_insumos_por_id($_POST["id_insumo"]);
 	       	/*si el titulo no existe entonces lo registra
 	        importante: se debe poner el $_POST sino no funciona*/
 	        if(empty($_POST["id_insumo"])){
@@ -43,6 +57,7 @@ switch ($_GET["op"]) {
 
 	            	  $messages[]="El insumo se editó correctamente";
 	            }
+	    }
 	     	//mensaje success
 	        if (isset($messages)) {
 	            echo exito($messages);
