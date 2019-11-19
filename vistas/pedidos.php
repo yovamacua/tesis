@@ -16,14 +16,24 @@
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        <section class="content-header">
+
+          <h1>Registro de Pedido</h1>
+
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-shopping-bag"></i> Pedido</li>
+          </ol>
+   
+        </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Registro de Pedido</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div class="box-header boton-top">
                       <h1 class="box-title" ><label id="letra">Pedido</label></h1>
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="mostrarformulario(true)"   data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button></h1>
@@ -31,7 +41,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive" id="listadoregistros">
+                    <div class="panel-body table-responsive tabla-top" id="listadoregistros">
                           <table id="pedido_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>

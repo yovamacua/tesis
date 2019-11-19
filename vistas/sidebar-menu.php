@@ -46,7 +46,7 @@
 
          <li <?php if(isset($activar) and  $activar == 'item_perdidas'){?>class="active"<?php }else{?> class=""<?php }?> >
             <a href="perdidas.php">
-            <i class="fa fa-minus-square" aria-hidden="true"></i> <span>Perdidas</span>
+            <i class="fa fa-minus-square" aria-hidden="true"></i> <span>Pérdidas</span>
             </a>
          </li>
 

@@ -13,14 +13,24 @@
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        <section class="content-header">
+
+          <h1>Listado de Donaciones</h1>
+
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-gift"></i> Donaciones</li>
+          </ol>
+   
+        </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Listado de Donaciones</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#donacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Donación</button></h1>
                         <div class="box-tools pull-right">
@@ -28,7 +38,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive">
+                    <div class="panel-body table-responsive tabla-top">
                           <table id="donacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
