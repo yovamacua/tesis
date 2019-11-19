@@ -3,6 +3,7 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Capacitaciones.php");
   require_once("../modelos/DetalleCapacitados.php");
+  require_once "mensajes.php";
 
 //objeto de tipo Capacitaciones y DetalleCapacitados
   $capacitaciones = new Capacitaciones();
@@ -46,35 +47,15 @@
 	            	  $messages[] = "La capacitacion se editó correctamente";
 	            }
              //mensaje success
-             if (isset($messages)){
-        				?>
-        				<div class="alert alert-success" role="alert">
-        						<button type="button" class="close" data-dismiss="alert">&times;</button>
-        						<strong>¡Bien hecho!</strong>
-        						<?php
-        							foreach ($messages as $message) {
-        									echo $message;
-        								}
-        							?>
-        				</div>
-        				<?php
-        			} 
-          	 //fin success
-          	 //mensaje error
-              if (isset($errors)){
-          			?>
-          				<div class="alert alert-danger" role="alert">
-          					<button type="button" class="close" data-dismiss="alert">&times;</button>
-          						<strong>Error!</strong>
-          						<?php
-          							foreach ($errors as $error) {
-          									echo $error;
-          								}
-          							?>
-          				</div>
-          			<?php
-          			}
-	           //fin mensaje error
+            if (isset($messages)) {
+                echo exito($messages);
+            }
+            //fin success
+            //mensaje error
+            if (isset($errors)) {
+                echo error($errors);
+            }
+            //fin mensaje error
       break;
 
       //guardaryeditar detallecapacitados
@@ -100,34 +81,16 @@
 
                   $messages[]="El capacitado se editó correctamente";
               }
-      //mensaje success
-      if (isset($messages)){
-      ?>
-        <div class="alert alert-success" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>¡Bien hecho!</strong>
-          <?php
-            foreach ($messages as $message) {
-              echo $message;
-            }
-          ?>
-        </div>
-      <?php
-    }//fin success
-   //mensaje error
-        if (isset($errors)){
-      ?>
-        <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>Error!</strong>
-            <?php
-              foreach ($errors as $error) {
-                echo $error;
-              }
-            ?>
-        </div>
-      <?php
-      }
+          //mensaje success
+          if (isset($messages)) {
+              echo exito($messages);
+          }
+          //fin success
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
     break; 
 
       case 'mostrar':
@@ -150,22 +113,11 @@
              //si no existe la capacitacion entonces no recorre el array
               $errors[]="la capacitacion  no existe";
 	        }
-
-         //inicio de mensaje de error
-				if(isset($errors)){
-					?>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Error!</strong>
-							<?php
-								foreach ($errors as $error) {
-										echo $error;
-									}
-								?>
-					</div>
-					<?php
-			      }
-	        //fin de mensaje de error
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
 	    break;
 
       //mostrar el detallecapacitados
@@ -191,20 +143,11 @@
         $errors[] = "No existe un capacitado con ese id";
 
       }
-      if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                foreach ($errors as $error) {
-                    echo $error;
-                }
-              ?>
-          </div>
-        <?php
+      //mensaje error
+      if (isset($errors)) {
+          echo error($errors);
       }
-            //fin de mensaje de error
+      //fin mensaje error
     break;
 
       case "listar":
@@ -274,33 +217,16 @@
         $errors[]="No hay registro que borrar";
       }
 
-      if(isset($messages)){
-        ?>
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Bien hecho!</strong>
-            <?php
-              foreach($messages as $message) {
-                  echo $message;
-                }
-              ?>
-        </div>
-        <?php
-      }
-
-      if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                foreach($errors as $error) {
-                    echo $error;
-                  }
-                ?>
-          </div>
-        <?php
-      }
+        //mensaje success
+        if (isset($messages)) {
+            echo exito($messages);
+        }
+        //fin success
+        //mensaje error
+        if (isset($errors)) {
+            echo error($errors);
+        }
+        //fin mensaje error
     break;
 
     //eliminar detallecapacitados
@@ -315,33 +241,16 @@
            $errors[]="No hay registro que borrar";
          }
 
-        if(isset($messages)){
-        ?>
-            <div class="alert alert-success" role="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>¡Bien hecho!</strong>
-                <?php
-                  foreach($messages as $message) {
-                      echo $message;
-                  }
-                ?>
-            </div>
-        <?php
-      }
-
-        if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                  foreach($errors as $error) {
-                    echo $error;
-                  }
-                ?>
-          </div>
-        <?php
-      }
+        //mensaje success
+        if (isset($messages)) {
+            echo exito($messages);
+        }
+        //fin success
+        //mensaje error
+        if (isset($errors)) {
+            echo error($errors);
+        }
+        //fin mensaje error
     break;
   }
 ?>

@@ -4,6 +4,7 @@
  
 	//llamar al modelo Gastos
 	require_once("../modelos/Gastos.php"); 
+	require_once "mensajes.php";
 
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
@@ -39,35 +40,16 @@ switch ($_GET["op"]) {
 
 	            	  $messages[]="El gasto se editó correctamente";
 	            }
-     	//mensaje success
-     	if (isset($messages)){
-			?>
-				<div class="alert alert-success" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<strong>¡Bien hecho!</strong>
-					<?php
-						foreach ($messages as $message) {
-							echo $message;
-						}
-					?>
-				</div>
-			<?php
-		}
-	 //fin success
-	 //mensaje error
-        if (isset($errors)){
-			?>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<strong>Error!</strong>
-						<?php
-							foreach ($errors as $error) {
-								echo $error;
-							}
-						?>
-				</div>
-			<?php
-			}
+	     	//mensaje success
+	        if (isset($messages)) {
+	            echo exito($messages);
+	        }
+	        //fin success
+	        //mensaje error
+	        if (isset($errors)) {
+	            echo error($errors);
+	        }
+	        //fin mensaje error
 		break; 
 		
 		case 'mostrar':
@@ -90,20 +72,11 @@ switch ($_GET["op"]) {
 				$errors[] = "No existe un gasto con ese id";
 
 			}
-			if(isset($errors)){
-				?>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Error!</strong>
-							<?php
-								foreach ($errors as $error) {
-										echo $error;
-								}
-							?>
-					</div>
-				<?php
-			}
-	        	//fin de mensaje de error
+			//mensaje error
+	        if (isset($errors)) {
+	            echo error($errors);
+	        }
+	        //fin mensaje error
 		break;
  
 		case 'listar':
@@ -142,33 +115,16 @@ switch ($_GET["op"]) {
 		       $errors[]="No hay registro que borrar";
 		     }
 
-		   	if(isset($messages)){
-				?>
-				  	<div class="alert alert-success" role="alert">
-				    	<button type="button" class="close" data-dismiss="alert">&times;</button>
-				     	<strong>¡Bien hecho!</strong>
-				      	<?php
-					        foreach($messages as $message) {
-					            echo $message;
-					        }
-				        ?>
-				  	</div>
-				<?php
-			}
-
-  			if(isset($errors)){
-				?>
-					<div class="alert alert-danger" role="alert">
-				  		<button type="button" class="close" data-dismiss="alert">&times;</button>
-				    	<strong>Error!</strong>
-				    	<?php
-					      	foreach($errors as $error) {
-					        	echo $error;
-					        }
-				      	?>
-					</div>
-				<?php
-			}
+		   	//mensaje success
+	        if (isset($messages)) {
+	            echo exito($messages);
+	        }
+	        //fin success
+	        //mensaje error
+	        if (isset($errors)) {
+	            echo error($errors);
+	        }
+	        //fin mensaje error
 		break;
 	}
 ?>	

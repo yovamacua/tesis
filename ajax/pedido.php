@@ -3,6 +3,7 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Pedidos.php");
   require_once("../modelos/DetallePedidos.php");
+  require_once "mensajes.php";
 
   //objeto de tipo Pedidos y DetallePedidos
   $pedidos = new Pedidos();
@@ -26,53 +27,31 @@
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["id_pedido"])){ 
 	       	  /*verificamos si hay pedidos existes en la base de datos, si ya existe un registro con el pediod entonces no se registra*/
-			       	    if(is_array($datos)==true and count($datos)==0){
-			       	   	  //no existe pedido por lo tanto hacemos el registros
-		                    $pedidos->registrar_pedido($id_usuario, $fecha);
-			       	   	      $messages[] = "El pedido se registró correctamente";
-			       	    } //cierre de validacion de $datos
+			       	if(is_array($datos)==true and count($datos)==0){
+			       	   //no existe pedido por lo tanto hacemos el registros
+		                $pedidos->registrar_pedido($id_usuario, $fecha);
+			       	   	  $messages[] = "El pedido se registró correctamente";
+			       	} //cierre de validacion de $datos
 			       	      /*si ya existes el titulo del pedido entonces aparece el mensaje*/
-				          else {
-				              	  $errors[] = "Existe un pedido con el mismo nombre";
-				              }
-
+				        else {
+				          $errors[] = "Existe un pedido con el mismo nombre";
+				        }
 			      }//cierre de empty
-
 	            else {
 	            	  /*si ya existe entonces editamos el pedido*/
 	                $pedidos-> editar_pedido($id_pedido, $id_usuario, $fecha);
 	            	  $messages[] = "El pedido se editó correctamente";
 	            }
              //mensaje success
-             if (isset($messages)){
-        				?>
-        				<div class="alert alert-success" role="alert">
-        						<button type="button" class="close" data-dismiss="alert">&times;</button>
-        						<strong>¡Bien hecho!</strong>
-        						<?php
-        							foreach ($messages as $message) {
-        									echo $message;
-        								}
-        							?>
-        				</div>
-        				<?php
-        			} 
-          	 //fin success
-          	 //mensaje error
-              if (isset($errors)){
-          			?>
-          				<div class="alert alert-danger" role="alert">
-          					<button type="button" class="close" data-dismiss="alert">&times;</button>
-          						<strong>Error!</strong>
-          						<?php
-          							foreach ($errors as $error) {
-          									echo $error;
-          								}
-          							?>
-          				</div>
-          			<?php
-          			}
-	           //fin mensaje error
+            if (isset($messages)) {
+                echo exito($messages);
+            }
+            //fin success
+            //mensaje error
+            if (isset($errors)) {
+                echo error($errors);
+            }
+            //fin mensaje error
       break;
 
   //guardaryeditar detallepedido
@@ -82,50 +61,31 @@
           importante: se debe poner el $_POST sino no funciona*/
           if(empty($_POST["id_detallepedido"])){
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
-          if(is_array($datos)==true and count($datos)==0){
-                    //no existe el capacitado por lo tanto hacemos el registros
-          $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
+            if(is_array($datos)==true and count($datos)==0){
+              //no existe el capacitado por lo tanto hacemos el registros
+              $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
                     
-                    $messages[]= "El insumo se registró correctamente";
-          }else {
-            
-            $errors[]="Existe un insumo con el mismo id";
-        }
+                  $messages[]= "El insumo se registró correctamente";
+            }else {
+              $errors[]="Existe un insumo con el mismo id";
+            }
 
           }else {
-                /*si ya existe entonces editamos el capacitado*/
+              /*si ya existe entonces editamos el capacitado*/
                $detallepedidos->editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
 
                   $messages[]="El insumo se editó correctamente";
               }
-      //mensaje success
-      if (isset($messages)){
-      ?>
-        <div class="alert alert-success" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>¡Bien hecho!</strong>
-          <?php
-            foreach ($messages as $message) {
-              echo $message;
-            }
-          ?>
-        </div>
-      <?php
-    }//fin success
-   //mensaje error
-        if (isset($errors)){
-      ?>
-        <div class="alert alert-danger" role="alert">
-          <button type="button" class="close" data-dismiss="alert">&times;</button>
-          <strong>Error!</strong>
-            <?php
-              foreach ($errors as $error) {
-                echo $error;
-              }
-            ?>
-        </div>
-      <?php
-      }
+          //mensaje success
+          if (isset($messages)) {
+              echo exito($messages);
+          }
+          //fin success
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
     break; 
 
       case 'mostrar':
@@ -147,22 +107,11 @@
              //si no existe el pedido entonces no recorre el array
               $errors[]="El pedido no existe";
 	        }
-
-         //inicio de mensaje de error
-				if(isset($errors)){
-					?>
-					<div class="alert alert-danger" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-							<strong>Error!</strong>
-							<?php
-								foreach ($errors as $error) {
-										echo $error;
-									}
-								?>
-					</div>
-					<?php
-			      }
-	        //fin de mensaje de error
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
 	    break;
 
       //mostrar el detallecapacitados
@@ -188,20 +137,11 @@
         $errors[] = "No existe un pedido con ese id";
 
       }
-      if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                foreach ($errors as $error) {
-                    echo $error;
-                }
-              ?>
-          </div>
-        <?php
+      //mensaje error
+      if (isset($errors)) {
+          echo error($errors);
       }
-            //fin de mensaje de error
+      //fin mensaje error
     break;
 
       case "listar":
@@ -268,33 +208,16 @@
         $errors[]="No hay registro que borrar";
       }
 
-      if(isset($messages)){
-        ?>
-        <div class="alert alert-success" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <strong>¡Bien hecho!</strong>
-            <?php
-              foreach($messages as $message) {
-                  echo $message;
-                }
-              ?>
-        </div>
-        <?php
+      //mensaje success
+      if (isset($messages)) {
+          echo exito($messages);
       }
-
-      if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                foreach($errors as $error) {
-                    echo $error;
-                  }
-                ?>
-          </div>
-        <?php
+      //fin success
+      //mensaje error
+      if (isset($errors)) {
+          echo error($errors);
       }
+      //fin mensaje error
     break;
 
     //eliminar detallepedido
@@ -309,33 +232,16 @@
            $errors[]="No hay registro que borrar";
          }
 
-        if(isset($messages)){
-        ?>
-            <div class="alert alert-success" role="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>¡Bien hecho!</strong>
-                <?php
-                  foreach($messages as $message) {
-                      echo $message;
-                  }
-                ?>
-            </div>
-        <?php
-      }
-
-        if(isset($errors)){
-        ?>
-          <div class="alert alert-danger" role="alert">
-              <button type="button" class="close" data-dismiss="alert">&times;</button>
-              <strong>Error!</strong>
-              <?php
-                  foreach($errors as $error) {
-                    echo $error;
-                  }
-                ?>
-          </div>
-        <?php
-      }
+        //mensaje success
+        if (isset($messages)) {
+            echo exito($messages);
+        }
+        //fin success
+        //mensaje error
+        if (isset($errors)) {
+            echo error($errors);
+        }
+        //fin mensaje error
     break;
   }
 ?>
