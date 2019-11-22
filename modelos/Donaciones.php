@@ -50,9 +50,9 @@
 			$sql = "insert into donaciones values(null,?,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $fecha);
-			$sql-> bindValue(2, $_POST["donante"]);
-			$sql-> bindValue(3, $_POST["descripcion"]);
-			$sql-> bindValue(4, $_POST["cantidad"]);
+			$sql-> bindValue(2, substr($_POST["donante"], 0, 45));
+			$sql-> bindValue(3, substr($_POST["descripcion"], 0, 100));
+			$sql-> bindValue(4, substr($_POST["cantidad"], 0, 4));
 			$sql-> bindValue(5, $_POST["precio"]);
 			$sql-> bindValue(6, $_POST["id_usuario"]);
 			$sql-> execute();
@@ -82,9 +82,9 @@
 			$sql = $conectar->prepare($sql);
 
 			$sql-> bindValue(1, $fecha);
-			$sql-> bindValue(2, $_POST["donante"]);
-			$sql-> bindValue(3, $_POST["descripcion"]);
-			$sql-> bindValue(4, $_POST["cantidad"]);
+			$sql-> bindValue(2, substr($_POST["donante"], 0, 45));
+			$sql-> bindValue(3, substr($_POST["descripcion"], 0, 100));
+			$sql-> bindValue(4, substr($_POST["cantidad"], 0, 4));
 			$sql-> bindValue(5, $_POST["precio"]);
 			$sql-> bindValue(6, $_POST["id_usuario"]);
 			$sql-> bindValue(7, $_POST["id_donacion"]);

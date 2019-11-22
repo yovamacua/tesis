@@ -44,10 +44,10 @@
             $sql = "insert into detallecapacitados values(null,?,?,?,?);";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1,$_POST["nombres"]);
-            $sql->bindValue(2,$_POST["apellidos"]);
-            $sql->bindValue(3,$_POST["dui"]);
-            $sql->bindValue(4,$_POST["id_capacitacion"]);
+            $sql->bindValue(1, substr($_POST["nombres"], 0, 45));
+            $sql->bindValue(2, substr($_POST["apellidos"], 0, 45));
+            $sql->bindValue(3, substr($_POST["dui"], 0, 45));
+            $sql->bindValue(4, $_POST["id_capacitacion"]);
             $sql->execute();
 
         }
@@ -67,9 +67,9 @@
               id_detallecapacitados=?";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $_POST["nombres"]);
-            $sql->bindValue(2, $_POST["apellidos"]);
-            $sql->bindValue(3, $_POST["dui"]);
+            $sql->bindValue(1, substr($_POST["nombres"], 0, 45));
+            $sql->bindValue(2, substr($_POST["apellidos"], 0, 45));
+            $sql->bindValue(3, substr($_POST["dui"], 0, 45));
             $sql->bindValue(4, $_POST["id_capacitacion"]);
             $sql->bindValue(5, $_POST["id_detallecapacitados"]);
             $sql->execute();

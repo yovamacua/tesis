@@ -55,10 +55,10 @@
             $sql = "insert into detallepedidos values(null,?,?,?,?,?);";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $_POST["nombreInsumo"]);
-            $sql->bindValue(2, $_POST["cantidad"]);
-            $sql->bindValue(3, $_POST["descripcion"]);
-            $sql->bindValue(4, $_POST["unidadMedida"]);
+            $sql->bindValue(1, substr($_POST["nombreInsumo"], 0, 45));
+            $sql->bindValue(2, substr($_POST["cantidad"], 0, 4));
+            $sql->bindValue(3, substr($_POST["descripcion"], 0, 100));
+            $sql->bindValue(4, substr($_POST["unidadMedida"], 0, 45));
             $sql->bindValue(5, $_POST["id_pedido"]);
             $sql->execute();
 
@@ -80,10 +80,10 @@
               id_detallepedido=?";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, $_POST["nombreInsumo"]);
-            $sql->bindValue(2, $_POST["cantidad"]);
-            $sql->bindValue(3, $_POST["descripcion"]);
-            $sql->bindValue(4, $_POST["unidadMedida"]);
+            $sql->bindValue(1, substr($_POST["nombreInsumo"]), 0, 45));
+            $sql->bindValue(2, substr($_POST["cantidad"], 0, 4));
+            $sql->bindValue(3, substr($_POST["descripcion"], 0, 100));
+            $sql->bindValue(4, substr($_POST["unidadMedida"], 0, 45));
             $sql->bindValue(5, $_POST["id_pedido"]);
             $sql->bindValue(6, $_POST["id_detallepedido"]);
             $sql->execute();

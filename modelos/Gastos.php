@@ -51,7 +51,7 @@
 			$sql = "insert into gastos values(null,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $fecha);
-			$sql-> bindValue(2, $_POST["descripcion"]);
+			$sql-> bindValue(2, substr($_POST["descripcion"], 0, 100));
 			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["id_usuario"]);
 			$sql-> execute();
@@ -79,7 +79,7 @@
 			$sql = $conectar->prepare($sql);
 
 			$sql-> bindValue(1, $fecha);
-			$sql-> bindValue(2, $_POST["descripcion"]);
+			$sql-> bindValue(2, substr($_POST["descripcion"], 0, 100));
 			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["id_usuario"]);
 			$sql-> bindValue(5, $_POST["id_gasto"]);

@@ -48,9 +48,9 @@
 
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1, $fecha);
-            $sql->bindValue(2, $_POST["nombreGrupo"]);
-            $sql->bindValue(3, $_POST["cargo"]);
-            $sql->bindValue(4, $_POST["encargado"]);
+            $sql->bindValue(2, substr($_POST["nombreGrupo"], 0, 45));
+            $sql->bindValue(3, substr($_POST["cargo"], 0, 45));
+            $sql->bindValue(4, substr($_POST["encargado"], 0, 45));
             $sql->bindValue(5, $_POST["id_usuario"]);
             $sql->execute();
 
@@ -77,9 +77,9 @@
 
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1, $fecha);
-            $sql->bindValue(2, $_POST["nombreGrupo"]);
-            $sql->bindValue(3, $_POST["cargo"]);
-            $sql->bindValue(4, $_POST["encargado"]);
+            $sql->bindValue(2, substr($_POST["nombreGrupo"], 0, 45));
+            $sql->bindValue(3, substr($_POST["cargo"], 0, 45));
+            $sql->bindValue(4, substr($_POST["encargado"], 0, 45));
             $sql->bindValue(5, $_POST["id_usuario"]);
             $sql->bindValue(6, $_POST["id_capacitacion"]);
             $sql->execute();
