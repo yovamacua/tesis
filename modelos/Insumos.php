@@ -41,25 +41,32 @@
 		//registrar insumos
 		public function registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria){
 
-			$conectar = parent::conexion();
-			parent::set_names();
+			try{
+	            $conectar=parent::conexion();
+	            parent::set_names();
+	           
+	            $date_inicial = $_POST["fecha"];
+	            $date = str_replace('/', '-', $date_inicial);
+	            $fecha = date("Y-m-d", strtotime($date));
+	          
+	          	$sql = "call registar_insumo(?,?,?,?,?,?,?);";
 
-			$date_inicial = $_POST["fecha"];
-            $date = str_replace('/', '-', $date_inicial);
-            $fecha = date("Y-m-d", strtotime($date));
+	            $sql = $conectar->prepare($sql);
+				$sql-> bindValue(1, $_POST["cantidad"], PDO::PARAM_INT);
+				$sql-> bindValue(2, $_POST["precio"], PDO::PARAM_STR);
+				$sql-> bindValue(3, $_POST["unidadMedida"], PDO::PARAM_STR);
+				$sql-> bindValue(4, $_POST["descripcion"], PDO::PARAM_STR);
+				$sql-> bindValue(5, $fecha);
+				$sql-> bindValue(6, $_POST["idpedido"], PDO::PARAM_INT);
+				$sql-> bindValue(7, $_POST["idcategoria"], PDO::PARAM_INT);
+				$sql-> execute();
 
-			$sql = "insert into insumos values(null,?,?,?,?,?,?,?);";
-			$sql = $conectar->prepare($sql);
-			$sql-> bindValue(1, $_POST["cantidad"]);
-			$sql-> bindValue(2, $_POST["precio"]);
-			$sql-> bindValue(3, $_POST["unidadMedida"]);
-			$sql-> bindValue(4, $_POST["descripcion"]);
-			$sql-> bindValue(5, $fecha);
-			$sql-> bindValue(6, $_POST["idpedido"]);
-			$sql-> bindValue(7, $_POST["idcategoria"]);
-			$sql-> execute();
+         	}catch(PDOException $ex){
 
-		}
+          echo $ex->getMessage();
+         }
+
+        }
  
 		//editar insumos
 		public function editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria){

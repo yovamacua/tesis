@@ -48,7 +48,7 @@
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Entrada de Insumo</button></h1>
 
                             <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
+                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar()" data-toggle="modal" data-target="#kardexinsumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -175,31 +175,31 @@
       </div>
     </div>
 
-    <!--FORMULARIO VENTANA MODAL-->
+   <!--FORMULARIO VENTANA MODAL-->
    <div id="kardexinsumoModal" class="modal fade">
     <div class="modal-dialog">
       <form method="post" id="kardexinsumo_form">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal2">&times;</button>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title2">Descontar Insumo</h4>
           </div>
 
-          <!-- codigo para mostrar calendario jquery IU -->
+          <!--- codigo para mostrar calendario jquery IU -->
           <script>
           $( function() {
-            $( "#fecha" ).datepicker();
+            $( "#Fecha" ).datepicker();
           } );
           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
 
            <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label>Insumo</label>
-                <select class="form-control" id="idpedido" name="idpedido" >
+                <select class="form-control" id="Idpedido" name="idpedido" placeholder="Seleccione el insumo">
                   <option  value="0">Seleccione el Insumo</option>
                     <?php
-                       for($i=0; $i<sizeof($p);$i++){
+                       for($i=0; $i<sizeof($in);$i++){
                          ?>
                           <option value="<?php echo $in[$i]["id_insumo"]?>"><?php echo $in[$i]["descripcion"];?></option>
                          <?php
@@ -207,27 +207,30 @@
                     ?>   
                 </select>
             </div>
+
+            <div class="form-group col-md-6">
+            <label>Insumos disponibles</label>
+            <input type="text" name="cantidad" id="cantidadDis" value="<?php echo $in[$i]["cantidad"]?>" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+          </div>
         </div>
 
         <div class="form-row">
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+            <input type="number" name="cantidad" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
           </div>
-        </div> 
 
-        <div class="form-row">
-          <div class="form-group col-md-12">
+          <div class="form-group col-md-6">
             <label>fecha</label>
-            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha"/>
+            <input type="text" name="fecha" id="Fecha" class="form-control" placeholder="Fecha"/>
           </div>  
         </div> 
 
                <div class="modal-footer">
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-                  <input type="hidden" name="id_insumo" id="id_insumo"/>
-                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
-                  <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal2"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                  <input type="hidden" name="id_insumo" id="Id_insumo"/>
+                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  <button type="button" onclick="limpiar2()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>
             </div>
          </form>

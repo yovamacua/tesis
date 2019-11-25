@@ -33,6 +33,15 @@ function limpiar(){
 
 }
 
+//funcion que limpia los campos del formulario2
+function limpiar2(){
+	$('#Cantidad').val("");
+	$('#Idpedido').val("");
+	$('#Fecha').val("");
+	$('#Id_insumo').val("");
+
+}
+
 // funcion listar
 function listar(){
 	tabla = $('#insumo_data').dataTable({
