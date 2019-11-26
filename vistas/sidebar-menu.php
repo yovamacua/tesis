@@ -134,7 +134,7 @@
          </li>
 
           <li <?php if(isset($activar) and  $activar == 'item_reporteFinanciero'){?>class="active"<?php }else{?> class=""<?php }?> >
-            <a href="reporte_financiero.php">
+            <a href="estados_financiero.php">
             <i class="fa fa-bar-chart" aria-hidden="true"></i> <span>Reporte Financiero</span>
             </a>
          </li>
