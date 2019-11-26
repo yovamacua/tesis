@@ -19,6 +19,10 @@
 	$idpedido = isset($_POST["idpedido"]);
 	$idcategoria = isset($_POST["idcategoria"]);
 
+	$salida = isset($_POST["cantida"]);
+	$fechaS = isset($_POST["fechaS"]);
+	$idinsumo = isset($_POST["id_insumo"]);
+
 	#valida que exista la sessión
 	if (!isset($_SESSION['id_usuario'])) {?>
 	        <script type="text/javascript">
@@ -69,6 +73,15 @@ switch ($_GET["op"]) {
 	        }
 	        //fin mensaje error
 		break; 
+
+		case 'editarcantidad':
+			$insumos->editar_cantidad($idinsumo, $salida, $fechaS);
+			$messages[]="El insumo se retiro correctamente";
+			//mensaje success
+	        if (isset($messages)) {
+	            echo exito($messages);
+	        }
+		break;
 		
 		case 'mostrar':
 			# selecciona el id de el insumo

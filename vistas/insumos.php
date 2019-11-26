@@ -48,7 +48,7 @@
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Entrada de Insumo</button></h1>
 
                             <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar()" data-toggle="modal" data-target="#kardexinsumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
+                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar2()" data-toggle="modal" data-target="#kardexinsumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -194,9 +194,9 @@
           <!--- fin codigo para mostrar calendario jquery IU -->
 
            <div class="form-row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
               <label>Insumo</label>
-                <select class="form-control" id="Idpedido" name="idpedido" placeholder="Seleccione el insumo">
+                <select class="form-control" id="Id_insumo" name="id_insumo" placeholder="Seleccione el insumo">
                   <option  value="0">Seleccione el Insumo</option>
                     <?php
                        for($i=0; $i<sizeof($in);$i++){
@@ -208,28 +208,28 @@
                 </select>
             </div>
 
-            <div class="form-group col-md-6">
+            <!-- <div class="form-group col-md-6">
             <label>Insumos disponibles</label>
             <input type="text" name="cantidad" id="cantidadDis" value="<?php echo $in[$i]["cantidad"]?>" autocomplete="off" class="form-control" placeholder="cantidad" required/>
-          </div>
+          </div> -->
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantidad" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+            <input type="number" name="cantida" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
           </div>
 
           <div class="form-group col-md-6">
             <label>fecha</label>
-            <input type="text" name="fecha" id="Fecha" class="form-control" placeholder="Fecha"/>
+            <input type="text" name="fechaS" id="Fecha" class="form-control" placeholder="Fecha"/>
           </div>  
         </div> 
 
                <div class="modal-footer">
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-                  <input type="hidden" name="id_insumo" id="Id_insumo"/>
-                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  <input type="hidden" name="id_kardexinsumo" id="id_kardexinsumo"/>
+                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   <button type="button" onclick="limpiar2()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>
             </div>

@@ -49,7 +49,7 @@
 	            $date = str_replace('/', '-', $date_inicial);
 	            $fecha = date("Y-m-d", strtotime($date));
 	          
-	          	$sql = "call registar_insumo(?,?,?,?,?,?,?);";
+	          	$sql = "call registrar_insumo(?,?,?,?,?,?,?);";
 
 	            $sql = $conectar->prepare($sql);
 				$sql-> bindValue(1, $_POST["cantidad"], PDO::PARAM_INT);
@@ -61,12 +61,36 @@
 				$sql-> bindValue(7, $_POST["idcategoria"], PDO::PARAM_INT);
 				$sql-> execute();
 
+				print_r($_POST);
+
          	}catch(PDOException $ex){
 
           echo $ex->getMessage();
          }
 
         }
+
+        //editar insumos
+		public function editar_cantidad($idinsumo, $salida, $fechaS){
+
+			$conectar = parent::conexion();
+			parent::set_names();
+
+			$date_inicial = $_POST["fechaS"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fechaS = date("Y-m-d", strtotime($date));
+
+			$sql = "call editar_insumo(?,?,?);";	
+
+			$sql = $conectar->prepare($sql);
+
+			$sql-> bindValue(1, $_POST["idinsumo"], PDO::PARAM_INT);
+			$sql-> bindValue(2, $_POST["salida"], PDO::PARAM_INT);
+			$sql-> bindValue(3, $fechaS);
+			$sql-> execute();
+
+			print_r($_POST);
+		}
  
 		//editar insumos
 		public function editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria){

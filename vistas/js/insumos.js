@@ -8,6 +8,11 @@ function init(){
 		guardaryeditar(e);
 	});
 
+	//cuando se de click al boton submit se ejecuta la funcion editar la cantidad
+	$("#kardexinsumo_form").on("submit",function(e){
+		editarcantidad(e);
+	});
+
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 		$(".modal-title").text("Agregar Insumo");
@@ -135,6 +140,29 @@ function mostrar(id_insumo){
 		       	$('#resultados_ajax').html(datos);
 		       	$('#insumo_data').DataTable().ajax.reload(null, false);
 		        limpiar();
+	       }
+
+	   	});
+	}
+
+	//la funcion editarcantidad(e); se llama cuando se da click al boton submit
+	function editarcantidad(e){
+		e.preventDefault(); // no se activa la accion predeterminada del evento
+		var formData = new FormData($("#kardexinsumo_form")[0]);
+
+	    $.ajax({
+	     	url: "../ajax/insumo.php?op=editarcantidad",
+	       	type: "POST",
+	       	data: formData,
+	       	contentType: false,
+	       	processData: false,
+
+	       	success: function(datos){
+	      		console.log(datos);
+		       	$('#kardexinsumo_form')[0].reset();
+		       	$('#kardexinsumoModal').modal('hide');
+		       	$('#resultados_ajax').html(datos);
+		        limpiar2();
 	       }
 
 	   	});
