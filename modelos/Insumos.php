@@ -17,7 +17,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.fecha, i.idpedido, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
+			$sql = "select i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.fecha, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 
@@ -61,8 +61,6 @@
 				$sql-> bindValue(7, $_POST["idcategoria"], PDO::PARAM_INT);
 				$sql-> execute();
 
-				print_r($_POST);
-
          	}catch(PDOException $ex){
 
           echo $ex->getMessage();
@@ -89,7 +87,7 @@
 			$sql-> bindValue(3, $fechaS);
 			$sql-> execute();
 
-			print_r($_POST);
+			//print_r($_POST);
 		}
  
 		//editar insumos

@@ -1,4 +1,4 @@
-var tabla; 
+var tabla;
  
 //funcion que se ejecuta al inicio
 function init(){
@@ -41,7 +41,6 @@ function limpiar(){
 //funcion que limpia los campos del formulario2
 function limpiar2(){
 	$('#Cantidad').val("");
-	$('#Idpedido').val("");
 	$('#Fecha').val("");
 	$('#Id_insumo').val("");
 

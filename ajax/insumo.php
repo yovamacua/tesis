@@ -19,9 +19,9 @@
 	$idpedido = isset($_POST["idpedido"]);
 	$idcategoria = isset($_POST["idcategoria"]);
 
-	$salida = isset($_POST["cantida"]);
+	$salida = isset($_POST["salida"]);
 	$fechaS = isset($_POST["fechaS"]);
-	$idinsumo = isset($_POST["id_insumo"]);
+	$idinsumo = isset($_POST["idinsumo"]);
 
 	#valida que exista la sessión
 	if (!isset($_SESSION['id_usuario'])) {?>
@@ -96,7 +96,6 @@ switch ($_GET["op"]) {
 					$output["unidadMedida"] = $row["unidadMedida"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
-					$output["idpedido"] = $row["idpedido"];
 					$output["idcategoria"] = $row["idcategoria"];
 					
 				}
@@ -126,7 +125,6 @@ switch ($_GET["op"]) {
 		      	$sub_array[] = $row["unidadMedida"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
-		     	$sub_array[] = $row["idpedido"];
 		     	$sub_array[] = $row["categoria"];
 		     	$sub_array[] = '<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>

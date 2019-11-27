@@ -63,7 +63,6 @@
                                   <th>Unidad de Medida</th>
                                   <th>Descripcion</th>
                                   <th>Fecha</th>
-                                  <th>No. Pedido</th>
                                   <th>Categoria</th>
                                   <th>Acciones</th>
                                   </tr>
@@ -196,7 +195,7 @@
            <div class="form-row">
             <div class="form-group col-md-12">
               <label>Insumo</label>
-                <select class="form-control" id="Id_insumo" name="id_insumo" placeholder="Seleccione el insumo">
+                <select class="form-control" name="idinsumo" id="Id_insumo" placeholder="Seleccione el insumo">
                   <option  value="0">Seleccione el Insumo</option>
                     <?php
                        for($i=0; $i<sizeof($in);$i++){
@@ -217,7 +216,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantida" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+            <input type="number" name="salida" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
           </div>
 
           <div class="form-group col-md-6">
