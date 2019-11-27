@@ -148,7 +148,7 @@ $(function resolucion() {
           <section class="content-header">
       <h1>
        Administrar información de la cuenta: <b><?php echo $nombre;?></b>
-        <a href="reportes/reporte-excel-cuenta.php?selector=<?php echo $identificador ?>" download><span class="btn btn-info btn-md hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></span></a>
+        <a href="reportes/reporte-excel-cuenta.php?selector=<?php echo $identificador ?>&selector2=<?php echo $_SESSION['seleccion_partida'] ?>" download><span class="btn btn-info btn-md hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></span></a>
       </a>
       </h1>
 

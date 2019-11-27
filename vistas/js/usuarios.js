@@ -84,6 +84,16 @@ $(function() {
             error_password1 = true;
         }
 
+        var pass11 = $("#password1").val().length;
+        if (pass11 <= 5) {
+            $("#error_password1").html("Minimo 6 caracteres");
+            $("#error_password1").css("position", "absolute");
+            $("#error_password1").css("color", "red");
+            $("#error_password1").show();
+            $("#password1").css("border-bottom", "2px solid #F90A0A");
+            error_password1 = true;
+        }
+
     }
 
     function campo_password2() {
@@ -118,6 +128,7 @@ $(function() {
             $("#error_email").hide();
             $("#email").css("border-bottom", "2px solid #34F458");
         } else {
+            $("#error_email").css("position", "absolute");
             $("#error_email").html("Correo no valido");
             $("#error_email").show();
             $("#email").css("border-bottom", "2px solid #F90A0A");

@@ -7,6 +7,7 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if (isset( $_GET['selector'])) {
        $selector = $_GET['selector'];
+       $selector2 = $_GET['selector2'];
 
 # Conexion base de datos
 $bd = new Conectar();
@@ -98,7 +99,7 @@ $result1 = $sentencia1->fetchAll();
 if (count($result1) > 0) {
 
 # Obtener cuentas de BD
-$consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, c.anio, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector."' AND  c.id_partida  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
+$consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, c.anio, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector2."' AND  c.id_cuenta  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
 $sentencia = $bd->prepare($consulta, [
     PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
 ]);
@@ -272,11 +273,11 @@ $archivogenerado = $nombrepartida.'-'.$nombrecuenta.'.xlsx';
 $writer = new Xlsx($documento);
 # Le pasamos la ruta de guardado
 $writer->save($archivogenerado);
-
 header('Content-disposition: attachment; filename=' .$archivogenerado);
 header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 readfile($archivogenerado);
 unlink($archivogenerado);
+
 }else{
     echo "Esta cuenta no posee información";
 }

@@ -109,7 +109,7 @@ switch ($_GET["op"]) {
      <button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>
 
      &nbsp;
-      <a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '" download>
+<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
       <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
       </a>
 
