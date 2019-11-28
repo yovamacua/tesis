@@ -39,6 +39,8 @@ $usuario   = isset($_POST["usuario"]);
 $password1 = isset($_POST["password1"]);
 $password2 = isset($_POST["password2"]);
 $estado    = isset($_POST["estado"]);
+$permisos= isset($_POST["permiso"]);
+
 
 if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
@@ -75,7 +77,7 @@ switch ($_GET["op"]) {
                     existe el correo en la base de datos, si existe no se registra el usuario*/
                     if (is_array($datos) == true and count($datos) == 0) {
                         //no existe el usuario por lo tanto hacemos el registros
-                        $usuarios->registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado);
+                        $usuarios->registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos);
                         /*si se registra el usuario aparece siguente mensaje*/
                         $messages[] = "El usuario se registró correctamente";
                     } else {
@@ -85,7 +87,7 @@ switch ($_GET["op"]) {
                 } //cierre de la validacion empty que valida el id usuario no sea vacio
                 else {
                     /*si ya existe entonces editamos el usuario*/
-                    $usuarios->editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado);
+                    $usuarios->editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos);
                     /*si edita el usuario aparece siguente mensaje*/
                     $messages[] = "La informacion se actualizo correctamente";
                 }
@@ -208,6 +210,52 @@ switch ($_GET["op"]) {
             "aaData"               => $data);
         echo json_encode($results);
         break;
+        case 'permisos':
+            
+            //Obtenemos todos los permisos de la tabla permisos
+          $listar_permisos= $usuarios->permisos();
+
+
+          //Obtener los permisos asignados al usuario
+          /*el id_usuario se envía cuando se edita un usuario*/
+        $id_usuario=$_GET['id_usuario'];
+
+        //echo $id_usuario;
+
+        $marcados = $usuarios->listar_permisos_por_usuario($id_usuario);
+
+        //print_r($marcados);
+
+            //Declaramos el array para almacenar todos los permisos marcados
+        $valores=array();
+
+        //Almacenar los permisos asignados al usuario en el array
+
+          foreach($marcados as $re){
+
+            /*NO hay que tratar a $re como si fuera un objeto o un metodo
+                hay que manejarlo como un array como en el siguiente ejemplo*/
+
+                $valores[]=$re["idpermiso"];
+             
+              }
+
+
+          //Mostramos la lista de permisos en la vista y si están o no marcados
+
+          foreach($listar_permisos as $row){
+
+                $output["idpermiso"]=$row["idpermiso"];
+                $output["nombre"]=$row["nombre"];
+
+                /*verificamos si el $row["id_permiso"] estan dentro del array $valores y y si lo está entonces estaría marcado, en caso contrario no estaría marcado*/
+                
+                $sw = in_array($row['idpermiso'],$valores) ? 'checked':'';
+                 
+                 echo '<li><input type="checkbox" '.$sw.' name="permiso[]" value="'.$row["idpermiso"].'">'.$row["nombre"].'</li>';
+            }
+
+       break;
 
     case "eliminar_usuario":
 
@@ -272,5 +320,6 @@ switch ($_GET["op"]) {
         if (isset($errors)) {
             echo error($errors);
         }
+
 
 }

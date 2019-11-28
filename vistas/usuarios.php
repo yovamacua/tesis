@@ -154,6 +154,24 @@
 
                </div>
             </div>
+            </br></br>
+<!--LISTA DE PERMISOS-->
+
+               <div class="form-group">
+                  <label for="" class="col-lg-1 control-label">Permisos</label>
+
+                    <div class="col-lg-6">
+
+                      <ul style="list-style:none;" id="permisos">
+                   
+                  
+                      </ul>
+                      
+                    </div>
+
+               </div>
+
+           <!--FIN LISTA DE PERMISOS-->
             <div class="modal-footer" style="border: none!important;">
                <input type="hidden" name="id_usuario" id="id_usuario"/>
                

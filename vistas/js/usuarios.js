@@ -284,6 +284,13 @@ function init() {
         $(".ofield").show();
         $(".ofield2").show();
     });
+    //Mostramos los permisos
+     /*en este caso NO se envia un id_usuario ya que se va agregar un 
+     usuario nuevo, solo se enviaría cuando se edita y ahí se enviaría el id_usuario
+     que se está editando*/
+     $.post("../ajax/usuario.php?op=permisos&id_usuario=",function(r){
+          $("#permisos").html(r);
+   });
 }
 
 //funcion para limpiar los campos del formulario
@@ -312,6 +319,8 @@ function limpiar() {
     $("#usuario").css("border-bottom", "1px solid #d2d6de");
     $("#nombre").css("border-bottom", "1px solid #d2d6de");
     $("#apellido").css("border-bottom", "1px solid #d2d6de");
+     //limpia los checkbox
+  $('input:checkbox').removeAttr('checked');
 }
 
 //function listar
@@ -430,6 +439,10 @@ function mostrar(id_usuario) {
         $('#id_usuario').val(id_usuario);
         $('#action').val("Edit");
     });
+      //muestra los checkbox en la ventana modal de usuarios
+    $.post("../ajax/usuario.php?op=permisos&id_usuario="+id_usuario,function(r){
+          $("#permisos").html(r);
+      });
 }
 
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
