@@ -58,6 +58,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                     $_SESSION["nombre"]     = $resultado["nombres"];
                     $_SESSION["usuario"]    = $resultado["usuario"];
                     $_SESSION["imagen"]     = $resultado["usuario_imagen"];
+                   
                     //PERMISOS DEL USUARIO PARA ACCEDER A LOS MODULOS
 
         require_once("Usuarios.php");
@@ -98,9 +99,14 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
       in_array(12,$valores)?$_SESSION['Reporte Financiero']=1:$_SESSION['Reporte Financiero']=0;
       in_array(13,$valores)?$_SESSION['Reportes de Ventas']=1:$_SESSION['Reportes de Ventas']=0;
       in_array(14,$valores)?$_SESSION['Respaldo']=1:$_SESSION['Respaldo']=0;
+      in_array(15,$valores)?$_SESSION['Eliminar']=1:$_SESSION['Eliminar']=0;
+      in_array(16,$valores)?$_SESSION['Editar']=1:$_SESSION['Editar']=0;
+      in_array(17,$valores)?$_SESSION['Registrar']=1:$_SESSION['Registrar']=0;
           
 
-      //FIN PERMISOS DEL USUARIO 
+      //FIN PERMISOS DEL USUARIO
+
+     
                     header("Location:" . Conectar::ruta() . "vistas/home.php");
                     exit();
                 } else {
@@ -126,7 +132,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
         $sql->execute();
         return $resultado = $sql->fetchAll();
     }
-
+  
     //metodo para registrar un nuevo usuario
     function registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos)
     {

@@ -14,7 +14,11 @@
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 
+<?php if($_SESSION["Reporte Financiero"]==1)
 
+     {
+
+     ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
 
@@ -70,7 +74,12 @@
 
 </div>
   <!-- /.content-wrapper -->
+<?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
    
    <?php require_once("footer.php");?>
 

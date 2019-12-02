@@ -8,6 +8,7 @@
   #incluir el header
   require_once("header.php");
   #mensaje al restaurar respaldo
+
   if (empty($_GET['msj'])) {
       echo "";
     }
@@ -18,6 +19,10 @@
               </div>";
     }
 ?>
+<?php if($_SESSION["Respaldo"]==1)
+     {
+
+     ?>
 <!-- Script para confirmar generado del backup -->
 <script>
 function Generado() {
@@ -122,7 +127,12 @@ function Generado() {
     </div>
 
     <!--Fin-Contenido-->
+  <?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
     <?php
     #incluir el footer
   require_once("footer.php");

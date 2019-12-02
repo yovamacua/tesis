@@ -3,7 +3,7 @@
 
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','');
+define('DBPASS','admin12-');
 define('DBNAME','campoescuela');
 
 //****************************************

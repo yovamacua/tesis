@@ -38,7 +38,10 @@ $activar2 = 'item_reporteVenta2';
 require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
+<?php if($_SESSION["Venta"]==1)
+     {
 
+     ?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -397,7 +400,12 @@ require_once("header.php");?>
 	}
 	
 </script>
+<?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 
 <?php
    }

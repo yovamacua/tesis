@@ -13,6 +13,10 @@
   $activar1 = 'item_pedidos1';
   require_once("header.php");
 ?>
+<?php if($_SESSION["Pedidos"]==1)
+     {
+
+     ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -178,7 +182,12 @@
   </div>
 </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
+ <?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
   require_once("footer.php");
 ?>

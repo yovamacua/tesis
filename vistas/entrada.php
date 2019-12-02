@@ -31,6 +31,11 @@ $activar = 'item_partidas';
   $final = sumar($conectar, $identificador);
 
 ?>
+<?php if($_SESSION["Partidas"]==1)
+
+     {
+
+     ?>
 <style>
 #user_data_processing{display: none!important;}
 
@@ -406,7 +411,12 @@ document.getElementById("data1").focus();
   });
  });
 </script>
+<?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 
 <?php
   } else {

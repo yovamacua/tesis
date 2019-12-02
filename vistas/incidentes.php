@@ -9,7 +9,10 @@
    #incluyendo header
      require_once("header.php");
    ?>
+ <?php if($_SESSION["Incidentes"]==1)
+     {
 
+     ?>
 <!-- estilo sencillo -->
 <style type="text/css">
 .showbreak tbody tr td:nth-child(2){white-space: pre!important;}
@@ -128,7 +131,12 @@
 </div>
 
 <!--FIN FORMULARIO VENTANA MODAL-->
+ <?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
   #incluyendo footer
    require_once("footer.php");

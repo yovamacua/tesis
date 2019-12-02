@@ -31,7 +31,11 @@
   #incluye header
    require_once("header.php");
     ?>
+<?php if($_SESSION["Partidas"]==1)
 
+     {
+
+     ?>
 <!--Contenido-->
 
 <div class="content-wrapper">
@@ -157,6 +161,12 @@
    </div>
 </div>
 <!--FIN FORMULARIO VENTANA MODAL-->
+<?php  } else {
+
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
 #incluendo archivo del footer
    require_once("footer.php");

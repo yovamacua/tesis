@@ -7,6 +7,11 @@
   $activar = 'item_categorias';
   require_once("header.php");
 ?>
+<?php if($_SESSION["Categoria"]==1)
+     {
+
+     ?>
+
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -31,7 +36,13 @@
                                 <tr>
                                 <th width="5%">Categoría</th>
                                 <th width="5%">Descripcion</th>
-                                <th width="5%">Acciones</th>
+                                <th width="5%">Editar</th>
+                                 <?php  if($_SESSION["Eliminar"]==1)
+                                 {
+                             echo '<th width="5%">Eliminar</th>';
+                                   }   
+                                 ?>
+                              
                                 </tr>
                             </thead>
                             <tbody>
@@ -77,7 +88,12 @@
   </div>
 </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
+<?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
   require_once("footer.php");
 ?>

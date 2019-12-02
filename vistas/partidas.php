@@ -8,6 +8,10 @@
     #incluyendo header
      require_once("header.php");
    ?>
+      <?php if($_SESSION["Partidas"]==1)
+     {
+
+     ?>
 <!--Contenido-->
 <div class="content-wrapper">
    <section class="content-header">
@@ -109,6 +113,12 @@
    </div>
 </div>
 <!--FIN FORMULARIO VENTANA MODAL-->
+ <?php  } else {
+
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
 #incluye footer
    require_once("footer.php");

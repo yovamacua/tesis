@@ -8,7 +8,11 @@
   $activar = 'item_gastos';
   require_once("header.php");
 ?>
+<?php if($_SESSION["Gastos"]==1)
 
+     {
+
+     ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -105,6 +109,12 @@
          </form>
       </div>
     </div>
+     <?php  } else {
+
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php
   require_once("footer.php");
 ?>

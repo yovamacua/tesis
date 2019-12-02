@@ -11,6 +11,7 @@
 ?>
 
 
+
 <!-- INICIO DEL HEADER - LIBRERIAS -->
 <?php 
   #variable para mostrar como item activo
@@ -20,6 +21,10 @@
  <!--VISTA MODAL PARA AGREGAR PRODUCTO-->
  <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
+      <?php if($_SESSION["Venta"]==1)
+     {
+
+     ?>
       <div class="content-wrapper">        
         <!-- Main content -->
         <section class="content">
@@ -182,10 +187,16 @@
         </div>        
       </div>
     </div>
+    </form>
   </div>  
   <!-- Fin modal -->
  <!--FIN FORMULARIO VENTANA MODAL-->
+ <?php  } else {
 
+       require("noacceso.php");
+  }
+   
+  ?><!--CIERRE DE SESSION DE PERMISO -->
 <?php require_once("footer.php");?>
 
  
