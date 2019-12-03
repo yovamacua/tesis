@@ -46,7 +46,11 @@
                                 <tr>
                                 <th width="5%">Categoría</th>
                                 <th width="5%">Descripcion</th>
-                                <th width="5%">Editar</th>
+                                 <?php  if($_SESSION["Editar"]==1)
+                                 {
+                             echo '<th width="5%">Eliminar</th>';
+                                   }   
+                                 ?>
                                  <?php  if($_SESSION["Eliminar"]==1)
                                  {
                              echo '<th width="5%">Eliminar</th>';
