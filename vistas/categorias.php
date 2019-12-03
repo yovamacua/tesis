@@ -15,10 +15,20 @@
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
+        <section class="content-header">
+
+          <h1>Listado de Categorias</h1>
+
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-users"></i> Categoria</li>
+          </ol>
+   
+        </section>
         <!-- Main content -->
         <section class="content">
              <div id="resultados_ajax"></div>
-             <h2>Listado de Categorías</h2>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
@@ -30,7 +40,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive">
+                    <div class="panel-body table-responsive tabla-top">
                           <table id="categoria_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -68,12 +78,14 @@
         <div class="modal-body">
 
           <label>Categoría</label>
-          <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Titulo" required/>
+          <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Titulo" maxlength="50" required="" autofocus="autofocus"/>
+          <span class="error_form" id="error_categoria"></span>
           <br />
 
 
           <label>Descripcion</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required/>
+          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="70" required=""/>
+          <span class="error_form" id="error_descripcion"></span>
           <br />
 
         </div>

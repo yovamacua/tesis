@@ -1,14 +1,114 @@
 var tabla;
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario de usuario
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_categoria").hide();
+    $("#error_descripcion").hide();
+ 
+
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_categoria = false;
+    var error_descripcion = false;
+    
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#categoria").focusout(function() {
+        campo_categoria();
+    });
+
+    $("#descripcion").focusout(function() {
+        campo_descripcion();
+    });
+
+
+
+    // funciones para validar
+   
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    function campo_categoria() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
+        var titulo = $("#categoria").val();
+        if (pattern.test(titulo) && titulo !== '') {
+            $("#error_categoria").hide();
+            $("#categoria").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_categoria").html("Solo se permiten letras");
+            $("#error_categoria").css("position", "absolute");
+            $("#error_categoria").css("color", "red");
+            $("#error_categoria").show();
+            $("#categoria").css("border-bottom", "2px solid #F90A0A");
+             error_categoria = true;
+        }
+        var titulo = $("#categoria").val().length;
+        if (titulo <= 0) {
+            $("#error_categoria").html("No se permiten campos vacios");
+            $("#error_categoria").css("position", "absolute");
+            $("#error_categoria").css("color", "red");
+            $("#error_categoria").show();
+            $("#categoria").css("border-bottom", "2px solid #F90A0A");
+            error_categoria = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#categoria_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        error_categoria = false;
+        error_descripcion = false;
+      
+
+
+        // se invoca a las funciones para tener el valor de las variables
+        campo_categoria();
+        campo_descripcion();
+
+
+        //comparacion
+        if (error_categoria === false &&
+            error_descripcion === false) {
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#categoria").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            bootbox.alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO
 //Función que se ejecuta al inicio
 function init(){
 
  listar();
-
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#categoria_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- })
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){

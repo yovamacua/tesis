@@ -2,7 +2,14 @@
  //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
   require_once("../modelos/Categorias.php");
-  //require_once("permiso.php");
+  require_once("mensajes.php");
+  #valida que exista la sessión
+if (!isset($_SESSION['id_usuario'])) {?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+}
 
 
 
@@ -16,6 +23,12 @@
 
       switch($_GET["op"]){
           case "guardaryeditar":
+          if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["categoria"]) or
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["descripcion"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
 
       $datos = $categorias->get_nombre_categoria($_POST["categoria"]);
 	       	   /*si el titulo no existe entonces lo registra
@@ -39,36 +52,20 @@
 	             $categorias-> editar_categoria($id_categoria,$categoria,$descripcion,$id_usuario);
 	            	  $messages[]="La categoria se editó correctamente";
 	            }
+            }
      //mensaje success
-     if (isset($messages)){
-				?>
-				<div class="alert alert-success" role="alert">
-						<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>¡Bien hecho!</strong>
-						<?php
-							foreach ($messages as $message) {
-									echo $message;
-								}
-							?>
-				</div>
-				<?php
-			}
+     //mensaje success
+          if (isset($messages)) {
+              echo exito($messages);
+          }
+          //fin success
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
+			
 	 //fin success
-	 //mensaje error
-         if (isset($errors)){
-			?>
-				<div class="alert alert-danger" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-						<strong>Error!</strong>
-						<?php
-							foreach ($errors as $error) {
-									echo $error;
-								}
-							?>
-				</div>
-			<?php
-			}
-	 //fin mensaje error
      break;
 
       case 'mostrar':

@@ -25,13 +25,20 @@
      {
 
      ?>
-      <div class="content-wrapper">        
+      <div class="content-wrapper">
+       <section class="content-header">
+
+          <h1>Listado de Ventas</h1>
+
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-usd"></i>Venta</li>
+          </ol>        
         <!-- Main content -->
         <section class="content">
              
              <div id="resultados_ajax"></div>
-
-             <h2>Listado de Ventas</h2>
 
             <div class="row">
               <div class="col-md-12">
@@ -44,7 +51,7 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                   <div class="panel-body table-responsive" id="listadoregistros">
+                   <div class="panel-body table-responsive tabla-top" id="listadoregistros">
     
                           <table id="ventas_data" class="table table-bordered table-striped">
                             <thead>

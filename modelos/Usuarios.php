@@ -345,11 +345,17 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
     function eliminar_usuario($id_usuario)
     {
         $conectar = parent::conexion();
-        $sql      = "delete from usuarios where id_usuario=?";
-        $sql      = $conectar->prepare($sql);
+        $sql = "delete from usuario_permiso where id_usuario=?";
+        $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $id_usuario);
         $sql->execute();
-        return $resultado = $sql->fetch();
+
+        ////
+        $sql1= "delete from usuarios where id_usuario=?";
+        $sql1= $conectar->prepare($sql1);
+        $sql1->bindValue(1, $id_usuario);
+        $sql1->execute();
+        return $resultado = $sql1->fetch();
     }
      // Funcion permite alistar los permisos (No Marcado)
         public function permisos(){

@@ -17,7 +17,8 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select pr.producto, p.cantidad, p.descripcion, p.precioProduc, p.mes, p.anio, p.unidadDelProduc from perdidas p inner join producto pr on pr.id_producto = p.idproducto";
+			$sql = " select p.id_perdida,pr.producto, p.cantidad, p.descripcion, p.precioProduc, p.mes, p.anio, p.unidadDelProduc 
+           from perdidas p inner join producto pr on pr.id_producto = p.idproducto";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 
@@ -55,6 +56,7 @@
 			$sql-> bindValue(7, $_POST["unidadDelProduc"]);
 			$sql-> bindValue(8, $_POST["id_usuario"]);
 			$sql-> execute();
+			print_r($sql);
 
 		}
  

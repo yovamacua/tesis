@@ -87,7 +87,7 @@
 			$sql-> bindValue(3, $fechaS);
 			$sql-> execute();
 
-			//print_r($_POST);
+			
 		}
  
 		//editar insumos

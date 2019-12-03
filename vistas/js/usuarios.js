@@ -12,6 +12,7 @@ $(function() {
     $("#error_password1").hide();
     $("#error_password2").hide();
     $("#error_estado").hide();
+    $("#error_permisos").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_nombre = false;
@@ -22,6 +23,7 @@ $(function() {
     var error_password1 = false;
     var error_password2 = false;
     var error_estado = false;
+    var error_permisos=false;
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#nombre").focusout(function() {
         campo_nombre();
@@ -53,6 +55,9 @@ $(function() {
 
     $("#estado").focusout(function() {
         campo_estado();
+    });
+     $("#permisos").focusout(function() {
+        ISchekbox();
     });
 
     // funciones para validar
@@ -200,6 +205,27 @@ $(function() {
             error_nombre = true;
         }
     }
+    function ISchekbox(){
+     var checked = false;
+    var elements = document.getElementsByName("permiso[]");
+    for(var i=0; i < elements.length; i++){
+        if(elements[i].checked) {
+
+            checked = true;
+              
+        }
+    }
+    if (!checked) {
+        $("#error_permisos").html("Debe seleccionar un permiso");
+         $("#error_permisos").css("position", "absolute");
+          $("#error_permisos").css("color", "red");
+        $("#error_permisos").show();
+        $("#permisos").css("border-bottom", "2px solid #F90A0A");
+        error_permisos = true;
+    }
+  
+
+    }
 
     function campo_apellido() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
@@ -237,6 +263,8 @@ $(function() {
         error_password1 = false;
         error_password2 = false;
         error_estado = false;
+        error_permisos= false;
+       
 
         // se invoca a las funciones para tener el valor de las variables
         campo_nombre();
@@ -247,6 +275,7 @@ $(function() {
         campo_password1();
         campo_password2();
         campo_estado();
+        ISchekbox();
 
         //comparacion
         if (error_nombre === false &&
@@ -257,7 +286,9 @@ $(function() {
             error_cargo === false &&
             error_password1 === false &&
             error_password2 === false &&
-            error_estado === false) {
+            error_estado === false &&
+            error_permisos ===false
+            ) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#password1").css("border-bottom", "1px solid #d2d6de");
             $("#password2").css("border-bottom", "1px solid #d2d6de");
@@ -265,6 +296,8 @@ $(function() {
             $("#usuario").css("border-bottom", "1px solid #d2d6de");
             $("#nombre").css("border-bottom", "1px solid #d2d6de");
             $("#apellido").css("border-bottom", "1px solid #d2d6de");
+             $("#permisos").css("border-bottom", "1px solid #d2d6de");
+           
             guardaryeditar(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
@@ -448,6 +481,8 @@ function mostrar(id_usuario) {
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e) {
     e.preventDefault(); //No se activará la acción predeterminada del evento
+   // bootbox.confirm("¿Está Seguro registar el nuevo usuario?", function(result){
+       // if(result){
     var formData = new FormData($("#usuario_form")[0]);
     var password1 = $("#password1").val();
     var password2 = $("#password2").val();
@@ -474,6 +509,8 @@ function guardaryeditar(e) {
     else {
         bootbox.alert("No coincide el password");
     }
+//}
+   // });//bootbox
 }
 
 //EDITAR ESTADO DEL USUARIO

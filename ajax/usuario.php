@@ -252,7 +252,8 @@ switch ($_GET["op"]) {
                 
                 $sw = in_array($row['idpermiso'],$valores) ? 'checked':'';
                  
-                 echo '<li><input type="checkbox" '.$sw.' name="permiso[]" value="'.$row["idpermiso"].'">'.$row["nombre"].'</li>';
+                 echo '<li><input type="checkbox" '.$sw.' name="permiso[]"  value="'.$row["idpermiso"].' required=""">'.$row["nombre"].'</li>
+                  <span class="error_form" id="error_permisos"></span>';
             }
 
        break;

@@ -1,5 +1,11 @@
 <?php
-
+#valida que exista la sessión
+if (!isset($_SESSION['id_usuario'])) {?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+}
   require_once("../config/conexion.php");
    class Categorias extends Conectar{
        //método para seleccionar registros
@@ -34,8 +40,8 @@
            values(null,?,?,?);";
 
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$_POST["categoria"]);
-          $sql->bindValue(2,$_POST["descripcion"]);
+          $sql->bindValue(1,substr($_POST["categoria"], 0, 50));
+          $sql->bindValue(2,substr($_POST["descripcion"], 0, 70));
           $sql->bindValue(3,$_POST["id_usuario"]);
           $sql->execute();
 
