@@ -13,6 +13,7 @@ $id_partida    = isset($_POST["id_partida"]);
 $nombrepartida = isset($_POST["nombrepartida"]);
 $responsable   = isset($_POST["responsable"]);
 $id_usuario    = isset($_POST["id_usuario"]);
+$anio         = isset($_POST["anio"]);
 
 if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
@@ -26,7 +27,8 @@ switch ($_GET["op"]) {
 
         // se reciben las variables y se valida si el formato es correcto
         if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["nombrepartida"]) or
-            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["responsable"])) {
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["responsable"]) or
+            !preg_match('/^[0-9\s]*$/', $_POST["anio"])) {
             $errors[] = "Formatos de Información no validos";
             echo error($errors);
         } else {
@@ -39,7 +41,7 @@ switch ($_GET["op"]) {
                 /*verificamos si existe en la base de datos, si ya existe un registro entonces no se registra*/
 
                 //no existe  por lo tanto hacemos el registros
-                $partidas->registrar_partidas($nombrepartida, $responsable, $id_usuario);
+                $partidas->registrar_partidas($nombrepartida, $responsable, $id_usuario, $anio);
                 $messages[] = "La partida se registró correctamente";
                 //cierre de validacion de $datos
                 /*si ya existes entonces aparece el mensaje*/
@@ -73,6 +75,7 @@ switch ($_GET["op"]) {
                 $output["id_partida"]    = $row["id_partida"];
                 $output["nombrepartida"] = $row["nombrepartida"];
                 $output["responsable"]   = $row["responsable"];
+                $output["anio"]          = $row["anio"];
             }
             echo json_encode($output);
         } else {
@@ -92,9 +95,23 @@ switch ($_GET["op"]) {
         $data  = array();
 
         foreach ($datos as $row) {
+
+            if ($partidas->dinero($row["id_partida"]) <= 0) {
+                $nulo = 0;
+            }else{
+                $nulo = $partidas->dinero($row["id_partida"]);
+            }
+
             $sub_array   = array();
             $sub_array[] = $row["nombrepartida"];
             $sub_array[] = $row["responsable"];
+            $sub_array[] = $row["anio"];
+              $sub_array[] = '<div class="cbtns">
+              <button type="button" class="btn btn-info btn-md" style="pointer-events: none;cursor: default;"><span class="notistyle2">'. 
+$nulo
+              .'</span></button>
+            
+            </div>';
             $sub_array[] = '<div class="cbtns">
             <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'. $partidas->conteo($row["id_partida"]).'</span></button></a>
             

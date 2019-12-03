@@ -191,6 +191,7 @@ function mostrar(id_partida) {
         $('#partidaModal').modal('show');
         $('#nombrepartida').val(data.nombrepartida);
         $('#responsable').val(data.responsable);
+        $('#anio').val(data.anio);
         $('.modal-title').text("Editar partida");
         $('#id_partida').val(id_partida);
         $('#action').val("Edit");

@@ -81,7 +81,7 @@
                            <th width="15%">Nombre cuenta</th>
                            <th width="20%">Objetivo</th>
                            <th width="20%">Estrategia</th>
-                           <th width="10%">Año</th>
+                           <th width="10%">Total ($)</th>
                            <th width="10%" style="background: white!important; pointer-events: none;">Cuenta</th>
                            <th width="20%">Acciones</th>
                         </tr>
@@ -126,19 +126,6 @@
                <label>Estrategia*</label>
                <input type="text" maxlength="150" name="estrategia" id="estrategia" class="form-control" placeholder="Estrategia" required/>
                <span class="error_form" id="error_estrategia"></span>
-               <br />
-
-               <label>Año*</label>
-              <select name="anio" id="anio" class="form-control" required="required">';<?php
-              for($year=date('Y')-5; $year<=date('Y')+5; $year++){
-                if($year == date('Y')){
-                  echo '<option value="'.$year.'" selected>'.$year.'</option>';
-                    }else{
-                  echo '<option value="'.$year.'">'.$year.'</option>';
-                  }
-              }
-              ?></select>
-               <span class="error_form" id="error_anio"></span>
                <br />
 
                - Los campos con * (asterisco) son obligatorios

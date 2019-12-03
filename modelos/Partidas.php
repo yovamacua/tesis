@@ -34,6 +34,17 @@ class partidas extends Conectar
         return $sql->rowCount();   
       }
 
+    public function dinero($cont){
+        $conectar= parent::conexion();      
+        $sql="Select SUM(e.Financiero) from entrada e INNER JOIN  cuentas c on c.id_cuenta = e.id_cuenta INNER JOIN partidas p where c.id_partida = ? and p.id_partida = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $cont);
+        $sql->bindValue(2, $cont);
+        $sql->execute();
+        $total = $sql->fetch(PDO::FETCH_NUM);
+        return $total[0];
+      }
+
     //método para mostrar los datos de un registro a modificar
     function get_partidas_por_id($id_partida)
     {
@@ -47,17 +58,18 @@ class partidas extends Conectar
     }
     //método para insertar registros
 
-    function registrar_partidas($nombrepartida, $responsable, $id_usuario)
+    function registrar_partidas($nombrepartida, $responsable, $id_usuario,$anio)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "insert into partidas values(null,?,?,?);";
+        $sql = "insert into partidas values(null,?,?,?,?);";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrepartida"], 0, 50));
         $sql->bindValue(2, substr($_POST["responsable"], 0, 50));
         $sql->bindValue(3, $_POST["id_usuario"]);
+        $sql->bindValue(4, substr($_POST["anio"], 0, 4));
         $sql->execute();
 
     }
@@ -68,14 +80,15 @@ class partidas extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?
+        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?, anio=?
             where id_partida=?";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrepartida"], 0, 50));
         $sql->bindValue(2, substr($_POST["responsable"], 0, 50));
         $sql->bindValue(3, $_POST["id_usuario"]);
-        $sql->bindValue(4, $_POST["id_partida"]);
+        $sql->bindValue(4, $_POST["anio"]);
+        $sql->bindValue(5, $_POST["id_partida"]);
         $sql->execute();
     }
 

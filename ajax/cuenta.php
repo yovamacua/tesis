@@ -12,7 +12,6 @@ $nombrecuenta = isset($_POST["nombrecuenta"]);
 $id_partida   = isset($_POST["id_partida"]);
 $estrategia   = isset($_POST["estrategia"]);
 $objetivo     = isset($_POST["objetivo"]);
-$anio         = isset($_POST["anio"]);
 
 if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
@@ -27,8 +26,7 @@ switch ($_GET["op"]) {
         // se reciben las variables y se valida si el formato es correcto
         if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/', $_POST["nombrecuenta"]) or
             !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["estrategia"]) or
-            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["objetivo"]) or
-            !preg_match('/^[0-9\s]*$/', $_POST["anio"])) {
+            !preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/', $_POST["objetivo"])) {
             $errors[] = "Formatos de Información no validos";
             echo error($errors);
         } else {
@@ -40,13 +38,13 @@ switch ($_GET["op"]) {
             if (empty($_POST["id_cuenta"])) {
                 /*verificamos si el cuenta existe en la base de datos */
                 //no existe la cuenta por lo tanto hacemos el registros
-                $cuentas->registrar_cuentas($nombrecuenta, $id_partida, $estrategia, $objetivo, $anio);
+                $cuentas->registrar_cuentas($nombrecuenta, $id_partida, $estrategia, $objetivo);
                 $messages[] = "La cuenta se registró correctamente";
                 //cierre de validacion de $datos
             } //cierre de empty
             else {
                 /*si ya existe entonces editamos el cuenta*/
-                $cuentas->editar_cuentas($id_cuenta, $nombrecuenta, $id_partida, $objetivo, $estrategia, $anio);
+                $cuentas->editar_cuentas($id_cuenta, $nombrecuenta, $id_partida, $objetivo, $estrategia);
                 $messages[] = "El cuenta se editó correctamente";
             }
         }
@@ -73,7 +71,6 @@ switch ($_GET["op"]) {
                 $output["nombrecuenta"] = $row["nombrecuenta"];
                 $output["objetivo"]     = $row["objetivo"];
                 $output["estrategia"]   = $row["estrategia"];
-                $output["anio"]         = $row["anio"];
             }
             echo json_encode($output);
         } else {
@@ -93,11 +90,22 @@ switch ($_GET["op"]) {
         $data          = array();
 
         foreach ($datos as $row) {
+
+        if ($cuentas->dinero($row["id_cuenta"]) <= 0) {
+                $nulo = 0;
+            }else{
+                $nulo = $cuentas->dinero($row["id_cuenta"]);
+            }
+
             $sub_array   = array();
             $sub_array[] = $row["nombrecuenta"];
             $sub_array[] = $row["objetivo"];
             $sub_array[] = $row["estrategia"];
-            $sub_array[] = $row["anio"];
+            $sub_array[] = '
+      <div class="cbtns">
+      <button type="button" class="btn btn-info btn-md" style="pointer-events: none;cursor: default;"><span class="notistyle2">'. $nulo .'</span></button>
+      </div>';
+
             $sub_array[] = '
       <div class="cbtns">
       <a href="entrada.php?identificador=' . $row["id_cuenta"] . '&nombrecuenta=' . $row["nombrecuenta"] . '">

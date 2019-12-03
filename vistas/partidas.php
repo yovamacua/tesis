@@ -50,8 +50,10 @@
                   <table id="partida_data" class="table table-bordered table-striped ">
                      <thead>
                         <tr>
-                           <th width="30%">Nombre Partida</th>
-                           <th width="25%">Responsable</th>
+                           <th width="25%">Nombre Partida</th>
+                           <th width="5%">Responsable</th>
+                           <th width="5%">Año</th>
+                            <th width="5%">Total ($)</th>
                            <th width="30%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
                            <th width="15%">Acciones</th>
                         </tr>
@@ -91,6 +93,18 @@
                <label>Responsable*</label>
                <input type="text" name="responsable" id="responsable" class="form-control" maxlength="50" placeholder="Responsable" required/>
                <span class="error_form" id="error_responsable"></span>
+               <br />
+
+              <label>Año</label>
+              <select name="anio" id="anio" class="form-control" required="required">';<?php
+              for($year=date('Y')-5; $year<=date('Y')+5; $year++){
+                if($year == date('Y')){
+                  echo '<option value="'.$year.'" selected>'.$year.'</option>';
+                    }else{
+                  echo '<option value="'.$year.'">'.$year.'</option>';
+                  }
+              }
+              ?></select>
                <br />
 
                - Los campos con * (asterisco) son obligatorios

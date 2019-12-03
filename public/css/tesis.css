@@ -8,6 +8,10 @@
   background: #f14934; border-radius: 50%; padding: 0.5rem 1rem;
 }
 
+.notistyle2{
+  background: white; border-radius: 50%; padding: 0.5rem 1rem; color: black;
+}
+
 ul li.active>a {
   background: #ecf0f547!important;
 }

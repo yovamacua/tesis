@@ -37,37 +37,35 @@ class cuentas extends Conectar
     }
     //método para insertar registros
 
-    function registrar_cuentas($nombrecuenta, $id_partida, $objetivo, $estrategia, $anio)
+    function registrar_cuentas($nombrecuenta, $id_partida, $objetivo, $estrategia)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "insert into cuentas values(null,?,?,?,?,?);";
+        $sql = "insert into cuentas values(null,?,?,?,?);";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $_POST["id_partida"]);
         $sql->bindValue(2, substr($_POST["nombrecuenta"], 0, 50));
         $sql->bindValue(3, substr($_POST["objetivo"], 0, 150));
         $sql->bindValue(4, substr($_POST["estrategia"], 0, 150));
-        $sql->bindValue(5, substr($_POST["anio"], 0, 4));
         $sql->execute();
 
     }
 
-    function editar_cuentas($id_cuenta, $nombrecuenta, $id_partida, $estrategia, $objetivo,$anio)
+    function editar_cuentas($id_cuenta, $nombrecuenta, $id_partida, $estrategia, $objetivo)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "update cuentas set nombrecuenta=?, objetivo=?, estrategia=?, anio=?, id_partida=? where id_cuenta=?";
+        $sql = "update cuentas set nombrecuenta=?, objetivo=?, estrategia=?, id_partida=? where id_cuenta=?";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrecuenta"], 0, 50));
         $sql->bindValue(2, substr($_POST["objetivo"], 0, 150));
         $sql->bindValue(3, substr($_POST["estrategia"], 0, 150));
-        $sql->bindValue(4, substr($_POST["anio"], 0, 4));
-        $sql->bindValue(5, $_POST["id_partida"]);
-        $sql->bindValue(6, $_POST["id_cuenta"]);
+        $sql->bindValue(4, $_POST["id_partida"]);
+        $sql->bindValue(5, $_POST["id_cuenta"]);
         $sql->execute();
     }
 
@@ -89,6 +87,16 @@ class cuentas extends Conectar
         $sql->execute();
         $resultado= $sql->fetchAll(PDO::FETCH_ASSOC);
         return $sql->rowCount();   
+      }
+
+    public function dinero($cont){
+        $conectar= parent::conexion();      
+        $sql="SELECT SUM(Financiero) FROM entrada WHERE id_cuenta = ?";
+        $sql = $conectar->prepare($sql);
+        $sql->bindValue(1, $cont);
+        $sql->execute();
+        $total = $sql->fetch(PDO::FETCH_NUM);
+        return $total[0];
       }
       
     //método para eliminar un registro
