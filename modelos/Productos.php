@@ -24,6 +24,17 @@
 
          
          }
+
+         //funcion para obtener los productos en la vista perdidas
+         public function getproductos(){
+
+           $conectar = parent::conexion();
+           $sql = "select * from producto";
+           $sql = $conectar->prepare($sql);
+           $sql->execute();
+           return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC); 
+
+         }
          //método para insertar registro de productos
 
         public function registrar_producto($producto,$precio_venta,$unidad,$id_categoria,$stock,$id_usuario){

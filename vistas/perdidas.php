@@ -4,7 +4,7 @@
 
   require_once("../modelos/Productos.php");
      $producto = new Producto();
-     $p = $producto->get_productos();
+     $p = $producto->getproductos();
 ?>
 
 <?php
