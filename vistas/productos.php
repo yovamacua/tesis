@@ -59,13 +59,21 @@
                             <thead>
                               
                                 <tr>
-                                <th width="12%">Producto</th>
+                                <th width="5%">Producto</th>
                                 <th width="5%">Unid. Medida</th>
-                                <th width="10%">Precio Venta</th>
-                                <th width="10%">Categoría</th>
+                                <th width="5%">Precio Venta</th>
+                                <th width="5%">Categoría</th>
                                 <th width="5%">Stock</th>
-                                <th width="10%">Acciones</th>
-
+                                <?php  if($_SESSION["Editar"]==1)
+                                 {
+                             echo '<th width="5%">Editarr</th>';
+                                   }   
+                                 ?>
+                                <?php  if($_SESSION["Eliminar"]==1)
+                                 {
+                             echo '<th width="5%">Eliminar</th>';
+                                   }   
+                                 ?>
                                 </tr>
                             </thead>
 

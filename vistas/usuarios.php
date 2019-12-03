@@ -162,7 +162,7 @@
             </br></br>
 <!--LISTA DE PERMISOS-->
 
-               <div class="form-group">
+               <div class="form-group ofield">
                   <label for="" class="col-lg-1 control-label">Permisos*</label>
 
                     <div class="col-lg-6">
