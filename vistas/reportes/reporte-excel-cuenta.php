@@ -99,7 +99,7 @@ $result1 = $sentencia1->fetchAll();
 if (count($result1) > 0) {
 
 # Obtener cuentas de BD
-$consulta = "SELECT p.nombrepartida, c.nombrecuenta, c.objetivo, c.estrategia, c.anio, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector2."' AND  c.id_cuenta  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
+$consulta = "SELECT p.nombrepartida, p.anio, c.nombrecuenta, c.objetivo, c.estrategia, e.ActGeneral, e.ActEspecifica, e.Responsable, e.Academico, e.Tecnico, e.Financiero, e.Infraestructura, e.Logro ,e.Inicio, e.Fin from partidas p INNER JOIN cuentas c on p.id_partida = '".$selector2."' AND  c.id_cuenta  = '".$selector."'  INNER JOIN entrada e on c.id_cuenta = e.id_cuenta ORDER BY e.Orden";
 $sentencia = $bd->prepare($consulta, [
     PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL,
 ]);

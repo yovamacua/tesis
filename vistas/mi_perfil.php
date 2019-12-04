@@ -70,7 +70,7 @@
           <i class="fa fa-user"></i>
 
           <h3 class="box-title">Administrar Perfil</h3>
-        
+        <!-- <?php //var_dump($_SESSION["ultimoAcceso"]); ?> -->
         </div>
         <div class="panel-body table-responsive">
          

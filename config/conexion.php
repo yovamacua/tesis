@@ -3,13 +3,32 @@
 
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','admin12-');
+define('DBPASS','');
 define('DBNAME','campoescuela');
 
 //****************************************
 //Conexion usando clase
 //****************************************
  session_start();
+
+if(isset($_SESSION["id_usuario"])){
+	$fechaGuardada = $_SESSION["ultimoAcceso"];
+    $ahora = date("Y-n-j H:i:s");
+    $tiempo_transcurrido = (strtotime($ahora)-strtotime($fechaGuardada));
+
+    //comparamos el tiempo transcurrido
+    // minutos por segundos 60 minutos x 60 segundos = 3600
+     if($tiempo_transcurrido >= 3600) {
+     //si pasaron 10 minutos o más
+      session_destroy(); // destruyo la sesión
+      header("Location:".Conectar::ruta()."vistas/index.php");
+       exit();
+    }else {
+    $_SESSION["ultimoAcceso"] = $ahora;
+   }
+}
+
+
 class Conectar {
  	protected $dbh;
  	public function conexion(){
