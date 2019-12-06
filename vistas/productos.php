@@ -20,7 +20,7 @@
 ?>
 <?php if($_SESSION["Producto"]==1)
      {
-
+var_dump($_SESSION["Eliminar"]==1)
      ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -64,16 +64,12 @@
                                 <th width="5%">Precio Venta</th>
                                 <th width="5%">Categoría</th>
                                 <th width="5%">Stock</th>
-                                <?php  if($_SESSION["Editar"]==1)
-                                 {
-                             echo '<th width="5%">Editarr</th>';
-                                   }   
-                                 ?>
-                                <?php  if($_SESSION["Eliminar"]==1)
-                                 {
-                             echo '<th width="5%">Eliminar</th>';
-                                   }   
-                                 ?>
+                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                              
+                              }else{
+                                  echo '<th width="5%">Acciones</th>';
+                              }
+                                ?>
                                 </tr>
                             </thead>
 
@@ -143,7 +139,7 @@
                   <label>Stock</label>
                     <input type="text" class="form-control" id="stock" name="stock" >
                </br>
-             </div>
+             
           <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
           <input type="hidden" name="id_producto" id="id_producto"/>
@@ -153,12 +149,8 @@
 
           <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
            </div><!--modal-footer-->
-
-        </div>
-       </div><!--row-->
-
       </div>
-      </form>
+     </div>
   </div>
 </div>
  <!--FIN FORMULARIO VENTANA MODAL-->

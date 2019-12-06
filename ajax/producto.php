@@ -5,6 +5,7 @@
   require_once("../modelos/Productos.php");
   require_once("mensajes.php");
   $productos = new Producto();
+   //var_dump($_SESSION["Editar"]==1);
 
    //declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos que si existe el parametro que estamos recibiendo
    
@@ -165,20 +166,33 @@
        
        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'
                   </span>';
-        
-    $sub_array[] = '<div class="cbtns">
+                  ?>
+                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
+                                 {
+                          $sub_array[]=   '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button></div>
+                            <button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>';
+                    }?>
+            <?php  if($_SESSION["Eliminar"]==1){
+             $sub_array[]=   '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button></div>';
+
+            }
+            ?>          
+            <?php if($_SESSION["Editar"]==1){
+            $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>';
-        $sub_array[]=   '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button></div>';
-                                         
+        }?>
+        <?php
+        
       $data[] = $sub_array;
       }
-
+    
       $results = array(
  			"sEcho"=>1, //Información para el datatables
  			"iTotalRecords"=>count($data), //enviamos el total registros al datatable
  			"iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
  			"aaData"=>$data);
  		echo json_encode($results);
+
       
      break;
      case "eliminar_producto":

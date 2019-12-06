@@ -56,7 +56,7 @@
 			$sql-> bindValue(7, $_POST["unidadDelProduc"]);
 			$sql-> bindValue(8, $_POST["id_usuario"]);
 			$sql-> execute();
-			print_r($sql);
+			
 
 		}
  

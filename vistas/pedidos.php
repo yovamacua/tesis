@@ -140,7 +140,7 @@
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern=""/>
           </div>
         </div>
 
