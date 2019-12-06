@@ -45,7 +45,81 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive tabla-top" id="listadoregistros">
+                    <div class="panel-body table-responsive" id="pedidoModal" >
+                      <form name="formulario" id="pedido_form" method="POST">
+
+                        <script>
+                          $( function() {
+                            $('#fecha1').datepicker({
+                          format: "dd/mm/yyyy"
+                            }).on('change', function(){
+                                $('.datepicker').hide();
+                            });
+                          } );
+                        </script>
+
+                        <div class="form-group table-responsive" style="width: 70%;">
+                          <label for="" class="col-lg-3 control-label">Fecha:</label>
+                          <div class="col-lg-9">
+                            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required style="width:50%;" class="gui-input" value=""/>
+                          </div>
+                        </div>
+
+                        <div class="form-group table-responsive" style="width: 70%;">
+                          <label for="" class="col-lg-3 control-label">No. de Pedido:</label>
+                            <div class="col-lg-9">
+                              <input type="text" name="id_pedido" id="id_pedido" class="form-control" required style="width:10%;" readonly="readonly" value=""/>
+                            </div> 
+                        </div> 
+
+                        <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap" onclick="desvanecer()"><i class="fa fa-save"></i> Guardar No. de Pedido</button>
+                          
+                  <!-- Tabla de insumo -->
+                            
+                        <button  type="button" id="addInsumo" class="btn btn-primary" data-toggle="modal"data-target="#detallepedidosModal"><i class="fa fa-plus"></i> Agregar Insumo </button>
+                            
+
+                        <table id="detallepedidos_data" class="table table-bordered table-striped">
+                          <thead>
+                              <tr>
+                              <th>Nombre de Insumo</th>
+                              <th>Cantidad</th>
+                              <th>Descripción</th>
+                              <th>Unidad de Medida</th>
+                              <th>Acciones</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                         
+                          
+                           
+                        <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                        
+                        </form> 
+
+                        <div style="width:200px;">
+                         
+                          <div style="width:100px; float:left;">
+                            <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i><font color=white>Cancelar</font></a></button>
+                          </div> 
+                         
+                          <div style="width:100px; float:right;">
+                            <!--form para generar el archivo excel-->
+                            <form action="reportes/hacer_pedido.php" method="post">
+                              <input type="hidden" name="id_pedido" id="id_p"/>  
+                              <input type="hidden" name="fecha" id="fechaA"/>                            
+                              <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Archivo</button>   
+                            </form>
+                        </div> 
+
+                      </div> 
+
+                         
+                    </div> <!-- /.col -->
+
+                    <div class="panel-body table-responsive" id="listadoregistros">
                           <table id="pedido_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -59,60 +133,12 @@
                           </table>
                     </div>
                     <!--Fin centro -->
-          
-                    <div class="panel-body table-responsive" id="pedidoModal" >
-                      <form name="formulario" id="pedido_form" method="POST">
-
-                        <div class="form-group table-responsive" style="width: 70%;">
-                          <label for="" class="col-lg-3 control-label">Fecha:</label>
-                          <div class="col-lg-9">
-                            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha" required style="width:50%;"/>
-                          </div>
-                        </div> 
-
-                        <div class="form-group table-responsive" style="width: 70%;">
-                          <label for="" class="col-lg-3 control-label">No. de Pedido:</label>
-                            <div class="col-lg-9">
-                              <input type="text" name="id_pedido" id="id_pedido" class="form-control" required style="width:10%;" readonly="readonly" />
-                            </div> 
-                        </div> 
-                          
-                  <!-- Tabla de insumo -->
-                            <div class="form-group table-responsive" style="width: 70%;" id="btnAgregarIns">
-                              <button  type="button" class="btn btn-primary" data-toggle="modal"data-target="#detallepedidosModal"><i class="fa fa-plus"></i> Agregar Insumo </button>
-                            </div> 
-
-                            <table id="detallepedidos_data" class="table table-bordered table-striped">
-                              <thead>
-                                  <tr>
-                                  <th width="12%">No. de Pedido</th>
-                                  <th>Nombre de Insumo</th>
-                                  <th>Cantidad</th>
-                                  <th>Descripción</th>
-                                  <th>Unidad de Medida</th>
-                                  <th>Acciones</th>
-                                  </tr>
-                              </thead>
-                              <tbody>
-                              </tbody>
-                            </table>
-
-                          <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap" onclick="desvanecer()"><i class="fa fa-save"></i> Registrar Pedido</button>
-
-                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></a></button>
-                          
-                          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-
-                        </form> 
-
-                    </div> <!-- /.col -->
                     <!--Fin centro -->
                 </div>
               </div>
             </div>
           </section><!-- /.content -->
         </div>
-
   <!--Fin-Contenido-->
     <!--FORMULARIO VENTANA MODAL-->
 
@@ -158,16 +184,7 @@
 
           <div class="form-group col-md-6">
             <label>No. de Pedido</label> 
-            <select class="form-control" id="id_pedido" name="id_pedido" >
-                <option  value="0">Seleccione el No. de Pedido</option>
-                  <?php
-                     for($i=0; $i<sizeof($p);$i++){
-                       ?>
-                        <option value="<?php echo $p[$i]["id_pedido"]?>"><?php echo $p[$i]["id_pedido"];?></option>
-                       <?php
-                     }
-                  ?>   
-              </select>
+            <input type="text" name="id_pedido" id="id_pe" class="form-control" readonly="readonly"/>
           </div> 
         </div>
 

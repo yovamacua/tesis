@@ -193,7 +193,6 @@
         foreach($datos as $row){
 
           $sub_array = array();
-          $sub_array[] = $row["id_pedido"];
           $sub_array[] = $row["nombreInsumo"];
           $sub_array[] = $row["cantidad"];
           $sub_array[] = $row["descripcion"];

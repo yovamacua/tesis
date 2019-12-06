@@ -32,14 +32,14 @@ function limpiardetalle()
   v1 = document.getElementById("id_pedido").value;
   p1 = v1;
   document.getElementById("id_pedido").value = p1;
-  v2 = document.getElementById("fecha").value;
+  v2 = document.getElementById("fecha1").value;
   p2 = v2;
-  document.getElementById("fecha").value = p2;
+  document.getElementById("fecha1").value = p2;
 }
 
 function limpiar()
 {
-  $('#fecha').val("");
+  $('#fecha1').val("");
   $('#id_pedido').val("");
 }
 
@@ -53,13 +53,20 @@ function mostrarformulario(flag)
     $("#pedidoModal").show();
     $("#add_button").hide();
     $("#listadoregistros").hide();
-    $("#btnAgregarIns").hide();
-    $("#detallepedidos_data").hide();
+    $("#fecha1").focus();
+    $("#addInsumo").hide();
+    $("#btnCancelar").hide();
+    $("#btnArchivo").hide();
   }else if($("#id_pedido").val().length == 0){
     $("#letra").hide();
     $("#pedidoModal").hide();
+    $("#detallepedidos_data").hide();
+    $("#btnArchivo").show();
+    $("#btnGuardarCap").show();
   }else{
-    //listarDetallePedido(id_pedido);
+    $("#addInsumo").show();
+    $("#btnCancelar").show();
+    $("#btnArchivo").show();
   }
 }
 
@@ -80,11 +87,14 @@ function cancelarform()
        $('#listadoregistros').hide();
        $("#add_button").hide();
        $("#detallepedidos_data").show();
-       $('#fecha').val(data.fecha);
+       $('#fecha1').val(data.fecha);
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
+       $('#id_p').val(data.id_pedido); 
+       $('#id_pe').val(data.id_pedido);  
+       $('#fechaA').val(data.fecha);
     });
-      document.getElementById('fecha').readOnly = true; 
-      document.getElementById('fecha').disabled = true;
+      document.getElementById('fecha1').readOnly = true; 
+      document.getElementById('fecha1').disabled = true;
       document.getElementById('id_pedido').disabled = true;
       listarDetallePedido(id_pedido);
       $("#btnGuardarCap").hide();
@@ -216,12 +226,12 @@ function mostrar(id_pedido)
        $('#listadoregistros').hide();
        $("#add_button").hide();
        $("#detallepedidos_data").hide();
-       $("#btnAgregarIns").hide();
-       $('#fecha').val(data.fecha);
+       $("#addInsumo").hide();
+       $('#fecha1').val(data.fecha);
        $('.modal-title').text("Editar Pedido");
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
-       
+       $("#botones").hide();
     });
   }
 
@@ -265,7 +275,7 @@ function guardaryeditar(e)
           $('#pedidoModal').modal('hide');
           $('#resultados_ajax').html(datos);
           $('#pedido_data').DataTable().ajax.reload(null, false);
-          limpiar();
+          cancelarform();
        }
    });
 }
