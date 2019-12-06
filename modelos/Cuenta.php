@@ -103,15 +103,17 @@ class cuentas extends Conectar
     function eliminar_cuenta($id_cuenta)
     {
         $conectar = parent::conexion();
-        $sql      = "delete from cuentas where id_cuenta=?";
-        $sql      = $conectar->prepare($sql);
-        $sql->bindValue(1, $id_cuenta);
-        $sql->execute();
+
         //elimina entradas asociadas a esa cuenta
         $sql2 = "delete from entrada where id_cuenta=?";
         $sql2 = $conectar->prepare($sql2);
         $sql2->bindValue(1, $id_cuenta);
         $sql2->execute();
+
+        $sql      = "delete from cuentas where id_cuenta=?";
+        $sql      = $conectar->prepare($sql);
+        $sql->bindValue(1, $id_cuenta);
+        $sql->execute();
         return $resultado = $sql->fetch();
     }
 

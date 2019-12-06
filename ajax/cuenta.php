@@ -84,7 +84,8 @@ switch ($_GET["op"]) {
         }
         //fin de mensaje de error
         break;
-    case "listar":
+
+        case "listar":
         $identificador = $_SESSION["seleccion_partida"];
         $datos         = $cuentas->get_cuentas($identificador);
         $data          = array();
@@ -123,7 +124,7 @@ switch ($_GET["op"]) {
 
      &nbsp;
 
-     <button type="button" onClick="eliminar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+     <button type="button" onClick="eliminar(' . $row["id_cuenta"] . '); desvanecer(); recargar2();"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
 
      </div>';
             $data[] = $sub_array;

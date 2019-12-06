@@ -38,6 +38,32 @@
      ?>
 <!--Contenido-->
 
+
+<!-- funcion para cargar la sumatoria al cargar la pagina -->
+<script type="text/javascript">
+$(document).ready(function() {  
+function recargar2(){   
+    $.post("../modelos/actions_table/sumatoria-total-cuenta-entrada.php", function(data){
+        //// Verificamos la rpta entregada por miscript.php
+            $("#recargado2").html(data); 
+    });        
+}
+    setTimeout(recargar2, 1000);
+}); 
+</script>
+
+<!-- funcion que actualiza la sumatoria al activar o desactivar año -->
+<script type="text/javascript">
+function recargar2(){   
+    $.post("../modelos/actions_table/sumatoria-total-cuenta-entrada.php", function(data){
+        //// Verificamos la rpta entregada por miscript.php
+            $("#recargado2").html(data); 
+    });   
+    setTimeout(recargar2, 1000);  
+    //setInterval(recargar, 1000);   
+}
+</script>
+
 <div class="content-wrapper">
    <section class="content-header">
       
@@ -63,7 +89,10 @@
                   <h1 class="box-title">
 
                      <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#cuentaModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar una cuenta</button>
-
+                     <div id="sumtop" style="display: inherit;"><b>Total($): </b> 
+<span id="recargado2" style="background: #dd4b39;color: white;padding: 0.5rem 1rem;"></span>&nbsp;
+<!--<span><a href="#" onclick="javascript:recargar2();">Actualizar</a></span> -->
+</div>
                   </h1>
 
                   <div class="box-tools pull-right">

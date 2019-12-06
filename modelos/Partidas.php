@@ -100,8 +100,7 @@ class partidas extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?, anio=?,  where id_partida=?";
-
+        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?, anio=?  where id_partida=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrepartida"], 0, 50));
         $sql->bindValue(2, substr($_POST["responsable"], 0, 50));

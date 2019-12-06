@@ -133,7 +133,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["nombrepartida"];
             $sub_array[] = $row["responsable"];
             $sub_array[] = '<div class="cbtns">
-            <button type="button" onClick="cambiarEstado(' . $row["id_partida"] . ',' . $row["estado"] . '); desvanecer(); recargar()" name="estado" id="' . $row["id_partida"] . '" class="' . $atrib . ' hint--top" aria-label="'.$mensajito.'">' . $row["anio"] . '</button>
+            <button type="button" onClick="cambiarEstado(' . $row["id_partida"] . ',' . $row["estado"] . '); desvanecer(); recargar();" name="estado" id="' . $row["id_partida"] . '" class="' . $atrib . ' hint--top" aria-label="'.$mensajito.'">' . $row["anio"] . '</button>
             </div>';
 
             $sub_array[] = '<div class="cbtns">
@@ -145,14 +145,11 @@ switch ($_GET["op"]) {
             <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'.$partidas->conteo($row["id_partida"]).'</span></button></a>
             
             </div>';
-            $sub_array[] = '
-            <div class="cbtns">
-
-
+            $sub_array[] = '<div class="cbtns">
     
             <button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
 
-            <button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer(); recargar()"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+            <button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer();"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
             </div>';
             $data[] = $sub_array;
         }
@@ -174,7 +171,7 @@ switch ($_GET["op"]) {
             $datos = $partidas->get_partidas_por_id($_POST["id_partida"]);
             if (is_array($datos) == true and count($datos) > 0) {
                 $partidas->eliminar_partida($_POST["id_partida"]);
-                $messages[] = "El registro de la partida se eliminó exitosamente";
+                $messages[] = "La partida se eliminó exitosamente";
             } else {
                 $errors[] = "No hay registro que borrar";
             }
