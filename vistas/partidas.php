@@ -13,10 +13,35 @@
 
      ?>
 <!--Contenido-->
+
+<!-- funcion para cargar la sumatoria al cargar la pagina -->
+<script type="text/javascript">
+//$(document).ready(function() {  
+function recargar(){   
+    $.post("../modelos/actions_table/sumatoria-total-partida.php", function(data){
+        //// Verificamos la rpta entregada por miscript.php
+            $("#recargado").html(data); 
+    });        
+}
+    //setInterval(recargar, 1000);
+//}); 
+</script>
+
+<!-- funcion que actualiza la sumatoria al activar o desactivar año -->
+<script type="text/javascript">
+var body = document.body;
+$(function recargar(){   
+    $.post("../modelos/actions_table/sumatoria-total-partida.php", function(data){
+        //// Verificamos la rpta entregada por miscript.php
+            $("#recargado").html(data); 
+    });        
+})
+</script>
+
 <div class="content-wrapper">
    <section class="content-header">
 
-      <h1>Administración de Partida</h1>
+      <h1>Administración de Partidas</h1>
 
     <!-- migas de pan-->
       <ol class="breadcrumb">
@@ -37,7 +62,10 @@
                   <h1 class="box-title">
 
                      <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#partidaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar partida</button>
-
+                     <div id="sumtop" style="display: inherit;"><b>Total($): </b> 
+<span id="recargado" style="background: #dd4b39;color: white;padding: 0.5rem 1rem;"></span>&nbsp;
+<!-- <span><a href="#" onclick="javascript:recargar();">Actualizar</a></span> -->
+</div>
                   </h1>
                   <div class="box-tools pull-right">
                 </div>
@@ -51,11 +79,11 @@
                      <thead>
                         <tr>
                            <th width="25%">Nombre Partida</th>
-                           <th width="5%">Responsable</th>
+                           <th width="15%">Responsable</th>
                            <th width="5%">Año</th>
                             <th width="5%">Total ($)</th>
-                           <th width="30%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
-                           <th width="15%">Acciones</th>
+                           <th width="25%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
+                           <th width="10%">Acciones</th>
                         </tr>
                      </thead>
                      <tbody>
@@ -85,16 +113,24 @@
             </div>
             <div class="modal-body">
 
+               <div class="form-group col-md-12">
+                  
+                 
                <label>Nombre Partida*</label>
                <input type="text" maxlength="50" name="nombrepartida" id="nombrepartida" class="form-control" placeholder="Nombre Partida" required/>
                <span class="error_form" id="error_nombrepartida"></span>
-               <br />
 
-               <label>Responsable*</label>
+               </div>
+
+               <div class="form-group col-md-12">
+
+                   <label>Responsable*</label>
                <input type="text" name="responsable" id="responsable" class="form-control" maxlength="50" placeholder="Responsable" required/>
                <span class="error_form" id="error_responsable"></span>
-               <br />
+               </div>
 
+
+              <div class="form-group col-md-12">
               <label>Año</label>
               <select name="anio" id="anio" class="form-control" required="required">';<?php
               for($year=date('Y')-5; $year<=date('Y')+5; $year++){
@@ -105,9 +141,9 @@
                   }
               }
               ?></select>
-               <br />
+               </div>
 
-               - Los campos con * (asterisco) son obligatorios
+                - Los campos con * (asterisco) son obligatorios
                <br/>
 
             </div>
@@ -117,7 +153,7 @@
 
                <input type="hidden" name="id_partida" id="id_partida"/>
 
-               <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" onclick="desvanecer()" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+               <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" onclick="desvanecer(); recargar()" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
 
                <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
 

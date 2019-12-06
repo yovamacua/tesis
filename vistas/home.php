@@ -104,7 +104,6 @@ require_once("header.php");?>
       </h2>
 
     <!--COMPRAS ACTUAL-->
-      <div class="row">
         
         <div class="">
            
@@ -238,7 +237,6 @@ require_once("header.php");?>
     </div><!--fin col-sm-6-->
 
      
-    </div><!--row-->
 
 
         <h2 class="container-fluid bg-red text-white text-center mh-50"> 
@@ -247,8 +245,7 @@ require_once("header.php");?>
 
     <!--VENTAS ACTUAL-->
 
-  
-      <div class="row">
+
         
         <div class="">
            
@@ -381,8 +378,6 @@ require_once("header.php");?>
       
     </div><!--fin col-sm-6-->
 
-     
-    </div><!--row-->
 
 
  <!--GRAFICA PERDIDA-->

@@ -63,15 +63,35 @@ class partidas extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "insert into partidas values(null,?,?,?,?);";
+        $sql = "insert into partidas values(null,?,?,?,?,?);";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrepartida"], 0, 50));
         $sql->bindValue(2, substr($_POST["responsable"], 0, 50));
         $sql->bindValue(3, $_POST["id_usuario"]);
         $sql->bindValue(4, substr($_POST["anio"], 0, 4));
+        $sql->bindValue(5, '0');
         $sql->execute();
 
+    }
+
+
+   //editar el estado del usuario, activar y desactiva el estado
+    function editar_estado($id_partida, $estado)
+    {
+        $conectar = parent::conexion();
+        parent::set_names();
+
+        //el parametro est se envia por via ajax
+        if ($_POST["est"] == "0") {$estado = 1;} else { $estado = 0;}
+
+        $sql = "update partidas set estado=? where id_partida=?";
+        //se le pasa la consulta
+        $sql = $conectar->prepare($sql);
+        //recibe informacion capturada del formulario y el boton
+        $sql->bindValue(1, $estado);
+        $sql->bindValue(2, $id_partida);
+        $sql->execute();
     }
 
     function editar_partidas($id_partida, $nombrepartida, $responsable, $id_usuario)
@@ -80,8 +100,7 @@ class partidas extends Conectar
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?, anio=?
-            where id_partida=?";
+        $sql = "update partidas set nombrepartida=?, responsable=?, id_usuario=?, anio=?,  where id_partida=?";
 
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, substr($_POST["nombrepartida"], 0, 50));

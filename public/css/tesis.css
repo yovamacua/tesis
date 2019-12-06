@@ -85,6 +85,12 @@ thead tr th:last-child {
 
 /* Small devices */
 @media (max-width: 320px) {
+
+  /** sumatoria partida **/
+  #sumtop{padding: 1rem!important;}
+
+  .boton-top{width: 100%!important;text-align: center!important;}
+
   /*** vista usuarios **/
   .tabla-top {
     margin-top: 0rem!important;
@@ -104,6 +110,12 @@ thead tr th:last-child {
 
 /* Smartphones */
 @media (min-width: 321px) and (max-width: 480px) {
+
+    /** sumatoria partida **/
+  #sumtop{padding: 1rem!important;}
+
+  .boton-top{width: 100%!important;text-align: center!important;}
+
   /*** vista usuarios **/
   .tabla-top {
     margin-top: 0rem!important;
@@ -123,6 +135,11 @@ thead tr th:last-child {
 
 /* Smartphones to Tablets */
 @media (min-width: 481px) and (max-width: 767px) {
+
+    /** sumatoria partida **/
+  #sumtop{padding: 1rem!important;}
+
+  .boton-top{width: 100%!important;text-align: center!important;}
   /*** vista usuarios **/
   .tabla-top {
     margin-top: 0rem!important;

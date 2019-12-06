@@ -199,6 +199,21 @@ function mostrar(id_partida) {
 }
 
 
+function cambiarEstado(id_partida, est) {
+            $.ajax({
+                url: "../ajax/partida.php?op=activarydesactivar",
+                method: "POST",
+                //toma el valor del id y del estado
+                data: {
+                    id_partida: id_partida,
+                    est: est
+                },
+                success: function(data) {
+                    $('#partida_data').DataTable().ajax.reload( null, false);
+                }
+            });
+}
+
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e) {
     e.preventDefault(); //No se activará la acción predeterminada del evento

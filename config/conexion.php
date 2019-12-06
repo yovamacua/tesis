@@ -1,4 +1,6 @@
 <?php
+//setirar la zona horaria no importando la hora del server
+date_default_timezone_set('America/El_Salvador');
 
 
 define('DBHOST','localhost');
