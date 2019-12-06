@@ -17,7 +17,7 @@ function init(){
 
 //funcion que limpia los campos del formulario
 function limpiar(){
-	$('#fecha').val("");
+	$('#fecha1').val("");
 	$('#donante').val("");
 	$('#descripcion').val("");
 	$('#cantidad').val("");
@@ -86,7 +86,7 @@ function mostrar(id_donacion){
         data = JSON.parse(data);
 
 	 		$('#donacionModal').modal("show");
-	 		$('#fecha').val(data.fecha);
+	 		$('#fecha1').val(data.fecha);
 	 		$('#donante').val(data.donante);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#cantidad').val(data.cantidad);

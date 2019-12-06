@@ -29,9 +29,9 @@ function init(){
 function limpiar(){
 	$('#cantidad').val("");
 	$('#precio').val("");
-	$('#unidaMedida').val("");
+	$('#unidad').val("");
 	$('#descripcion').val("");
-	$('#fecha').val("");
+	$('#fecha1').val("");
 	$('#idpedido').val("");
 	$('#idcategoria').val("");
 	$('#id_insumo').val("");
@@ -109,10 +109,10 @@ function mostrar(id_insumo){
 	 		$('#insumoModal').modal("show");
 	 		$('#cantidad').val(data.cantidad);
 	 		$('#precio').val(data.precio);
-	 		$('#unidaMedida').val(data.unidaMedida);
+	 		$('#unidad').val(data.unidaMedida);
 	 		$('#descripcion').val(data.descripcion);
-	 		$('#fecha').val(data.fecha);
-	 		$('#idpedido').val(data.idpedido);
+	 		$('#fecha1').val(data.fecha);
+	 		$('#idpe').val(data.idpedido);
 	 		$('#idcategoria').val(data.idcategoria);
 	 		$('.modal-title').text("Editar Insumo");
 	 		$('#id_insumo').val(id_insumo);

@@ -49,14 +49,13 @@
                       <form name="formulario" id="pedido_form" method="POST">
 
                         <script>
-                          $( function() {
-                            $('#fecha1').datepicker({
-                          format: "dd/mm/yyyy"
-                            }).on('change', function(){
-                                $('.datepicker').hide();
-                            });
-                          } );
-                        </script>
+                          $(function () {
+                              $("#fecha1").datepicker({
+                                  format: "dd/mm/yyyy",
+                                  firstDay: 1
+                              }).datepicker("setDate", new Date());
+                           });          
+                       </script>
 
                         <div class="form-group table-responsive" style="width: 70%;">
                           <label for="" class="col-lg-3 control-label">Fecha:</label>
@@ -166,7 +165,7 @@
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern=""/>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern="[a-zA-Z_áéíóúñ\s]{0,30}$"/>
           </div>
         </div>
 

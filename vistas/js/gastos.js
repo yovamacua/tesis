@@ -17,7 +17,7 @@ function init(){
 
 //funcion que limpia los campos del formulario
 function limpiar(){
-	$('#fecha').val("");
+	$('#fecha1').val("");
 	$('#descripcion').val("");
 	$('#precio').val("");
 	$('#id_gasto').val("");
@@ -84,7 +84,7 @@ function mostrar(id_gasto){
         data = JSON.parse(data);
 
 	 		$('#gastoModal').modal("show");
-	 		$('#fecha').val(data.fecha);
+	 		$('#fecha1').val(data.fecha);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precio').val(data.precio);
 	 		$('.modal-title').text("Editar Gasto");

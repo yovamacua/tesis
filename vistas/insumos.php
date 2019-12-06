@@ -93,10 +93,13 @@
 
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
-          $( function() {
-            $( "#fecha" ).datepicker();
-          } );
-          </script>
+            $(function () {
+                $("#fecha1").datepicker({
+                    format: "dd/mm/yyyy",
+                    firstDay: 1
+                }).datepicker("setDate", new Date());
+             });          
+           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
 
           <div class="form-row">
@@ -121,7 +124,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Unidad de Medida</label>
-            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
+            <select class="selectpicker form-control" id="unidad" name="unidadMedida" required>
                   <option value="">-- Seleccione unidad --</option>
                   <option value="kilo">kilo</option>
                   <option value="gramo">gramo</option>
@@ -132,14 +135,14 @@
 
           <div class="form-group col-md-6">
             <label>fecha</label>
-            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha"/>
+            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha"/>
           </div>  
         </div> 
 
         <div class="form-row">
           <div class="form-group col-md-6">
              <label>No. de Pedido</label>
-              <select class="form-control" id="idpedido" name="idpedido" >
+              <select class="form-control" id="idpe" name="idpedido" >
                 <option  value="0">Seleccione el No. de Pedido</option>
                   <?php
                      for($i=0; $i<sizeof($p);$i++){
@@ -189,10 +192,13 @@
 
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
-          $( function() {
-            $( "#Fecha" ).datepicker();
-          } );
-          </script>
+            $(function () {
+                $("#Fecha").datepicker({
+                    format: "dd/mm/yyyy",
+                    firstDay: 1
+                }).datepicker("setDate", new Date());
+             });          
+           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
 
            <div class="form-row">

@@ -32,7 +32,7 @@ function limpiardetalle()
 
 function limpiar()
 {
-  $('#fecha').val("");
+  $('#fecha1').val("");
   $('#nombreGrupo').val("");
   $('#cargo').val("");
   $('#encargado').val("");
@@ -41,7 +41,7 @@ function limpiar()
 
 //Función mostrar formulario
 function mostrarformulario(flag)
-{
+{ 
 
   if (flag)
   {
@@ -50,7 +50,7 @@ function mostrarformulario(flag)
     $("#add_button").hide();
     $("#listadoregistros").hide();
     $("#letra1").hide();
-
+    $("#btnCancelar").hide();
   }else{
     $("#letra").hide();
     $("#letra1").hide();
@@ -201,7 +201,7 @@ function mostrar(id_capacitacion)
        $("#letra").show();
        $('#listadoregistros').hide();
        $("#add_button").hide();
-       $('#fecha').val(data.fecha);
+       $('#fecha1').val(data.fecha);
        $('#nombreGrupo').val(data.nombreGrupo);
        $('#cargo').val(data.cargo);
        $('#encargado').val(data.encargado);
@@ -222,7 +222,7 @@ function mostrardetalle(id_detallecapacitados)
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
-       $('#id_capacitacion').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
+       $('#id_capa').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallecapacitados').val(id_detallecapacitados);//AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
@@ -250,7 +250,7 @@ function guardaryeditar(e)
           $('#capacitacionModal').modal('hide');
           $('#resultados_ajax').html(datos);
           $('#capacitacion_data').DataTable().ajax.reload(null, false);
-          limpiar();
+          cancelarform()
        }
    });
 }

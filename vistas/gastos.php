@@ -75,20 +75,23 @@
           
           <!--- codigo para mostrar calendario jquery IU -->
           <script>
-          $( function() {
-            $( "#fecha" ).datepicker();
-          } );
-          </script>
+            $(function () {
+                $("#fecha1").datepicker({
+                    format: "dd/mm/yyyy",
+                    firstDay: 1
+                }).datepicker("setDate", new Date());
+             });          
+           </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Fecha</label>
-              <input type="text" name="fecha" id="fecha" autocomplete="off" class="form-control" placeholder="Fecha" required/>
+              <input type="text" name="fecha" id="fecha1" autocomplete="off" class="form-control" placeholder="Fecha" required/>
             </div>
             <div class="form-group col-md-6">
             <label>Gasto</label>
-            <input type="number" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
+            <input type="number" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
           </div>
         </div>
 

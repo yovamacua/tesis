@@ -71,10 +71,19 @@
                     <div class="panel-body table-responsive" id="capacitacionModal" >
                       <form name="formulario" id="capacitacion_form"style="width: 70%;" method="POST">
 
+                        <script>
+                          $(function () {
+                              $("#fecha1").datepicker({
+                                  format: "dd/mm/yyyy",
+                                  firstDay: 1
+                              }).datepicker("setDate", new Date());
+                           });          
+                       </script>
+
                         <div class="form-group table-responsive">
                           <label for="" class="col-lg-3 control-label">Fecha:</label>
                           <div class="col-lg-9">
-                            <input type="text" name="fecha" id="fecha" class="form-control" placeholder="Fecha" required style="width:50%;"/>
+                            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required style="width:50%;"/>
                           </div>
                         </div> 
 
@@ -110,7 +119,7 @@
                           
                           <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap" onclick="desvanecer()"><i class="fa fa-save"></i> Registrar Capacitación</button>
 
-                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></a></button>
+                          <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i> <font color=white>Cancelar</font></button>
                           
                           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                           
@@ -181,7 +190,7 @@
           </div>
           <div class="form-group col-md-6">
             <label>No. de Capacitación</label> 
-            <select class="form-control" id="id_capacitacion" name="id_capacitacion" >
+            <select class="form-control" id="id_capa" name="id_capacitacion" >
                 <option  value="0">Seleccione el No. de Capacitación</option>
                   <?php
                      for($i=0; $i<sizeof($c);$i++){
