@@ -50,7 +50,12 @@
                                   <th>Descripción</th>
                                   <th>Cantidad</th>
                                   <th>Precio</th>
-                                  <th>Acciones</th>
+                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                              
+                              }else{
+                                  echo '<th>Acciones</th>';
+                              }
+                                ?>
                                   </tr>
                               </thead>
                             <tbody>

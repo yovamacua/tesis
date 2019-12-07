@@ -126,9 +126,22 @@ switch ($_GET["op"]) {
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	$sub_array[] = $row["categoria"];
-		     	$sub_array[] = '<div class="cbtns">
+      			?>
+                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
+                                 {
+                          $sub_array[]='<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>
       			<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
+                    }?>
+            <?php  if($_SESSION["Eliminar"]==1){
+             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
+
+            }
+            ?>          
+            <?php if($_SESSION["Editar"]==1){
+            $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button></div>';
+        }?>
+        <?php
 		      	$data[] = $sub_array;
 		      }
 

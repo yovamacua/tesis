@@ -113,20 +113,46 @@ switch ($_GET["op"]) {
       <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar <span class="notistyle">'. $cuentas->conteo($row["id_cuenta"]).'</span></button>
       </a>
       </div>';
-            $sub_array[] = '
-     <div class="cbtns">
+      ?>
+                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
+                                 {
+                          $sub_array[]='<div class="cbtns">
      <button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>
 
      &nbsp;
-<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
+     <a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
       <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
       </a>
 
      &nbsp;
-
      <button type="button" onClick="eliminar(' . $row["id_cuenta"] . '); desvanecer(); recargar2();"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
 
      </div>';
+                    }?>
+            <?php  if($_SESSION["Eliminar"]==1){
+             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_cuenta"].');"  id="'. $row["id_cuenta"] .'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button>
+             &nbsp;
+             <a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
+      <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
+      </a></div>';
+
+            }
+            ?>          
+            <?php if($_SESSION["Editar"]==1){
+            $sub_array[] = '<div class="cbtns">
+          <button type="button" onClick="mostrar('. $row["id_cuenta"] .');"  id="'. $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>
+
+          <a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
+      <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
+      </a></div>';
+        }else{
+
+            $sub_array[] = '<div class="cbtns"> <a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
+      <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
+      </a></div>';
+        }?>
+        <?php
+           
             $data[] = $sub_array;
         }
 
