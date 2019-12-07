@@ -20,7 +20,7 @@
 ?>
 <?php if($_SESSION["Producto"]==1)
      {
-var_dump($_SESSION["Eliminar"]==1)
+
      ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -44,7 +44,7 @@ var_dump($_SESSION["Eliminar"]==1)
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header with-border">
+                    <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#productoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</button></h1>
                         <div class="box-tools pull-right">

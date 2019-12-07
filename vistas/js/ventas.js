@@ -281,7 +281,7 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	var inpP=prec[i];
     	var inpS=sub[i];
     	var inpK= stock[i];   
-    	if(inpC.value >= inpK.value){
+    	if(parseInt(inpC.value)  >= parseInt(inpK.value)){
 
     		alert("producto insuficiente");
     	} else{
@@ -295,12 +295,12 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
      	i++;
      }
 
-   /* for (var i = 0; i <cant.length; i++) {
+    /*for (var i = 0; i <cant.length; i++) {
     	var inpC=cant[i];
     	var inpP=prec[i];
     	var inpS=sub[i];
 var inpK= stock[i]; 
-    		if(inpC.value >= inpK.value){
+    		if(parseInt(inpC.value)  >= parseInt(inpK.value)){
 
     		alert("producto insuficiente");
     	} else{

@@ -132,7 +132,11 @@ function listar()
     "aServerSide": true,//Paginación y filtrado realizados por el servidor
     "bStateSave" : true,
     dom: 'Bfrtip',//Definimos los elementos del control de tabla
-    buttons: [],
+    buttons: [
+               'copyHtml5',
+               'excelHtml5',
+               'csvHtml5',
+               'pdf'],
    "ajax":
        {
          url: '../ajax/categoria.php?op=listar',

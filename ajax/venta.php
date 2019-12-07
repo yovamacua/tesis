@@ -81,8 +81,14 @@ $cantidad=isset( $_POST["cantidad"]);
        if($row["estado"] == 1){
             $est = 'ACEPTADO';
             $atrib = '<span class="label bg-green">Aceptado</span>';
-             $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>'.
+                ?>
+            <?php  if($_SESSION["Eliminar"]==1){
+             $sub_array[]= '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>'.
           ' <button class="btn btn-danger" onClick="anularventa('.$row["idventas"].','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="btn btn-danger btn-md fa fa-close">Anular</button>';
+
+            }else{
+              $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
+        }
           }else{
                 $est = 'ANULADO';
                 $atrib='<span class="label bg-red">Anulado</span>';

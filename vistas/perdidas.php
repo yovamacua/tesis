@@ -56,7 +56,12 @@
                                   <th>Mes</th>
                                   <th>Año</th>
                                   <th>Unidad de Medida</th>
-                                  <th>Acciones</th>
+                                <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                              
+                              }else{
+                                  echo '<th>Acciones</th>';
+                              }
+                                ?>
                                   </tr>
                               </thead>
                             <tbody>

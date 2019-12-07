@@ -145,12 +145,32 @@ switch ($_GET["op"]) {
             <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'.$partidas->conteo($row["id_partida"]).'</span></button></a>
             
             </div>';
-            $sub_array[] = '<div class="cbtns">
+
+     ?>
+                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
+                                 {
+                          $sub_array[]='<div class="cbtns">
     
             <button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
 
             <button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer();"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
             </div>';
+                    }
+                    ?>
+                    <?php  if($_SESSION["Eliminar"]==1){
+             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer();"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+            </div>';
+
+            }
+            ?>          
+            <?php if($_SESSION["Editar"]==1){
+            $sub_array[] = '<div class="cbtns">
+    
+            <button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button></div>&nbsp;
+';
+        }?>
+        <?php
+            $sub_array[] = 
             $data[] = $sub_array;
         }
         $results = array(

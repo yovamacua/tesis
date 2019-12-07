@@ -84,7 +84,12 @@ function recargar(){
                            <th width="5%">Año</th>
                             <th width="5%">Total ($)</th>
                            <th width="25%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
-                           <th width="10%">Acciones</th>
+                             <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                              
+                              }else{
+                                  echo '<th width="10%">Acciones</th>';
+                              }
+                                ?>
                         </tr>
                      </thead>
                      <tbody>
