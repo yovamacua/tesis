@@ -62,12 +62,7 @@
                            <th width="30%">Descripción</th>
                            <th width="10%">Autor</th>
                            <th width="15%">Fecha Incidente</th>
-                            <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
-                              
-                              }else{
-                                  echo '<th width="15%">Acciones</th>';
-                              }
-                                ?>
+                           <th width="15%">Acciones</th>
                         </tr>
                      </thead>
                      <tbody>

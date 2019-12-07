@@ -85,12 +85,7 @@
                               <th>Cantidad</th>
                               <th>Descripción</th>
                               <th>Unidad de Medida</th>
-                             <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0 and $_SESSION["Registrar"]==0){
-                              
-                              }else{
-                                  echo '<th>Acciones</th>';
-                              }
-                                ?>
+                              <th>Acciones</th>
                               </tr>
                           </thead>
                           <tbody>

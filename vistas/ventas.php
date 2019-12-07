@@ -44,7 +44,7 @@
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
-                    <div class="box-header boton-top">
+                    <div class="box-header with-border">
                           <h1 class="box-title" ><label id="letra">Venta</label></h1>
                             <button class="btn btn-primary btn-lg" id="btnagregar" onclick="mostrarformulario(true)" ><i class="fa fa-plus" aria-hidden="true"></i> Nueva Venta</button></h1>
                         <div class="box-tools pull-right">

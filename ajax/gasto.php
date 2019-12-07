@@ -103,24 +103,10 @@ switch ($_GET["op"]) {
 		      	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $row["precio"];
-      			?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]='<div class="cbtns">
+		     	$sub_array[] = '<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_gasto"].');"  id="'.$row["id_gasto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Gasto" ><i class="fa fa-pencil-square-o"></i></button>
       			<button type="button" onClick="eliminar('.$row["id_gasto"].'); desvanecer()"  id="'.$row["id_gasto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Gasto "><i class="fa fa-trash"></i></button></div>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_gasto"].');"  id="'.$row["id_gasto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';
-
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_gasto"].');"  id="'.$row["id_gasto"]. '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>';
-        }?>
-        <?php
-		      	$data[] = $sub_array; 
+		      	$data[] = $sub_array;
 		      }
 
 		      $results = array(
