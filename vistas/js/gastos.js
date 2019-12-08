@@ -1,4 +1,136 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario gastos
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_fecha").hide();
+    $("#error_precio").hide();
+    $("#error_descripcion").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_fecha1 = false;
+    var error_precio = false;
+    var error_descripcion = false;
+
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#fecha1").focusout(function() {
+        campo_fecha1();
+    });
+
+    $("#precio").focusout(function() {
+        campo_precio();
+    });
+
+    $("#descripcion").focusout(function() {
+        campo_descripcion();
+    });
+
+    function campo_fecha1() {
+        var pattern = /^[0-9/\s]*$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_fecha1").html("Solo se permiten numeros y el simbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+    }
+
+    function campo_precio() {
+        var pattern = /^[0-9.\s]*$/;
+        var precio = $("#precio").val();
+        if (pattern.test(precio) && precio !== '') {
+            $("#error_precio").hide();
+            $("#precio").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_precio").html("Solo se permiten numeros y el simbolos . ");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+        var precio = $("#precio").val().length;
+        if (precio <= 0) {
+            $("#error_precio").html("No se permiten campos vacios");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+    }
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#gasto_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        var error_fecha1 = false;
+        var error_precio = false;
+        var error_descripcion = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_fecha1 = false;
+        error_precio = false;
+        error_descripcion = false;
+
+        //comparacion
+        if (error_fecha1 === false && error_precio === false && error_descripcion === false ) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+            $("#precio").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO
  
 //funcion que se ejecuta al inicio
 function init(){
