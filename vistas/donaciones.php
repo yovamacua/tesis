@@ -72,7 +72,7 @@
   <!--FORMULARIO VENTANA MODAL-->
   <div id="donacionModal" class="modal fade">
       <div class="modal-dialog">
-         <form method="post" id="donacion_form">
+         <form method="post" id="donacion_form" autocomplete="off">
             <div class="modal-content">
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -94,28 +94,35 @@
             <div class="form-group col-md-6">
               <label>Fecha</label>
               <input type="text" name="fecha" id="fecha1" autocomplete="off" class="form-control" placeholder="Fecha" required/>
+              <span class="error_form" id="error_fecha1"></span>
             </div>
+
             <div class="form-group col-md-6">
               <label>Donante</label>
-              <input type="text" name="donante" id="donante" class="form-control" placeholder="nombre del donante" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="text" name="donante" id="donante" class="form-control"  autocomplete="off" placeholder="nombre del donante" required/>
+              <span class="error_form" id="error_donante"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="text" name="descripcion" id="descripcion" autocomplete="off" class="form-control" placeholder="Breve descripción" required/>
+            <span class="error_form" id="error_descripcion"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" step="any" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
+            <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
+            <span class="error_form" id="error_cantidad"></span>
           </div>
+
            <div class="form-group col-md-6">
             <label>Precio</label>
             <input type="number" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
+            <span class="error_form" id="error_precio"></span>
           </div>
         </div>
  

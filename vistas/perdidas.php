@@ -78,7 +78,7 @@
   <!--FORMULARIO VENTANA MODAL-->
   <div id="perdidaModal" class="modal fade">
     <div class="modal-dialog">
-      <form method="post" id="perdida_form">
+      <form method="post" id="perdida_form" autocomplete="off" >
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -88,8 +88,8 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre del Producto</label>
-              <select class="form-control" id="idproducto" name="idproducto" >
-                <option  value="0">Seleccione el Producto</option>
+              <select class="form-control" id="idproducto" name="idproducto" required>
+                <option  value="">Seleccione el Producto</option>
                   <?php
                      for($i=0; $i<sizeof($p);$i++){
                        ?>
@@ -98,11 +98,13 @@
                      }
                   ?>   
               </select>
+              <span class="error_form" id="error_idproducto"></span>
             </div>
 
             <div class="form-group col-md-6">
               <label>Cantidad</label>
               <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
+              <span class="error_form" id="error_cantidad"></span>
             </div>
           </div>
 
@@ -110,6 +112,7 @@
             <div class="form-group col-md-6">
               <label>Precio del Producto</label>
               <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
+              <span class="error_form" id="error_precioProduc"></span>
             </div>
 
             <div class="form-group col-md-6">
@@ -121,13 +124,15 @@
                   <option value="libra">libra</option>
                   <option value="unidad">unidad</option>
                 </select>
+                <span class="error_form" id="error_unidadDelProduc"></span>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-12">
               <label>Descripción</label>
-              <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+              <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" placeholder="Breve descripción" required/>
+              <span class="error_form" id="error_descripcion"></span>
             </div>
           </div>
           
@@ -135,11 +140,13 @@
             <div class="form-group col-md-6">
               <label>Mes</label>
               <input type="number" name="mes" id="mes" class="form-control" autocomplete="off" placeholder="mm" required/>
+              <span class="error_form" id="error_mes"></span>
             </div>
 
             <div class="form-group col-md-6">
               <label>Año</label>
               <input type="number" name="anio" id="anio" class="form-control" autocomplete="off" placeholder="AAAA" required />
+              <span class="error_form" id="error_anio"></span>
             </div>
           </div>
  

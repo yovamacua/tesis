@@ -1,4 +1,203 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario gastos
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_fecha1").hide();
+    $("#error_donante").hide();
+    $("#error_descripcion").hide();
+    $("#error_cantidad").hide();
+    $("#error_precio").hide();
+    
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_fecha1= false;
+    var error_donante= false;
+    var error_descripcion = false;
+    var error_cantidad = false;
+    var error_precio = false;
+    
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#fecha1").focusout(function() {
+        campo_fecha1();
+    	});
+
+    $("#error_donante").focusout(function() {
+        campo_donante();
+    	});
+
+    $("#descripcion").focusout(function() {
+	        campo_descripcion();
+		});
+
+    $("#cantidad").focusout(function() {
+        campo_cantidad();
+    	});
+
+    function campo_fecha1() {
+        var pattern = /^[0-9/\s]*$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_fecha1").html("Solo se permiten numeros y el simbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+    }
+
+    function campo_donante() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var donante = $("#donante").val();
+        if (pattern.test(donante) && donante !== '') {
+            $("#error_donante").hide();
+            $("#donante").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_donante").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_donante").css("position", "absolute");
+            $("#error_donante").css("color", "red");
+            $("#error_donante").show();
+            $("#donante").css("border-bottom", "2px solid #F90A0A");
+            error_donante = true;
+        }
+        var donante = $("#donante").val().length;
+        if (donante <= 0) {
+            $("#error_donante").html("No se permiten campos vacios");
+            $("#error_donante").css("position", "absolute");
+            $("#error_donante").css("color", "red");
+            $("#error_donante").show();
+            $("#donante").css("border-bottom", "2px solid #F90A0A");
+            error_donante = true;
+        }
+    }
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    function campo_cantidad() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var cantidad = $("#cantidad").val();
+        if (pattern.test(cantidad) && cantidad !== '') {
+            $("#error_cantidad").hide();
+            $("#cantidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_cantidad").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+        var cantidad = $("#cantidad").val().length;
+        if (cantidad <= 0) {
+            $("#error_cantidad").html("No se permiten campos vacios");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+    }
+
+    function campo_precio() {
+        var pattern = /^[0-9.\s]*$/;
+        var precio = $("#precio").val();
+        if (pattern.test(precio) && precio !== '') {
+            $("#error_precio").hide();
+            $("#precio").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_precio").html("Solo se permiten numeros y el simbolos . ");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+        var precio = $("#precio").val().length;
+        if (precio <= 0) {
+            $("#error_precio").html("No se permiten campos vacios");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#gasto_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        var error_fecha1= false;
+	    var error_donante= false;
+	    var error_descripcion = false;
+	    var error_cantidad = false;
+	    var error_precio = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_fecha1= false;
+	    error_donante= false;
+	    error_descripcion = false;
+	    error_cantidad = false;
+	    error_precio = false;
+
+        //comparacion
+        if (error_fecha1 === false && error_donante === false && 
+        	error_descripcion === false && error_cantidad === false && 
+        	error_precio === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#error_fecha1").css("border-bottom", "1px solid #d2d6de");
+            $("#error_donante").css("border-bottom", "1px solid #d2d6de");
+            $("#error_descripcion").css("border-bottom", "1px solid #d2d6de");
+            $("#error_cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#error_precio").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO
  
 //funcion que se ejecuta al inicio
 function init(){

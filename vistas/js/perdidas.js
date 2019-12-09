@@ -1,4 +1,275 @@
 var tabla;
+
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario gastos
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_idproducto").hide();
+    $("#error_cantidad").hide();
+    $("#error_precioProduc").hide();
+    $("#error_unidadDelProduc").hide();
+    $("#error_descripcion").hide();
+    $("#error_mes").hide();
+    $("#error_anio").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_idproducto= false;
+    var error_cantidad = false;
+    var error_precioProduc = false;
+    var error_unidadDelProduc = false;
+    var error_descripcion = false;
+    var error_mes = false;
+    var error_anio = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#idproducto").focusout(function() {
+        campo_idproducto();
+    	});
+
+    $("#cantidad").focusout(function() {
+        campo_cantidad();
+    	});
+
+    $("#precioProduc").focusout(function() {
+        campo_precioProduc();
+    	});
+
+     $("#unidadDelProduc").focusout(function() {
+        campo_unidadDelProduc();
+    	});
+
+	$("#descripcion").focusout(function() {
+	        campo_descripcion();
+		});
+
+	$("#mes").focusout(function() {
+	        campo_mes();
+	    });
+
+	$("#anio").focusout(function() {
+	        campo_anio();
+	    });
+
+
+    function campo_idproducto() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var idproducto = $("#idproducto").val();
+        if (pattern.test(idproducto) && idproducto !== '') {
+            $("#error_idproducto").hide();
+            $("#idproducto").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_idproducto").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_idproducto").css("position", "absolute");
+            $("#error_idproducto").css("color", "red");
+            $("#error_idproducto").show();
+            $("#idproducto").css("border-bottom", "2px solid #F90A0A");
+            error_idproducto = true;
+        }
+        var idproducto = $("#idproducto").val().length;
+        if (idproducto <= 0) {
+            $("#error_idproducto").html("No se permiten campos vacios");
+            $("#error_idproducto").css("position", "absolute");
+            $("#error_idproducto").css("color", "red");
+            $("#error_idproducto").show();
+            $("#idproducto").css("border-bottom", "2px solid #F90A0A");
+            error_idproducto = true;
+        }
+    }
+
+    function campo_cantidad() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var cantidad = $("#cantidad").val();
+        if (pattern.test(cantidad) && cantidad !== '') {
+            $("#error_cantidad").hide();
+            $("#cantidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_cantidad").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+        var cantidad = $("#cantidad").val().length;
+        if (cantidad <= 0) {
+            $("#error_cantidad").html("No se permiten campos vacios");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+    }
+
+    function campo_precioProduc() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var precioProduc = $("#precioProduc").val();
+        if (pattern.test(precioProduc) && precioProduc !== '') {
+            $("#error_precioProduc").hide();
+            $("#precioProduc").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_precioProduc").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_precioProduc").css("position", "absolute");
+            $("#error_precioProduc").css("color", "red");
+            $("#error_precioProduc").show();
+            $("#precioProduc").css("border-bottom", "2px solid #F90A0A");
+            error_precioProduc = true;
+        }
+        var precioProduc = $("#precioProduc").val().length;
+        if (precioProduc <= 0) {
+            $("#error_precioProduc").html("No se permiten campos vacios");
+            $("#error_precioProduc").css("position", "absolute");
+            $("#error_precioProduc").css("color", "red");
+            $("#error_precioProduc").show();
+            $("#precioProduc").css("border-bottom", "2px solid #F90A0A");
+            error_precioProduc = true;
+        }
+    }
+
+    function campo_unidadDelProduc() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var unidadDelProduc = $("#unidadDelProduc").val();
+        if (pattern.test(unidadDelProduc) && unidadDelProduc !== '') {
+            $("#error_unidadDelProduc").hide();
+            $("#unidadDelProduc").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_unidadDelProduc").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_unidadDelProduc").css("position", "absolute");
+            $("#error_unidadDelProduc").css("color", "red");
+            $("#error_unidadDelProduc").show();
+            $("#unidadDelProduc").css("border-bottom", "2px solid #F90A0A");
+            error_unidadDelProduc = true;
+        }
+        var unidadDelProduc = $("#unidadDelProduc").val().length;
+        if (unidadDelProduc <= 0) {
+            $("#error_unidadDelProduc").html("No se permiten campos vacios");
+            $("#error_unidadDelProduc").css("position", "absolute");
+            $("#error_unidadDelProduc").css("color", "red");
+            $("#error_unidadDelProduc").show();
+            $("#unidadDelProduc").css("border-bottom", "2px solid #F90A0A");
+            error_unidadDelProduc = true;
+        }
+    }
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    function campo_mes() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var mes = $("#mes").val();
+        if (pattern.test(mes) && mes !== '') {
+            $("#error_mes").hide();
+            $("#mes").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_mes").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_mes").css("position", "absolute");
+            $("#error_mes").css("color", "red");
+            $("#error_mes").show();
+            $("#mes").css("border-bottom", "2px solid #F90A0A");
+            error_mes = true;
+        }
+        var mes = $("#mes").val().length;
+        if (mes <= 0) {
+            $("#error_mes").html("No se permiten campos vacios");
+            $("#error_mes").css("position", "absolute");
+            $("#error_mes").css("color", "red");
+            $("#error_mes").show();
+            $("#mes").css("border-bottom", "2px solid #F90A0A");
+            error_mes = true;
+        }
+    }
+
+    function campo_anio() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var anio = $("#anio").val();
+        if (pattern.test(anio) && anio !== '') {
+            $("#error_danio").hide();
+            $("#anio").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_danio").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_danio").css("position", "absolute");
+            $("#error_danio").css("color", "red");
+            $("#error_danio").show();
+            $("#anio").css("border-bottom", "2px solid #F90A0A");
+            error_danio = true;
+        }
+        var anio = $("#anio").val().length;
+        if (anio <= 0) {
+            $("#error_danio").html("No se permiten campos vacios");
+            $("#error_danio").css("position", "absolute");
+            $("#error_danio").css("color", "red");
+            $("#error_danio").show();
+            $("#anio").css("border-bottom", "2px solid #F90A0A");
+            error_danio = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#gasto_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        var error_idproducto= false;
+	    var error_cantidad = false;
+	    var error_precioProduc = false;
+	    var error_unidadDelProduc = false;
+	    var error_descripcion = false;
+	    var error_mes = false;
+	    var error_anio = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_idproducto = false;
+        error_cantidad = false;
+        error_precioProduc = false;
+        error_unidadDelProduc = false;
+        error_descripcion = false;
+        error_mes = false;
+        error_anio = false;
+
+        //comparacion
+        if (error_idproducto === false && error_cantidad === false && 
+        	error_precioProduc === false && error_unidadDelProduc === false && 
+        	error_descripcion === false && error_mes === false && 
+        	error_anio === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#idproducto").css("border-bottom", "1px solid #d2d6de");
+            $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
+            $("#unidadDelProduc").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            $("#mes").css("border-bottom", "1px solid #d2d6de");
+            $("#anio").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO
  
 //funcion que se ejecuta al inicio 
 function init(){
