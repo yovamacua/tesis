@@ -58,6 +58,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                     $_SESSION["nombre"]     = $resultado["nombres"];
                     $_SESSION["usuario"]    = $resultado["usuario"];
                     $_SESSION["imagen"]     = $resultado["usuario_imagen"];
+                    $_SESSION["cargo"]     = $resultado["cargo"];
                     $_SESSION["ultimoAcceso"] = date("Y-n-j H:i:s");
                    
                     //PERMISOS DEL USUARIO PARA ACCEDER A LOS MODULOS

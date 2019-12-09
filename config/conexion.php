@@ -5,7 +5,7 @@ date_default_timezone_set('America/El_Salvador');
 
 define('DBHOST','localhost');
 define('DBUSER','root');
-define('DBPASS','');
+define('DBPASS','admin12-');
 define('DBNAME','campoescuela');
 
 //****************************************

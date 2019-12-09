@@ -86,19 +86,24 @@
      $estado_resultado->getStyle('B10:B50')->applyFromArray($fontStyle);
      $estado_resultado->getStyle('C10:C50')->applyFromArray($fontStyle);
      $estado_resultado->getStyle('D10:D50')->applyFromArray($fontStyle);
+    $estado_resultado->getStyle('B10:D23')->applyFromArray($styleArray);
+     $estado_resultado->getStyle('B10:B23')->applyFromArray($styleArray);
+     $estado_resultado->getStyle('C10:C23')->applyFromArray($styleArray);
+     $estado_resultado->getStyle('D10:D23')->applyFromArray($styleArray);
+
      // CAPTURA DE LOS DATOS POR METODO POST Y COMIENZA EL INGRESO
            $date_inicial = $_POST["fecha"];
                 $date = str_replace('/', '-', $date_inicial);
-                $fecha_inicial = date("Y-m-d", strtotime($date));
+                $fecha_inicial = date("d-m-Y", strtotime($date));
 
                   $date_final = $_POST["fecha2"];
                   $date = str_replace('/', '-', $date_final);
-                  $fecha_final = date("Y-m-d", strtotime($date));
+                  $fecha_final = date("d-m-Y", strtotime($date));
 
   //titulo de la hoja
 
 
-   $valor= "ESTADO DE RESULTADO"."  ".  $date_inicial ."  "."AL"."  ".$date_final;
+   $valor= "ESTADO DE RESULTADO"."  ".  $fecha_inicial ."  "."AL"."  ".$fecha_final ;
     $estado_resultado->setCellValue('C2', $valor);
     $estado_resultado->getStyle('C2')->applyFromArray($fontStyle);                
 
@@ -248,15 +253,16 @@
     
     $balance_general->getStyle('C12:C50')->applyFromArray($fontStyle);
     $balance_general->getStyle('F13:F50')->applyFromArray($fontStyle);
-
+  $balance_general->getStyle('C12:F28')->applyFromArray($styleArray);
+  $balance_general->getStyle('C12:C28')->applyFromArray($styleArray);
     // dimesion de las columnas
     $balance_general->getColumnDimension('A')->setWidth(20);
     $balance_general->getColumnDimension('B')->setWidth(20);
-    $balance_general->getColumnDimension('C')->setWidth(25);
+    $balance_general->getColumnDimension('C')->setWidth(32);
     $balance_general->getColumnDimension('F')->setWidth(18);
   //**********************************************************************/////
          $balance_general->setTitle("Balance General");// titulo de la hoja
-         $valor1= "ESTADO DE RESULTADO"."  ".  $date_inicial ."  "."AL"."  ".$date_final;
+         $valor1= "ESTADO DE RESULTADO"."  ".  $fecha_inicial ."  "."AL"."  ".$fecha_final;
     $balance_general->setCellValue('C2', $valor1);
     $balance_general->getStyle('C2')->applyFromArray($fontStyle); 
   //*******************************************************/***
@@ -340,16 +346,7 @@
          
      }
      //**********************CAPITAL ****************//
-   /*   $sql9= "select sum(e.financiero) as inversion from entrada e
-  inner join cuentas c on c.id_cuenta= e.id_cuenta
-  where anio=? ;";
-              
-                $sql9 = $bd->prepare($sql9,[
-        PDO :: ATTR_CURSOR  =>  PDO :: CURSOR_SCROLL ,
-    ]);
-                $sql9->bindValue(1,$anio);
-                $sql9->execute();
-                 $uso= $sql9->fetchall(PDO::FETCH_ASSOC);*/
+
     $sql9= "select sum(precio *cantidad) as totalInsumo from insumos ;";
              $sql9 = $bd->prepare($sql9,[
         PDO :: ATTR_CURSOR  =>  PDO :: CURSOR_SCROLL ,
@@ -360,7 +357,7 @@
                $numeroFila  =  27;
         foreach($capital as $row){
        $capital=$row["totalInsumo"];
-       $patrimonio=$capital + $total;
+       $patrimonio=$capital;
         $balance_general-> setCellValueByColumnAndRow ( 6 , $numeroFila , $patrimonio);
         $numeroFila ++ ;
          $balance_general->setCellValue('C27', "CAPITAL");

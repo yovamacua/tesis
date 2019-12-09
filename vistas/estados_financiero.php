@@ -44,7 +44,7 @@
                    <div class="form-group">
                 <label for="inputPassword">Fecha Inicial</label>
                
-                  <input type="text" class="form-control" id="fecha" name="fecha" placeholder="Fecha Inicial" style="width:50%"/>
+                  <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha Inicial" style="width:50%"/>
               
               </div>
 
@@ -52,7 +52,7 @@
               <div class="form-group">
                 <label for="inputPassword">Fecha Final</label>
                
-                  <input type="text" class="form-control" id="fecha2" name="fecha2" placeholder="Fecha Final" style="width:50%"/>
+                  <input type="date" class="form-control" id="fecha2" name="fecha2" placeholder="Fecha Final" style="width:50%"/>
               
               </div>
 

@@ -5,7 +5,12 @@
   require_once("../modelos/Productos.php");
   require_once("mensajes.php");
   $productos = new Producto();
-   //var_dump($_SESSION["Editar"]==1);
+  if (!isset($_SESSION['id_usuario'])) {?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+}
 
    //declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos que si existe el parametro que estamos recibiendo
    
@@ -23,7 +28,12 @@
    switch($_GET["op"]){
 
               case "guardaryeditar":
-
+ if (!preg_match('/^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/', $_POST["producto"]) or
+            !preg_match('/^[0-9.\s]*$/', $_POST["precio_venta"]) or !preg_match('/^[0-9.\s]*$/', $_POST["stock"])) 
+        {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
       /*verificamos si existe el producto en la base de datos, si ya existe un registro con la categoria entonces no se registra la categoria*/
       
       //importante: se debe poner el $_POST sino no funciona
@@ -70,6 +80,7 @@
 
 	            	 
 	            }
+            }
 
      //mensaje success
      if (isset($messages)){

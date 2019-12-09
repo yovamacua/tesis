@@ -100,7 +100,8 @@
                      <label for="" class="col-lg-3 control-label">Fecha(*)</label>
 
                   <div class="col-lg-9">
-                    <input type="date" class="form-control" id="fecha" name="fecha" style="width:50%;"  />
+                    <input type="date" class="form-control" id="fecha" name="fecha" autocomplete="off" style="width:50%;"  required  />
+                    <span class="error_form" id="error_fecha">
                   </div>
               </div>
                <div class="form-group  ">

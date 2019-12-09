@@ -122,7 +122,8 @@
                     </select>
                   </br>
                   <label>Producto</label>
-                   <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$">
+                   <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" maxlength="60" required/>
+                   <span class="error_form" id="error_producto"></span>
                    </br>
                   <label>Unid. Medida</label>
                      <select class="selectpicker form-control"id="unidad" name="unidad"   required>
@@ -134,10 +135,12 @@
                   </br>
 
                   <label>Precio Venta</label>
-                  <input type="text" class="form-control" id="precio_venta" name="precio_venta"  placeholder="Precio Venta" required pattern="^[0-9]{0,12}([.][0-9]{0,12})">
+                  <input type="text" class="form-control" id="precio_venta" name="precio_venta"  placeholder="Precio Venta" maxlength="4" required />
+                   <span class="error_form" id="error_precio"></span>
                 </br>
                   <label>Stock</label>
-                    <input type="text" class="form-control" id="stock" name="stock" >
+                    <input type="text" class="form-control" id="stock" name="stock" maxlength="4" required/>
+                     <span class="error_form" id="error_stock"></span>
                </br>
              
           <div class="modal-footer">

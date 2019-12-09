@@ -96,14 +96,14 @@
   // la consulta de los datos
          $date_inicial = $_POST["fecha"];
               $date = str_replace('/', '-', $date_inicial);
-              $fecha_inicial = date("Y-m-d", strtotime($date));
+              $fecha_inicial = date("d-m-Y", strtotime($date));
 
                 $date_final = $_POST["fecha2"];
                 $date = str_replace('/', '-', $date_final);
-                $fecha_final = date("Y-m-d", strtotime($date));
+                $fecha_final = date("d-m-Y", strtotime($date));
                 $id_categoria=$_POST["categoria"];
    // TITULO DEL REPORTE
-  $valor= "REPORTE DE VENTAS SEMANAL DE LA FECHA"." ".  $date_inicial ." "."HASTA"." ".$date_final;
+  $valor= "REPORTE DE VENTAS SEMANAL DE LA FECHA"." ".  $fecha_inicial ." "."HASTA"." ".$fecha_final;
   $registro_venta->setCellValue('E2', $valor);
   $registro_venta->getStyle('E2')->applyFromArray($fontStyle);
 
@@ -116,8 +116,8 @@
               $sql = $bd->prepare($sql,[
       PDO :: ATTR_CURSOR  =>  PDO :: CURSOR_SCROLL ,
   ]);
-              $sql->bindValue(1,$fecha_inicial);
-              $sql->bindValue(2,$fecha_final);
+              $sql->bindValue(1,$date_inicial);
+              $sql->bindValue(2,$date_final);
               $sql->bindValue(3,$id_categoria);
               $sql->execute();
              
@@ -138,7 +138,7 @@
       $registro_venta -> setCellValueByColumnAndRow ( 3 , $numeroDeFila , $cantidad );
       $registro_venta -> setCellValueByColumnAndRow ( 4, $numeroDeFila , $precio_venta );
       $registro_venta -> setCellValueByColumnAndRow ( 5, $numeroDeFila , $total );
-      $registro_venta -> setCellValueByColumnAndRow ( 6, $numeroDeFila , $Fecha_venta );
+      $registro_venta -> setCellValueByColumnAndRow ( 6, $numeroDeFila ,  $newDate );
       $numeroDeFila ++ ;
       $id=$numeroDeFila-1;
       // aplica formato a la celda con el contenido
@@ -203,8 +203,8 @@
            $sql1 = $bd->prepare($sql1,[
       PDO :: ATTR_CURSOR  =>  PDO :: CURSOR_SCROLL ,
   ]);
-              $sql1->bindValue(1,$fecha_inicial1);
-              $sql1->bindValue(2,$fecha_final2);
+              $sql1->bindValue(1,$date_inicial);
+              $sql1->bindValue(2,$date_final);
               $sql1->bindValue(3,$id_categorias);
               $sql1->execute();
             $semana= $sql1->fetchall(PDO::FETCH_ASSOC);

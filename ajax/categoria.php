@@ -129,6 +129,7 @@ if (!isset($_SESSION['id_usuario'])) {?>
             <?php if($_SESSION["Editar"]==1){
             $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrar('.$row["id_categoria"].');"  id="'.$row["id_categoria"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button></div>';
+         
         }?>
         <?php
          

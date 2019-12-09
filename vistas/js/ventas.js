@@ -3,17 +3,72 @@ var tabla;
 var tabla_ventas;
 
 var tabla_ventas_mes
+//// INICIO DE VALIDACION DEL FORMULARIO///
+// funcion para validar formulario de usuario
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_fecha").hide();
+
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    
+    var error_fecha = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+
+    $("#fecha").focusout(function() {
+        campo_fecha();
+    });
+
+
+    // funciones para validar
+    function campo_fecha() {
+        var fecha = document.getElementById("fecha").value;
+        if (fecha.length <= 0) {
+            $("#error_fecha").html("Debe colocar una fecha");
+            $("#error_fecha").css("color", "red");
+            $("#error_fecha").show();
+            error_fecha = true;
+        } else {
+            $("#error_fecha").hide();
+            $("#fecha").css("border-bottom", "2px solid #34F458");
+            var error_fecha = false;
+        }
+    }
+    // se valida el formulario
+    $("#formulario").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        error_fecha = false;
+    
+
+
+        // se invoca a las funciones para tener el valor de las variables
+    
+        campo_fecha();
+        
+
+
+        //comparacion
+        if (error_titulo === false) {
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#fecha").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            bootbox.alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO
+
 //Función que se ejecuta al inicio
 function init(){
 	mostrarformulario(false);
 	listar();
 	 //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
-	$("#formulario").on("submit",function(e)
-	{
-
-		guardaryeditar(e);
-	})
-
+	
     //cambia el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 
@@ -249,9 +304,9 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	var fila='<tr class="filas" style="text-align: center" id="fila'+cont+'">'+
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
     	'<td><input type="hidden"  name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
-    	'<td><input type="text" style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
-    	'<td><input type="text" style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-    	'<td><input type="text"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+'"></td>'+
+    	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
+    	'<td><input type="text" maxlength="5" required pattern="/^([0-9])*$/" style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+    	'<td><input type="text"  maxlength="5" required pattern="/^([0-9])*$/" style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' "></td>'+
     	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
     	//'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
     	'</tr>';

@@ -5,6 +5,13 @@
   require_once("../modelos/Venta.php");
   require_once("mensajes.php");
   require_once("../modelos/Productos.php");
+  if (!isset($_SESSION['id_usuario'])) {?>
+        <script type="text/javascript">
+        window.location="../vistas/home.php";
+        </script>
+    <?php
+}
+ 
   $productos = new Producto();
   $venta = new Ventas();
 
@@ -20,7 +27,10 @@ $cantidad=isset( $_POST["cantidad"]);
 
    switch($_GET["op"]){
    case "guardaryeditar":
-
+ if ($_POST["fecha"] == '') {
+            $errors[] = "Formatos de Información no validos";
+            echo error($errors);
+        } else {
       /*verificamos si existe el producto en la base de datos, si ya existe un registro con la categoria entonces no se registra la categoria*/
       
       //importante: se debe poner el $_POST sino no funciona
@@ -54,7 +64,7 @@ $cantidad=isset( $_POST["cantidad"]);
 
           }//cierre de empty
 
-
+}
      //mensaje success
      if (isset($messages)){
         echo exito($messages);
