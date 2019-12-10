@@ -64,7 +64,7 @@ function recargar(){
 
                      <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#partidaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar partida</button>
                      <div id="sumtop" style="display: inherit;"><b>Total($): </b> 
-<span id="recargado" style="background: #dd4b39;color: white;padding: 0.5rem 1rem;"></span>&nbsp;
+<span id="recargado" style="font-weight: bold"></span>&nbsp;
 <!--<span><a href="#" onclick="javascript:recargar();">Actualizar</a></span> -->
 </div>
                   </h1>
@@ -82,8 +82,8 @@ function recargar(){
                            <th width="25%">Nombre Partida</th>
                            <th width="15%">Responsable</th>
                            <th width="5%">Año</th>
-                            <th width="5%">Total ($)</th>
-                           <th width="25%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
+                            <th width="10%">Total ($)</th>
+                           <th width="20%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
                              <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{

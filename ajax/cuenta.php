@@ -102,10 +102,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["nombrecuenta"];
             $sub_array[] = $row["objetivo"];
             $sub_array[] = $row["estrategia"];
-            $sub_array[] = '
-      <div class="cbtns">
-      <button type="button" class="btn btn-info btn-md" style="pointer-events: none;cursor: default;"><span class="notistyle2">'. $nulo .'</span></button>
-      </div>';
+            $sub_array[] = '<b>'.$nulo.'</b>';
 
             $sub_array[] = '
       <div class="cbtns">

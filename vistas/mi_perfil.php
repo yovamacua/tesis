@@ -100,9 +100,9 @@
               ?>
             <div style="text-align: center;">
 
-              <a href="#" class="btn btn-default btn-flat" onclick="mostrar_perfil('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Editar Perfil</a>&nbsp;
+              <a href="#" class="btn btn-primary btn-flat" onclick="mostrar_perfil('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Editar Perfil</a>&nbsp;
 
-              <a href="#" class="btn btn-default btn-flat" onclick="editar_pass('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Cambiar Contraseña</a>
+              <a href="#" class="btn btn-primary btn-flat" onclick="editar_pass('<?php echo $_SESSION["id_usuario"]?>')"  data-toggle="modal" data-target="#perfilModal">Cambiar Contraseña</a>
 
             </div>
           </div>
@@ -116,7 +116,7 @@
               if ($imagen == "imagen_usuario_general.png") {              
               }else{ ?>
             
-            <a href="#" class="btn btn-default btn-flat" onclick="quitar_imagen('<?php echo $_SESSION["id_usuario"]?>')" >Eliminar Imagen</a>
+            <a href="#" class="btn btn-danger btn-flat" onclick="quitar_imagen('<?php echo $_SESSION["id_usuario"]?>')" >Eliminar Imagen</a>
             <?php }?>
 
           </div>

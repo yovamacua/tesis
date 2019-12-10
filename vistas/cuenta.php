@@ -90,7 +90,7 @@ function recargar2(){
 
                      <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#cuentaModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar una cuenta</button>
                      <div id="sumtop" style="display: inherit;"><b>Total($): </b> 
-<span id="recargado2" style="background: #dd4b39;color: white;padding: 0.5rem 1rem;"></span>&nbsp;
+<span id="recargado2" style="font-weight: bold"></span>&nbsp;
 <!--<span><a href="#" onclick="javascript:recargar2();">Actualizar</a></span> -->
 </div>
                   </h1>

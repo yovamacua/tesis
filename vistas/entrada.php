@@ -152,8 +152,7 @@ $(function resolucion() {
       <div class="content-wrapper" onload="resolucion()">
           <section class="content-header">
       <h1>
-       Administrar información de la cuenta: <b><?php echo $nombre;?></b>
-        <a href="reportes/reporte-excel-cuenta.php?selector=<?php echo $identificador ?>&selector2=<?php echo $_SESSION['seleccion_partida'] ?>" download><span class="btn btn-info btn-md hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></span></a>
+       <a href="reportes/reporte-excel-cuenta.php?selector=<?php echo $identificador ?>&selector2=<?php echo $_SESSION['seleccion_partida'] ?>" download><span class="btn btn-info btn-md hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></span></a> Nombre de cuenta: <b><?php echo $nombre;?></b>        
       </a>
       </h1>
 
@@ -161,7 +160,7 @@ $(function resolucion() {
         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
         <li><a href="partidas.php"><i class="fa fa-file-text-o"></i> Partidas</a></li>
         <li><a href="cuenta.php?id=<?php echo $_SESSION["seleccion_partida"]; ?>&partida=<?php echo $_SESSION["nombre_partida"]; ?>"><i class="fa fa-clipboard"></i> Cuentas</a></li>
-        <li><i class="fa fa-list-alt"></i> Detalles de cuenta</li>
+        <li><i class="fa fa-list-alt"></i> Detalle de cuenta</li>
       </ol>
 
     </section>
@@ -395,8 +394,9 @@ document.getElementById("data1").focus();
   $(document).on('click', '.delete', function(){
    var id = $(this).attr("id");
   contador = 0;
-   if(confirm("Esta seguro de borrar esta información?"))
-   {
+
+bootbox.confirm("¿Está Seguro de eliminar este registro?", function(result) {
+  if (result) {
     $.ajax({
      url:"../modelos/actions_table/delete.php?valor="+<?php echo $identificador; ?>,
      method:"POST",
@@ -407,7 +407,9 @@ document.getElementById("data1").focus();
       fetch_data();
      }
     });
-   }
+
+}
+});
   });
  });
 </script>
