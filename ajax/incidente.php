@@ -60,7 +60,7 @@ switch ($_GET["op"]) {
                 $output["id_incidente"] = $row["id_incidente"];
                 $output["titulo"]       = $row["titulo"];
                 $output["descripcion"]  = $row["descripcion"];
-                $output["fecha"]        = $row["fecha"];
+                $output["fecha"]        = date("d-m-Y",strtotime($row["fecha"]));
             }
             echo json_encode($output);
         } else {
@@ -83,7 +83,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["titulo"];
             $sub_array[] = $row["descripcion"];
             $sub_array[] = $row["usuario"];
-            $sub_array[] = $row["fecha"];
+            $sub_array[] =  date("d/m/Y", strtotime($row["fecha"]));
              ?>
                   <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
                                  {

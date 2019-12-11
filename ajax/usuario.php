@@ -189,7 +189,7 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["correo"];
             $sub_array[] = $cargo;
             //se formate el la fecha, tipo y formato
-            $sub_array[] = date("d-m-Y", strtotime($row["fecha_ingreso"]));
+            $sub_array[] = date("d/m/Y", strtotime($row["fecha_ingreso"]));
             //botones con valores de los campos en el id
             $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button>
 

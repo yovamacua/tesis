@@ -133,7 +133,11 @@
                      <td><?php echo $datos[$i]["titulo"]?></td>
                      <td><?php echo $datos[$i]["descripcion"]?></td>
                      <td><?php echo $datos[$i]["usuario"]?></td>
-                     <td><?php echo $datos[$i]["fecha"]?></td>
+                     <td><?php echo date("d/m/Y", strtotime($datos[$i]["fecha"]));
+
+                     
+                     
+                     ?></td>
                   </tr>
                   <?php
                      }//cierre del for                                              
@@ -193,7 +197,7 @@
    ["<?php echo str_replace('
 ', '\n', $c->titulo); ?>", 
    "<?php echo str_replace('
-', '\n', $c->descripcion); ?>", "<?php echo $c->usuario; ?>","<?php echo $c->fecha; ?>"],
+', '\n', $c->descripcion); ?>", "<?php echo $c->usuario; ?>","<?php echo date("d/m/Y", strtotime($c->fecha)); ?>"],
    <?php endforeach; ?>  
      ];
    
@@ -202,7 +206,7 @@
      );
    var d = new Date();
 	//codigo para genera la fecha del reporte
-   var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Dicimber"];
+   var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciember"];
    var today = months[d.getMonth()]+' '+d.getDate();
      pdf.save('Reporte de '+today);
    

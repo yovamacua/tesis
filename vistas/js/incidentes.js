@@ -225,7 +225,6 @@ function mostrar(id_incidente) {
         $('#incidenteModal').modal('show');
         $('#titulo').val(data.titulo);
         $('#descripcion').val(data.descripcion);
-
         $('#fecha').datepicker('setDate', data.fecha);
         $('.modal-title').text("Editar Incidente");
         $('#id_incidente').val(id_incidente);
