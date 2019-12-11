@@ -103,14 +103,17 @@ switch ($_GET["op"]) {
       $datos=$donaciones->get_donaciones();
       $data= Array();
 
+      $dolar = '$ ';
+
         foreach($datos as $row){
             $sub_array = array();
           
+          $sub_array[] = $row["usuario"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
           $sub_array[] = $row["donante"];
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["cantidad"];
-          $sub_array[] = $row["precio"];
+          $sub_array[] = $dolar.$row["precio"];
           ?>
                   <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
                                  {
@@ -119,13 +122,13 @@ switch ($_GET["op"]) {
           <button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación "><i class="fa fa-trash"></i></button></div>';
                     }?>
             <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';
+             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación "><i class="fa fa-trash"></i></button></div>';
 
             }
             ?>          
             <?php if($_SESSION["Editar"]==1){
             $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>';
+          <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación" ><i class="fa fa-pencil-square-o"></i></button>';
         }?>
         <?php
             $data[] = $sub_array;

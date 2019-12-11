@@ -45,11 +45,12 @@
                           <table id="donacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th>Fecha</th>
-                                  <th>Donante</th>
+                                  <th width="15%">Autor</th>
+                                  <th width="10%">Fecha</th>
+                                  <th width="15%">Donante</th>
                                   <th>Descripción</th>
-                                  <th>Cantidad</th>
-                                  <th>Precio</th>
+                                  <th width="8%">Cantidad</th>
+                                  <th width="10%">Valorado c/u en </th>
                                  <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{

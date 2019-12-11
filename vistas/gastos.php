@@ -45,9 +45,10 @@
                           <table id="gasto_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th>Fecha</th>
+                                  <th width="15%">Autor</th>
+                                  <th width="10%">Fecha</th>
                                   <th>Descripción</th>
-                                  <th>Gasto</th>
+                                  <th width="10%">Gasto</th>
                                   <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{

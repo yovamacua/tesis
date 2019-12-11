@@ -205,24 +205,24 @@ $(function() {
         var pattern = /^[0-9]*$/;   
         var anio = $("#anio").val();
         if (pattern.test(anio) && anio !== '') {
-            $("#error_danio").hide();
+            $("#error_anio").hide();
             $("#anio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_danio").html("Solo se permiten numeros");
-            $("#error_danio").css("position", "absolute");
-            $("#error_danio").css("color", "red");
-            $("#error_danio").show();
+            $("#error_anio").html("Solo se permiten numeros");
+            $("#error_anio").css("position", "absolute");
+            $("#error_anio").css("color", "red");
+            $("#error_anio").show();
             $("#anio").css("border-bottom", "2px solid #F90A0A");
             error_danio = true;
         }
         var anio = $("#anio").val().length;
         if (anio <= 0) {
-            $("#error_danio").html("No se permiten campos vacios");
-            $("#error_danio").css("position", "absolute");
-            $("#error_danio").css("color", "red");
-            $("#error_danio").show();
+            $("#error_anio").html("No se permiten campos vacios");
+            $("#error_anio").css("position", "absolute");
+            $("#error_anio").css("color", "red");
+            $("#error_anio").show();
             $("#anio").css("border-bottom", "2px solid #F90A0A");
-            error_danio = true;
+            error_anio = true;
         }
     }
 

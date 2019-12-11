@@ -117,15 +117,18 @@ switch ($_GET["op"]) {
 			$datos = $insumos->get_insumos();
  	 		$data = Array();
 
+ 	 		$dolar = '$ ';
+
 		    foreach($datos as $row){
 		        $sub_array = array();
 		      
+		      	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
+		      	$sub_array[] = $row["categoria"];
+		      	$sub_array[] = $row["descripcion"];
 		      	$sub_array[] = $row["cantidad"];
-		      	$sub_array[] = $row["precio"];
 		      	$sub_array[] = $row["unidadMedida"];
-		     	$sub_array[] = $row["descripcion"];
-		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
-		     	$sub_array[] = $row["categoria"];
+		      	$sub_array[] = $dolar.$row["precio"];
+		      	
       			?>
                   <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
                                  {

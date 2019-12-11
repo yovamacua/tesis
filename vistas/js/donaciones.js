@@ -122,7 +122,7 @@ $(function() {
             $("#error_cantidad").hide();
             $("#cantidad").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_cantidad").html("Solo se permiten numeros");
+            $("#error_cantidad").html("Solo se permiten números enteros");
             $("#error_cantidad").css("position", "absolute");
             $("#error_cantidad").css("color", "red");
             $("#error_cantidad").show();

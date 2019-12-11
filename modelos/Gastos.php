@@ -17,7 +17,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select * from gastos";
+			$sql = "select g.fecha, g.descripcion, g.precio, u.usuario from gastos g inner join usuarios u on g.id_usuario = u.id_usuario";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 

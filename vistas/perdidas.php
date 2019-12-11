@@ -49,13 +49,14 @@
                           <table id="perdida_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th>Nombre Producto</th>
-                                  <th>Cantidad</th>
+                                  <th width="12%">Nombre Producto</th>
+                                  <th width="10%">Cantidad</th>
+                                  <th width="10%">Unidad de Medida</th>
                                   <th>Descripción</th>
-                                  <th>Precio Producto</th>
+                                  <th width="10%">Precio Unitario</th>
                                   <th>Mes</th>
                                   <th>Año</th>
-                                  <th>Unidad de Medida</th>
+                                  <th width="15%">Autor</th>
                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{

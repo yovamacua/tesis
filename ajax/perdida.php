@@ -18,7 +18,7 @@
 	$mes = isset($_POST["mes"]);
 	$anio = isset($_POST["anio"]);
 	$unidadDelProduc = isset($_POST["unidadDelProduc"]);
-	$id_usuario=isset($_POST["id_usuario"]);
+	$id_usuario = isset($_POST["id_usuario"]);
 
 	#valida que exista la sessión
 	if (!isset($_SESSION['id_usuario'])) {?>
@@ -106,15 +106,18 @@ switch ($_GET["op"]) {
 			$datos=$perdidas->get_perdidas();
  	 		$data= Array();
 
+            $dolar = '$ ';
+
 		    foreach($datos as $row){
 		        $sub_array = array();
 		      	$sub_array[] = $row["producto"];
 		     	$sub_array[] = $row["cantidad"];
+		     	$sub_array[] = $row["unidadDelProduc"];
 		     	$sub_array[] = $row["descripcion"];
-		     	$sub_array[] = $row["precioProduc"];
+		     	$sub_array[] = $dolar.$row["precioProduc"];
 		     	$sub_array[] = $row["mes"];
 		     	$sub_array[] = $row["anio"];
-		     	$sub_array[] = $row["unidadDelProduc"];
+		     	$sub_array[] = $row["usuario"];
 		     	$sub_array[] = '<div class="cbtns">
 		     	<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida" ><i class="fa fa-pencil-square-o"></i></button>
       			<button type="button" onClick="eliminar('.$row["id_perdida"].'); desvanecer()"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';

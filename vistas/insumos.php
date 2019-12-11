@@ -61,12 +61,12 @@
                           <table id="insumo_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th>Cantidad</th>
-                                  <th>Precio</th>
-                                  <th>Unidad de Medida</th>
-                                  <th>Descripcion</th>
                                   <th>Fecha</th>
                                   <th>Categoria</th>
+                                  <th>Descripcion</th>
+                                  <th>Cantidad</th>
+                                  <th>Unidad de Medida</th>
+                                  <th>Precio</th>                                  
                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{
