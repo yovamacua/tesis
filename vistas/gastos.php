@@ -98,7 +98,7 @@
 
             <div class="form-group col-md-6">
             <label>Gasto</label>
-            <input type="number" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
+            <input type="text" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
             <span class="error_form" id="error_precio"></span>
           </div>
         </div>

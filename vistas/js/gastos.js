@@ -28,7 +28,7 @@ $(function() {
     });
 
     function campo_fecha1() {
-        var pattern = /^[0-9/\s]*$/;
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
         var fecha1 = $("#fecha1").val();
         if (pattern.test(fecha1) && fecha1 !== '') {
             $("#error_fecha1").hide();
@@ -53,13 +53,13 @@ $(function() {
     }
 
     function campo_precio() {
-        var pattern = /^[0-9.\s]*$/;
+        var pattern = /^[0-9]+[.]+[0-9]*$/;
         var precio = $("#precio").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_precio").hide();
             $("#precio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precio").html("Solo se permiten numeros y el simbolos . ");
+            $("#error_precio").html("Solo se permite el formato 0.00");
             $("#error_precio").css("position", "absolute");
             $("#error_precio").css("color", "red");
             $("#error_precio").show();
@@ -135,10 +135,6 @@ $(function() {
 //funcion que se ejecuta al inicio
 function init(){
 	listar();
-	//cuando se de click al boton submit se ejecuta la funcion guardar
-	$("#gasto_form").on("submit",function(e){
-		guardaryeditar(e);
-	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
@@ -153,6 +149,15 @@ function limpiar(){
 	$('#descripcion').val("");
 	$('#precio').val("");
 	$('#id_gasto').val("");
+
+    /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    $("#precio").css("border-bottom", "1px solid #d2d6de");
+    
+    $("#error_fecha1").hide();
+    $("#error_descripcion").hide();
+    $("#error_precio").hide();
 
 }
 

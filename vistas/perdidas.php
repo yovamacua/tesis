@@ -103,7 +103,7 @@
 
             <div class="form-group col-md-6">
               <label>Cantidad</label>
-              <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
+              <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
               <span class="error_form" id="error_cantidad"></span>
             </div>
           </div>
@@ -111,13 +111,13 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Precio del Producto</label>
-              <input type="number" step="any" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
+              <input type="text" step="any" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
               <span class="error_form" id="error_precioProduc"></span>
             </div>
 
             <div class="form-group col-md-6">
               <label>Unidad de Medida</label>
-                <select class="selectpicker form-control"id="unidadDelProduc" name="unidadDelProduc" required>
+                <select class="selectpicker form-control" id="unidadDelProduc" name="unidadDelProduc" required>
                   <option value="">-- Seleccione la Unidad --</option>
                   <option value="kilo">kilo</option>
                   <option value="gramo">gramo</option>
@@ -139,13 +139,13 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Mes</label>
-              <input type="number" name="mes" id="mes" class="form-control" autocomplete="off" placeholder="mm" required/>
+              <input type="text" name="mes" id="mes" class="form-control" autocomplete="off" placeholder="mm" required/>
               <span class="error_form" id="error_mes"></span>
             </div>
 
             <div class="form-group col-md-6">
               <label>Año</label>
-              <input type="number" name="anio" id="anio" class="form-control" autocomplete="off" placeholder="AAAA" required />
+              <input type="text" name="anio" id="anio" class="form-control" autocomplete="off" placeholder="AAAA" required />
               <span class="error_form" id="error_anio"></span>
             </div>
           </div>

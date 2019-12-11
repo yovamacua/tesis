@@ -115,13 +115,13 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
+            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
             <span class="error_form" id="error_cantidad"></span>
           </div>
 
            <div class="form-group col-md-6">
             <label>Precio</label>
-            <input type="number" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
+            <input type="text" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
             <span class="error_form" id="error_precio"></span>
           </div>
         </div>

@@ -1,7 +1,7 @@
 var tabla;
 
 //// INICIO DE VALIDACION DEL FORMULARIO///
-// funcion para validar formulario gastos
+// funcion para validar formulario perdidas
 $(function() {
     //creando variables y ocultando campos de error
     $("#error_idproducto").hide();
@@ -39,15 +39,15 @@ $(function() {
     	});
 
 	$("#descripcion").focusout(function() {
-	        campo_descripcion();
+	    campo_descripcion();
 		});
 
 	$("#mes").focusout(function() {
-	        campo_mes();
+	    campo_mes();
 	    });
 
 	$("#anio").focusout(function() {
-	        campo_anio();
+	    campo_anio();
 	    });
 
 
@@ -77,13 +77,13 @@ $(function() {
     }
 
     function campo_cantidad() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[0-9]*$/;   
         var cantidad = $("#cantidad").val();
         if (pattern.test(cantidad) && cantidad !== '') {
             $("#error_cantidad").hide();
             $("#cantidad").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_cantidad").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_cantidad").html("Solo se permiten numeros");
             $("#error_cantidad").css("position", "absolute");
             $("#error_cantidad").css("color", "red");
             $("#error_cantidad").show();
@@ -102,13 +102,13 @@ $(function() {
     }
 
     function campo_precioProduc() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[0-9]+[.]+[0-9]*$/;
         var precioProduc = $("#precioProduc").val();
         if (pattern.test(precioProduc) && precioProduc !== '') {
             $("#error_precioProduc").hide();
             $("#precioProduc").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precioProduc").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_precioProduc").html("Solo se permite el formato 0.00");
             $("#error_precioProduc").css("position", "absolute");
             $("#error_precioProduc").css("color", "red");
             $("#error_precioProduc").show();
@@ -177,13 +177,13 @@ $(function() {
     }
 
     function campo_mes() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[0-9]*$/;   
         var mes = $("#mes").val();
         if (pattern.test(mes) && mes !== '') {
             $("#error_mes").hide();
             $("#mes").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_mes").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_mes").html("Solo se permiten numeros");
             $("#error_mes").css("position", "absolute");
             $("#error_mes").css("color", "red");
             $("#error_mes").show();
@@ -202,13 +202,13 @@ $(function() {
     }
 
     function campo_anio() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[0-9]*$/;   
         var anio = $("#anio").val();
         if (pattern.test(anio) && anio !== '') {
             $("#error_danio").hide();
             $("#anio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_danio").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_danio").html("Solo se permiten numeros");
             $("#error_danio").css("position", "absolute");
             $("#error_danio").css("color", "red");
             $("#error_danio").show();
@@ -227,7 +227,7 @@ $(function() {
     }
 
     // se valida el formulario
-    $("#gasto_form").on("submit", function(e) {
+    $("#perdida_form").on("submit", function(e) {
         // asignacion de valor a vaiables
         var error_idproducto= false;
 	    var error_cantidad = false;
@@ -274,10 +274,6 @@ $(function() {
 //funcion que se ejecuta al inicio 
 function init(){
 	listar();
-	//cuando se de click al boton submit se ejecuta la funcion guardar
-	$("#perdida_form").on("submit",function(e){
-		guardaryeditar(e);
-	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
@@ -296,6 +292,23 @@ function limpiar(){
 	$('#anio').val("");
 	$('#unidadDelProduc').val("");
 	$('#id_perdida').val("");
+
+    /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#idproducto").css("border-bottom", "1px solid #d2d6de");
+    $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
+    $("#mes").css("border-bottom", "1px solid #d2d6de");
+    $("#anio").css("border-bottom", "1px solid #d2d6de");
+    $("#unidadDelProduc").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_idproducto").hide();
+    $("#error_cantidad").hide();
+    $("#error_precioProduc").hide();
+    $("#error_unidadDelProduc").hide();
+    $("#error_descripcion").hide();
+    $("#error_mes").hide();
+    $("#error_anio").hide();
 
 }
 

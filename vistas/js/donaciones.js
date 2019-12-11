@@ -12,8 +12,8 @@ $(function() {
     
 
     // se declaran variables con valor false para ver si pasa o no la validacion
-    var error_fecha1= false;
-    var error_donante= false;
+    var error_fecha1 = false;
+    var error_donante = false;
     var error_descripcion = false;
     var error_cantidad = false;
     var error_precio = false;
@@ -24,20 +24,24 @@ $(function() {
         campo_fecha1();
     	});
 
-    $("#error_donante").focusout(function() {
+    $("#donante").focusout(function() {
         campo_donante();
     	});
 
     $("#descripcion").focusout(function() {
-	        campo_descripcion();
+	    campo_descripcion();
 		});
 
     $("#cantidad").focusout(function() {
         campo_cantidad();
     	});
 
+     $("#precio").focusout(function() {
+        campo_precio();
+        });
+
     function campo_fecha1() {
-        var pattern = /^[0-9/\s]*$/;
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
         var fecha1 = $("#fecha1").val();
         if (pattern.test(fecha1) && fecha1 !== '') {
             $("#error_fecha1").hide();
@@ -112,13 +116,13 @@ $(function() {
     }
 
     function campo_cantidad() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[0-9]*$/;   
         var cantidad = $("#cantidad").val();
         if (pattern.test(cantidad) && cantidad !== '') {
             $("#error_cantidad").hide();
             $("#cantidad").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_cantidad").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_cantidad").html("Solo se permiten numeros");
             $("#error_cantidad").css("position", "absolute");
             $("#error_cantidad").css("color", "red");
             $("#error_cantidad").show();
@@ -137,13 +141,13 @@ $(function() {
     }
 
     function campo_precio() {
-        var pattern = /^[0-9.\s]*$/;
+        var pattern = /^[0-9]+[.]+[0-9]*$/;
         var precio = $("#precio").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_precio").hide();
             $("#precio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precio").html("Solo se permiten numeros y el simbolos . ");
+            $("#error_precio").html("Solo se permite el formato 0.00");
             $("#error_precio").css("position", "absolute");
             $("#error_precio").css("color", "red");
             $("#error_precio").show();
@@ -162,7 +166,7 @@ $(function() {
     }
 
     // se valida el formulario
-    $("#gasto_form").on("submit", function(e) {
+    $("#donacion_form").on("submit", function(e) {
         // asignacion de valor a vaiables
         var error_fecha1= false;
 	    var error_donante= false;
@@ -202,10 +206,6 @@ $(function() {
 //funcion que se ejecuta al inicio
 function init(){
 	listar();
-	//cuando se de click al boton submit se ejecuta la funcion guardar
-	$("#donacion_form").on("submit",function(e){
-		guardaryeditar(e);
-	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
@@ -222,6 +222,19 @@ function limpiar(){
 	$('#cantidad').val("");
 	$('#precio').val("");
 	$('#id_donacion').val("");
+
+    /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+    $("#donante").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#precio").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_fecha1").hide();
+    $("#error_donante").hide();
+    $("#error_descripcion").hide();
+    $("#error_cantidad").hide();
+    $("#error_precio").hide();
 
 }
 
