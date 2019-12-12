@@ -17,7 +17,7 @@ function init(){
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
-     $(".modal-title").text("Agregar capacitacion");
+     $(".modal-title").text("Agregar Capacitación");
    });
 }
 
@@ -42,21 +42,7 @@ function limpiar()
 //Función mostrar formulario
 function mostrarformulario(flag)
 { 
-
-  if (flag)
-  {
-    $("#letra").show();
-    $("#capacitacionModal").show();
-    $("#add_button").hide();
-    $("#listadoregistros").hide();
-    $("#letra1").hide();
-    $("#btnCancelar").hide();
-  }else{
-    $("#letra").hide();
-    $("#letra1").hide();
-    $("#capacitacionModal").hide();
-    $("#capacitadosModal").hide();
-  }
+  $("#capacitadosModal").hide();
 }
 
 function verdetalle(id_capacitacion){
@@ -73,8 +59,7 @@ function verdetalle(id_capacitacion){
 function cancelarform()
 {
   limpiar();
-  location.reload();
-  mostrarformulario(false);
+  $("#capacitadosModal").show();
 }
 
 //Función Listar
@@ -197,15 +182,12 @@ function mostrar(id_capacitacion)
  {
     data = JSON.parse(data);
 
-       $('#capacitacionModal').show();
-       $("#letra").show();
-       $('#listadoregistros').hide();
-       $("#add_button").hide();
+       $('#capacitacionModal').modal('show');
        $('#fecha1').val(data.fecha);
        $('#nombreGrupo').val(data.nombreGrupo);
        $('#cargo').val(data.cargo);
        $('#encargado').val(data.encargado);
-       $('.modal-title').text("Editar Capacitacion");
+       $('.modal-title').text("Editar Capacitación");
        $('#id_capacitacion').val(id_capacitacion);  //AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
 
