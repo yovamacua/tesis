@@ -5,7 +5,7 @@
   require_once("../modelos/Venta.php");
   require_once("mensajes.php");
   require_once("../modelos/Productos.php");
-  if (!isset($_SESSION['id_usuario'])) {?>
+ if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>

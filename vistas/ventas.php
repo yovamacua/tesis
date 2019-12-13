@@ -128,6 +128,7 @@
                                     <th  width="10%">Cantidad</th>
                                     <th  width="10%">Precio Venta</th>
                                     <th  width="10%" style="background-color: #A9D0F5 !important">Subtotal</th>
+                                    
                                 </thead>
                                 <tfoot>
                                     <th>TOTAL</th>
@@ -135,7 +136,7 @@
                                     <th></th>
                                     <th></th>
                                     <th></th>
-                                    <th style="text-align: center"><h4 id="total">$/. 0.00</h4><input type="hidden" name="total_pagar" id="total_pagar"></th> 
+                                    <th style="text-align: center"><h4 id="total">$ 0.00</h4><input type="hidden" name="total_pagar" id="total_pagar"></th> 
                                 </tfoot>
                                 <tbody>
                                   

@@ -305,8 +305,8 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
     	'<td><input type="hidden"  name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
     	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
-    	'<td><input type="text" maxlength="5" required pattern="/^([0-9])*$/" style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
-    	'<td><input type="text"  maxlength="5" required pattern="/^([0-9])*$/" style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' "></td>'+
+    	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+    	'<td><input type="text"  maxlength="5"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' "></td>'+
     	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
     	//'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
     	'</tr>';
@@ -348,6 +348,7 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
             
     		
      	i++;
+     	//setTimeOut(modificarSubototales, 1000);
      }
 
     /*for (var i = 0; i <cant.length; i++) {

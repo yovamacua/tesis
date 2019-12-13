@@ -5,7 +5,7 @@
   require_once("../modelos/Productos.php");
   require_once("mensajes.php");
   $productos = new Producto();
-  if (!isset($_SESSION['id_usuario'])) {?>
+ if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>

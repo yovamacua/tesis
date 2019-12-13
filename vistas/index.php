@@ -33,8 +33,10 @@ else{
     <link rel="stylesheet" href="../public/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Libreria Font Awesome -->
     <link rel="stylesheet" href="../public/bower_components/font-awesome/css/font-awesome.min.css">
+    
     <!-- Theme style -->
     <link rel="stylesheet" href="../public/dist/css/AdminLTE.min.css">
+
     <!-- estilos adicionales para el formulario -->
     <style>
       .login-logo{

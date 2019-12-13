@@ -5,9 +5,11 @@
       
       require_once("../modelos/Venta.php");
       require_once("../modelos/Perdidas.php");
+       require_once("../ajax/infocajas.php");
       
       $venta = new Ventas();
       $perdidas = new Perdidas();
+      $informacion= new infocajas();
 
       $datos_venta = $venta->get_ventas_anio_actual();
       $datos = $perdidas->get_perdidas_reporte_general();
@@ -25,76 +27,76 @@ require_once("header.php");?>
       </h1>
     </section>
     <!-- Main content -->
-    <section class="content">
-       <div class="row panel_modulos">
-       	   <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
+      <section class="content">
+      <div class="container-fluid">
+        
+        <div class="row">
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box" >
+      <span class="info-box-icon bg-info" style="background-color: #17a2b8 !important"><i class="fa fa-usd" aria-hidden="true"></i></span>
 
-          <div class="small-box bg-aqua">
-            <div class="inner">
-             <a href="<?php echo Conectar::ruta()?>vistas/productos.php">
-              <h3>1</h3>
-               <h2>PRODUCTOS</h2>
-             </a>
-          </div>
-            <div class="icon">
-              <i class="fa fa-lemon-o" aria-hidden="true"></i>
+              <div class="info-box-content">
+                <span class="info-box-text" >Ventas</span>
+                <?php 
+                $informacion-> infoventas();
+
+               ?>
+              
+              </div>
+              <!-- /.info-box-content -->
             </div>
+            <!-- /.info-box -->
           </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-success" style="background-color: #28a745 !important"><i class="fa fa-lemon-o" ></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Productos</span>
+                <?php 
+                $informacion-> infoproducto();
+
+               ?>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-warning"  style="background-color: #ffc107!important"><i class="fa fa-paperclip"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Incidentes</span>
+                <?php 
+                $informacion-> infoincidentes();
+
+               ?>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-3 col-sm-6 col-12">
+            <div class="info-box">
+              <span class="info-box-icon bg-danger"  style="background-color: #dc3545!important;"><i class="fa fa-gift" aria-hidden="true"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Donaciones</span>
+                <?php 
+                $informacion-> infodonaciones();
+
+               ?>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+          </div>
+          <!-- /.col -->
         </div>
-        <!-- ./col -->
-
-         <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-           <a href="<?php echo Conectar::ruta()?>vistas/ventas.php">
-              <h3>2</h3>
-              <h2>VENTAS</h2>
-           </a>
-            </div>
-            <div class="icon">
-              <i class="fa fa-usd" aria-hidden="true"></i>
-            </div>
-
-          </div>
-        </div>
-        <!-- ./col -->
-
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-            <a href="<?php echo Conectar::ruta()?>vistas/pedidos.php">
-              <h3>3</h3>
-              <h2>PEDIDOS</h2>
-             </a>
-            </div>
-            <div class="icon">
-              <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-            </div>
-
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-             <a href="<?php echo Conectar::ruta()?>vistas/donaciones.php">
-              <h3>4</h3>
-              <h2>DONACIONES</h2>
-            </a>
-            </div>
-            <div class="icon">
-              <i class="fa fa-gift" aria-hidden="true"></i>
-            </div>
-
-          </div>
-        </div>
-        <!-- ./col -->
-
-       </div><!--ROW-->
 
 
  <!--INICIO CONTENIDO-->

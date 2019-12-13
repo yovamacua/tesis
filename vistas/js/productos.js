@@ -16,14 +16,14 @@ $(function() {
     
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#producto").focusout(function() {
-        campo_categoria();
+        campo_producto();
     });
 
     $("#precio_venta").focusout(function() {
-        campo_descripcion();
+        campo_precio();
     });
       $("#stock").focusout(function() {
-        campo_descripcion();
+        campo_stock();
     });
 
 
