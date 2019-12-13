@@ -184,8 +184,8 @@
           $sub_array[] = $row["id_capacitacion"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
           $sub_array[] = $row["nombreGrupo"];
-          $sub_array[] = $row["cargo"];
           $sub_array[] = $row["encargado"];
+          $sub_array[] = $row["cargo"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Adminstrar Capacitación" ><i class="fa fa-cogs"></i></button>
           <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitación" ><i class="fa fa-pencil-square-o"></i></button>
@@ -208,9 +208,8 @@
       $data= Array();
 
         foreach($datos as $row){
-            $sub_array = array();
+          $sub_array = array();
 
-          $sub_array[] = $row["id_capacitacion"];
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
           $sub_array[] = $row["dui"];

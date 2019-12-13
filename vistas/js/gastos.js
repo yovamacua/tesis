@@ -34,7 +34,7 @@ $(function() {
             $("#error_fecha1").hide();
             $("#fecha1").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_fecha1").html("Solo se permiten numeros y el simbolos /");
+            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
             $("#error_fecha1").css("position", "absolute");
             $("#error_fecha1").css("color", "red");
             $("#error_fecha1").show();
@@ -84,7 +84,7 @@ $(function() {
             $("#error_descripcion").hide();
             $("#descripcion").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
             $("#error_descripcion").css("position", "absolute");
             $("#error_descripcion").css("color", "red");
             $("#error_descripcion").show();

@@ -1,19 +1,343 @@
 var tabla; 
+
+//// INICIO DE VALIDACION DEL FORMULARIO 1///
+// funcion para validar formulario capacitacion
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_fecha1").hide();
+    $("#error_nombreGrupo").hide();
+    $("#error_encargado").hide();
+    $("#error_cargo").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_fecha1 = false;
+    var error_nombreGrupo = false;
+    var error_encargado = false;
+    var error_cargo = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#fecha1").focusout(function() {
+        campo_fecha1();
+      });
+
+    $("#nombreGrupo").focusout(function() {
+        campo_nombreGrupo();
+      });
+
+    $("#encargado").focusout(function() {
+        campo_encargado();
+      });
+
+     $("#cargo").focusout(function() {
+        campo_cargo();
+      });
+
+    function campo_fecha1() {
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+    }
+
+    function campo_nombreGrupo() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var nombreGrupo = $("#nombreGrupo").val();
+        if (pattern.test(nombreGrupo) && nombreGrupo !== '') {
+            $("#error_nombreGrupo").hide();
+            $("#nombreGrupo").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_nombreGrupo").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_nombreGrupo").css("position", "absolute");
+            $("#error_nombreGrupo").css("color", "red");
+            $("#error_nombreGrupo").show();
+            $("#nombreGrupo").css("border-bottom", "2px solid #F90A0A");
+            error_nombreGrupo = true;
+        }
+        var nombreGrupo = $("#nombreGrupo").val().length;
+        if (nombreGrupo <= 0) {
+            $("#error_nombreGrupo").html("No se permiten campos vacios");
+            $("#error_nombreGrupo").css("position", "absolute");
+            $("#error_nombreGrupo").css("color", "red");
+            $("#error_nombreGrupo").show();
+            $("#nombreGrupo").css("border-bottom", "2px solid #F90A0A");
+            error_nombreGrupo = true;
+        }
+    }
+
+    function campo_encargado() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var encargado = $("#encargado").val();
+        if (pattern.test(encargado) && encargado !== '') {
+            $("#error_encargado").hide();
+            $("#encargado").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_encargado").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_encargado").css("position", "absolute");
+            $("#error_encargado").css("color", "red");
+            $("#error_encargado").show();
+            $("#encargado").css("border-bottom", "2px solid #F90A0A");
+            error_encargado = true;
+        }
+        var encargado = $("#encargado").val().length;
+        if (encargado <= 0) {
+            $("#error_encargado").html("No se permiten campos vacios");
+            $("#error_encargado").css("position", "absolute");
+            $("#error_encargado").css("color", "red");
+            $("#error_encargado").show();
+            $("#encargado").css("border-bottom", "2px solid #F90A0A");
+            error_encargado = true;
+        }
+    }
+
+    function campo_cargo() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var cargo = $("#cargo").val();
+        if (pattern.test(cargo) && cargo !== '') {
+            $("#error_cargo").hide();
+            $("#cargo").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_cargo").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_cargo").css("position", "absolute");
+            $("#error_cargo").css("color", "red");
+            $("#error_cargo").show();
+            $("#cargo").css("border-bottom", "2px solid #F90A0A");
+            error_cargo = true;
+        }
+        var cargo = $("#cargo").val().length;
+        if (cargo <= 0) {
+            $("#error_cargo").html("No se permiten campos vacios");
+            $("#error_cargo").css("position", "absolute");
+            $("#error_cargo").css("color", "red");
+            $("#error_cargo").show();
+            $("#cargo").css("border-bottom", "2px solid #F90A0A");
+            error_cargo = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#capacitacion_form").on("submit", function(e) {
+      // asignacion de valor a vaiables
+      
+      var error_fecha1 = false;
+      var error_nombreGrupo = false;
+      var error_encargado = false;
+      var error_cargo = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_fecha1 = false;
+        error_nombreGrupo = false;
+        error_encargado = false;
+        error_cargo = false;
+
+        //comparacion
+        if (error_fecha1 === false && error_nombreGrupo === false && 
+          error_encargado === false && error_cargo === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+            $("#nombreGrupo").css("border-bottom", "1px solid #d2d6de");
+            $("#encargado").css("border-bottom", "1px solid #d2d6de");
+            $("#cargo").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO 1
+
+//// INICIO DE VALIDACION DEL FORMULARIO 2///
+// funcion para validar formulario capacitados
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_nombres").hide();
+    $("#error_apellidos").hide();
+    $("#error_dui").hide();
+    $("#error_id_capa").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_nombres = false;
+    var error_apellidos = false;
+    var error_dui = false;
+    var error_id_capa = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#nombres").focusout(function() {
+        campo_nombres();
+      });
+
+    $("#apellidos").focusout(function() {
+        campo_apellidos();
+      });
+
+    $("#dui").focusout(function() {
+        campo_dui();
+      });
+
+    $("#id_capa").focusout(function() {
+        campo_id_capa();
+      });
+
+    function campo_nombres() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var nombres = $("#nombres").val();
+        if (pattern.test(nombres) && nombres !== '') {
+            $("#error_nombres").hide();
+            $("#nombres").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_nombres").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_nombres").css("position", "absolute");
+            $("#error_nombres").css("color", "red");
+            $("#error_nombres").show();
+            $("#nombres").css("border-bottom", "2px solid #F90A0A");
+            error_nombres = true;
+        }
+        var nombres = $("#nombres").val().length;
+        if (nombres <= 0) {
+            $("#error_nombres").html("No se permiten campos vacios");
+            $("#error_nombres").css("position", "absolute");
+            $("#error_nombres").css("color", "red");
+            $("#error_nombres").show();
+            $("#nombres").css("border-bottom", "2px solid #F90A0A");
+            error_nombres = true;
+        }
+    }
+
+    function campo_apellidos() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var apellidos = $("#apellidos").val();
+        if (pattern.test(apellidos) && apellidos !== '') {
+            $("#error_apellidos").hide();
+            $("#apellidos").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_apellidos").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_apellidos").css("position", "absolute");
+            $("#error_apellidos").css("color", "red");
+            $("#error_apellidos").show();
+            $("#apellidos").css("border-bottom", "2px solid #F90A0A");
+            error_apellidos = true;
+        }
+        var apellidos = $("#apellidos").val().length;
+        if (apellidos <= 0) {
+            $("#error_apellidos").html("No se permiten campos vacios");
+            $("#error_apellidos").css("position", "absolute");
+            $("#error_apellidos").css("color", "red");
+            $("#error_apellidos").show();
+            $("#apellidos").css("border-bottom", "2px solid #F90A0A");
+            error_apellidos = true;
+        }
+    }
+
+    function campo_dui() {
+        var pattern =/^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[-]+[0-9]*$/;
+        var dui = $("#dui").val();
+        if (pattern.test(dui) && dui !== '') {
+            $("#error_dui").hide();
+            $("#dui").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_dui").html("Solo se permiten el formato de DUI");
+            $("#error_dui").css("position", "absolute");
+            $("#error_dui").css("color", "red");
+            $("#error_dui").show();
+            $("#dui").css("border-bottom", "2px solid #F90A0A");
+            error_dui = true;
+        }
+        var dui = $("#dui").val().length;
+        if (dui <= 0) {
+            $("#error_dui").html("No se permiten campos vacios");
+            $("#error_dui").css("position", "absolute");
+            $("#error_dui").css("color", "red");
+            $("#error_dui").show();
+            $("#dui").css("border-bottom", "2px solid #F90A0A");
+            error_dui = true;
+        }
+    }
+
+    function campo_id_capa() {
+        var pattern = /^[0-9]*$/;
+        var id_capa = $("#id_capa").val();
+        if (pattern.test(id_capa) && id_capa !== '') {
+            $("#error_id_capa").hide();
+            $("#id_capa").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_id_capa").html("Solo se permiten números enteros");
+            $("#error_id_capa").css("position", "absolute");
+            $("#error_id_capa").css("color", "red");
+            $("#error_id_capa").show();
+            $("#id_capa").css("border-bottom", "2px solid #F90A0A");
+            error_id_capa = true;
+        }
+        var id_capa = $("#id_capa").val().length;
+        if (id_capa <= 0) {
+            $("#error_id_capa").html("No se permiten campos vacios");
+            $("#error_id_capa").css("position", "absolute");
+            $("#error_id_capa").css("color", "red");
+            $("#error_id_capa").show();
+            $("#id_capa").css("border-bottom", "2px solid #F90A0A");
+            error_id_capa = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#detallecapacitados_form").on("submit", function(e) {
+      // asignacion de valor a vaiables
+      
+      var error_nombres = false;
+      var error_apellidos = false;
+      var error_dui = false;
+      var error_id_capa = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_nombres = false;
+        error_apellidos = false;
+        error_dui = false;
+        error_id_capa = false;
+
+        //comparacion
+        if (error_nombres === false && error_apellidos === false && 
+          error_dui === false && error_id_capa === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#nombres").css("border-bottom", "1px solid #d2d6de");
+            $("#apellidos").css("border-bottom", "1px solid #d2d6de");
+            $("#dui").css("border-bottom", "1px solid #d2d6de");
+            $("#id_capa").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditardetalle(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO 2
+
 //Función que se ejecuta al inicio
 function init(){
   mostrarformulario(false);
   listar();
-
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#capacitacion_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- });
-
- $("#detallecapacitados_form").on("submit",function(e)
- {
-   guardaryeditardetalle(e);
- });
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
@@ -28,6 +352,17 @@ function limpiardetalle()
   $('#dui').val("");
 	$('#id_capacitacion').val("");
   $('#id_detallecapacitados').val("");
+
+  /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#nombres").css("border-bottom", "1px solid #d2d6de");
+    $("#apellidos").css("border-bottom", "1px solid #d2d6de");
+    $("#dui").css("border-bottom", "1px solid #d2d6de");
+    $("#id_capa").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_nobmres").hide();
+    $("#error_apellidos").hide();
+    $("#error_dui").hide();
+    $("#error_id_capa").hide();
 }
 
 function limpiar()
@@ -37,16 +372,29 @@ function limpiar()
   $('#cargo').val("");
   $('#encargado').val("");
   $('#id_capacitacion').val("");
+
+  /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+    $("#nombreGrupo").css("border-bottom", "1px solid #d2d6de");
+    $("#cargo").css("border-bottom", "1px solid #d2d6de");
+    $("#encargado").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_fecha1").hide();
+    $("#error_nombreGrupo").hide();
+    $("#error_encargado").hide();
+    $("#error_cargo").hide();
 }
 
 //Función mostrar formulario
 function mostrarformulario(flag)
 { 
   $("#capacitadosModal").hide();
+  $("#btnAgregarCap").hide();
 }
 
 function verdetalle(id_capacitacion){
   $("#letra1").show();
+  $("#btnAgregarCap").show();
   $("#capacitadosModal").show();
   listarDetalleCapacitados(id_capacitacion);
   $("#letra").hide();
@@ -58,8 +406,10 @@ function verdetalle(id_capacitacion){
 //Función cancelarform
 function cancelarform()
 {
-  limpiar();
-  $("#capacitadosModal").show();
+  $("#btnAgregarCap").hide();
+  $("#capacitadosModal").hide();
+  $("#add_button").show();
+  $("#listadoregistros").show();
 }
 
 //Función Listar
@@ -204,7 +554,7 @@ function mostrardetalle(id_detallecapacitados)
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
-       $('#id_capa').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
+       $('#id_capa').val(id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallecapacitados').val(id_detallecapacitados);//AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
@@ -232,7 +582,7 @@ function guardaryeditar(e)
           $('#capacitacionModal').modal('hide');
           $('#resultados_ajax').html(datos);
           $('#capacitacion_data').DataTable().ajax.reload(null, false);
-          cancelarform()
+          limpiar();
        }
    });
 }

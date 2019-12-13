@@ -44,6 +44,8 @@
                     <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button"  onclick="limpiar()" data-toggle="modal" data-target="#capacitacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Capacitación</button></h1>
+
+                            <button class="btn btn-primary btn-lg" id="btnAgregarCap" onclick="limpiardetalle();" data-toggle="modal" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i>  Agregar Capacitado</button>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
@@ -55,8 +57,8 @@
                                 <th width="12%">No. Capacitación</th>
                                 <th>Fecha</th>
                                 <th>Nombre del Grupo</th>
-                                <th>Cargo</th>
                                 <th>Encargado</th>
+                                <th>Cargo</th>
                                 <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -67,13 +69,10 @@
                     <!--Fin centro -->
 
                       <div class="panel-body table-responsive tabla-top" id="capacitadosModal">
-                          
-                          <button class="btn btn-primary btn-lg" id="btnAgregarCap" type="button" data-toggle="modal"data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Capacitado</button>
-                   
+
                         <table id="detallecapacitados_data" class="table table-bordered table-striped">
                           <thead>
                               <tr>
-                              <th width="12%">No. Capacitación</th>
                               <th>Nombre</th>
                               <th>Apellido</th>
                               <th>DUI</th>
@@ -83,25 +82,21 @@
                           <tbody>
                           </tbody>
                         </table>
-
-                        <button id="btnCancelar" class="btn btn-danger" type="button"><i class="fa fa-arrow-circle-left"></i> <a href="capacitaciones.php"><font color=white>Regresar</font></a></button>
+                        <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform();"><i class="fa fa-arrow-circle-left"></i> <font color=white>Regresar</font></a></button>
                         <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                       </div>
                     <!--Fin centro -->
 
-                         
-                    <!-- </div>  --> <!-- /.panel-body -->
-                 <!--  </div> --> <!-- /.row -->
                 </div>
               </div>
             </div>
           </section><!-- /.content -->
         </div>
 
- <!--FORMULARIO VENTANA MODAL-->
+ <!--FORMULARIO VENTANA MODAL CAPACITACION-->
   <div id="capacitacionModal"class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="capacitacion_form">
+    <form method="post" id="capacitacion_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -120,22 +115,26 @@
          <div class="form-row">
           <div class="form-group col-md-6">
             <label>Fecha</label>
-            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required/>
+            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" autocomplete="off" required/>
+            <span class="error_form" id="error_fecha1"></span>
           </div>
           <div class="form-group col-md-6">
             <label>Nombre de Grupo</label>
             <input type="text" name="nombreGrupo" id="nombreGrupo" class="form-control" placeholder="Nombre de Grupo" required/>
+            <span class="error_form" id="error_nombreGrupo"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Encargado</label>
-            <input type="text" name="encargado" id="encargado" class="form-control" placeholder="Nombre del Encargado" required/>
+            <input type="text" name="encargado" id="encargado" class="form-control" placeholder="Nombre del Encargado" autocomplete="off" required/>
+            <span class="error_form" id="error_encargado"></span>
           </div>
           <div class="form-group col-md-6">
             <label>Cargo</label>
-            <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo del Encargado" required/>
+            <input type="text" name="cargo" id="cargo" class="form-control" placeholder="Cargo del Encargado" autocomplete="off" required/>
+            <span class="error_form" id="error_cargo"></span>
           </div>
         </div>
     
@@ -153,10 +152,10 @@
          
 
   <!--Fin-Contenido-->
-    <!--FORMULARIO VENTANA MODAL-->
+    <!--FORMULARIO VENTANA MODAL CAPACITADOS-->
   <div id="detallecapacitadosModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="detallecapacitados_form">
+    <form method="post" id="detallecapacitados_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -166,22 +165,25 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Nombres</label>
-            <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombres" required/>
+            <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombres" autocomplete="off" required/>
+            <span class="error_form" id="error_nombres"></span>
           </div>
           <div class="form-group col-md-6">
             <label>Apellidos</label>
-            <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" required/>
+            <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" autocomplete="off" required/>
+            <span class="error_form" id="error_apellidos"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>DUI</label>
-            <input type="text" name="dui" id="dui" class="form-control" placeholder="DUI" required/>
+            <input type="text" name="dui" id="dui" class="form-control" placeholder="00000000-0" autocomplete="off" required/>
+            <span class="error_form" id="error_dui"></span>
           </div>
           <div class="form-group col-md-6">
             <label>No. de Capacitación</label> 
-            <select class="form-control" id="id_capa" name="id_capacitacion" >
+           <select class="form-control" id="id_capa" name="id_capacitacion" required>
                 <option  value="0">Seleccione el No. de Capacitación</option>
                   <?php
                      for($i=0; $i<sizeof($c);$i++){
@@ -190,7 +192,9 @@
                        <?php
                      }
                   ?>   
-              </select>
+              </select> 
+              <!-- <input type="text" name="id_capacitacion" id="id_capa" value="<?php echo $c["id_capacitacion"];?>" class="form-control" readonly="readonly"/> -->
+              <span class="error_form" id="error_id_capa"></span>
           </div> 
         </div>
 
