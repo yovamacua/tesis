@@ -5,12 +5,12 @@
   require_once("../modelos/Productos.php");
   require_once("mensajes.php");
   $productos = new Producto();
- if (!isset($_SESSION['id_usuario'])) {?>
+ /*if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-}
+}*/
 
    //declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos que si existe el parametro que estamos recibiendo
    
@@ -68,10 +68,7 @@
 			    }//cierre de empty
 
 	            else {
-
-
-	            	/*si ya existe entonces editamos el producto*/
-
+	            	//si ya existe entonces editamos el producto
 
 	            $productos->editar_producto($producto,$precio_venta,$unidad,$id_usuario,$id_categoria,$id_producto,$stock);
 
@@ -81,18 +78,16 @@
 	            	 
 	            }
             }
-
      //mensaje success
-     if (isset($messages)){
-				echo exito($messages);
-			}
-	 //fin success
-
-	 //mensaje error
-         if (isset($errors)){
-			
-			echo error($messages);
-			}
+          if (isset($messages)) {
+              echo exito($messages);
+          }
+          //fin success
+          //mensaje error
+          if (isset($errors)) {
+              echo error($errors);
+          }
+          //fin mensaje error
 
 	 //fin mensaje error
 

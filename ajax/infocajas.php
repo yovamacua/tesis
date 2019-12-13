@@ -17,9 +17,9 @@
     	$datos=parent::getProductos();
   if(is_array($datos)==true and count($datos)>0){
    foreach ($datos as $row) {
-    		$productos=$output["producto"]=$row["producto"];
+    		$productos=$row["producto"];
     	}
-    	echo  '<span class="info-box-number" value= >'.$productos.'</span>';
+    	echo  '<span class="info-box-number" >'.$productos.'</span>';
 
   }else{
   echo '<span class="info-box-number">0</span>';
@@ -35,8 +35,7 @@
    foreach ($datos as $row) {
     		$ventas=$row["ventas"];
     	}
-    	echo  '<span class="info-box-number" value= >'.$ventas.'</span>';
-
+    	echo  '<span class="info-box-number"  >'.$ventas.'</span>';
   }else{
   echo '<span class="info-box-number">0</span>';
     	 	
@@ -51,7 +50,7 @@
    foreach ($datos as $row) {
     		$donaciones=$row["donaciones"];
     	}
-    	echo  '<span class="info-box-number" value= >'.$donaciones.'</span>';
+    	echo  '<span class="info-box-number"  >'.$donaciones.'</span>';
 
   }else{
   echo '<span class="info-box-number">0</span>';
@@ -65,7 +64,7 @@
    foreach ($datos as $row) {
     		$incidentes=$row["incidentes"];
     	}
-    	echo  '<span class="info-box-number" value= >'.$incidentes.'</span>';
+    	echo  '<span class="info-box-number"  >'.$incidentes.'</span>';
 
   }else{
   echo '<span class="info-box-number">0</span>';

@@ -59,8 +59,7 @@ try{
             $sql->bindValue(4, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(5, substr($_POST["stock"], 0, 4), PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_usuario"],PDO::PARAM_INT);
-           
-          
+             
            $sql->execute();
          }catch(PDOException $ex){
 
@@ -120,7 +119,7 @@ try{
       $sql-> execute();
 
       return  $resultado = $sql->fetchAll();
-      //print_r($resultado);
+    
     }
    // metodo eliminar producto
      public function eliminar_producto($id_categoria){
@@ -148,9 +147,6 @@ try{
 
        }
     
-
-/*$roducto = new Producto();
-$producto -> get_producto_por_id()*/
 
 
           
