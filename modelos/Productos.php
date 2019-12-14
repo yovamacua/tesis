@@ -42,7 +42,7 @@
          }
          //método para insertar registro de productos
 
-        public function registrar_producto($producto,$precio_venta,$unidad,$id_categoria,$stock,$id_usuario){
+        public function registrar_producto($producto,$precio_venta,$id_unidad,$id_categoria,$stock,$id_usuario){
 
 try{
             $conectar=parent::conexion();
@@ -55,7 +55,7 @@ try{
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, substr($_POST["producto"], 0, 50), PDO::PARAM_STR);
             $sql->bindValue(2,substr($_POST["precio_venta"], 0, 4), PDO::PARAM_STR);
-            $sql->bindValue(3, $_POST["unidad"],PDO::PARAM_STR);
+            $sql->bindValue(3, $_POST["id_unidad"],PDO::PARAM_IN);
             $sql->bindValue(4, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(5, substr($_POST["stock"], 0, 4), PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_usuario"],PDO::PARAM_INT);
@@ -81,7 +81,7 @@ try{
               return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
                 // editar los productos
-         public function editar_producto($producto,$precio_venta,$unidad,$id_usuario,$id_categoria,$id_producto,$stock){
+         public function editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock){
            
             try {
                $conectar=parent::conexion();
@@ -92,7 +92,7 @@ try{
              $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $_POST["producto"], PDO::PARAM_STR);
             $sql->bindValue(2, $_POST["precio_venta"], PDO::PARAM_STR);
-            $sql->bindValue(3, $_POST["unidad"],PDO::PARAM_STR);
+            $sql->bindValue(3, $_POST["id_unidad"],PDO::PARAM_INT);
             $sql->bindValue(4, $_POST["id_usuario"],PDO::PARAM_INT);
             $sql->bindValue(5, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_producto"], PDO::PARAM_INT);
@@ -122,11 +122,11 @@ try{
     
     }
    // metodo eliminar producto
-     public function eliminar_producto($id_categoria){
+     public function eliminar_producto($id_producto){
            $conectar=parent::conexion();
            $sql="delete from producto where id_producto=?;";
            $sql=$conectar->prepare($sql);
-           $sql->bindValue(1,$id_categoria);
+           $sql->bindValue(1,$id_producto);
            $sql->execute();
 
            return $resultado=$sql->fetch();

@@ -49,7 +49,7 @@ require_once("header.php");?>
 
    <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
-         REPORTE DE VENTAS MENSUAL
+         Reporte de ventas mensual
     </h2>
 
    <div class="panel panel-default">
@@ -147,7 +147,7 @@ require_once("header.php");?>
 
 	       <div class="">
 
-				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">REPORTE DE VENTAS MENSUAL</h2>
+				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">reporte de ventas mensual</h2>
 				              
 				  <table class="table table-bordered">
 				    <thead>
@@ -256,7 +256,7 @@ require_once("header.php");?>
 	             <div class="">
 
 				   
-		         <h2  class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">REPORTE DE VENTAS MENSUAL</h2>
+		         <h2  class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte de ventas mensual</h2>
 
       
 	          <!--GRAFICA-->

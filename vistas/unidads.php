@@ -4,10 +4,10 @@
 ?>
 <?php
   #variable item activo
-  $activar = 'item_categorias';
+  $activar = 'item_unidad';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Categoria"]==1)
+<?php if($_SESSION["Unidad"]==1)
      {
 
      ?>
@@ -17,12 +17,12 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Listado de Categorias</h1>
+          <h1>Listado de Unidades</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
              <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
-             <li><i class="fa fa-users"></i> Categoria</li>
+             <li><i class="fa fa-users"></i> Unidad</li>
           </ol>
    
         </section>
@@ -34,17 +34,17 @@
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#categoriaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Categoría</button></h1>
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#unidadModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Unidad</button></h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
                     <div class="panel-body table-responsive tabla-top">
-                          <table id="categoria_data" class="table table-bordered table-striped">
+                          <table id="unidad_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="5%">Categoría</th>
+                                <th width="5%">Unida</th>
                                 <th width="5%">Descripcion</th>
                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
@@ -67,31 +67,31 @@
   </div><!-- /.content-wrapper -->
   <!--Fin-Contenido-->
     <!--FORMULARIO VENTANA MODAL-->
-  <div id="categoriaModal" class="modal fade">
+  <div id="unidadModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="categoria_form">
+    <form method="post" id="unidad_form">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Categoría</h4>
+          <h4 class="modal-title">Agregar Unidad</h4>
         </div>
         <div class="modal-body">
 
-          <label>Categoría</label>
-          <input type="text" name="categoria" id="categoria" class="form-control" placeholder="Titulo" maxlength="50" required="" autofocus="autofocus" autocomplete="off"/>
-          <span class="error_form" id="error_categoria"></span>
+          <label>Unidad</label>
+          <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Titulo" maxlength="45" required="" autofocus="autofocus"/>
+          <span class="error_form" id="error_unidad"></span>
           <br />
 
 
           <label>Descripcion</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="70"  autocomplete="off" required=""/>
+          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="50" required=""/>
           <span class="error_form" id="error_descripcion"></span>
           <br />
 
         </div>
         <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-           <input type="hidden" name="id_categoria" id="id_categoria"/>
+           <input type="hidden" name="id_unidad" id="id_unidad"/>
           <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="t rue"></i> Cerrar</button>
         </div>
@@ -109,7 +109,7 @@
 <?php
   require_once("footer.php");
 ?>
-<script type="text/javascript" src="js/categorias.js"></script>
+<script type="text/javascript" src="js/unidads.js"></script>
 <?php
   } else {
         header("Location:".Conectar::ruta()."vistas/index.php");

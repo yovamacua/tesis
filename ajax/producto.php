@@ -19,7 +19,7 @@
    $id_producto=isset($_POST["id_producto"]);
    $producto=isset($_POST["producto"]);
    $precio_venta=isset($_POST["precio_venta"]);
-   $unidad=isset($_POST["unidad"]);
+   $id_unidad=isset($_POST["id_unidad"]);
    $id_usuario=isset($_POST["id_usuario"]);
    $id_categoria=isset($_POST["categoria"]);
    $stock = isset($_POST["stock"]);
@@ -50,7 +50,7 @@
 
 			       	   	  //no existe el producto por lo tanto hacemos el registros
 
-			$productos->registrar_producto($producto,$precio_venta,$unidad,$id_categoria,$stock,$id_usuario);
+			$productos->registrar_producto($producto,$precio_venta,$id_unidad,$id_categoria,$stock,$id_usuario);
 
 
 
@@ -70,7 +70,7 @@
 	            else {
 	            	//si ya existe entonces editamos el producto
 
-	            $productos->editar_producto($producto,$precio_venta,$unidad,$id_usuario,$id_categoria,$id_producto,$stock);
+	            $productos->editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock);
 
 
 	            	  $messages[]="El producto se editó correctamente";
@@ -110,9 +110,9 @@
 			foreach($datos as $row)
 			{
 				$output["id_producto"] = $row["id_producto"];
-				$output["categoria"] = $row["categoria"];
+        $output["id_categoria"] = $row["id_categoria"];
 				$output["producto"] = $row["producto"];
-				$output["unidad"] = $row["unidad"];
+				$output["id_unidad"] = $row["idunidad"];
 				$output["precio_venta"] = $row["precio_venta"];
 				$output["stock"] = $row["stock"];
 

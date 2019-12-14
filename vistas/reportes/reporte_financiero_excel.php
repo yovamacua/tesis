@@ -94,16 +94,16 @@
      // CAPTURA DE LOS DATOS POR METODO POST Y COMIENZA EL INGRESO
            $date_inicial = $_POST["fecha"];
                 $date = str_replace('/', '-', $date_inicial);
-                $fecha_inicial = date("d-m-Y", strtotime($date));
+                $fecha_inicial = date("Y-m-d", strtotime($date));
 
                   $date_final = $_POST["fecha2"];
                   $date = str_replace('/', '-', $date_final);
-                  $fecha_final = date("d-m-Y", strtotime($date));
+                  $fecha_final = date("Y-m-d", strtotime($date));
 
   //titulo de la hoja
 
 
-   $valor= "ESTADO DE RESULTADO"."  ".  $fecha_inicial ."  "."AL"."  ".$fecha_final ;
+   $valor= "ESTADO DE RESULTADO"."  ".   $date_inicial ."  "."AL"."  ".$date_final  ;
     $estado_resultado->setCellValue('C2', $valor);
     $estado_resultado->getStyle('C2')->applyFromArray($fontStyle);                
 
@@ -262,7 +262,7 @@
     $balance_general->getColumnDimension('F')->setWidth(18);
   //**********************************************************************/////
          $balance_general->setTitle("Balance General");// titulo de la hoja
-         $valor1= "ESTADO DE RESULTADO"."  ".  $fecha_inicial ."  "."AL"."  ".$fecha_final;
+         $valor1= "ESTADO DE RESULTADO"."  ".  $date_inicial ."  "."AL"."  ".$date_final ;
     $balance_general->setCellValue('C2', $valor1);
     $balance_general->getStyle('C2')->applyFromArray($fontStyle); 
   //*******************************************************/***
@@ -320,7 +320,7 @@
    //****************VENTA **************//
         $balance_general->setCellValue('C19', "VENTA");
        $balance_general->setCellValue('F19', $total_venta);
-    $balance_general->setCellValue('C28', "TOTAL ACTIVO");
+    $balance_general->setCellValue('C21', "TOTAL ACTIVO");
          $balance_general->setCellValue('F21', '=SUM(F13:F20)');
           
   //**********************PASIVO ****************// 

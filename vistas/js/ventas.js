@@ -73,6 +73,7 @@ function init(){
 	$("#add_button").click(function(){
 
 			$(".modal-title").text("Agregar Producto");
+			$('#fecha').datepicker('setDate', 'today');
 
 });
 
@@ -686,7 +687,7 @@ function mostrar(idventas)
 		//$("#idventa").selectpicker('refresh');
 		$("#nombre").val(data.usuario);
 		//$("#nombre").selectpicker('refresh');
-		$("#fecha").val(data.fecha);
+		$('#fecha').datepicker('setDate', data.fecha);
 		$("#numero_venta").val(data.numero_venta); 
 		//Ocultar y mostrar los botones
 		$("#btnGuardar").hide();

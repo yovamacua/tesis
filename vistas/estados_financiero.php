@@ -26,7 +26,7 @@
    <div >
    <H2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
-           REPORTE FINANCIEROS
+           Reporte Financieros
   </div>
    
 
@@ -44,7 +44,7 @@
                    <div class="form-group">
                 <label for="inputPassword">Fecha Inicial</label>
                
-                  <input type="date" class="form-control" id="fecha" name="fecha" placeholder="Fecha Inicial" style="width:50%"/>
+                  <input type="text" class="form-control" id="fecha" name="fecha" autocomplete="off" placeholder="Fecha Inicial" style="width:50%"/>
               
               </div>
 
@@ -52,7 +52,7 @@
               <div class="form-group">
                 <label for="inputPassword">Fecha Final</label>
                
-                  <input type="date" class="form-control" id="fecha2" name="fecha2" placeholder="Fecha Final" style="width:50%"/>
+                  <input type="text" class="form-control" id="fecha2" name="fecha2" autocomplete="off" placeholder="Fecha Inicial" style="width:50%"/>
               
               </div>
 

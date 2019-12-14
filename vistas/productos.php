@@ -5,10 +5,13 @@
     if(isset($_SESSION["id_usuario"])){
 
       require_once("../modelos/Categorias.php");
+         require_once("../modelos/Unidad.php");
 
       $categoria = new Categorias();
+        $unidad = new Unidad();
 
-      $cat = $categoria->get_categoria();     
+      $cat = $categoria->get_categoria();  
+      $unid= $unidad->get_unidad()   
        
 ?>
 
@@ -122,24 +125,33 @@
                     </select>
                   </br>
                   <label>Producto</label>
-                   <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" maxlength="60" required/>
+                   <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
                    <span class="error_form" id="error_producto"></span>
                    </br>
-                  <label>Unid. Medida</label>
-                     <select class="selectpicker form-control"id="unidad" name="unidad"   required>
-                      <option value="">-- Seleccione unidad --</option>
-                      <option value="kilo">kilo</option>
-                      <option value="Gramo">Gramo</option>
-                      <option value="Libra">Libra</option>
+                   <label>Unidad</label>
+                   <select class="form-control" id="id_unidad" name="id_unidad" >
+
+                      <option  value="0">Seleccione</option>
+
+                        <?php
+
+                           for($i=0; $i<sizeof($unid);$i++){
+                             
+                             ?>
+                              <option value="<?php echo $unid[$i]["idunidad"]?>"><?php echo $unid[$i]["nombre"];?></option>
+                             <?php
+                           }
+                        ?>
+                      
                     </select>
                   </br>
 
                   <label>Precio Venta</label>
-                  <input type="text" class="form-control" id="precio_venta" name="precio_venta"  placeholder="Precio Venta" maxlength="4" required />
+                  <input type="text" class="form-control" id="precio_venta" name="precio_venta"  placeholder="Precio Venta" maxlength="4" autocomplete="off" required />
                    <span class="error_form" id="error_precio"></span>
                 </br>
                   <label>Stock</label>
-                    <input type="text" class="form-control" id="stock" name="stock" maxlength="4" required/>
+                    <input type="text" class="form-control" id="stock" name="stock" maxlength="4" autocomplete="off" required/>
                      <span class="error_form" id="error_stock"></span>
                </br>
              

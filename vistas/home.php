@@ -115,7 +115,7 @@ $_SESSION["bienvenida"]=1; ?>
  <!--INICIO CONTENIDO-->
 
       <h2 class="container-fluid bg-primary text-white text-center mh-50">
-          RESUMEN DE PERDIDA DEL AÑO <?php echo date("Y");?>
+          Resumen de perdida del año <?php echo date("Y");?>
       </h2>
 
     <!--COMPRAS ACTUAL-->
@@ -255,7 +255,7 @@ $_SESSION["bienvenida"]=1; ?>
 
 
         <h2 class="container-fluid bg-red text-white text-center mh-50"> 
-            RESUMEN DE VENTAS DEL AÑO <?php echo date("Y");?>
+            Resumen de ventas del año <?php echo date("Y");?>
         </h2>
 
     <!--VENTAS ACTUAL-->
@@ -404,7 +404,7 @@ $_SESSION["bienvenida"]=1; ?>
 
                <div class="box-body">
 
-               <h2 class="bg-primary text-white col-lg-12 text-center">RESUMEN DE PERDIDA DEL AÑO <?php echo date("Y");?></h2>
+               <h2 class="bg-primary text-white col-lg-12 text-center">resumen de perdida del año <?php echo date("Y");?></h2>
 
               <!--GRAFICA-->
              
@@ -423,7 +423,7 @@ $_SESSION["bienvenida"]=1; ?>
 
                <div class="box-body">
 
-               <h2 class="bg-red text-white col-lg-12 text-center">RESUMEN DE VENTAS DEL AÑO <?php echo date("Y");?></h2>
+               <h2 class="bg-red text-white col-lg-12 text-center">Resumen de ventas del año <?php echo date("Y");?></h2>
 
       
               <!--GRAFICA-->

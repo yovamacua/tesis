@@ -164,7 +164,7 @@ function limpiar()
 	//$("#id_usuario").val("");
     $("#categoria").val("");
 	$('#producto').val("");
-    $('#unidad').val("");
+    $('#id_unidad').val("");
 	$('#precio_venta').val("");
 	$('#stock').val("");
 }
@@ -256,9 +256,9 @@ function mostrar(id_producto)
 		
 			
 				$('#productoModal').modal('show');
-				$('#categoria').val(data.categoria);
+                $('#categoria').val(data.id_categoria);
                 $('#producto').val(data.producto);
-				$('#unidad').val(data.unidad);
+				$('#id_unidad').val(data.id_unidad);
 				$('#precio_venta').val(data.precio_venta);
 				$('#stock').val(data.stock);
 				$('.modal-title').text("Editar Producto");

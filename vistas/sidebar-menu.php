@@ -132,7 +132,23 @@
             
          </li>
 
-         <li <?php if(isset($activar) and  $activar == 'item_categorias'){?>class="active"<?php }else{?> class=""<?php }?> >
+
+         <li <?php if(isset($activar) and $activar == 'item_categorias'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
+             <?php if($_SESSION["Categoria"]==1)
+         
+          {
+            echo '<a href="#">
+            <i class="fa fa-users" aria-hidden="true"></i> <span>Categoria</span>
+            <span class="pull-right-container badge movarrow bg-blue">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>';
+              }
+
+         ?>
+            
+            <ul class="treeview-menu">
+              <li <?php if(isset($activar) and  $activar == 'item_categorias'){?>class="active"<?php }else{?> class=""<?php }?> >
             <?php if($_SESSION["Categoria"]==1)
          
           {
@@ -143,6 +159,21 @@
          ?>
             
          </li>
+               <li <?php if(isset($activar2) and $activar2 == 'item_unidad'){?>class="active"<?php }else{?><?php }?> >
+                   <?php if($_SESSION["Unidad"]==1)
+         
+          {
+                 echo' <a href="unidads.php">
+
+                  <i class="fa fa-users" aria-hidden="true"></i> <span>Unidad</span>
+                  </a>';
+               }
+               ?>
+               </li>
+            </ul>
+         </li>
+
+         
 
          <li <?php if(isset($activar) and  $activar == 'item_productos'){?>class="active"<?php }else{?> class=""<?php }?> >
              <?php if($_SESSION["Producto"]==1)

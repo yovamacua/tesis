@@ -37,7 +37,7 @@ require_once("header.php");?>
 
   <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
-         REPORTE DE VENTAS MES Y AÑO
+         Reporte de ventas mes y año
     </h2>
 
    <div class="panel panel-default">
@@ -61,7 +61,7 @@ require_once("header.php");?>
 
 	       <div class="">
 
-				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">REPORTE GENERAL DE VENTAS</h2>
+				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
 				              
 				  <table class="table table-bordered">
 				    <thead>
@@ -122,7 +122,7 @@ require_once("header.php");?>
 
 	             <div class="">
 
-				     <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">PORCENTAJE POR AÑO</h2>
+				     <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año</h2>
 				    
 		         
 		         <table class="table table-bordered">
@@ -229,7 +229,7 @@ require_once("header.php");?>
 
 			       <div class="">
 
-					<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">REPORTE GENERAL DE VENTAS</h2>
+					<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
 
       
 	          <!--GRAFICA-->
@@ -250,7 +250,7 @@ require_once("header.php");?>
 
 			       <div class="">
 
-					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">REPORTE GENERAL DE VENTAS CANCELADAS</h2>
+					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas canceladas</h2>
 
       
 	          <!--GRAFICA-->
