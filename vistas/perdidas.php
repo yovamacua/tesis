@@ -5,6 +5,10 @@
   require_once("../modelos/Productos.php");
      $producto = new Producto();
      $p = $producto->getproductos();
+
+  require_once("../modelos/Unidad.php");
+     $unidad = new Unidad();
+     $uni = $unidad->get_unidad();
 ?>
 
 <?php
@@ -57,12 +61,12 @@
                                   <th>Mes</th>
                                   <th>Año</th>
                                   <th width="15%">Autor</th>
-                                <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                                  <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
-                              }else{
-                                  echo '<th>Acciones</th>';
-                              }
-                                ?>
+                                    }else{
+                                    echo '<th>Acciones</th>';
+                                    }
+                                  ?>
                                   </tr>
                               </thead>
                             <tbody>
@@ -118,14 +122,17 @@
 
             <div class="form-group col-md-6">
               <label>Unidad de Medida</label>
-                <select class="selectpicker form-control" id="unidadDelProduc" name="unidadDelProduc" required>
-                  <option value="">-- Seleccione la Unidad --</option>
-                  <option value="kilo">kilo</option>
-                  <option value="gramo">gramo</option>
-                  <option value="libra">libra</option>
-                  <option value="unidad">unidad</option>
-                </select>
-                <span class="error_form" id="error_unidadDelProduc"></span>
+              <select class="form-control" id="unidadDelProduc" name="unidadDelProduc" required>
+                <option  value="">Seleccione la Unidad</option>
+                  <?php
+                     for($i=0; $i<sizeof($uni);$i++){
+                       ?>
+                        <option value="<?php echo $uni[$i]["idunidad"]?>"><?php echo $uni[$i]["nombre"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
+              <span class="error_form" id="error_unidadDelProduc"></span>
             </div>
           </div>
 

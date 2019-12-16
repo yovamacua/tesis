@@ -51,12 +51,12 @@
                                   <th>Descripción</th>
                                   <th width="8%">Cantidad</th>
                                   <th width="10%">Valorado c/u en</th> 
-                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                                  <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
-                              }else{
-                                  echo '<th>Acciones</th>';
-                              }
-                                ?>
+                                    }else{
+                                    echo '<th>Acciones</th>';
+                                    }
+                                  ?>
                                   </tr>
                               </thead>
                             <tbody>

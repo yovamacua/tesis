@@ -44,8 +44,8 @@
                           <table id="unidad_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="5%">Unida</th>
-                                <th width="5%">Descripcion</th>
+                                <th width="5%">Unidad</th>
+                                <th width="5%">Descripción</th>
                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{

@@ -104,7 +104,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
       in_array(15,$valores)?$_SESSION['Eliminar']=1:$_SESSION['Eliminar']=0;
       in_array(16,$valores)?$_SESSION['Editar']=1:$_SESSION['Editar']=0;
       in_array(17,$valores)?$_SESSION['Registrar']=1:$_SESSION['Registrar']=0;
-      in_array(21,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
+      in_array(18,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
           
           
 

@@ -1,4 +1,4 @@
-var tabla;
+var tabla; 
 
 //// INICIO DE VALIDACION DEL FORMULARIO///
 // funcion para validar formulario gastos

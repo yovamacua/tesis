@@ -58,7 +58,7 @@ $(function() {
             $("#error_idproducto").hide();
             $("#idproducto").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_idproducto").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_idproducto").html("Solo se permiten letras");
             $("#error_idproducto").css("position", "absolute");
             $("#error_idproducto").css("color", "red");
             $("#error_idproducto").show();
@@ -133,7 +133,7 @@ $(function() {
             $("#error_unidadDelProduc").hide();
             $("#unidadDelProduc").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_unidadDelProduc").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_unidadDelProduc").html("Solo se permiten letras");
             $("#error_unidadDelProduc").css("position", "absolute");
             $("#error_unidadDelProduc").css("color", "red");
             $("#error_unidadDelProduc").show();
