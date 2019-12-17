@@ -182,19 +182,9 @@
             <span class="error_form" id="error_dui"></span>
           </div>
           <div class="form-group col-md-6">
-            <label>No. de Capacitación</label> 
-           <select class="form-control" id="id_capa" name="id_capacitacion" required>
-                <option  value="0">Seleccione el No. de Capacitación</option>
-                  <?php
-                     for($i=0; $i<sizeof($c);$i++){
-                       ?>
-                        <option value="<?php echo $c[$i]["id_capacitacion"]?>"><?php echo $c[$i]["id_capacitacion"];?></option>
-                       <?php
-                     }
-                  ?>   
-              </select> 
-              <!-- <input type="text" name="id_capacitacion" id="id_capa" value="<?php echo $c["id_capacitacion"];?>" class="form-control" readonly="readonly"/> -->
-              <span class="error_form" id="error_id_capa"></span>
+            <label>No. de Capacitación</label>  
+            <input type="text" name="id_capacitacion" id="id_capa" class="form-control" readonly="readonly"/> 
+            <span class="error_form" id="error_id_capa"></span>
           </div> 
         </div>
 

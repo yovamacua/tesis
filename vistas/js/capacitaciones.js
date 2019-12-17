@@ -393,14 +393,19 @@ function mostrarformulario(flag)
 }
 
 function verdetalle(id_capacitacion){
-  $("#letra1").show();
-  $("#btnAgregarCap").show();
-  $("#capacitadosModal").show();
-  listarDetalleCapacitados(id_capacitacion);
-  $("#letra").hide();
-  $("#capacitacionModal").hide();
-  $("#add_button").hide();
-  $("#listadoregistros").hide();
+   $.post("../ajax/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
+ {
+    data = JSON.parse(data);
+    $("#letra1").show();
+    $("#btnAgregarCap").show();
+    $("#capacitadosModal").show();
+    listarDetalleCapacitados(id_capacitacion);
+    $("#letra").hide();
+    $("#capacitacionModal").hide();
+    $("#add_button").hide();
+    $("#listadoregistros").hide();
+    $('#id_capa').val(data.id_capacitacion);
+    });
 }
 
 //Función cancelarform
@@ -554,9 +559,9 @@ function mostrardetalle(id_detallecapacitados)
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
-       $('#id_capa').val(id_capacitacion); //-----------ID DE LA TABLA PADRE-------
+       $('#id_capa').val(data.id_capacitacion); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
-       $('#id_detallecapacitados').val(id_detallecapacitados);//AGREGAR EL ID DEL DETALLE
+       $('#id_detallecapacitados').val(data.id_detallecapacitados);//AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
 
     });

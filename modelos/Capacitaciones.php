@@ -53,8 +53,7 @@
             $sql->bindValue(4, substr($_POST["encargado"], 0, 45));
             $sql->bindValue(5, $_POST["id_usuario"]);
             $sql->execute();
-          
-
+        
         }
 
         // metodo para editar las categorias
