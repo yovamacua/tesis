@@ -16,7 +16,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select d.fecha, d.donante, d.descripcion, d.cantidad, d.precio, u.usuario from donaciones d inner join usuarios u on d.id_usuario = u.id_usuario";
+			$sql = "select d.id_donacion, d.fecha, d.donante, d.descripcion, d.cantidad, d.precio, u.usuario from donaciones d inner join usuarios u on d.id_usuario = u.id_usuario";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 

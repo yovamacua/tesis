@@ -55,7 +55,7 @@ try{
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, substr($_POST["producto"], 0, 50), PDO::PARAM_STR);
             $sql->bindValue(2,substr($_POST["precio_venta"], 0, 4), PDO::PARAM_STR);
-            $sql->bindValue(3, $_POST["id_unidad"],PDO::PARAM_IN);
+            $sql->bindValue(3, $_POST["id_unidad"],PDO::PARAM_INT);
             $sql->bindValue(4, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(5, substr($_POST["stock"], 0, 4), PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_usuario"],PDO::PARAM_INT);
