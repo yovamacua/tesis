@@ -15,7 +15,7 @@ require_once("../config/conexion.php");
         $conectar = parent::conexion();
         parent::set_names();
 
-          $sql = "select * from pedidos";
+          $sql = "select p.id_pedido, p.fecha, u.usuario from pedidos p inner join usuarios u on p.id_usuario = u.id_usuario";
           $sql = $conectar->prepare($sql);
           $sql->execute();
           return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);

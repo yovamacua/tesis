@@ -5,6 +5,10 @@
       require_once("../modelos/Pedidos.php");
       $pedido = new Pedidos();
       $p = $pedido->get_pedido();
+
+     require_once("../modelos/Unidad.php");
+     $unidad = new Unidad();
+     $uni = $unidad->get_unidad();
 ?>
 
 <?php
@@ -33,51 +37,39 @@
         </section>
         <!-- Main content -->
         <section class="content">
-             <div id="resultados_ajax"></div>
+          <div id="resultados_ajax"></div>
             <div class="row">
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header boton-top">
-                      <h1 class="box-title" ><label id="letra">Pedido</label></h1>
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="mostrarformulario(true)"   data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button></h1>
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button></h1>
+
+                            <button class="btn btn-primary btn-lg" id="addInsumo" onclick="limpiardetalle()" data-toggle="modal" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
-                    <!-- centro -->
-                    <div class="panel-body table-responsive" id="pedidoModal" >
-                      <form name="formulario" id="pedido_form" method="POST">
 
-                        <script>
-                          $(function () {
-                              $("#fecha1").datepicker({
-                                  format: "dd/mm/yyyy",
-                                  firstDay: 1
-                              }).datepicker("setDate", new Date());
-                           });          
-                       </script>
+                    <!-- centro 1-->
+                    <div class="panel-body table-responsive tabla-top" id="listadoregistros">
+                          <table id="pedido_data" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                <th width="15%">No. de Pedido</th>
+                                <th width="15%">Fecha</th>
+                                <th width="15%">Autor</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                    </div>
+                    <!--Fin centro 1-->
 
-                        <div class="form-group table-responsive" style="width: 70%;">
-                          <label for="" class="col-lg-3 control-label">Fecha:</label>
-                          <div class="col-lg-9">
-                            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required style="width:50%;" class="gui-input" value=""/>
-                          </div>
-                        </div>
-
-                        <div class="form-group table-responsive" style="width: 70%;">
-                          <label for="" class="col-lg-3 control-label">No. de Pedido:</label>
-                            <div class="col-lg-9">
-                              <input type="text" name="id_pedido" id="id_pedido" class="form-control" required style="width:10%;" readonly="readonly" value=""/>
-                            </div> 
-                        </div> 
-
-                        <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardarCap" onclick="desvanecer()"><i class="fa fa-save"></i> Guardar No. de Pedido</button>
-                          
-                  <!-- Tabla de insumo -->
-                            
-                        <button  type="button" id="addInsumo" class="btn btn-primary" data-toggle="modal"data-target="#detallepedidosModal"><i class="fa fa-plus"></i> Agregar Insumo </button>
-                            
-
+                    <!-- centro 2-->
+                    <div class="panel-body table-responsive tabla-top" id="listadopedido">
+                      <!-- Tabla de insumo -->
                         <table id="detallepedidos_data" class="table table-bordered table-striped">
                           <thead>
                               <tr>
@@ -96,17 +88,14 @@
                           <tbody>
                           </tbody>
                         </table>
-                         
-                          
-                           
+
                         <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                         
-                        </form> 
-
+                    <!-- div para el boton generar archivo de pedido -->
                         <div style="width:200px;">
                          
                           <div style="width:100px; float:left;">
-                            <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i><font color=white>Cancelar</font></a></button>
+                            <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i><font color=white> Regresar</font></a></button>
                           </div> 
                          
                           <div style="width:100px; float:right;">
@@ -119,36 +108,63 @@
                         </div> 
 
                       </div> 
-
+                    <!-- fin del div del boton generar archivo de pedido -->
                          
                     </div> <!-- /.col -->
+                    <!--Fin centro 2-->
 
-                    <div class="panel-body table-responsive" id="listadoregistros">
-                          <table id="pedido_data" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                <th width="12%">No. de Pedido</th>
-                                <th>Fecha</th>
-                                <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                          </table>
-                    </div>
-                    <!--Fin centro -->
-                    <!--Fin centro -->
                 </div>
               </div>
             </div>
           </section><!-- /.content -->
         </div>
   <!--Fin-Contenido-->
-    <!--FORMULARIO VENTANA MODAL-->
+
+ <!--FORMULARIO VENTANA MODAL PEDIDO-->
+
+  <div id="pedidoModal" class="modal fade">
+  <div class="modal-dialog">
+    <form method="post" id="pedido_form" autocomplete="off">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Registrar fecha del pedido</h4>
+        </div>
+
+        <script>
+        $(function () {
+            $("#fecha1").datepicker({
+                format: "dd/mm/yyyy",
+                firstDay: 1
+            }).datepicker("setDate", new Date());
+         });          
+     </script>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label>Fecha</label>
+            <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required/>
+            <span class="error_form" id="error_fecha1"></span>
+          </div>
+        </div>
+     
+         <div class="modal-footer">
+          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+          <input type="hidden" name="id_pedido" id="id_pedido"/>
+          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+          <button type="button" onclick="limpiardetalle()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+ <!--FIN FORMULARIO VENTANA MODAL-->
+
+    <!--FORMULARIO VENTANA MODAL INSUMOS DEL PEDIDO-->
 
   <div id="detallepedidosModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="detallepedidos_form">
+    <form method="post" id="detallepedidos_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -158,32 +174,39 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Insumo</label>
-            <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" placeholder="Insumo" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" autocomplete="off" placeholder="Insumo" required/>
+            <span class="error_form" id="error_nombreInsumo"></span>
           </div>
 
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
+            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
+            <span class="error_form" id="error_cantidad"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve Descripcion" required pattern="[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" placeholder="Breve Descripcion" required/>
+            <span class="error_form" id="error_descripcion"></span>
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Unidad de Medida</label>
-            <select class="selectpicker form-control" id="unidadMedida" name="unidadMedida" required>
-                  <option value="">-- Seleccione unidad --</option>
-                  <option value="kilo">kilo</option>
-                  <option value="gramo">gramo</option>
-                  <option value="libra">libra</option>
-                  <option value="unidad">unidad</option>
-                </select>
+            <select class="form-control" id="unidadMedida" name="unidadMedida" required>
+                <option  value="">Seleccione la Unidad</option>
+                  <?php
+                     for($i=0; $i<sizeof($uni);$i++){
+                       ?>
+                        <option value="<?php echo $uni[$i]["idunidad"]?>"><?php echo $uni[$i]["nombre"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
+              <span class="error_form" id="error_unidadMedida"></span>
           </div>
 
           <div class="form-group col-md-6">

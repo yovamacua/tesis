@@ -169,6 +169,7 @@
           $sub_array = array();
           $sub_array[] = $row["id_pedido"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
+          $sub_array[] = $row["usuario"];
     ?>
                   <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1 and $_SESSION["Registrar"]==1 )
                                  {

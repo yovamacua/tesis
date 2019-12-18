@@ -1,24 +1,243 @@
 var tabla; 
 
+//// INICIO DE VALIDACION DEL FORMULARIO 1///
+// funcion para validar formulario pedido
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_fecha1").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_fecha1 = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#fecha1").focusout(function() {
+        campo_fecha1();
+      });
+
+    function campo_fecha1() {
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#pedido_form").on("submit", function(e) {
+      // asignacion de valor a vaiables
+      
+      var error_fecha1 = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_fecha1 = false;
+
+        //comparacion
+        if (error_fecha1 === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO 1
+
+//// INICIO DE VALIDACION DEL FORMULARIO 2///
+// funcion para validar formulario capacitados
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_nombreInsumo").hide();
+    $("#error_cantidad").hide();
+    $("#error_descripcion").hide();
+    $("#error_unidadMedida").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_nombreInsumo = false;
+    var error_cantidad = false;
+    var error_descripcion = false;
+    var error_unidadMedida = false;
+    
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#nombreInsumo").focusout(function() {
+        campo_nombreInsumo();
+      });
+
+    $("#cantidad").focusout(function() {
+        campo_cantidad();
+      });
+
+    $("#descripcion").focusout(function() {
+      campo_descripcion();
+    });
+
+    $("#unidadMedida").focusout(function() {
+      campo_unidadMedida();
+    });
+    
+    function campo_nombreInsumo() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var nombreInsumo = $("#nombreInsumo").val();
+        if (pattern.test(nombreInsumo) && nombreInsumo !== '') {
+            $("#error_nombreInsumo").hide();
+            $("#nombreInsumo").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_nombreInsumo").html("Solo se permiten letras, números y los simbolos . : , ¿ ? ! ¡");
+            $("#error_nombreInsumo").css("position", "absolute");
+            $("#error_nombreInsumo").css("color", "red");
+            $("#error_nombreInsumo").show();
+            $("#nombreInsumo").css("border-bottom", "2px solid #F90A0A");
+            error_nombreInsumo = true;
+        }
+        var nombreInsumo = $("#nombreInsumo").val().length;
+        if (nombreInsumo <= 0) {
+            $("#error_nombreInsumo").html("No se permiten campos vacios");
+            $("#error_nombreInsumo").css("position", "absolute");
+            $("#error_nombreInsumo").css("color", "red");
+            $("#error_nombreInsumo").show();
+            $("#insumo").css("border-bottom", "2px solid #F90A0A");
+            error_nombreInsumo = true;
+        }
+    }
+
+    function campo_cantidad() {
+        var pattern = /^[0-9]*$/;   
+        var cantidad = $("#cantidad").val();
+        if (pattern.test(cantidad) && cantidad !== '') {
+            $("#error_cantidad").hide();
+            $("#cantidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_cantidad").html("Solo se permiten números enteros");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+        var cantidad = $("#cantidad").val().length;
+        if (cantidad <= 0) {
+            $("#error_cantidad").html("No se permiten campos vacios");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+    }
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, números y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    function campo_unidadMedida() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var unidadMedida = $("#unidadMedida").val();
+        if (pattern.test(unidadMedida) && unidadMedida !== '') {
+            $("#error_unidadMedida").hide();
+            $("#unidadMedida").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_unidadMedida").html("Solo se permiten letras");
+            $("#error_unidadMedida").css("position", "absolute");
+            $("#error_unidadMedida").css("color", "red");
+            $("#error_unidadMedida").show();
+            $("#unidadMedida").css("border-bottom", "2px solid #F90A0A");
+            error_unidadMedida = true;
+        }
+        var unidadMedida = $("#unidadMedida").val().length;
+        if (unidadMedida <= 0) {
+            $("#error_unidadMedida").html("No se permiten campos vacios");
+            $("#error_unidadMedida").css("position", "absolute");
+            $("#error_unidadMedida").css("color", "red");
+            $("#error_unidadMedida").show();
+            $("#unidadMedida").css("border-bottom", "2px solid #F90A0A");
+            error_unidadMedida = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#detallepedidos_form").on("submit", function(e) {
+      // asignacion de valor a vaiables
+      
+      var error_nombreInsumo = false;
+      var error_cantidad = false;
+      var error_descripcion = false;
+      var error_unidadMedida = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+         error_nombreInsumo = false;
+         error_cantidad = false;
+         error_descripcion = false;
+         error_unidadMedida = false;
+
+        //comparacion
+        if (error_nombreInsumo === false && error_cantidad === false && 
+          error_descripcion === false && error_unidadMedida === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#nombreInsumo").css("border-bottom", "1px solid #d2d6de");
+            $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            $("#unidadMedida").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditardetalle(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO 2
 //Función que se ejecuta al inicio
 function init(){
   mostrarformulario(false);
   listar();
 
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#pedido_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- });
-
- $("#detallepedidos_form").on("submit",function(e)
- {
-   guardaryeditardetalle(e);
- });
-
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
-     $(".modal-title").text("Agregar pedido");
+     $(".modal-title").text("Agregar fecha de pedido");
    });
 }
 
@@ -35,69 +254,67 @@ function limpiardetalle()
   v2 = document.getElementById("fecha1").value;
   p2 = v2;
   document.getElementById("fecha1").value = p2;
+
+  /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#nombreInsumo").css("border-bottom", "1px solid #d2d6de");
+    $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    $("#unidadMedida").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_nombreInsumo").hide();
+    $("#error_cantidad").hide();
+    $("#error_descripcion").hide();
+    $("#error_unidadMedida").hide();
 }
 
 function limpiar()
 {
   $('#fecha1').val("");
   $('#id_pedido').val("");
+
+  /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_fecha1").hide();
 }
 
 //Función mostrar formulario
 function mostrarformulario(flag)
 {
-
-  if (flag) 
-  {
-    $("#letra").show();
-    $("#pedidoModal").show();
-    $("#add_button").hide();
-    $("#listadoregistros").hide();
-    $("#fecha1").focus();
-    $("#addInsumo").hide();
-    $("#btnCancelar").hide();
-    $("#btnArchivo").hide();
-  }else if($("#id_pedido").val().length == 0){
-    $("#letra").hide();
-    $("#pedidoModal").hide();
-    $("#detallepedidos_data").hide();
-    $("#btnArchivo").show();
-    $("#btnGuardarCap").show();
-  }else{
-    $("#addInsumo").show();
-    $("#btnCancelar").show();
-    $("#btnArchivo").show();
-  }
+   $("#listadopedido").hide();
+   $("#addInsumo").hide();
+   $("#btnCancelar").hide();
+   $("#btnArchivo").hide();
 }
 
 //Función cancelarform
 function cancelarform()
 {
-  limpiar();
-  location.reload();
-  mostrarformulario(false);
+  $("#add_button").show();
+  $("#listadoregistros").show();
+  $("#listadopedido").hide();
+  $("#addInsumo").hide();
+  $("#btnCancelar").hide();
+  $("#btnArchivo").hide();
 }
 
   function verdetalle(id_pedido){
    $.post("../ajax/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
  {
     data = JSON.parse(data);
-       $('#pedidoModal').show();
-       $("#letra").show();
        $('#listadoregistros').hide();
        $("#add_button").hide();
-       $("#detallepedidos_data").show();
+       $("#listadopedido").show();
+       $("#addInsumo").show();
+       $("#btnCancelar").show();
+       $("#btnArchivo").show();
        $('#fecha1').val(data.fecha);
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
        $('#id_p').val(data.id_pedido); 
        $('#id_pe').val(data.id_pedido);  
        $('#fechaA').val(data.fecha);
     });
-      document.getElementById('fecha1').readOnly = true; 
-      document.getElementById('fecha1').disabled = true;
-      document.getElementById('id_pedido').disabled = true;
       listarDetallePedido(id_pedido);
-      $("#btnGuardarCap").hide();
 }
 
 //Función Listar
@@ -221,14 +438,9 @@ function mostrar(id_pedido)
  {
     data = JSON.parse(data);
 
-       $('#pedidoModal').show();
-       $("#letra").show();
-       $('#listadoregistros').hide();
-       $("#add_button").hide();
-       $("#detallepedidos_data").hide();
-       $("#addInsumo").hide();
+       $('#pedidoModal').modal('show');
        $('#fecha1').val(data.fecha);
-       $('.modal-title').text("Editar Pedido");
+       $('.modal-title').text("Editar fecha del pedido");
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
        $("#botones").hide();
