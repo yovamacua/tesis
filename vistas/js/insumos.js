@@ -1,17 +1,376 @@
 var tabla;
  
+//// INICIO DE VALIDACION DEL FORMULARIO ENTRADA///
+// funcion para validar formulario gastos
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_cantidad").hide();
+    $("#error_precio").hide();
+    $("#error_descripcion").hide();
+    $("#error_unidad").hide();
+    $("#error_fecha1").hide();
+    $("#error_idcategoria").hide();
+    
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_cantidad = false;
+    var error_precio = false;
+    var error_descripcion = false;
+    var error_unidad = false;
+    var error_fecha1 = false;
+	var error_idcategoria = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#cantidad").focusout(function() {
+        campo_cantidad();
+    });
+
+    $("#precio").focusout(function() {
+        campo_precio();
+    });
+
+    $("#descripcion").focusout(function() {
+        campo_descripcion();
+    });
+
+    $("#unidad").focusout(function() {
+        campo_unidad();
+    });
+
+    $("#fecha1").focusout(function() {
+        campo_fecha1();
+    });
+
+    $("#idcategoria").focusout(function() {
+        campo_idcategoria();
+    }); 
+ 	
+    
+    function campo_cantidad() {
+        var pattern = /^[0-9]*$/;   
+        var cantidad = $("#cantidad").val();
+        if (pattern.test(cantidad) && cantidad !== '') {
+            $("#error_cantidad").hide();
+            $("#cantidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_cantidad").html("Solo se permiten números");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+        var cantidad = $("#cantidad").val().length;
+        if (cantidad <= 0) {
+            $("#error_cantidad").html("No se permiten campos vacios");
+            $("#error_cantidad").css("position", "absolute");
+            $("#error_cantidad").css("color", "red");
+            $("#error_cantidad").show();
+            $("#cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad = true;
+        }
+    }
+
+    function campo_precio() {
+        var pattern = /^[0-9]+[.]+[0-9]*$/;
+        var precio = $("#precio").val();
+        if (pattern.test(precio) && precio !== '') {
+            $("#error_precio").hide();
+            $("#precio").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_precio").html("Solo se permite el formato 0.00");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+        var precio = $("#precio").val().length;
+        if (precio <= 0) {
+            $("#error_precio").html("No se permiten campos vacios");
+            $("#error_precio").css("position", "absolute");
+            $("#error_precio").css("color", "red");
+            $("#error_precio").show();
+            $("#precio").css("border-bottom", "2px solid #F90A0A");
+            error_precio = true;
+        }
+    }
+
+    function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+
+    function campo_unidad() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var unidad = $("#unidad").val();
+        if (pattern.test(unidad) && unidad !== '') {
+            $("#error_unidad").hide();
+            $("#unidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_unidad").html("Solo se permiten letras");
+            $("#error_unidad").css("position", "absolute");
+            $("#error_unidad").css("color", "red");
+            $("#error_unidad").show();
+            $("#unidad").css("border-bottom", "2px solid #F90A0A");
+            error_unidad = true;
+        }
+        var unidad = $("#unidad").val().length;
+        if (unidad <= 0) {
+            $("#error_unidad").html("No se permiten campos vacios");
+            $("#error_unidad").css("position", "absolute");
+            $("#error_unidad").css("color", "red");
+            $("#error_unidad").show();
+            $("#unidad").css("border-bottom", "2px solid #F90A0A");
+            error_unidad = true;
+        }
+    }
+
+    function campo_fecha1() {
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
+        }
+    }
+
+    function campo_idcategoria() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var idcategoria = $("#idcategoria").val();
+        if (pattern.test(idcategoria) && idcategoria !== '') {
+            $("#error_idcategoria").hide();
+            $("#idcategoria").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_idcategoria").html("Solo se permiten letras");
+            $("#error_idcategoria").css("position", "absolute");
+            $("#error_idcategoria").css("color", "red");
+            $("#error_idcategoria").show();
+            $("#idcategoria").css("border-bottom", "2px solid #F90A0A");
+            error_idcategoria = true;
+        }
+        var idcategoria = $("#idcategoria").val().length;
+        if (idcategoria <= 0) {
+            $("#error_idcategoria").html("No se permiten campos vacios");
+            $("#error_idcategoria").css("position", "absolute");
+            $("#error_idcategoria").css("color", "red");
+            $("#error_idcategoria").show();
+            $("#idcategoria").css("border-bottom", "2px solid #F90A0A");
+            error_idcategoria = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#insumo_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        var error_cantidad = false;
+	    var error_precio = false;
+	    var error_descripcion = false;
+	    var error_unidad = false;
+	    var error_fecha1 = false;
+		var error_idcategoria = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_cantidad = false;
+	    error_precio = false;
+	    error_descripcion = false;
+	    error_unidad = false;
+	    error_fecha1 = false;
+		error_idcategoria = false;
+
+        //comparacion
+        if (error_cantidad === false && error_precio === false && 
+        	error_descripcion === false && error_unidad === false && 
+        	error_fecha1 === false && error_idcategoria === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#precio").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            $("#unidad").css("border-bottom", "1px solid #d2d6de");
+            $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+            $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+//// INICIO DE VALIDACION DEL FORMULARIO SALIDA///
+// funcion para validar formulario capacitados
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_Id_insumo").hide();
+    $("#error_Cantidad").hide();
+    $("#error_Fecha").hide();
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_Id_insumo = false;
+    var error_Cantidad = false;
+    var error_Fecha = false;
+
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#Id_insumo").focusout(function() {
+        campo_Id_insumo();
+      });
+
+    $("#Cantidad").focusout(function() {
+        campo_Cantidad();
+      });
+
+    $("#Fecha").focusout(function() {
+        campo_Fecha();
+      });
+
+	function campo_Id_insumo() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var Id_insumo = $("#Id_insumo").val();
+        if (pattern.test(Id_insumo) && Id_insumo !== '') {
+            $("#error_Id_insumo").hide();
+            $("#Id_insumo").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_Id_insumo").html("Solo se permiten letras");
+            $("#error_Id_insumo").css("position", "absolute");
+            $("#error_Id_insumo").css("color", "red");
+            $("#error_Id_insumo").show();
+            $("#Id_insumo").css("border-bottom", "2px solid #F90A0A");
+            error_Id_insumo = true;
+        }
+        var Id_insumo = $("#Id_insumo").val().length;
+        if (Id_insumo <= 0) {
+            $("#error_Id_insumo").html("No se permiten campos vacios");
+            $("#error_Id_insumo").css("position", "absolute");
+            $("#error_Id_insumo").css("color", "red");
+            $("#error_Id_insumo").show();
+            $("#idcategoria").css("border-bottom", "2px solid #F90A0A");
+            error_Id_insumo = true;
+        }
+    }
+    function campo_Cantidad() {
+        var pattern = /^[0-9]*$/;   
+        var Cantidad = $("#Cantidad").val();
+        if (pattern.test(Cantidad) && Cantidad !== '') {
+            $("#error_Cantidad").hide();
+            $("#Cantidad").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_Cantidad").html("Solo se permiten números");
+            $("#error_Cantidad").css("position", "absolute");
+            $("#error_Cantidad").css("color", "red");
+            $("#error_Cantidad").show();
+            $("#Cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_Cantidad = true;
+        }
+        var Cantidad = $("#Cantidad").val().length;
+        if (Cantidad <= 0) {
+            $("#error_Cantidad").html("No se permiten campos vacios");
+            $("#error_Cantidad").css("position", "absolute");
+            $("#error_Cantidad").css("color", "red");
+            $("#error_Cantidad").show();
+            $("#Cantidad").css("border-bottom", "2px solid #F90A0A");
+            error_Cantidad = true;
+        }
+    }
+
+    function campo_Fecha() {
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+        var Fecha = $("#Fecha").val();
+        if (pattern.test(Fecha) && Fecha !== '') {
+            $("#error_Fecha").hide();
+            $("#Fecha").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_Fecha").html("Solo se permiten números y el símbolos /");
+            $("#error_Fecha").css("position", "absolute");
+            $("#error_Fecha").css("color", "red");
+            $("#error_Fecha").show();
+            $("#Fecha").css("border-bottom", "2px solid #F90A0A");
+            error_Fecha = true;
+        }
+        var Fecha = $("#Fecha").val().length;
+        if (Fecha <= 0) {
+            $("#error_Fecha").html("No se permiten campos vacios");
+            $("#error_Fecha").css("position", "absolute");
+            $("#error_Fecha").css("color", "red");
+            $("#error_Fecha").show();
+            $("#Fecha").css("border-bottom", "2px solid #F90A0A");
+            error_Fecha = true;
+        }
+    }
+
+    // se valida el formulario
+    $("#kardexinsumo_form").on("submit", function(e) {
+      // asignacion de valor a vaiables
+      
+        var error_Id_insumo = false;
+	    var error_Cantidad = false;
+	    var error_Fecha = false;
+
+        // se invoca a las funciones para tener el valor de las variables
+        error_Id_insumo = false;
+        error_Cantidad = false;
+        error_Fecha = false;
+
+        //comparacion
+        if (error_Id_insumo === false && error_Cantidad === false && 
+          error_Fecha === false) {
+            
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#Id_insumo").css("border-bottom", "1px solid #d2d6de");
+            $("#Cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#Fecha").css("border-bottom", "1px solid #d2d6de");
+            editarcantidad(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
+
+// FIN VALIDACION FORMULARIO SALIDA
+
+
+// FIN VALIDACION FORMULARIO ENTRADA
 //funcion que se ejecuta al inicio
 function init(){
 	listar();
-	//cuando se de click al boton submit se ejecuta la funcion guardar
-	$("#insumo_form").on("submit",function(e){
-		guardaryeditar(e);
-	});
-
-	//cuando se de click al boton submit se ejecuta la funcion editar la cantidad
-	$("#kardexinsumo_form").on("submit",function(e){
-		editarcantidad(e);
-	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
@@ -36,6 +395,21 @@ function limpiar(){
 	$('#idcategoria').val("");
 	$('#id_insumo').val("");
 
+	/** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#precio").css("border-bottom", "1px solid #d2d6de");
+    $("#unidad").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+    $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_cantidad").hide();
+    $("#error_precio").hide();
+    $("#error_unidad").hide();
+    $("#error_descripcion").hide();
+    $("#error_fecha1").hide();
+    $("#error_idcategoria").hide();
+
 }
 
 //funcion que limpia los campos del formulario2
@@ -43,6 +417,15 @@ function limpiar2(){
 	$('#Cantidad').val("");
 	$('#Fecha').val("");
 	$('#Id_insumo').val("");
+
+	/** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#Cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#Fecha").css("border-bottom", "1px solid #d2d6de");
+    $("#Id_insumo").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_Cantidad").hide();
+    $("#error_Fecha").hide();
+    $("#error_Id_insumo").hide();
 
 }
 

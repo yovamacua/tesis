@@ -14,6 +14,10 @@
     require_once("../modelos/Insumos.php");
        $insumo = new Insumos();
        $in = $insumo->get_insumos();
+
+    require_once("../modelos/Unidad.php");
+     $unidad = new Unidad();
+     $uni = $unidad->get_unidad();
 ?>
 
 <?php
@@ -61,12 +65,13 @@
                           <table id="insumo_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th>Fecha</th>
-                                  <th>Categoria</th>
+                                  <th width="15%">Autor</th>
+                                  <th width="10%">Fecha</th>
+                                  <th width="10%">Categoria</th>
                                   <th>Descripcion</th>
-                                  <th>Cantidad</th>
-                                  <th>Unidad de Medida</th>
-                                  <th>Precio</th>                                  
+                                  <th width="10%">Cantidad</th>
+                                  <th width="10%">Unidad de Medida</th>
+                                  <th width="10%">Precio</th>                                  
                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                               }else{
@@ -89,7 +94,7 @@
   <!--FORMULARIO VENTANA MODAL-->
   <div id="insumoModal" class="modal fade">
     <div class="modal-dialog">
-      <form method="post" id="insumo_form">
+      <form method="post" id="insumo_form" autocomplete="off">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -110,45 +115,53 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Cantidad</label>
-              <input type="number" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+              <input type="text" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="Cantidad" required/>
+              <span class="error_form" id="error_cantidad"></span>
             </div>
 
             <div class="form-group col-md-6">
-              <label>Precio</label>
-              <input type="number" step="any" name="precio" id="precio" autocomplete="off" class="form-control" placeholder="0.00" required/>
+              <label>Precio unitario</label>
+              <input type="text" name="precio" id="precio" autocomplete="off" class="form-control" placeholder="0.00" required/>
+              <span class="error_form" id="error_precio"></span>
             </div>
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Breve descripción" required pattern="^[a-zA-Z_áéíóúñ\s]{0,30}$"/>
+            <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+            <span class="error_form" id="error_descripcion"></span>
           </div>  
         </div> 
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Unidad de Medida</label>
-            <select class="selectpicker form-control" id="unidad" name="unidadMedida" required>
-                  <option value="">-- Seleccione unidad --</option>
-                  <option value="kilo">kilo</option>
-                  <option value="gramo">gramo</option>
-                  <option value="libra">libra</option>
-                  <option value="unidad">unidad</option>
-                </select>
+            <select class="form-control" id="unidad" name="unidadMedida" required>
+                <option  value="">Seleccione la Unidad</option>
+                  <?php
+                     for($i=0; $i<sizeof($uni);$i++){
+                       ?>
+                        <option value="<?php echo $uni[$i]["idunidad"]?>"><?php echo $uni[$i]["nombre"];?></option>
+                       <?php
+                     }
+                  ?>   
+              </select>
+              <span class="error_form" id="error_unidad"></span>
           </div>
 
           <div class="form-group col-md-6">
-            <label>fecha</label>
+            <label>Fecha</label>
             <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha"/>
+             <span class="error_form" id="error_fecha1"></span>
           </div>  
         </div> 
 
         <div class="form-row">
           <div class="form-group col-md-6">
              <label>No. de Pedido</label>
-              <select class="form-control" id="idpe" name="idpedido" >
-                <option  value="0">Seleccione el No. de Pedido</option>
+              <select class="form-control" id="idpe" name="idpedido" required>
+                <option  value="">Seleccione el No. de Pedido</option>
                   <?php
                      for($i=0; $i<sizeof($p);$i++){
                        ?>
@@ -161,8 +174,8 @@
 
           <div class="form-group col-md-6">
             <label>Categoría</label>
-              <select class="form-control" id="idcategoria" name="idcategoria" >
-                <option  value="0">Seleccione la Categoría</option>
+              <select class="form-control" id="idcategoria" name="idcategoria" required>
+                <option  value="">Seleccione la Categoría</option>
                   <?php
                      for($i=0; $i<sizeof($cat);$i++){
                        ?>
@@ -171,6 +184,7 @@
                      }
                   ?>   
               </select>
+              <span class="error_form" id="error_idcategoria"></span>
           </div> 
         </div> 
 
@@ -209,8 +223,8 @@
            <div class="form-row">
             <div class="form-group col-md-12">
               <label>Insumo</label>
-                <select class="form-control" name="idinsumo" id="Id_insumo" placeholder="Seleccione el insumo">
-                  <option  value="0">Seleccione el Insumo</option>
+                <select class="form-control" name="idinsumo" id="Id_insumo" placeholder="Seleccione el insumo" required>
+                  <option  value="">Seleccione el Insumo</option>
                     <?php
                        for($i=0; $i<sizeof($in);$i++){
                          ?>
@@ -219,23 +233,21 @@
                        }
                     ?>   
                 </select>
+                <span class="error_form" id="error_Id_insumo"></span>
             </div>
-
-            <!-- <div class="form-group col-md-6">
-            <label>Insumos disponibles</label>
-            <input type="text" name="cantidad" id="cantidadDis" value="<?php echo $in[$i]["cantidad"]?>" autocomplete="off" class="form-control" placeholder="cantidad" required/>
-          </div> -->
         </div>
 
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="number" name="salida" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+            <input type="text" name="salida" id="Cantidad" autocomplete="off" class="form-control" placeholder="cantidad" required/>
+            <span class="error_form" id="error_Cantidad"></span>
           </div>
 
           <div class="form-group col-md-6">
             <label>fecha</label>
-            <input type="text" name="fechaS" id="Fecha" class="form-control" placeholder="Fecha"/>
+            <input type="text" name="fechaS" id="Fecha" class="form-control" placeholder="Fecha" required/>
+            <span class="error_form" id="error_Fecha"></span>
           </div>  
         </div> 
 

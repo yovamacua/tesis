@@ -99,7 +99,7 @@
 
             <div class="form-group col-md-6">
             <label>Gasto</label>
-            <input type="text" step="any" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
+            <input type="text" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" step="any" required/>
             <span class="error_form" id="error_precio"></span>
           </div>
         </div>
@@ -107,7 +107,7 @@
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" placeholder="Breve descripción" required/>
+            <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
             <span class="error_form" id="error_descripcion"></span>
           </div>  
         </div> 

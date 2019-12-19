@@ -100,7 +100,7 @@
 
             <div class="form-group col-md-6">
               <label>Donante</label>
-              <input type="text" name="donante" id="donante" class="form-control"  autocomplete="off" placeholder="nombre del donante" required/>
+              <input type="text" name="donante" id="donante" class="form-control"  autocomplete="off" placeholder="Nombre del donante" required/>
               <span class="error_form" id="error_donante"></span>
           </div>
         </div>
@@ -108,7 +108,7 @@
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" autocomplete="off" class="form-control" placeholder="Breve descripción" required/>
+            <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
             <span class="error_form" id="error_descripcion"></span>
           </div>
         </div>
@@ -116,7 +116,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="cantidad" required/>
+            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
             <span class="error_form" id="error_cantidad"></span>
           </div>
 

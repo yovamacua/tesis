@@ -122,6 +122,7 @@ switch ($_GET["op"]) {
 		    foreach($datos as $row){
 		        $sub_array = array();
 		      
+		      	$sub_array[] = $row["usuario"];
 		      	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		      	$sub_array[] = $row["categoria"];
 		      	$sub_array[] = $row["descripcion"];

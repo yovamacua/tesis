@@ -4,7 +4,7 @@ var tabla;
 // funcion para validar formulario gastos
 $(function() {
     //creando variables y ocultando campos de error
-    $("#error_fecha").hide();
+    $("#error_fecha1").hide();
     $("#error_precio").hide();
     $("#error_descripcion").hide();
 

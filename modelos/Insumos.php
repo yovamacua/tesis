@@ -17,7 +17,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.fecha, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria";
+			$sql = "select u.usuario, i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.fecha, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria inner join pedidos p on p.id_pedido = i.idpedido inner join usuarios u on p.id_usuario = u.id_usuario";
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 

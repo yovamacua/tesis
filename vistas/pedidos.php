@@ -55,9 +55,9 @@
                           <table id="pedido_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                <th width="15%">Autor</th>
                                 <th width="15%">No. de Pedido</th>
                                 <th width="15%">Fecha</th>
-                                <th width="15%">Autor</th>
                                 <th>Acciones</th>
                                 </tr>
                             </thead>

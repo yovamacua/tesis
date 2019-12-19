@@ -53,6 +53,7 @@
                           <table id="perdida_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
+                                  <th width="15%">Autor</th>
                                   <th width="12%">Nombre Producto</th>
                                   <th width="10%">Cantidad</th>
                                   <th width="10%">Unidad de Medida</th>
@@ -60,7 +61,6 @@
                                   <th width="10%">Precio Unitario</th>
                                   <th>Mes</th>
                                   <th>Año</th>
-                                  <th width="15%">Autor</th>
                                   <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                                     }else{
@@ -115,8 +115,8 @@
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Precio del Producto</label>
-              <input type="text" step="any" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
+              <label>Precio Unitario</label>
+              <input type="text" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
               <span class="error_form" id="error_precioProduc"></span>
             </div>
 
@@ -139,7 +139,7 @@
           <div class="form-row">
             <div class="form-group col-md-12">
               <label>Descripción</label>
-              <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" placeholder="Breve descripción" required/>
+              <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
               <span class="error_form" id="error_descripcion"></span>
             </div>
           </div>
