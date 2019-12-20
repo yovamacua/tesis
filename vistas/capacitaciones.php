@@ -44,8 +44,6 @@
                     <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button"  onclick="limpiar()" data-toggle="modal" data-target="#capacitacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Capacitación</button></h1>
-
-                            <button class="btn btn-primary btn-lg" id="btnAgregarCap" onclick="limpiardetalle();" data-toggle="modal" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i>  Agregar Capacitado</button>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
@@ -68,7 +66,61 @@
                     </div>
                     <!--Fin centro -->
 
-                      <div class="panel-body table-responsive tabla-top" id="capacitadosModal">
+              <!--Formulario para agregar capacitados -->
+              <button id="btnAgregarCap" class="btn btn-primary btn-lg collapsible " onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i aria-hidden="true"></i>Agregar Capacitado</button>
+
+              <div class="panel-body table-responsive" class="capacitado" id="detallecapacitadosModal">
+                <form method="post" id="detallecapacitados_form" autocomplete="off">
+
+                <div class="form-group col-md-12">
+
+                  <div class="form-group col-md-3">
+                    <label>Nombres</label>
+                    <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombres" autocomplete="off" required/>
+                    <span class="error_form" id="error_nombres"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label>Apellidos</label>
+                    <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" autocomplete="off" required/>
+                    <span class="error_form" id="error_apellidos"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label>DUI</label>
+                    <input type="text" name="dui" id="dui" class="form-control" placeholder="00000000-0" autocomplete="off" required/>
+                    <span class="error_form" id="error_dui"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                  <label>No. de Capacitación</label> 
+                  <select class="form-control" id="id_capa" name="id_capacitacion" required>
+                    <option  value="">Seleccione el No. de Capacitación</option>
+                    <?php
+                       for($i=0; $i<sizeof($c);$i++){
+                         ?>
+                          <option value="<?php echo $c[$i]["id_capacitacion"]?>"><?php echo $c[$i]["id_capacitacion"];?></option>
+                         <?php
+                       }
+                    ?>   
+                  </select> 
+                  <span class="error_form" id="error_id_capa"></span>
+                </div>
+
+              </div>
+
+                    <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                    <input type="hidden" name="id_detallecapacitados" id="id_detallecapacitados"/>
+                    <!-- <input type="show" name="id_capacitacion" id="id_capa"/>  -->
+                   
+                   <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  
+                </form>
+              </div>
+            <!--Fin formulario para agregar capacitados -->
+
+                    <!--Tabla de capacitados -->
+                      <div class="panel-body table-responsive tabla-cap" id="capacitadosModal">
 
                         <table id="detallecapacitados_data" class="table table-bordered table-striped">
                           <thead>
@@ -85,7 +137,7 @@
                         <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform();"><i class="fa fa-arrow-circle-left"></i> <font color=white>Regresar</font></a></button>
                         <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                       </div>
-                    <!--Fin centro -->
+                    <!--Fin tabla de capacitados -->
 
                 </div>
               </div>
@@ -151,54 +203,8 @@
  <!--FIN FORMULARIO VENTANA MODAL-->
          
 
-  <!--Fin-Contenido-->
-    <!--FORMULARIO VENTANA MODAL CAPACITADOS-->
-  <div id="detallecapacitadosModal" class="modal fade">
-  <div class="modal-dialog">
-    <form method="post" id="detallecapacitados_form" autocomplete="off">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Capacitado</h4>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Nombres</label>
-            <input type="text" name="nombres" id="nombres" class="form-control" placeholder="Nombres" autocomplete="off" required/>
-            <span class="error_form" id="error_nombres"></span>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Apellidos</label>
-            <input type="text" name="apellidos" id="apellidos" class="form-control" placeholder="Apellidos" autocomplete="off" required/>
-            <span class="error_form" id="error_apellidos"></span>
-          </div>
-        </div>
+<!--Fin-Contenido-->
 
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>DUI</label>
-            <input type="text" name="dui" id="dui" class="form-control" placeholder="00000000-0" autocomplete="off" required/>
-            <span class="error_form" id="error_dui"></span>
-          </div>
-          <div class="form-group col-md-6">
-            <label>No. de Capacitación</label>  
-            <input type="text" name="id_capacitacion" id="id_capa" class="form-control" readonly="readonly"/> 
-            <span class="error_form" id="error_id_capa"></span>
-          </div> 
-        </div>
-
-        <div class="modal-footer">
-          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-          <input type="hidden" name="id_detallecapacitados" id="id_detallecapacitados"/>
-          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
-          <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
- <!--FIN FORMULARIO VENTANA MODAL-->
 <?php  } else {
 
        require("noacceso.php");

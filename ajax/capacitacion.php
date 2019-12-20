@@ -215,7 +215,7 @@
           $sub_array[] = $row["dui"];
           $sub_array[] = '<div class="cbtns">
           <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="glyphicon glyphicon-edit"></i></button></div>';
+          <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="fa fa-trash"></i></button></div>';
             $data[] = $sub_array;
           }
 

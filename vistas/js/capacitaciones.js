@@ -316,7 +316,7 @@ $(function() {
 
         //comparacion
         if (error_nombres === false && error_apellidos === false && 
-          error_dui === false && error_id_capa === false) {
+        error_dui === false && error_id_capa === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#nombres").css("border-bottom", "1px solid #d2d6de");
@@ -345,12 +345,41 @@ function init(){
    });
 }
 
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+// var coll = document.getElementsByClassName("collapsible");
+// var i;
+
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.maxHeight){
+//       content.style.maxHeight = null;
+//     } else {
+//       content.style.maxHeight = content.scrollHeight + "px";
+//     } 
+//   });
+// }
+
 function limpiardetalle()
 {
   $('#nombres').val("");
-	$('#apellidos').val("");
+  $('#apellidos').val("");
   $('#dui').val("");
-	$('#id_capacitacion').val("");
   $('#id_detallecapacitados').val("");
 
   /** reinicia la validacion cuando se sale de la ventana modal **/
@@ -389,6 +418,7 @@ function limpiar()
 function mostrarformulario(flag)
 { 
   $("#capacitadosModal").hide();
+  $("#detallecapacitadosModal").hide();
   $("#btnAgregarCap").hide();
 }
 
@@ -415,6 +445,7 @@ function cancelarform()
   $("#capacitadosModal").hide();
   $("#add_button").show();
   $("#listadoregistros").show();
+  $("#detallecapacitadosModal").hide();
 }
 
 //Función Listar
@@ -555,7 +586,6 @@ function mostrardetalle(id_detallecapacitados)
  {
     data = JSON.parse(data);
 
-       $('#detallecapacitadosModal').modal('show');
        $('#nombres').val(data.nombres);
        $('#apellidos').val(data.apellidos);
        $('#dui').val(data.dui);
@@ -608,10 +638,8 @@ function guardaryeditardetalle(e)
        {
           console.log(datos);
           $('#detallecapacitados_form')[0].reset();
-          $('#detallecapacitadosModal').modal('hide');
           $('#resultados_ajax').html(datos);
           $('#detallecapacitados_data').DataTable().ajax.reload(null, false);
-          limpiardetalle();
        }
    });
 }
