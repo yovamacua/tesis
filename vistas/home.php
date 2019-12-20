@@ -28,7 +28,7 @@ require_once("header.php");?>
 
 <?php 
 if(isset($_SESSION["bienvenida"])){}else{ ?>
-<div class="alert alert-info alert-dismissible">
+<div class="alert alert-info alert-dismissible" style="margin-top: 1rem;">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                 <h4 style="margin-bottom: 0px!important;"><i class="icon fa fa-info"></i> Bienvenido! <?php echo $_SESSION["usuario"]?></h4>
               <!-- Aqui puede ir algo más -->
