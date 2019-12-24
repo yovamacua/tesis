@@ -83,24 +83,9 @@ thead tr th:last-child {
   margin-bottom: 15px;
 }
 
-.capacitado {
+.contenedor {
   display: none;
   overflow: hidden;
-  /*padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;*//*agregar efecto slide down*/
-
-}
-
-.collapsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-
-}
-
-.active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
 
 }
 

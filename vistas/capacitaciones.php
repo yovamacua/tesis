@@ -67,10 +67,11 @@
                     <!--Fin centro -->
 
               <!--Formulario para agregar capacitados -->
-              <button id="btnAgregarCap" class="btn btn-primary btn-lg collapsible " onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i aria-hidden="true"></i>Agregar Capacitado</button>
 
-              <div class="panel-body table-responsive" class="capacitado" id="detallecapacitadosModal">
-                <form method="post" id="detallecapacitados_form" autocomplete="off">
+            <button id="btnAgregarCap" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Capacitado</button>
+
+            <div class="panel-body table-responsive contenedor" id="detallecapacitadosModal">
+              <form method="post" id="detallecapacitados_form" autocomplete="off">
 
                 <div class="form-group col-md-12">
 
@@ -92,31 +93,18 @@
                     <span class="error_form" id="error_dui"></span>
                   </div>
 
-                  <div class="form-group col-md-3">
-                  <label>No. de Capacitación</label> 
-                  <select class="form-control" id="id_capa" name="id_capacitacion" required>
-                    <option  value="">Seleccione el No. de Capacitación</option>
-                    <?php
-                       for($i=0; $i<sizeof($c);$i++){
-                         ?>
-                          <option value="<?php echo $c[$i]["id_capacitacion"]?>"><?php echo $c[$i]["id_capacitacion"];?></option>
-                         <?php
-                       }
-                    ?>   
-                  </select> 
-                  <span class="error_form" id="error_id_capa"></span>
                 </div>
-
-              </div>
-
+             
                     <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                     <input type="hidden" name="id_detallecapacitados" id="id_detallecapacitados"/>
-                    <!-- <input type="show" name="id_capacitacion" id="id_capa"/>  -->
+                    <input type="hidden" name="id_capacitacion" id="id_capa"/> 
                    
                    <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   
                 </form>
               </div>
+
+         
             <!--Fin formulario para agregar capacitados -->
 
                     <!--Tabla de capacitados -->

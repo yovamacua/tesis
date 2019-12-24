@@ -44,8 +44,6 @@
                     <div class="box-header boton-top">
                           <h1 class="box-title">
                             <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button></h1>
-
-                            <button class="btn btn-primary btn-lg" id="addInsumo" onclick="limpiardetalle()" data-toggle="modal" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
@@ -67,8 +65,60 @@
                     </div>
                     <!--Fin centro 1-->
 
+            <!--Formulario para agregar capacitados -->
+            <button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
+
+            <div class="panel-body table-responsive contenedor" id="detallepedidosModal">
+              <form method="post" id="detallepedidos_form" autocomplete="off">
+
+                <div class="form-group col-md-12">
+
+                  <div class="form-group col-md-3">
+                    <label>Insumo</label>
+                    <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" autocomplete="off" placeholder="Insumo" required/>
+                    <span class="error_form" id="error_nombreInsumo"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label>Cantidad</label>
+                    <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
+                    <span class="error_form" id="error_cantidad"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label>Unidad de Medida</label>
+                    <select class="form-control" id="unidadMedida" name="unidadMedida" required>
+                        <option  value="">Seleccione la Unidad</option>
+                          <?php
+                             for($i=0; $i<sizeof($uni);$i++){
+                               ?>
+                                <option value="<?php echo $uni[$i]["idunidad"]?>"><?php echo $uni[$i]["nombre"];?></option>
+                               <?php
+                             }
+                          ?>   
+                    </select>
+                    <span class="error_form" id="error_unidadMedida"></span>
+                  </div>
+
+                  <div class="form-group col-md-3">
+                    <label>Descripción</label>
+                    <textarea rows="1" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+                    <span class="error_form" id="error_descripcion"></span>
+                  </div>
+
+                </div>
+
+                    <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                    <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
+                    <input type="hidden" name="id_pedido" id="id_pe">
+                    <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  
+                </form>
+              </div>
+            <!--Fin formulario para agregar capacitados -->
+
                     <!-- centro 2-->
-                    <div class="panel-body table-responsive tabla-top" id="listadopedido">
+                    <div class="panel-body table-responsive tabla-cap" id="listadopedido">
                       <!-- Tabla de insumo -->
                         <table id="detallepedidos_data" class="table table-bordered table-striped">
                           <thead>
@@ -160,72 +210,6 @@
 </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
 
-    <!--FORMULARIO VENTANA MODAL INSUMOS DEL PEDIDO-->
-
-  <div id="detallepedidosModal" class="modal fade">
-  <div class="modal-dialog">
-    <form method="post" id="detallepedidos_form" autocomplete="off">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Agregar Insumo</h4>
-        </div>
-        
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Insumo</label>
-            <input type="text" name="nombreInsumo" id="nombreInsumo" class="form-control" autocomplete="off" placeholder="Insumo" required/>
-            <span class="error_form" id="error_nombreInsumo"></span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label>Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
-            <span class="error_form" id="error_cantidad"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-12">
-            <label>Descripción</label>
-            <input type="text" name="descripcion" id="descripcion" class="form-control" autocomplete="off" placeholder="Breve Descripcion" required/>
-            <span class="error_form" id="error_descripcion"></span>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label>Unidad de Medida</label>
-            <select class="form-control" id="unidadMedida" name="unidadMedida" required>
-                <option  value="">Seleccione la Unidad</option>
-                  <?php
-                     for($i=0; $i<sizeof($uni);$i++){
-                       ?>
-                        <option value="<?php echo $uni[$i]["idunidad"]?>"><?php echo $uni[$i]["nombre"];?></option>
-                       <?php
-                     }
-                  ?>   
-              </select>
-              <span class="error_form" id="error_unidadMedida"></span>
-          </div>
-
-          <div class="form-group col-md-6">
-            <label>No. de Pedido</label> 
-            <input type="text" name="id_pedido" id="id_pe" class="form-control" readonly="readonly"/>
-          </div> 
-        </div>
-
-        <div class="modal-footer">
-          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
-          <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
-          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
-          <button type="button" onclick="limpiardetalle()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-        </div>
-      </div>
-    </form>
-  </div>
-</div>
- <!--FIN FORMULARIO VENTANA MODAL-->
  <?php  } else {
 
        require("noacceso.php");

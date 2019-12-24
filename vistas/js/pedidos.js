@@ -241,6 +241,22 @@ function init(){
    });
 }
 
+//mostrar y esconder el form de agregar pedido
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
 function limpiardetalle()
 {
   $('#nombreInsumo').val("");
@@ -285,6 +301,7 @@ function mostrarformulario(flag)
    $("#addInsumo").hide();
    $("#btnCancelar").hide();
    $("#btnArchivo").hide();
+   $("#detallepedidosModal").hide();
 }
 
 //Función cancelarform
@@ -296,6 +313,7 @@ function cancelarform()
   $("#addInsumo").hide();
   $("#btnCancelar").hide();
   $("#btnArchivo").hide();
+  $("#detallepedidosModal").hide();
 }
 
   function verdetalle(id_pedido){
@@ -454,7 +472,7 @@ function mostrardetalle(id_detallepedido)
  {
     data = JSON.parse(data);
 
-       $('#detallepedidosModal').modal('show');
+       //$('#detallepedidosModal').show();
        $('#nombreInsumo').val(data.nombreInsumo);
        $('#cantidad').val(data.cantidad);
        $('#descripcion').val(data.descripcion);
@@ -508,8 +526,6 @@ function guardaryeditardetalle(e)
        success: function(datos)
        {
           console.log(datos);
-          $('#detallepedidos_form')[0].reset();
-          $('#detallepedidosModal').modal('hide');
           $('#resultados_ajax').html(datos);
           $('#detallepedidos_data').DataTable().ajax.reload(null, false);
           limpiardetalle();
