@@ -113,7 +113,7 @@ switch ($_GET["op"]) {
 		     	$sub_array[] = $row["usuario"];
 		      	$sub_array[] = $row["producto"];
 		     	$sub_array[] = $row["cantidad"];
-		     	$sub_array[] = $row["unidadDelProduc"];
+		     	$sub_array[] = $row["nombre"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $dolar.$row["precioProduc"];
 		     	$sub_array[] = $row["mes"];

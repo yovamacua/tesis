@@ -34,7 +34,22 @@
       $hacer_pedido->setTitle("Pedido de Insumos");
 
 
-
+  $styleTitle = [
+      'borders' => [
+          'top' => [
+              'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          ],
+                  'left' => [
+              'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          ],
+                  'right' => [
+              'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          ],
+                  'bottom' => [
+              'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+          ],
+      ],
+  ];
   $styleArray = [
       'borders' => [
           'top' => [
@@ -66,30 +81,37 @@
 
 
   //APLICAMOS ESTILO A LAS CELDAS
+  $hacer_pedido->getStyle('A4')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A5')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A6')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A7')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A8')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A9')->applyFromArray($styleTitle);
+  $hacer_pedido->getStyle('A10')->applyFromArray($styleTitle);
+
+  $hacer_pedido->getStyle('A14')->applyFromArray($styleArray);
+  $hacer_pedido->getStyle('B14')->applyFromArray($styleArray);
   $hacer_pedido->getStyle('C14')->applyFromArray($styleArray);
   $hacer_pedido->getStyle('D14')->applyFromArray($styleArray);
   $hacer_pedido->getStyle('E14')->applyFromArray($styleArray);
-  $hacer_pedido->getStyle('F14')->applyFromArray($styleArray);
-  $hacer_pedido->getStyle('G14')->applyFromArray($styleArray);
    
   //AGREGAMOS EL ANCHO DE LA COLUMNA
-  $hacer_pedido->getColumnDimension('A')->setWidth(30);
-  $hacer_pedido->getColumnDimension('B')->setWidth(35);
-  $hacer_pedido->getColumnDimension('C')->setWidth(10);
-  $hacer_pedido->getColumnDimension('D')->setWidth(15);
-  $hacer_pedido->getColumnDimension('E')->setWidth(20);
-  $hacer_pedido->getColumnDimension('F')->setWidth(40);
-  $hacer_pedido->getColumnDimension('G')->setWidth(30);
+  $hacer_pedido->getColumnDimension('A')->setWidth(25);
+  $hacer_pedido->getColumnDimension('B')->setWidth(25);
+  $hacer_pedido->getColumnDimension('C')->setWidth(25);
+  $hacer_pedido->getColumnDimension('D')->setWidth(30);
+  $hacer_pedido->getColumnDimension('E')->setWidth(25);
 
   //AGREGANDO EL TITUTLO DE LAS COLUMNAS
   $encabezado = ["ITEM","CANTIDAD", "UNIDAD DE MEDIDA","OBRA, BIEN O SERVICIO SOLICITADO","ESPECIFICACIONES"];
-  $hacer_pedido->fromArray($encabezado, null, 'C14');
+  $hacer_pedido->fromArray($encabezado, null, 'A14');
 
 
    // TITULO DEL REPORTE
   $valor = "SOLICITUD O REQUERIMIENTO DE OBRA BIEN O SERVICIO";
-  $hacer_pedido->setCellValue('F2', $valor);
-  $hacer_pedido->getStyle('F2')->applyFromArray($fontStyle);
+  $hacer_pedido->setCellValue('A2', $valor);
+  $hacer_pedido->getStyle('A2')->applyFromArray($fontStyle);
+  $hacer_pedido->mergeCells('A2:E2');
 
     $fecha1 = $_POST["fecha"];
 
@@ -114,11 +136,11 @@
       $descripcion = $pedido ->descripcion;
 
       # Escribirlos en el documento
-      $hacer_pedido -> setCellValueByColumnAndRow ( 3, $numeroDeFila , $item );
-      $hacer_pedido -> setCellValueByColumnAndRow ( 4, $numeroDeFila , $cantidad );
-      $hacer_pedido -> setCellValueByColumnAndRow ( 5, $numeroDeFila , $unidadMedida );
-      $hacer_pedido -> setCellValueByColumnAndRow ( 6, $numeroDeFila , $nombreInsumo );
-      $hacer_pedido -> setCellValueByColumnAndRow ( 7, $numeroDeFila , $descripcion );
+      $hacer_pedido -> setCellValueByColumnAndRow ( 1, $numeroDeFila , $item );
+      $hacer_pedido -> setCellValueByColumnAndRow ( 2, $numeroDeFila , $cantidad );
+      $hacer_pedido -> setCellValueByColumnAndRow ( 3, $numeroDeFila , $unidadMedida );
+      $hacer_pedido -> setCellValueByColumnAndRow ( 4, $numeroDeFila , $nombreInsumo );
+      $hacer_pedido -> setCellValueByColumnAndRow ( 5, $numeroDeFila , $descripcion );
       $numeroDeFila ++ ;
       $item ++;
       $id=$numeroDeFila-1;
@@ -126,11 +148,11 @@
       // la consulta de los datos
          
 
+      $hacer_pedido->getStyle('A14:A'.$id)->applyFromArray($styleArray);
+      $hacer_pedido->getStyle('B14:B'.$id)->applyFromArray($styleArray);
       $hacer_pedido->getStyle('C14:C'.$id)->applyFromArray($styleArray);
-      $hacer_pedido->getStyle('D14:D'.$id)->applyFromArray($styleArray);
-      $hacer_pedido->getStyle('E14:E'.$id)->applyFromArray($styleArray);
-      $hacer_pedido->getStyle('F14:F'.$id)->applyFromArray($styleArray); 
-      $hacer_pedido->getStyle('G14:G'.$id)->applyFromArray($styleArray); 
+      $hacer_pedido->getStyle('D14:D'.$id)->applyFromArray($styleArray); 
+      $hacer_pedido->getStyle('E14:E'.$id)->applyFromArray($styleArray); 
   }
 
     // parte del titulo 
@@ -149,12 +171,45 @@
     $hacer_pedido->setCellValue('B9', "ALCALDEZA MUNICIPAL");
     $hacer_pedido->setCellValue('A10', "DEPENDENCIA:");
     $hacer_pedido->setCellValue('B10', "CONCEJO MUNICIPAL");
-    $hacer_pedido->setCellValue('E5', "FIRMA DEL SOLICITANTE:");
+    $hacer_pedido->setCellValue('D5', "FIRMA DEL SOLICITANTE:");
     $hacer_pedido->setCellValue('F5', " ");
-    $hacer_pedido->setCellValue('E8', "FIRMA DEL AUTORIZANTE:");
+    $hacer_pedido->setCellValue('D8', "FIRMA DEL AUTORIZANTE:");
     $hacer_pedido->setCellValue('F8', " ");
     $hacer_pedido->setCellValue('A11', "JUSTIFICACION DE LA SOLICITUD:");
     $hacer_pedido->setCellValue('B12', " ");
+
+    $hacer_pedido->mergeCells('B4:E4');
+    $hacer_pedido->mergeCells('B5:C5');
+    $hacer_pedido->mergeCells('B6:C6');
+    $hacer_pedido->mergeCells('B7:C7');
+    $hacer_pedido->mergeCells('B8:C8');
+    $hacer_pedido->mergeCells('B9:C9');
+    $hacer_pedido->mergeCells('B10:C10');
+    $hacer_pedido->mergeCells('D5:D7');
+    $hacer_pedido->mergeCells('D8:D10');
+    $hacer_pedido->mergeCells('E5:E7');
+    $hacer_pedido->mergeCells('E8:E10');
+    $hacer_pedido->mergeCells('A11:E11');
+    $hacer_pedido->mergeCells('A12:E12');
+    
+    $hacer_pedido->getStyle('B4:E4')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('B5:C5')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('B6:C6')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('B7:C7')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('B8:C8')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('D5:D7')->applyFromArray($styleArray);
+    $hacer_pedido->getStyle('D8:D10')->applyFromArray($styleArray);
+    $hacer_pedido->getStyle('D5:D7')->getAlignment()->setVertical('center');
+    $hacer_pedido->getStyle('D8:D10')->getAlignment()->setVertical('center');
+    $hacer_pedido->getStyle('B9:C9')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('B10:C10')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('D5:D7')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('D8:D10')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('E5:E7')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('E8:E10')->applyFromArray($styleTitle);
+    $hacer_pedido->getStyle('A11:E11')->applyFromArray($styleArray);
+    $hacer_pedido->getStyle('A12:E12')->applyFromArray($styleTitle);
+
 
     // Nombre del archivo descargado
     $archivogenerado = 'PedidoInsumos'.'.xlsx';
