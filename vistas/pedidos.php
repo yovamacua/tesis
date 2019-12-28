@@ -87,7 +87,7 @@
 
                   <div class="form-group col-md-3">
                     <label>Unidad de Medida</label>
-                    <select class="form-control" id="unidadMedida" name="unidadMedida" required>
+                    <select class="form-control" id="id_uni" name="id_uni" required>
                         <option  value="">Seleccione la Unidad</option>
                           <?php
                              for($i=0; $i<sizeof($uni);$i++){
@@ -97,7 +97,7 @@
                              }
                           ?>   
                     </select>
-                    <span class="error_form" id="error_unidadMedida"></span>
+                    <span class="error_form" id="error_id_uni"></span>
                   </div>
 
                   <div class="form-group col-md-3">
@@ -110,7 +110,7 @@
 
                     <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                     <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
-                    <input type="hidden" name="id_pedido" id="id_pe">
+                    <input type="hidden" name="id_pedido" id="id_pe"/>
                     <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   
                 </form>

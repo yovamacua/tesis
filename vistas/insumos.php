@@ -137,7 +137,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Unidad de Medida</label>
-            <select class="form-control" id="unidad" name="unidadMedida" required>
+            <select class="form-control" id="iduni" name="iduni" required>
                 <option  value="">Seleccione la Unidad</option>
                   <?php
                      for($i=0; $i<sizeof($uni);$i++){
@@ -147,7 +147,7 @@
                      }
                   ?>   
               </select>
-              <span class="error_form" id="error_unidad"></span>
+              <span class="error_form" id="error_iduni"></span>
           </div>
 
           <div class="form-group col-md-6">

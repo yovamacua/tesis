@@ -71,13 +71,13 @@ $(function() {
     $("#error_nombreInsumo").hide();
     $("#error_cantidad").hide();
     $("#error_descripcion").hide();
-    $("#error_unidadMedida").hide();
+    $("#error_id_uni").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_nombreInsumo = false;
     var error_cantidad = false;
     var error_descripcion = false;
-    var error_unidadMedida = false;
+    var error_id_uni = false;
     
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#nombreInsumo").focusout(function() {
@@ -92,8 +92,8 @@ $(function() {
       campo_descripcion();
     });
 
-    $("#unidadMedida").focusout(function() {
-      campo_unidadMedida();
+    $("#id_uni").focusout(function() {
+      campo_id_uni();
     });
     
     function campo_nombreInsumo() {
@@ -171,28 +171,28 @@ $(function() {
         }
     }
 
-    function campo_unidadMedida() {
+    function campo_id_uni() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
-        var unidadMedida = $("#unidadMedida").val();
-        if (pattern.test(unidadMedida) && unidadMedida !== '') {
-            $("#error_unidadMedida").hide();
-            $("#unidadMedida").css("border-bottom", "2px solid #34F458");
+        var id_uni = $("#id_uni").val();
+        if (pattern.test(id_uni) && id_uni !== '') {
+            $("#error_id_uni").hide();
+            $("#id_uni").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_unidadMedida").html("Solo se permiten letras");
-            $("#error_unidadMedida").css("position", "absolute");
-            $("#error_unidadMedida").css("color", "red");
-            $("#error_unidadMedida").show();
-            $("#unidadMedida").css("border-bottom", "2px solid #F90A0A");
-            error_unidadMedida = true;
+            $("#error_id_uni").html("Solo se permiten letras");
+            $("#error_id_uni").css("position", "absolute");
+            $("#error_id_uni").css("color", "red");
+            $("#error_id_uni").show();
+            $("#id_uni").css("border-bottom", "2px solid #F90A0A");
+            error_id_uni = true;
         }
-        var unidadMedida = $("#unidadMedida").val().length;
-        if (unidadMedida <= 0) {
-            $("#error_unidadMedida").html("No se permiten campos vacios");
-            $("#error_unidadMedida").css("position", "absolute");
-            $("#error_unidadMedida").css("color", "red");
-            $("#error_unidadMedida").show();
-            $("#unidadMedida").css("border-bottom", "2px solid #F90A0A");
-            error_unidadMedida = true;
+        var id_uni = $("#id_uni").val().length;
+        if (id_uni <= 0) {
+            $("#error_id_uni").html("No se permiten campos vacios");
+            $("#error_id_uni").css("position", "absolute");
+            $("#error_id_uni").css("color", "red");
+            $("#error_id_uni").show();
+            $("#id_uni").css("border-bottom", "2px solid #F90A0A");
+            error_id_uni = true;
         }
     }
 
@@ -203,23 +203,23 @@ $(function() {
       var error_nombreInsumo = false;
       var error_cantidad = false;
       var error_descripcion = false;
-      var error_unidadMedida = false;
+      var error_id_uni = false;
 
         // se invoca a las funciones para tener el valor de las variables
          error_nombreInsumo = false;
          error_cantidad = false;
          error_descripcion = false;
-         error_unidadMedida = false;
+         error_id_uni = false;
 
         //comparacion
         if (error_nombreInsumo === false && error_cantidad === false && 
-          error_descripcion === false && error_unidadMedida === false) {
+          error_descripcion === false && error_id_uni === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#nombreInsumo").css("border-bottom", "1px solid #d2d6de");
             $("#cantidad").css("border-bottom", "1px solid #d2d6de");
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
-            $("#unidadMedida").css("border-bottom", "1px solid #d2d6de");
+            $("#id_uni").css("border-bottom", "1px solid #d2d6de");
             guardaryeditardetalle(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
@@ -262,7 +262,7 @@ function limpiardetalle()
   $('#nombreInsumo').val("");
   $('#cantidad').val("");
   $('#descripcion').val("");
-  $('#unidadMedida').val("");
+  $('#id_uni').val("");
   $('#id_detallepedido').val("");
   v1 = document.getElementById("id_pedido").value;
   p1 = v1;
@@ -275,12 +275,12 @@ function limpiardetalle()
     $("#nombreInsumo").css("border-bottom", "1px solid #d2d6de");
     $("#cantidad").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
-    $("#unidadMedida").css("border-bottom", "1px solid #d2d6de");
+    $("#id_uni").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_nombreInsumo").hide();
     $("#error_cantidad").hide();
     $("#error_descripcion").hide();
-    $("#error_unidadMedida").hide();
+    $("#error_id_uni").hide();
 }
 
 function limpiar()
@@ -472,11 +472,10 @@ function mostrardetalle(id_detallepedido)
  {
     data = JSON.parse(data);
 
-       //$('#detallepedidosModal').show();
        $('#nombreInsumo').val(data.nombreInsumo);
        $('#cantidad').val(data.cantidad);
        $('#descripcion').val(data.descripcion);
-       $('#unidadMedida').val(data.unidadMedida);
+       $('#id_uni').val(data.id_uni);
        $('#id_pedido1').val(data.id_pedido); //-----------ID DE LA TABLA PADRE-------
        $('.modal-title').text("Editar Capacitado");
        $('#id_detallepedido').val(id_detallepedido);//AGREGAR EL ID DEL DETALLE

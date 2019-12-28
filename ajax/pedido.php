@@ -17,7 +17,7 @@
   $nombreInsumo = isset($_POST["nombreInsumo"]);
   $cantidad = isset($_POST["cantidad"]);
   $descripcion = isset($_POST["descripcion"]);
-  $unidadMedida = isset($_POST["unidadMedida"]);
+  $id_uni = isset($_POST["id_uni"]);
 
   #valida que exista la sessión
   if (!isset($_SESSION['id_usuario'])) {?>
@@ -78,7 +78,7 @@
             /*verificamos si el capacitado existe en la base de datos, si ya existe un registro con el capacitado entonces no se registra*/
             if(is_array($datos)==true and count($datos)==0){
               //no existe el capacitado por lo tanto hacemos el registros
-              $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
+              $detallepedidos->registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $id_pedido, $id_uni);
                     
                   $messages[]= "El insumo se registró correctamente";
             }else {
@@ -87,7 +87,7 @@
 
           }else {
               /*si ya existe entonces editamos el capacitado*/
-               $detallepedidos->editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido);
+               $detallepedidos->editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $id_pedido, $id_uni);
 
                   $messages[]="El insumo se editó correctamente";
               }
@@ -142,7 +142,7 @@
           $output["nombreInsumo"] = $row["nombreInsumo"];
           $output["cantidad"] = $row["cantidad"];
           $output["descripcion"] = $row["descripcion"];
-          $output["unidadMedida"] = $row["unidadMedida"];
+          $output["id_uni"] = $row["id_uni"];
           $output["id_detallepedido"] = $row["id_detallepedido"];
           $output["id_pedido"] = $row["id_pedido"];
         }
@@ -233,7 +233,7 @@
           $sub_array[] = $row["nombreInsumo"];
           $sub_array[] = $row["cantidad"];
           $sub_array[] = $row["descripcion"];
-          $sub_array[] = $row["unidadMedida"];
+          $sub_array[] = $row["nombre"];
           ?>
                   <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
                                  {

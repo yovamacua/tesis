@@ -16,7 +16,9 @@
         $conectar= parent::conexion();
         parent::set_names();
         
-        $sql="select * from detallepedidos where id_pedido=?";
+        $sql = "select dp.id_detallepedido, dp.nombreInsumo, dp.cantidad, dp.descripcion, dp.id_pedido, uni.nombre, dp.id_uni 
+                from detallepedidos dp
+                inner join unidad uni on dp.id_uni = uni.idunidad where id_pedido=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $id_pedido);
         $sql->execute();
@@ -48,7 +50,7 @@
         }
 
         //método para insertar registros
-        public function registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido){
+        public function registrar_detallepedido($nombreInsumo, $cantidad, $descripcion, $id_pedido, $id_uni){
           $conectar = parent::conexion();
           parent::set_names();
 
@@ -58,14 +60,14 @@
             $sql->bindValue(1, substr($_POST["nombreInsumo"], 0, 45));
             $sql->bindValue(2, substr($_POST["cantidad"], 0, 4));
             $sql->bindValue(3, substr($_POST["descripcion"], 0, 100));
-            $sql->bindValue(4, substr($_POST["unidadMedida"], 0, 45));
-            $sql->bindValue(5, $_POST["id_pedido"]);
-            $sql->execute();
+            $sql->bindValue(4, $_POST["id_pedido"]);
+            $sql->bindValue(5, $_POST["id_uni"]);
+            $sql->execute(); 
 
         }
 
         // metodo para editar el detallepedido
-        public function editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $unidadMedida, $id_pedido){
+        public function editar_detallepedido($id_detallepedido, $nombreInsumo, $cantidad, $descripcion, $id_pedido, $id_uni){
 
           $conectar = parent::conexion();
           parent::set_names();
@@ -74,17 +76,17 @@
               nombreInsumo=?,
               cantidad=?,
               descripcion=?,
-              unidadMedida=?,
-              id_pedido=?
+              id_pedido=?,
+              id_uni=?
               where
-              id_detallepedido=?";
+              id_detallepedido=?;";
 
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1, substr($_POST["nombreInsumo"]), 0, 45);
             $sql->bindValue(2, substr($_POST["cantidad"], 0, 4));
             $sql->bindValue(3, substr($_POST["descripcion"], 0, 100));
-            $sql->bindValue(4, substr($_POST["unidadMedida"], 0, 45));
-            $sql->bindValue(5, $_POST["id_pedido"]);
+            $sql->bindValue(4, $_POST["id_pedido"]);
+            $sql->bindValue(5, $_POST["id_uni"]);            
             $sql->bindValue(6, $_POST["id_detallepedido"]);
             $sql->execute();
         }

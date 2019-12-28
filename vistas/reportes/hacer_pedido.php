@@ -116,7 +116,7 @@
     $fecha1 = $_POST["fecha"];
 
     // la consulta de los datos 
-    $sql = "select cantidad, unidadMedida, nombreInsumo, descripcion from detallepedidos where id_pedido=?";
+    $sql = "select dp.cantidad, uni.nombre, dp.nombreInsumo, dp.descripcion from detallepedidos dp inner join unidad uni on dp.id_uni = uni.idunidad where id_pedido=?";
             
     $sql = $bd->prepare($sql, [PDO :: ATTR_CURSOR  =>  PDO :: CURSOR_SCROLL , ]);
             $sql->bindValue(1, $_POST["id_pedido"]);
@@ -131,7 +131,7 @@
       $item = $num;
       $num = $num + 1;
       $cantidad = $pedido ->cantidad;
-      $unidadMedida = $pedido ->unidadMedida;
+      $unidadMedida = $pedido ->nombre;
       $nombreInsumo = $pedido ->nombreInsumo;
       $descripcion = $pedido ->descripcion;
 

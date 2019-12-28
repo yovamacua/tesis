@@ -7,7 +7,7 @@ $(function() {
     $("#error_cantidad").hide();
     $("#error_precio").hide();
     $("#error_descripcion").hide();
-    $("#error_unidad").hide();
+    $("#error_iduni").hide();
     $("#error_fecha1").hide();
     $("#error_idcategoria").hide();
     
@@ -15,7 +15,7 @@ $(function() {
     var error_cantidad = false;
     var error_precio = false;
     var error_descripcion = false;
-    var error_unidad = false;
+    var error_iduni = false;
     var error_fecha1 = false;
 	var error_idcategoria = false;
 
@@ -32,8 +32,8 @@ $(function() {
         campo_descripcion();
     });
 
-    $("#unidad").focusout(function() {
-        campo_unidad();
+    $("#iduni").focusout(function() {
+        campo_iduni();
     });
 
     $("#fecha1").focusout(function() {
@@ -120,28 +120,28 @@ $(function() {
         }
     }
 
-    function campo_unidad() {
+    function campo_iduni() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
-        var unidad = $("#unidad").val();
-        if (pattern.test(unidad) && unidad !== '') {
-            $("#error_unidad").hide();
-            $("#unidad").css("border-bottom", "2px solid #34F458");
+        var iduni = $("#iduni").val();
+        if (pattern.test(iduni) && iduni !== '') {
+            $("#error_iduni").hide();
+            $("#iduni").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_unidad").html("Solo se permiten letras");
-            $("#error_unidad").css("position", "absolute");
-            $("#error_unidad").css("color", "red");
-            $("#error_unidad").show();
-            $("#unidad").css("border-bottom", "2px solid #F90A0A");
-            error_unidad = true;
+            $("#error_iduni").html("Solo se permiten letras");
+            $("#error_iduni").css("position", "absolute");
+            $("#error_iduni").css("color", "red");
+            $("#error_iduni").show();
+            $("#iduni").css("border-bottom", "2px solid #F90A0A");
+            error_iduni = true;
         }
-        var unidad = $("#unidad").val().length;
-        if (unidad <= 0) {
-            $("#error_unidad").html("No se permiten campos vacios");
-            $("#error_unidad").css("position", "absolute");
-            $("#error_unidad").css("color", "red");
-            $("#error_unidad").show();
-            $("#unidad").css("border-bottom", "2px solid #F90A0A");
-            error_unidad = true;
+        var iduni = $("#iduni").val().length;
+        if (iduni <= 0) {
+            $("#error_iduni").html("No se permiten campos vacios");
+            $("#error_iduni").css("position", "absolute");
+            $("#error_iduni").css("color", "red");
+            $("#error_iduni").show();
+            $("#iduni").css("border-bottom", "2px solid #F90A0A");
+            error_iduni = true;
         }
     }
 
@@ -201,7 +201,7 @@ $(function() {
         var error_cantidad = false;
 	    var error_precio = false;
 	    var error_descripcion = false;
-	    var error_unidad = false;
+	    var error_iduni = false;
 	    var error_fecha1 = false;
 		var error_idcategoria = false;
 
@@ -209,20 +209,20 @@ $(function() {
         error_cantidad = false;
 	    error_precio = false;
 	    error_descripcion = false;
-	    error_unidad = false;
+	    error_iduni = false;
 	    error_fecha1 = false;
 		error_idcategoria = false;
 
         //comparacion
         if (error_cantidad === false && error_precio === false && 
-        	error_descripcion === false && error_unidad === false && 
+        	error_descripcion === false && error_iduni=== false && 
         	error_fecha1 === false && error_idcategoria === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#cantidad").css("border-bottom", "1px solid #d2d6de");
             $("#precio").css("border-bottom", "1px solid #d2d6de");
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
-            $("#unidad").css("border-bottom", "1px solid #d2d6de");
+            $("#iduni").css("border-bottom", "1px solid #d2d6de");
             $("#fecha1").css("border-bottom", "1px solid #d2d6de");
             $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
@@ -388,7 +388,7 @@ function init(){
 function limpiar(){
 	$('#cantidad').val("");
 	$('#precio').val("");
-	$('#unidad').val("");
+	$('#iduni').val("");
 	$('#descripcion').val("");
 	$('#fecha1').val("");
 	$('#idpedido').val("");
@@ -398,14 +398,14 @@ function limpiar(){
 	/** reinicia la validacion cuando se sale de la ventana modal **/
     $("#cantidad").css("border-bottom", "1px solid #d2d6de");
     $("#precio").css("border-bottom", "1px solid #d2d6de");
-    $("#unidad").css("border-bottom", "1px solid #d2d6de");
+    $("#iduni").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
     $("#fecha1").css("border-bottom", "1px solid #d2d6de");
     $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_cantidad").hide();
     $("#error_precio").hide();
-    $("#error_unidad").hide();
+    $("#error_iduni").hide();
     $("#error_descripcion").hide();
     $("#error_fecha1").hide();
     $("#error_idcategoria").hide();
@@ -492,7 +492,7 @@ function mostrar(id_insumo){
 	 		$('#insumoModal').modal("show");
 	 		$('#cantidad').val(data.cantidad);
 	 		$('#precio').val(data.precio);
-	 		$('#unidad').val(data.unidaMedida);
+	 		$('#iduni').val(data.iduni);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#fecha1').val(data.fecha);
 	 		$('#idpe').val(data.idpedido);

@@ -17,7 +17,13 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select u.usuario, i.id_insumo, i.cantidad, i.precio,  i.unidadMedida, i.descripcion, i.fecha, c.categoria from insumos i inner join categorias c on c.id_categoria = i.idcategoria inner join pedidos p on p.id_pedido = i.idpedido inner join usuarios u on p.id_usuario = u.id_usuario";
+			$sql = "select u.usuario, i.id_insumo, i.cantidad, i.precio, i.descripcion, i.fecha, i.idpedido, c.categoria, uni.nombre, i.iduni
+				from insumos i 
+				inner join categorias c on c.id_categoria = i.idcategoria 
+				inner join pedidos p on p.id_pedido = i.idpedido 
+				inner join usuarios u on p.id_usuario = u.id_usuario
+				inner join unidad uni on i.iduni = uni.idunidad";
+
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
 
@@ -39,7 +45,7 @@
 		}
 
 		//registrar insumos
-		public function registrar_insumo($cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria){
+		public function registrar_insumo($cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni){
 
 			try{
 	            $conectar=parent::conexion();
@@ -54,11 +60,11 @@
 	            $sql = $conectar->prepare($sql);
 				$sql-> bindValue(1, $_POST["cantidad"], PDO::PARAM_INT);
 				$sql-> bindValue(2, $_POST["precio"], PDO::PARAM_STR);
-				$sql-> bindValue(3, $_POST["unidadMedida"], PDO::PARAM_STR);
-				$sql-> bindValue(4, $_POST["descripcion"], PDO::PARAM_STR);
-				$sql-> bindValue(5, $fecha);
-				$sql-> bindValue(6, $_POST["idpedido"], PDO::PARAM_INT);
-				$sql-> bindValue(7, $_POST["idcategoria"], PDO::PARAM_INT);
+				$sql-> bindValue(3, $_POST["descripcion"], PDO::PARAM_STR);
+				$sql-> bindValue(4, $fecha);
+				$sql-> bindValue(5, $_POST["idpedido"], PDO::PARAM_INT);
+				$sql-> bindValue(6, $_POST["idcategoria"], PDO::PARAM_INT);
+				$sql-> bindValue(7, $_POST["iduni"], PDO::PARAM_INT);
 				$sql-> execute();
 
          	}catch(PDOException $ex){
@@ -91,7 +97,7 @@
 		}
  
 		//editar insumos
-		public function editar_insumo($id_insumo, $cantidad, $precio, $unidadMedida, $descripcion, $fecha, $idpedido, $idcategoria){
+		public function editar_insumo($id_insumo, $cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni){
 
 			$conectar = parent::conexion();
 			parent::set_names();
@@ -103,11 +109,11 @@
 			$sql = "update insumos set
             cantidad=?,
             precio=?,
-            unidadMedida=?,
             descripcion=?,
             fecha=?,
             idpedido=?,
-            idcategoria=?
+            idcategoria=?,
+            iduni=?
             where
             id_insumo=?";	
 
@@ -120,7 +126,8 @@
 			$sql-> bindValue(5, $fecha);
 			$sql-> bindValue(6, $_POST["idpedido"]);
 			$sql-> bindValue(7, $_POST["idcategoria"]);
-			$sql-> bindValue(8, $_POST["id_insumo"]);
+			$sql-> bindValue(8, $_POST["iduni"]);
+			$sql-> bindValue(9, $_POST["id_insumo"]);
 			$sql-> execute();
 		}
 
