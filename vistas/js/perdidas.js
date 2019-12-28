@@ -9,8 +9,7 @@ $(function() {
     $("#error_precioProduc").hide();
     $("#error_unidadDelProduc").hide();
     $("#error_descripcion").hide();
-    $("#error_mes").hide();
-    $("#error_anio").hide();
+    $("#error_fecha1").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_idproducto= false;
@@ -18,8 +17,7 @@ $(function() {
     var error_precioProduc = false;
     var error_unidadDelProduc = false;
     var error_descripcion = false;
-    var error_mes = false;
-    var error_anio = false;
+    var error_fecha1= false;
 
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#idproducto").focusout(function() {
@@ -42,12 +40,8 @@ $(function() {
 	    campo_descripcion();
 		});
 
-	$("#mes").focusout(function() {
-	    campo_mes();
-	    });
-
-	$("#anio").focusout(function() {
-	    campo_anio();
+	$("#fecha1").focusout(function() {
+	    campo_fecha1();
 	    });
 
 
@@ -176,53 +170,28 @@ $(function() {
         }
     }
 
-    function campo_mes() {
-        var pattern = /^[0-9]*$/;   
-        var mes = $("#mes").val();
-        if (pattern.test(mes) && mes !== '') {
-            $("#error_mes").hide();
-            $("#mes").css("border-bottom", "2px solid #34F458");
+    function campo_fecha1() {
+        var pattern = /^([0-2][0-9]|3[0-1])(\/|-)(0[1-9]|1[0-2])\2(\d{4})$/;
+        var fecha1 = $("#fecha1").val();
+        if (pattern.test(fecha1) && fecha1 !== '') {
+            $("#error_fecha1").hide();
+            $("#fecha1").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_mes").html("Solo se permiten números");
-            $("#error_mes").css("position", "absolute");
-            $("#error_mes").css("color", "red");
-            $("#error_mes").show();
-            $("#mes").css("border-bottom", "2px solid #F90A0A");
-            error_mes = true;
+            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
         }
-        var mes = $("#mes").val().length;
-        if (mes <= 0) {
-            $("#error_mes").html("No se permiten campos vacios");
-            $("#error_mes").css("position", "absolute");
-            $("#error_mes").css("color", "red");
-            $("#error_mes").show();
-            $("#mes").css("border-bottom", "2px solid #F90A0A");
-            error_mes = true;
-        }
-    }
-
-    function campo_anio() {
-        var pattern = /^[0-9]*$/;   
-        var anio = $("#anio").val();
-        if (pattern.test(anio) && anio !== '') {
-            $("#error_anio").hide();
-            $("#anio").css("border-bottom", "2px solid #34F458");
-        } else {
-            $("#error_anio").html("Solo se permiten números");
-            $("#error_anio").css("position", "absolute");
-            $("#error_anio").css("color", "red");
-            $("#error_anio").show();
-            $("#anio").css("border-bottom", "2px solid #F90A0A");
-            error_danio = true;
-        }
-        var anio = $("#anio").val().length;
-        if (anio <= 0) {
-            $("#error_anio").html("No se permiten campos vacios");
-            $("#error_anio").css("position", "absolute");
-            $("#error_anio").css("color", "red");
-            $("#error_anio").show();
-            $("#anio").css("border-bottom", "2px solid #F90A0A");
-            error_anio = true;
+        var fecha1 = $("#fecha1").val().length;
+        if (fecha1 <= 0) {
+            $("#error_fecha1").html("No se permiten campos vacios");
+            $("#error_fecha1").css("position", "absolute");
+            $("#error_fecha1").css("color", "red");
+            $("#error_fecha1").show();
+            $("#fecha1").css("border-bottom", "2px solid #F90A0A");
+            error_fecha1 = true;
         }
     }
 
@@ -234,8 +203,7 @@ $(function() {
 	    var error_precioProduc = false;
 	    var error_unidadDelProduc = false;
 	    var error_descripcion = false;
-	    var error_mes = false;
-	    var error_anio = false;
+	    var error_fecha1 = false;
 
         // se invoca a las funciones para tener el valor de las variables
         error_idproducto = false;
@@ -243,14 +211,12 @@ $(function() {
         error_precioProduc = false;
         error_unidadDelProduc = false;
         error_descripcion = false;
-        error_mes = false;
-        error_anio = false;
+        error_fecha1 = false;
 
         //comparacion
         if (error_idproducto === false && error_cantidad === false && 
         	error_precioProduc === false && error_unidadDelProduc === false && 
-        	error_descripcion === false && error_mes === false && 
-        	error_anio === false) {
+        	error_descripcion === false && error_fecha1 === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#idproducto").css("border-bottom", "1px solid #d2d6de");
@@ -258,8 +224,7 @@ $(function() {
             $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
             $("#unidadDelProduc").css("border-bottom", "1px solid #d2d6de");
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
-            $("#mes").css("border-bottom", "1px solid #d2d6de");
-            $("#anio").css("border-bottom", "1px solid #d2d6de");
+            $("#fecha1").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
@@ -288,8 +253,7 @@ function limpiar(){
 	$('#cantidad').val("");
 	$('#descripcion').val("");
 	$('#precioProduc').val("");
-	$('#mes').val("");
-	$('#anio').val("");
+	$('#fecha1').val("");
 	$('#unidadDelProduc').val("");
 	$('#id_perdida').val("");
 
@@ -298,8 +262,7 @@ function limpiar(){
     $("#cantidad").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
     $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
-    $("#mes").css("border-bottom", "1px solid #d2d6de");
-    $("#anio").css("border-bottom", "1px solid #d2d6de");
+    $("#fecha1").css("border-bottom", "1px solid #d2d6de");
     $("#unidadDelProduc").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_idproducto").hide();
@@ -307,8 +270,7 @@ function limpiar(){
     $("#error_precioProduc").hide();
     $("#error_unidadDelProduc").hide();
     $("#error_descripcion").hide();
-    $("#error_mes").hide();
-    $("#error_anio").hide();
+    $("#error_fecha1").hide();
 
 }
 
@@ -377,8 +339,7 @@ function mostrar(id_perdida){
 	 		$('#cantidad').val(data.cantidad);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precioProduc').val(data.precioProduc);
-	 		$('#mes').val(data.mes);
-	 		$('#anio').val(data.anio);
+            $('#fecha1').val(data.fecha);
 	 		$('#unidadDelProduc').val(data.unidadDelProduc);
 	 		$('.modal-title').text("Editar Pérdida");
 	 		$('#id_perdida').val(id_perdida);

@@ -59,8 +59,7 @@
                                   <th width="10%">Unidad de Medida</th>
                                   <th>Descripción</th>
                                   <th width="10%">Precio Unitario</th>
-                                  <th>Mes</th>
-                                  <th>Año</th>
+                                  <th>Fecha</th>
                                   <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
                                     }else{
@@ -90,6 +89,17 @@
             <h4 class="modal-title">Agregar Pérdida</h4>
           </div>
 
+          <!--- codigo para mostrar calendario jquery IU -->
+          <script>
+            $(function () {
+                $("#fecha1").datepicker({
+                    format: "dd/mm/yyyy",
+                    firstDay: 1
+                }).datepicker("setDate", new Date());
+             });          
+           </script>
+          <!--- fin codigo para mostrar calendario jquery IU -->
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre del Producto</label>
@@ -104,20 +114,6 @@
                   ?>   
               </select>
               <span class="error_form" id="error_idproducto"></span>
-            </div>
-
-            <div class="form-group col-md-6">
-              <label>Cantidad</label>
-              <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
-              <span class="error_form" id="error_cantidad"></span>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Precio Unitario</label>
-              <input type="text" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
-              <span class="error_form" id="error_precioProduc"></span>
             </div>
 
             <div class="form-group col-md-6">
@@ -137,27 +133,34 @@
           </div>
 
           <div class="form-row">
+            <div class="form-group col-md-4">
+              <label>Fecha</label>
+              <input type="text" name="fecha" id="fecha1" class="form-control" autocomplete="off" placeholder="Fecha" required />
+              <span class="error_form" id="error_fecha1"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Cantidad</label>
+              <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
+              <span class="error_form" id="error_cantidad"></span>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label>Precio Unitario</label>
+              <input type="text" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
+              <span class="error_form" id="error_precioProduc"></span>
+            </div>
+          </div>
+
+
+          <div class="form-row">
             <div class="form-group col-md-12">
               <label>Descripción</label>
               <textarea rows="4" maxlength="250" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
               <span class="error_form" id="error_descripcion"></span>
             </div>
           </div>
-          
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label>Mes</label>
-              <input type="text" name="mes" id="mes" class="form-control" autocomplete="off" placeholder="mm" required/>
-              <span class="error_form" id="error_mes"></span>
-            </div>
 
-            <div class="form-group col-md-6">
-              <label>Año</label>
-              <input type="text" name="anio" id="anio" class="form-control" autocomplete="off" placeholder="AAAA" required />
-              <span class="error_form" id="error_anio"></span>
-            </div>
-          </div>
- 
 
               <div class="modal-footer">
                  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />

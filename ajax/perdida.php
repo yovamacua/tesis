@@ -15,8 +15,7 @@
 	$cantidad = isset($_POST["cantidad"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$precioProduc = isset($_POST["precioProduc"]);
-	$mes = isset($_POST["mes"]);
-	$anio = isset($_POST["anio"]);
+	$fecha = isset($_POST["fecha"]);
 	$unidadDelProduc = isset($_POST["unidadDelProduc"]);
 	$id_usuario = isset($_POST["id_usuario"]);
 
@@ -44,7 +43,7 @@ switch ($_GET["op"]) {
 	       	  /*verificamos si el incidente existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
-		 			$perdidas->registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+		 			$perdidas->registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $fecha, $unidadDelProduc, $id_usuario);
 			       	   	  
 			       	   	  $messages[]="La perdida se registró correctamente";
 			    }else {
@@ -54,7 +53,7 @@ switch ($_GET["op"]) {
 
 			    }else {
 	            	/*si ya existe entonces editamos la perdida*/
-	             $perdidas-> editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario);
+	             $perdidas-> editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $fecha, $unidadDelProduc, $id_usuario);
 
 	            	  $messages[]="La perdida se editó correctamente";
 	            }
@@ -83,8 +82,7 @@ switch ($_GET["op"]) {
 					$output["cantidad"] = $row["cantidad"];
 					$output["descripcion"] = $row["descripcion"];
 					$output["precioProduc"] = $row["precioProduc"];
-					$output["mes"] = $row["mes"];
-					$output["anio"] = $row["anio"];
+					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
 					$output["unidadDelProduc"] = $row["unidadDelProduc"];
 					
 				}
@@ -116,8 +114,7 @@ switch ($_GET["op"]) {
 		     	$sub_array[] = $row["nombre"];
 		     	$sub_array[] = $row["descripcion"];
 		     	$sub_array[] = $dolar.$row["precioProduc"];
-		     	$sub_array[] = $row["mes"];
-		     	$sub_array[] = $row["anio"];
+		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	
       			?>
                 <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1){

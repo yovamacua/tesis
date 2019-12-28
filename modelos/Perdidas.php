@@ -17,7 +17,7 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select p.id_perdida, pr.producto, p.cantidad, p.descripcion, p.precioProduc, p.mes, p.anio, uni.nombre, u.usuario 
+			$sql = "select p.id_perdida, pr.producto, p.cantidad, p.descripcion, p.precioProduc, p.fecha, uni.nombre, u.usuario 
 				from perdidas p 
 				inner join producto pr on pr.id_producto = p.idproducto 
 				inner join unidad uni on pr.id_unidad = uni.idunidad
@@ -44,39 +44,45 @@
 		}
 
 		//registrar perdidas
-		public function registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
+		public function registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $fecha, $unidadDelProduc, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "insert into perdidas values(null,?,?,?,?,?,?,?,?);";
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
+
+			$sql = "insert into perdidas values(null,?,?,?,?,?,?,?);";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $_POST["idproducto"]);
 			$sql-> bindValue(2, substr($_POST["cantidad"], 0, 4));
 			$sql-> bindValue(3, substr($_POST["descripcion"], 0, 100));
 			$sql-> bindValue(4, $_POST["precioProduc"]);
-			$sql-> bindValue(5, substr($_POST["mes"], 0, 2));
-			$sql-> bindValue(6, substr($_POST["anio"], 0, 4));
-			$sql-> bindValue(7, $_POST["unidadDelProduc"]);
-			$sql-> bindValue(8, $_POST["id_usuario"]);
+			$sql-> bindValue(5, $fecha);
+			$sql-> bindValue(6, $_POST["unidadDelProduc"]);
+			$sql-> bindValue(7, $_POST["id_usuario"]);
 			$sql-> execute();
 			
 
 		}
  
 		//editar perdidas
-		public function editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $mes, $anio, $unidadDelProduc, $id_usuario){
+		public function editar_perdida($id_perdida, $idproducto, $cantidad, $descripcion, $precioProduc, $fecha, $unidadDelProduc, $id_usuario){
 
 			$conectar = parent::conexion();
 			parent::set_names();
+
+			$date_inicial = $_POST["fecha"];
+            $date = str_replace('/', '-', $date_inicial);
+            $fecha = date("Y-m-d", strtotime($date));
 
 			$sql = "update perdidas set
             idproducto=?,
             cantidad=?,
             descripcion=?,
             precioProduc=?,
-            mes=?,
-            anio=?,
+            fecha=?,
             unidadDelProduc=?,
             id_usuario=?
             where
@@ -88,11 +94,10 @@
 			$sql-> bindValue(2, substr($_POST["cantidad"], 0, 4));
 			$sql-> bindValue(3, substr($_POST["descripcion"], 0, 100));
 			$sql-> bindValue(4, $_POST["precioProduc"]);
-			$sql-> bindValue(5, substr($_POST["mes"], 0, 2));
-			$sql-> bindValue(6, substr($_POST["anio"], 0, 4));
-			$sql-> bindValue(7, $_POST["unidadDelProduc"]);
-			$sql-> bindValue(8, $_POST["id_usuario"]);
-			$sql-> bindValue(9, $_POST["id_perdida"]);
+			$sql-> bindValue(5, $fecha);
+			$sql-> bindValue(6, $_POST["unidadDelProduc"]);
+			$sql-> bindValue(7, $_POST["id_usuario"]);
+			$sql-> bindValue(8, $_POST["id_perdida"]);
 			$sql-> execute();
 		}
 
