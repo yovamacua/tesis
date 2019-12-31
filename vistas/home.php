@@ -148,8 +148,8 @@ $_SESSION["bienvenida"]=1; ?>
 
                   array_push($arregloReg, array(
 
-                      "anio" => $datos[$i]["Año"],
-                      "mes" => $datos[$i]["Mes"],
+                      "anio" => $datos[$i]["anio"],
+                      "mes" => $datos[$i]["mes"],
                       "totalPerdida" => $datos[$i]["totalPerdida"]
                     )
 
@@ -179,9 +179,9 @@ $_SESSION["bienvenida"]=1; ?>
                      //imprime la fecha por separado ejemplo: dia, mes y año
                       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
  
-                      $fecha = $arregloReg[$i]["mes"];
+                      $fecha= $arregloReg[$i]["mes"];
 
-                      $fecha_mes = $meses[$fecha-1];
+                      $fecha_mes = $meses[date("n", strtotime($fecha))-1];
 
                       //calculo de porcentaje
                       $porcentaje = round($arregloReg[$i]["totalPerdida"]/$sumaTotal*100,2);
@@ -404,7 +404,7 @@ $_SESSION["bienvenida"]=1; ?>
 
                <div class="box-body">
 
-               <h2 class="bg-primary text-white col-lg-12 text-center">resumen de perdida del año <?php echo date("Y");?></h2>
+               <h2 class="bg-primary text-white col-lg-12 text-center">Resumen de perdida del año <?php echo date("Y");?></h2>
 
               <!--GRAFICA-->
              

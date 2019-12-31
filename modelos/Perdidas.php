@@ -108,8 +108,7 @@
           $conectar = parent::conexion();
            parent::set_names();
 
-           	$sql = "SELECT mes as Mes, anio as Año, SUM(precioProduc) as totalPerdida
-					FROM perdidas GROUP BY anio desc, mes desc;";
+           	$sql = "SELECT MONTHname(fecha) as mes, MONTH(fecha) as numero_mes, YEAR(fecha) as anio, SUM(precioProduc*cantidad) as totalPerdida FROM perdidas GROUP BY mes desc, numero_mes desc, anio desc;";
         	$sql = $conectar->prepare($sql);
         	$sql->execute();
         	return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -124,7 +123,7 @@
 
 	       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	       
-	       $sql = "SELECT  mes as Mes, SUM(precioProduc) as total_perdida_mes FROM perdidas
+	       $sql = "SELECT MONTHname(fecha) as mes, SUM(precioProduc*cantidad) as total_perdida_mes FROM perdidas
 	        GROUP BY mes desc";
 	           
 	        $sql = $conectar->prepare($sql);
@@ -137,7 +136,7 @@
 	        	//$fecha = $arregloReg[$i]["mes"];
                // $fecha_mes = $meses[$fecha-1];
 
-	          	$mes = $output["mes"] = $meses[$row["Mes"]-1];
+          		$mes= $output["mes"]=$meses[date("n", strtotime($row["mes"]))-1];
 	          	$total = $output["total_perdida_mes"] = $row["total_perdida_mes"];
 
 	         echo $grafica= "{name:'".$mes."', y:".$total."},";

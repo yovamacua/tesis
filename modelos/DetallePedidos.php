@@ -79,10 +79,10 @@
               id_pedido=?,
               id_uni=?
               where
-              id_detallepedido=?;";
+              id_detallepedido=?";
 
             $sql = $conectar->prepare($sql);
-            $sql->bindValue(1, substr($_POST["nombreInsumo"]), 0, 45);
+            $sql->bindValue(1, substr($_POST["nombreInsumo"], 0, 45));
             $sql->bindValue(2, substr($_POST["cantidad"], 0, 4));
             $sql->bindValue(3, substr($_POST["descripcion"], 0, 100));
             $sql->bindValue(4, $_POST["id_pedido"]);

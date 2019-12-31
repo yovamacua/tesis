@@ -97,6 +97,7 @@ switch ($_GET["op"]) {
 					$output["descripcion"] = $row["descripcion"];
 					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
 					$output["idcategoria"] = $row["idcategoria"];
+					$output["idpedido"] = $row["idpedido"];
 					
 				}
 					echo json_encode($output);

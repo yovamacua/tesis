@@ -9,6 +9,7 @@ $(function() {
     $("#error_descripcion").hide();
     $("#error_iduni").hide();
     $("#error_fecha1").hide();
+    $("#error_idpe").hide();
     $("#error_idcategoria").hide();
     
     // se declaran variables con valor false para ver si pasa o no la validacion
@@ -17,6 +18,7 @@ $(function() {
     var error_descripcion = false;
     var error_iduni = false;
     var error_fecha1 = false;
+    var error_idpe = false;
 	var error_idcategoria = false;
 
     // se ejecuta funcion en el id del control cuando se pierde el foco
@@ -38,6 +40,10 @@ $(function() {
 
     $("#fecha1").focusout(function() {
         campo_fecha1();
+    });
+
+    $("#idpe").focusout(function() {
+        campo_idpe();
     });
 
     $("#idcategoria").focusout(function() {
@@ -170,6 +176,31 @@ $(function() {
         }
     }
 
+    function campo_idpe() {
+        var pattern = /^[0-9]*$/;   
+        var idpe = $("#idpe").val();
+        if (pattern.test(idpe) && idpe !== '') {
+            $("#error_idpe").hide();
+            $("#idpe").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_idpe").html("Solo se permiten números");
+            $("#error_idpe").css("position", "absolute");
+            $("#error_idpe").css("color", "red");
+            $("#error_idpe").show();
+            $("#idpe").css("border-bottom", "2px solid #F90A0A");
+            error_idpe = true;
+        }
+        var idpe = $("#idpe").val().length;
+        if (idpe <= 0) {
+            $("#error_idpe").html("No se permiten campos vacios");
+            $("#error_idpe").css("position", "absolute");
+            $("#error_idpe").css("color", "red");
+            $("#error_idpe").show();
+            $("#idpe").css("border-bottom", "2px solid #F90A0A");
+            error_idpe = true;
+        }
+    }
+
     function campo_idcategoria() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
         var idcategoria = $("#idcategoria").val();
@@ -203,6 +234,7 @@ $(function() {
 	    var error_descripcion = false;
 	    var error_iduni = false;
 	    var error_fecha1 = false;
+        var error_idpe = false;
 		var error_idcategoria = false;
 
         // se invoca a las funciones para tener el valor de las variables
@@ -211,12 +243,13 @@ $(function() {
 	    error_descripcion = false;
 	    error_iduni = false;
 	    error_fecha1 = false;
+        error_idpe = false;
 		error_idcategoria = false;
 
         //comparacion
         if (error_cantidad === false && error_precio === false && 
         	error_descripcion === false && error_iduni=== false && 
-        	error_fecha1 === false && error_idcategoria === false) {
+        	error_fecha1 === false && error_idpe === false && error_idcategoria === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#cantidad").css("border-bottom", "1px solid #d2d6de");
@@ -224,6 +257,7 @@ $(function() {
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
             $("#iduni").css("border-bottom", "1px solid #d2d6de");
             $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+            $("#idpe").css("border-bottom", "1px solid #d2d6de");
             $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
         } else {
@@ -391,7 +425,7 @@ function limpiar(){
 	$('#iduni').val("");
 	$('#descripcion').val("");
 	$('#fecha1').val("");
-	$('#idpedido').val("");
+    $('#idpe').val("");
 	$('#idcategoria').val("");
 	$('#id_insumo').val("");
 
@@ -401,6 +435,7 @@ function limpiar(){
     $("#iduni").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
     $("#fecha1").css("border-bottom", "1px solid #d2d6de");
+    $("#idpe").css("border-bottom", "1px solid #d2d6de");
     $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_cantidad").hide();
@@ -408,6 +443,7 @@ function limpiar(){
     $("#error_iduni").hide();
     $("#error_descripcion").hide();
     $("#error_fecha1").hide();
+    $("#error_idpe").hide();
     $("#error_idcategoria").hide();
 
 }

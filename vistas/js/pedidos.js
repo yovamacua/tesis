@@ -267,9 +267,6 @@ function limpiardetalle()
   v1 = document.getElementById("id_pedido").value;
   p1 = v1;
   document.getElementById("id_pedido").value = p1;
-  v2 = document.getElementById("fecha1").value;
-  p2 = v2;
-  document.getElementById("fecha1").value = p2;
 
   /** reinicia la validacion cuando se sale de la ventana modal **/
     $("#nombreInsumo").css("border-bottom", "1px solid #d2d6de");
