@@ -146,9 +146,9 @@
           <script>
             $(function () {
                 $("#fecha1").datepicker({
-                    format: "dd/mm/yyyy",
-                    firstDay: 1
-                }).datepicker("setDate", new Date());
+                    format: "dd/mm/yyyy"//,
+                    //firstDay: 1
+                });//.datepicker("setDate", new Date());
              });          
          </script>
 

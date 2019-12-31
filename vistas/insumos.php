@@ -105,9 +105,9 @@
           <script>
             $(function () {
                 $("#fecha1").datepicker({
-                    format: "dd/mm/yyyy",
-                    firstDay: 1
-                }).datepicker("setDate", new Date());
+                    format: "dd/mm/yyyy"//,
+                    //firstDay: 1
+                });//.datepicker("setDate", new Date());
              });          
            </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
@@ -214,9 +214,9 @@
           <script>
             $(function () {
                 $("#Fecha").datepicker({
-                    format: "dd/mm/yyyy",
-                    firstDay: 1
-                }).datepicker("setDate", new Date());
+                    format: "dd/mm/yyyy"//,
+                    //firstDay: 1
+                });//.datepicker("setDate", new Date());
              });          
            </script>
           <!--- fin codigo para mostrar calendario jquery IU -->
