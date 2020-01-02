@@ -77,7 +77,7 @@ try{
               $sql=$conectar->prepare($sql);
 
               $sql->bindValue(1, $producto);
-              echo $sql->execute();
+               $sql->execute();
               return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
                 // editar los productos

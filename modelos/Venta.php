@@ -130,6 +130,7 @@ $resultado1=$sql2->fetchAll(PDO::FETCH_ASSOC);
             $sql->bindValue(5, $_POST["id_usuario"], PDO::PARAM_INT);
             $sql->execute();
              $resultado =$sql->fetchAll();
+         
             
              // for  que permite recuperar el ultimo id insertado
          foreach($resultado as $row){
@@ -167,8 +168,8 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
           echo $ex->getMessage();
          }
-         //$this-> registrar_detalleventas($id);
-         print_r(_POST);
+  
+
      }
 
 

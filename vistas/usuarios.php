@@ -66,8 +66,9 @@
 <!--Fin-Contenido-->
 <!--FORMULARIO VENTANA MODAL-->
 <div id="usuarioModal" class="modal fade">
-   <div class="modal-dialog">
+   <div class="modal-dialog ">
     <!-- formulario -->
+    
       <form method="post" id="usuario_form" autocomplete="off">
 
          <div class="modal-content">
@@ -78,7 +79,7 @@
                <h4 class="modal-title">Agregar Usuario</h4>
             </div>
 
-            <div class="form-row ofield" style="margin-top: 1.2rem!important;">
+       <div class="form-row ofield" style="margin-top: 1.2rem!important;">
                <div class="form-group col-md-6">
                   
                   <label>Nombres*</label>
@@ -150,45 +151,20 @@
 
                </div>
             </div>
-            <div class="form-row">
-               <div class="form-group col-md-12">
+    
 
-                  <div><span class="ofield">- Los campos con * (asterisco) son obligatorios<br></span>
-                     <span class="ofield2">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras y números</span>
-                  </div>
-
-               </div>
-            </div>
-            </br></br>
-<!--LISTA DE PERMISOS-->
-
-               <div class="form-group ofield">
-                  <label for="" class="col-lg-1 control-label">Permisos*</label>
-
-                    <div class="col-lg-6">
-
-                      <ul style="list-style:none;" id="permisos">
-                   
-                  
-                      </ul>
-                     
-                    </div>
-
-               </div>
-
-           <!--FIN LISTA DE PERMISOS-->
-            <div class="modal-footer" style="border: none!important;">
-               <input type="hidden" name="id_usuario" id="id_usuario"/>
-               
-               <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" onclick="desvanecer()" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
-               
-               <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal  "><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
+                      
+            <div class="modal-footer" >
+             <input type="hidden " name="id_usuario" id="id_usuario"/>
+               <button  type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" onclick="desvanecer()" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button> 
+               <button  type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal  "><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
 
             </div>
          </div>
       </form>
    </div>
 </div>
+
   <?php  } else {
 
        require("noacceso.php");

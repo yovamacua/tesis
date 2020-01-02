@@ -5,7 +5,7 @@ var tabla_ventas;
 var tabla_ventas_mes
 //// INICIO DE VALIDACION DEL FORMULARIO///
 // funcion para validar formulario de usuario
-$(function() {
+/*$(function() {
     //creando variables y ocultando campos de error
     $("#error_fecha").hide();
 
@@ -59,21 +59,26 @@ $(function() {
             return false;
         }
     });
-});
+});*/
 
 // FIN VALIDACION FORMULARIO
+
 
 //Función que se ejecuta al inicio
 function init(){
 	mostrarformulario(false);
 	listar();
 	 //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
-	
+	$("#formulario").on("submit",function(e)
+	{
+
+		guardaryeditar(e);
+	})
+
     //cambia el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 
 			$(".modal-title").text("Agregar Producto");
-			$('#fecha').datepicker('setDate', 'today');
 
 });
 
@@ -132,7 +137,7 @@ function cancelarform()
 	limpiar();
 	//location.reload();
 	mostrarformulario(false);
-	cargar();
+	//cargar();
 }
 
 function cancelar(){

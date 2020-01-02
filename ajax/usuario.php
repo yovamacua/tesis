@@ -194,11 +194,16 @@ switch ($_GET["op"]) {
             $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button>
 
  <button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
+ <a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarRoles</button></a> 
 
 <button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>
-
-
+  
+            
       <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
+    
+
+      
+            
             $data[] = $sub_array;
         }
 
@@ -210,11 +215,11 @@ switch ($_GET["op"]) {
             "aaData"               => $data);
         echo json_encode($results);
         break;
+
         case 'permisos':
             
             //Obtenemos todos los permisos de la tabla permisos
           $listar_permisos= $usuarios->permisos();
-
 
           //Obtener los permisos asignados al usuario
           /*el id_usuario se envía cuando se edita un usuario*/
@@ -228,7 +233,7 @@ switch ($_GET["op"]) {
 
             //Declaramos el array para almacenar todos los permisos marcados
         $valores=array();
-
+     
         //Almacenar los permisos asignados al usuario en el array
 
           foreach($marcados as $re){
@@ -236,28 +241,46 @@ switch ($_GET["op"]) {
             /*NO hay que tratar a $re como si fuera un objeto o un metodo
                 hay que manejarlo como un array como en el siguiente ejemplo*/
 
-                $valores[]=$re["idpermiso"];
+                $valores[]=$re["idmodulo"];
              
               }
 
 
           //Mostramos la lista de permisos en la vista y si están o no marcados
-
+  echo   '<thead>
+         <tr>
+            <th>Modulo</th>
+             <th>Crear</th>
+             <th>Editar</th>
+              <th>Eliminar</th>
+         </tr>
+      </thead> '; 
           foreach($listar_permisos as $row){
 
-                $output["idpermiso"]=$row["idpermiso"];
+                $output["idmodulo"]=$row["idmodulo"];
                 $output["nombre"]=$row["nombre"];
 
                 /*verificamos si el $row["id_permiso"] estan dentro del array $valores y y si lo está entonces estaría marcado, en caso contrario no estaría marcado*/
                 
-                $sw = in_array($row['idpermiso'],$valores) ? 'checked':'';
-                 
-                 echo '<li><input type="checkbox" '.$sw.' name="permiso[]"  value="'.$row["idpermiso"].' required=""">'.$row["nombre"].'</li>
-                  <span class="error_form" id="error_permisos"></span>';
-            }
+                $sw = in_array($row['idmodulo'],$valores) ? 'checked':'';
 
+                 echo '
+              <tr>
+           <td>
+            <ul style="list-style:none;">   
+     <li>'.$row["nombre"].'<input type="checkbox" '.$sw.' name="modulo[]"  value="'.$row["idmodulo"].' required=""">
+    </div> </li></ul>
+
+ </td>
+ <tr>';
+            }
+    
        break;
 
+
+    
+
+   
     case "eliminar_usuario":
 
         //verificamos si el usuario existe en las tablas si existe entonces el usuario no se elimina,
@@ -324,3 +347,4 @@ switch ($_GET["op"]) {
 
 
 }
+?>

@@ -19,9 +19,22 @@
          </li>
 
          <!-- linea de codigo para validar el color -->
-
- 
-         <li <?php if(isset($activar) and $activar == 'item_usuarios'){?>class="active"<?php }else{?> class=""<?php }?> >
+          <li <?php if(isset($activar) and $activar == 'item_usuario'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
+             <?php if($_SESSION["Pedidos"]==1)
+         
+          {
+        echo '<a href="#">
+            <i class="fa fa-user" aria-hidden="true"></i> <span>Usuario</span>
+            <span class="pull-right-container badge bg-blue">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+           </a>';
+      }
+      ?>
+        <ul class="treeview-menu">
+        
+        
+               <li <?php if(isset($activar) and $activar == 'item_usuario'){?>class="active"<?php }else{?><?php }?> >
           
               <?php if($_SESSION["Usuarios"]==1)
          
@@ -33,6 +46,60 @@
 
          ?>
          </li>
+    <li <?php if(isset($activar) and $activar == 'item_usuario_rol'){?>class="active"<?php }else{?><?php }?> >
+          
+              <?php if($_SESSION["Usuarios"]==1)
+         
+          {
+           echo '<a href="usuario_rol.php">
+            <i class="fa fa-user" aria-hidden="true"></i> <span>Rol</span>
+            </a>';
+             }
+
+         ?>
+         </li>
+         </ul>
+       </li>
+          
+       <li <?php if(isset($activar) and $activar == 'item_permiso'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
+             <?php if($_SESSION["Incidentes"]==1)
+         
+          {
+            echo '<a href="#">
+            <i class="fa fa-paperclip" aria-hidden="true"></i> <span>Permiso</span>
+            <span class="pull-right-container badge movarrow bg-blue">
+            <i class="fa fa-angle-left pull-right"></i>
+            </span>
+            </a>';
+              }
+
+         ?>
+            
+            <ul class="treeview-menu">
+               <li <?php if(isset($activar1) and $activar1 == 'item_perfil'){?>class="active"<?php }else{?><?php }?> >
+                   <?php if($_SESSION["Incidentes"]==1)
+         
+          {
+                echo'  <a href="perfilese.php">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Perfiles</span>
+                  </a>
+               </li>';
+            }
+            ?>
+               <li <?php if(isset($activar2) and $activar2 == 'item_incidentes2'){?>class="active"<?php }else{?><?php }?> >
+                   <?php if($_SESSION["Incidentes"]==1)
+         
+          {
+                 echo' <a href="rol.php">
+
+                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Roles</span>
+                  </a>';
+               }
+               ?>
+               </li>
+            </ul>
+         </li>
+
           
 
          <li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
@@ -83,6 +150,7 @@
       }
          ?>
 </li>
+ 
          <li <?php if(isset($activar) and  $activar == 'item_perdidas'){?>class="active"<?php }else{?> class=""<?php }?> >
             <?php if($_SESSION["Perdidas"]==1)
          

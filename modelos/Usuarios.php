@@ -80,7 +80,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
           foreach($marcados as $row){
 
-              $valores[]= $row["idpermiso"];
+              $valores[]= $row["idmodulo"];
           }
 
 
@@ -104,7 +104,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
       in_array(15,$valores)?$_SESSION['Eliminar']=1:$_SESSION['Eliminar']=0;
       in_array(16,$valores)?$_SESSION['Editar']=1:$_SESSION['Editar']=0;
       in_array(17,$valores)?$_SESSION['Registrar']=1:$_SESSION['Registrar']=0;
-      in_array(18,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
+      in_array(21,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
           
           
 
@@ -366,7 +366,7 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
 
             $conectar=parent::conexion();
 
-            $sql="select * from permisos;";
+            $sql="select * from modulo;";
 
             $sql=$conectar->prepare($sql);
             $sql->execute();
@@ -374,8 +374,8 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
 
 
               } 
-              // Listar los permisos del usuario
-// verfica a que modulo tiene accesso
+      
+  
 
 public function listar_permisos_por_usuario($id_usuario){
 
@@ -388,6 +388,26 @@ public function listar_permisos_por_usuario($id_usuario){
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
+
+ 
+  public function ver_modulos($idusuario){
+    
+
+       $conectar = parent::conexion();
+             parent::set_names();
+
+            $sql="select DISTINCT id_modulo from perfil_modulo as pm
+ inner join perfil_usuario as pu on pu.idperfil = pm.idperfiles where pu.idusuarios=?;";
+
+             $sql=$conectar->prepare($sql);
+               $sql->bindValue(1, $idusuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+    
+  }
+    # code...
+  
+
 
 
          public function get_usuario_permiso_por_id_usuario($id_usuario){

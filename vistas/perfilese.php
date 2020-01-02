@@ -1,0 +1,110 @@
+<?php
+   require_once("../config/conexion.php");
+    if(isset($_SESSION["id_usuario"])){
+    	require_once("../modelos/Perfiles.php");
+         require_once("../modelos/Modulos.php");
+?>
+
+<?php
+  #variable item activo
+  $activar = 'item_categorias';
+  require_once("header.php");
+?>
+<!--Contenido-->
+      <!-- Content Wrapper. Contains page content -->
+      <div class="content-wrapper">
+        <section class="content-header">
+
+          <h1>Listado de perfiles</h1>
+
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-users"></i> Categoria</li>
+          </ol>
+   
+        </section>
+        <!-- Main content -->
+        <section class="content">
+             <div id="resultados_ajax"></div>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="box">
+                    <div class="box-header boton-top">
+                          <h1 class="box-title">
+                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#perfilModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Perfil</button></h1>
+                        <div class="box-tools pull-right">
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- centro -->
+                    <div class="panel-body table-responsive tabla-top">
+                          <table id="perfil_data" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                <th width="5%">Codigo</th>
+                                <th width="5%">Nombre</th>
+                                <th width="5%">Estado</th>
+                                <th width="5%">Acciones</th>
+                              
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                          </table>
+                    </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+              </div><!-- /.col -->
+          </div><!-- /.row -->
+      </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
+  <!--Fin-Contenido-->
+    <!--FORMULARIO VENTANA MODAL-->
+  <div id="perfilModal" class="modal fade">
+  <div class="modal-dialog">
+    <form method="post" id="perfiles_form">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Agregar perfil</h4>
+        </div>
+        <div class="modal-body">
+
+          <label>Nombre</label>
+                   <input type="text" id="nombre" name="nombre"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
+                    <label>Codigo</label>
+                   <input type="text" id="codigo" name="codigo"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
+     <label>Estado</label>
+       <select class="form-control" id="estado" name="estado" >
+        <option value="">selecione el estado</option>
+                            <option value="1">Habilitado</option>
+                            <option value="0">Dehabilitado</option>
+                        
+                        </select>
+                   
+           </br>
+        </div>
+        <div class="modal-footer">
+           <input type="hidden" name="idperfil" id="idperfil"/>
+          <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+          <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="t rue"></i> Cerrar</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+ 
+ <!--FIN FORMULARIO VENTANA MODAL-->
+<!--CIERRE DE SESSION DE PERMISO -->
+<?php
+  require_once("footer.php");
+?>
+<script type="text/javascript" src="js/perfiles.js"></script>
+<?php
+  } else {
+        header("Location:".Conectar::ruta()."vistas/index.php");
+  }
+?>

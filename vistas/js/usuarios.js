@@ -12,7 +12,7 @@ $(function() {
     $("#error_password1").hide();
     $("#error_password2").hide();
     $("#error_estado").hide();
-    $("#error_permisos").hide();
+    //$("#error_permisos").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_nombre = false;
@@ -56,9 +56,9 @@ $(function() {
     $("#estado").focusout(function() {
         campo_estado();
     });
-     $("#permisos").focusout(function() {
+    /* $("#permisos").focusout(function() {
         ISchekbox();
-    });
+    });*/
 
     // funciones para validar
     function campo_estado() {
@@ -205,7 +205,7 @@ $(function() {
             error_nombre = true;
         }
     }
-    function ISchekbox(){
+   /* function ISchekbox(){
      var checked = false;
     var elements = document.getElementsByName("permiso[]");
     for(var i=0; i < elements.length; i++){
@@ -225,7 +225,7 @@ $(function() {
     }
   
 
-    }
+    }*/
 
     function campo_apellido() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
@@ -263,7 +263,7 @@ $(function() {
         error_password1 = false;
         error_password2 = false;
         error_estado = false;
-        error_permisos= false;
+        //error_permisos= false;
        
 
         // se invoca a las funciones para tener el valor de las variables
@@ -275,7 +275,7 @@ $(function() {
         campo_password1();
         campo_password2();
         campo_estado();
-        ISchekbox();
+       // ISchekbox();
 
         //comparacion
         if (error_nombre === false &&
@@ -286,9 +286,7 @@ $(function() {
             error_cargo === false &&
             error_password1 === false &&
             error_password2 === false &&
-            error_estado === false &&
-            error_permisos ===false
-            ) {
+            error_estado === false) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#password1").css("border-bottom", "1px solid #d2d6de");
             $("#password2").css("border-bottom", "1px solid #d2d6de");
@@ -296,7 +294,7 @@ $(function() {
             $("#usuario").css("border-bottom", "1px solid #d2d6de");
             $("#nombre").css("border-bottom", "1px solid #d2d6de");
             $("#apellido").css("border-bottom", "1px solid #d2d6de");
-             $("#permisos").css("border-bottom", "1px solid #d2d6de");
+             //$("#permisos").css("border-bottom", "1px solid #d2d6de");
            
             guardaryeditar(e);
         } else {
@@ -316,6 +314,7 @@ function init() {
         $(".modal-title").text("Agregar Usuario");
         $(".ofield").show();
         $(".ofield2").show();
+         $(".ofields").show();
     });
     //Mostramos los permisos
      /*en este caso NO se envia un id_usuario ya que se va agregar un 
@@ -428,6 +427,7 @@ function pass(id_usuario) {
         //analiza una cadena de texto como json
         data = JSON.parse(data);
         var nm = data.nombre;
+        $('.ofields').hide();
         $('.ofield').hide();
         $('.ofield2').show();
         //evento para ventana modal
@@ -445,6 +445,7 @@ function pass(id_usuario) {
         $('#action').val("Edit");
     });
 }
+//Mostrar datos del usuario en la ventana modal del formulari
 
 //Mostrar datos del usuario en la ventana modal del formulario
 function mostrar(id_usuario) {
@@ -459,6 +460,7 @@ function mostrar(id_usuario) {
         $("#usuarioModal").modal("show");
         $('.ofield').show();
         $('.ofield2').hide();
+         $('.ofields').show();
         //valor del formulario
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
@@ -476,7 +478,9 @@ function mostrar(id_usuario) {
     $.post("../ajax/usuario.php?op=permisos&id_usuario="+id_usuario,function(r){
           $("#permisos").html(r);
       });
+
 }
+
 
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e) {
