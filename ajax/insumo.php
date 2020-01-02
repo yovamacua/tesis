@@ -181,5 +181,25 @@ switch ($_GET["op"]) {
 	        }
 	        //fin mensaje error
 		break;
+
+		case "cantidad_insumo":
+
+		  	$datos = $insumos->get_insumos_por_id($_POST["id_insumo"]);
+			if(is_array($datos)==true and count($datos)>0){
+
+				foreach ($datos as $row) {
+					$output["cantidad"] = $row["cantidad"];
+				}
+					echo json_encode($output);
+			}else{
+				//si no existe el registro no se recorre el array
+				$errors[] = "No existe un insumo con ese id";
+			}
+			//mensaje error
+	        if (isset($errors)) {
+	            echo error($errors);
+	        }
+	        //fin mensaje error
+		break;
 	}
 ?>	

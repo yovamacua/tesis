@@ -606,4 +606,21 @@ function eliminar(id_insumo){
   	});//bootbox
 }
 
+function validarCantidad(id_insumo){
+    var idIns = document.getElementById("Id_insumo").value;
+    $.post("../ajax/insumo.php?op=cantidad_insumo",{id_insumo: idIns}, function(data, status){
+        //analiza una cadena de texto como json
+        data = JSON.parse(data);
+            $('#canti').val(data.cantidad);
+     });
+   
+    var salida = document.getElementById("Cantidad").value;
+    var cant = document.getElementById("canti").value;
+
+    if(parseInt(salida, 10) > cant) {
+        alert("Cantidad superior a la existencia del insumo");
+        limpiar2();
+    }
+}  
+
 init();
