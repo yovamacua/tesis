@@ -33,7 +33,7 @@ require_once("header.php");?>
   	<div class="content-wrapper">
 
 		  	<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
-		        Reporte de ventas mes y año
+		        Reporte de ventas y perdidas mes y año
 		   	</h2>
 
 		   	<div class="panel panel-default">
@@ -336,7 +336,7 @@ require_once("header.php");?>
 	    	<div class="box">
 	       		<div class="">
 
-					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Gráfico reporte general de perdias</h2>
+					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Gráfico reporte general de perdidas</h2>
 	      
 		          <!--GRAFICA-->
 		           <div id="container_perdidas" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
