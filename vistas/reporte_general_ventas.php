@@ -1,23 +1,19 @@
 <?php
    
-   require_once("../config/conexion.php");
+    require_once("../config/conexion.php");
 
-   if(isset($_SESSION["id_usuario"])){
+    if(isset($_SESSION["id_usuario"])){
 
    	require_once("../modelos/Venta.php");
+   	require_once("../modelos/Perdidas.php");
 
+   	$ventas = new Ventas();
+   	$datos = $ventas->get_ventas_reporte_general();
+   	$datos_ano = $ventas->suma_ventas_total_ano();
 
-   	$ventas=new Ventas();
-
-   	$datos= $ventas->get_ventas_reporte_general();
-
-
-   	$datos_ano= $ventas->suma_ventas_total_ano();
-      
-	
-	
+	$perdidas = new Perdidas();
+	$datosp = $perdidas->get_perdidas_reporte_general();
 ?>
-
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
 <?php 
@@ -32,36 +28,30 @@ require_once("header.php");?>
      {
 
      ?>
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
 
-  <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
-        
-         Reporte de ventas mes y año
-    </h2>
+  	<!-- Content Wrapper. Contains page content -->
+  	<div class="content-wrapper">
 
-   <div class="panel panel-default">
-        
-        <div class="panel-body">
+		  	<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
+		        Reporte de ventas mes y año
+		   	</h2>
 
-         <div class="btn-group text-center">
-          <button type='button' id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
-         </div>
+		   	<div class="panel panel-default">
+		        
+		        <div class="panel-body">
 
+		         <div class="btn-group text-center">
+		          <button type='button' id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+		         </div>
+		       </div>
+		    </div>
 
-       </div>
-      </div>
-
-    
+<!--DATOS DE VENTAS-->
 	<div class="row">
-
 	 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-
 	    <div class="box">
-
 	       <div class="">
-
-				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
+				<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
 				              
 				  <table class="table table-bordered">
 				    <thead>
@@ -75,22 +65,36 @@ require_once("header.php");?>
 				    <tbody>
 				     
                    <?php
-                    
-         
                    
-                    for($i=0;$i<count($datos);$i++){
+                   		$arregloReg = array();
 
+	                    for($i=0; $i<count($datos_ano); $i++){
+	                  
+				        	array_push($arregloReg, 
+						            array(
+					
+					     	'año' => $datos_ano[$i]["año"],
 
-				    //imprime la fecha por separado ejemplo: dia, mes y año
-                      $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+					     	'total_venta_año' => $datos_ano[$i]["total_venta_año"]
+					               
+					            )
+					        );
+					    }
+          
+	                    $total_ventas = 0;
+	                    for($j=0; $j<count($arregloReg); $j++){
+	                       	$total_ventas = $total_ventas + $datos_ano[$j]["total_venta_año"];
+	                   	}
+
+                    	for($i=0;$i<count($datos);$i++){
+
+				    	//imprime la fecha por separado ejemplo: dia, mes y año
+                       	$meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
  
-                       $fecha= $datos[$i]["mes"];
-
-                       $fecha_mes = $meses[date("n", strtotime($fecha))-1];
-
-
-				     ?>
-
+                       	$fecha = $datos[$i]["mes"];
+                       	$fecha_mes = $meses[date("n", strtotime($fecha))-1];
+                        
+				     	?>
 
 					      <tr>
 					        <td><?php echo $datos[$i]["año"]?></td>
@@ -100,64 +104,52 @@ require_once("header.php");?>
 					        <td><?php echo "$"." ".$datos[$i]["total_venta"]?></td>
 					      </tr>
 					      
-				      <?php
+				     	<?php
 
-                       
-                       }//cierre del for
+                    }//cierre del for
                    
-
 				      ?>
-                      
-                  
+                    
+	                  	<tr>
+		                	<td><strong>Total:</strong></td>
+		                	<td><strong></strong></td>
+		                	<td><strong></strong></td>
+		                	<td><strong>$ <?php echo $total_ventas?></strong></td>
+		                </tr>
 				    </tbody>
 				  </table>
 
-		   </div><!--fin box-body-->
-      </div><!--fin box-->
-			
-		</div><!--fin col-xs-12-->
+		   	</div><!--fin box-body-->
+      	</div><!--fin box-->	
+	</div><!--fin col-xs-12-->
 
-		  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-		  	  <div class="box">
-
-	             <div class="">
-
-				     <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año</h2>
-				    
+	<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		<div class="box">
+            <div class="">
+				<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año de ventas</h2>
 		         
-		         <table class="table table-bordered">
-	                 <thead>
-
+		        <table class="table table-bordered">
+	                <thead>
 	                    <th>AÑO</th>
 				        <th>TOTAL</th>
 				        <th>PORCENTAJE %</th>
-	                 	
-	                 </thead>
+	                </thead>
 
-	                 <tbody>
-
-	                <?php
-                       $arregloReg = array();
-            
-	                 ?>
+	                <tbody>
                  
-                    <?php for($i=0; $i<count($datos_ano); $i++){
-                  
+                    <?php 
 
-			           array_push($arregloReg, 
+                    $arregloReg = array();
+                    for($i=0; $i<count($datos_ano); $i++){
+                  
+			            array_push($arregloReg, 
 					            array(
 					
-				      
-				     'año' => $datos_ano[$i]["año"],
-
-				     'total_venta_año' => $datos_ano[$i]["total_venta_año"]
-				               
+						     	'año' => $datos_ano[$i]["año"],
+						     	'total_venta_año' => $datos_ano[$i]["total_venta_año"]
 				            )
 				        );
-               
-
 				   }//cierre del primer ciclo for
-
 
 				   //segundo for
                    $sumaTotal = 0;
@@ -166,283 +158,426 @@ require_once("header.php");?>
                      
                      //sumo el total de los años
                      $sumaTotal = $sumaTotal + $datos_ano[$j]["total_venta_año"];
-
-				   }
+ 
+				    }
                    
-                  
                     $porcentaje_total=0;
 
 					for($i=0;$i<count($arregloReg);$i++) {
 
-             //CALCULO DEL PORCENTAJE
-			  $dato_por_ano=$arregloReg[$i]["total_venta_año"];
+	             		//CALCULO DEL PORCENTAJE
+				  		$dato_por_ano=$arregloReg[$i]["total_venta_año"];
+				 
+				 		$porcentaje_por_ano= round(($dato_por_ano/$sumaTotal)*100,2);	
 
-			 
-			 $porcentaje_por_ano= round(($dato_por_ano/$sumaTotal)*100,2);	
+				  		$porcentaje_total= $porcentaje_total+ $porcentaje_por_ano;
+	              
+	                    ?>
 
-			  $porcentaje_total= $porcentaje_total+ $porcentaje_por_ano;
-              
+		                 <tr>
+		                 	<td><?php echo $arregloReg[$i]["año"];?></td>
+		                 	<td><?php echo $arregloReg[$i]["total_venta_año"];?></td>
+		                    <td><?php echo $porcentaje_por_ano?></td>
+		                 </tr>
 
+		                 <?php 
 
-                    	?>
+	                } //cierre delfor
 
-	                 <tr>
-	                 	<td><?php echo  $arregloReg[$i]["año"];?></td>
-	                 	<td><?php echo $arregloReg[$i]["total_venta_año"];?></td>
-	                    <td><?php echo  $porcentaje_por_ano?></td>
-	                 </tr>
-
-	                 <?php 
-
-	                 } 
-
-         
 	                ?>
+		                <tr>
+		                	<td><strong>Total:</strong>  </td>
+		                	<td><strong> <?php echo $sumaTotal?> </strong></td>
+		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
+		                </tr>
 
-	                <tr>
-	                	<td><strong>Total:</strong>  </td>
-	                	<td><strong> <?php echo $sumaTotal?> </strong></td>
-	                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
-	                </tr>
-
-	                
-	                 	
-	                 </tbody>
-
+	                </tbody>
 	             </table>
 
+		        </div><!--fin box-body-->
+            </div><!--fin box-->
+		</div><!--fin col-xs-6-->
+    </div><!--fin row-->
 
-		         </div><!--fin box-body-->
-               </div><!--fin box-->
-		  </div><!--fin col-xs-6-->
+  <!--FILA DE LA GRAFICAS-->
+	<div class="row">
 
-  </div><!--fin row-->
+	     <!--VENTAS HECHAS-->
 
-  <!--SEGUNDA FILA DE LA GRAFIA-->
-		<div class="row">
+		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-		     <!--VENTAS HECHAS-->
+		    <div class="box">
 
-			 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		       <div class="">
 
-			    <div class="box">
+				<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Gráfico reporte general de ventas</h2>
+  
+          <!--GRAFICA-->
+           <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-			       <div class="">
+	            </div><!--fin box-body-->
+	        </div><!--fin box-->
+		</div><!--fin col-lg-6-->
+ 
+        <!--VENTAS CANCELADAS-->
 
-					<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
+		 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-      
-	          <!--GRAFICA-->
-	           <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+		    <div class="box">
 
+		       <div class="">
 
+				<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Gráfico general de ventas canceladas</h2>
 
-		            </div><!--fin box-body-->
-		        </div><!--fin box-->
-			</div><!--fin col-lg-6-->
+		          <!--GRAFICA-->
+		           <div id="container_cancelada" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
-            
-            <!--VENTAS CANCELADAS-->
+	            </div><!--fin box-body-->
+	        </div><!--fin box-->
+		</div><!--fin col-lg-6-->
+	</div><!--fin row-->
 
-			 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		 <!--DATOS DE PERDIDAS-->
+	<div class="row">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	    	<div class="box">
+	       		<div class="">
+					<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte general de perdidas</h2>
+				              
+				  	<table class="table table-bordered">
+					    <thead>
+					      <tr>
+					        <th>AÑO</th>
+					        <th>N° MES</th>
+					        <th>NOMBRE MES</th>
+					        <th>PORCENTAJE %</th>
+					        <th>TOTAL</th>
+					      </tr>
+					    </thead>
+				    <tbody>
+				     
+                    <?php
+                   
+                   		$arregloReg = array();
 
-			    <div class="box">
+	                    for($i=0; $i<count($datosp); $i++){
+	                  
+				        	array_push($arregloReg, 
+						            array(
+					
+					     	'anio' => $datosp[$i]["anio"],
 
-			       <div class="">
+					     	'totalPerdida' => $datosp[$i]["totalPerdida"]
+					               
+					            )
+					        );
+					    }
+          
+	                    $total_perdidas = 0;
+	                    for($j=0; $j<count($arregloReg); $j++){
+	                       	$total_perdidas = $total_perdidas + $datosp[$j]["totalPerdida"];
+	                   	}
 
-					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas canceladas</h2>
+	                   	 $sumaTotal = 0;
 
-      
-	          <!--GRAFICA-->
-	           <div id="container_cancelada" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+				   		for($j=0;$j<count($arregloReg);$j++){
+	                     	//sumo el total de los años
+	                     	$sumaTotal = $sumaTotal + $datosp[$j]["totalPerdida"];
+				    	}
 
+		                $porcentaje_total = 0;
+	                    for($i=0; $i<count($datosp); $i++){
 
+					    //imprime la fecha por separado ejemplo: dia, mes y año
+	                       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+	 
+	                       $fecha = $datosp[$i]["mes"];
+	                       $fecha_mes = $meses[date("n", strtotime($fecha))-1];
 
-		            </div><!--fin box-body-->
-		        </div><!--fin box-->
-			</div><!--fin col-lg-6-->
+	                       //CALCULO DEL PORCENTAJE
+					  		$dato_por_anio = $arregloReg[$i]["totalPerdida"];
+					 		$porcentaje_por_anio = round(($dato_por_anio/$sumaTotal)*100,2);	
+					  		$porcentaje_total = $porcentaje_total + $porcentaje_por_anio;
+	                        
+					     	?>
 
+						      <tr>
+						        <td><?php echo $datosp[$i]["anio"]?></td>
+						        <td><?php echo $datosp[$i]["numero_mes"]?></td>
+						        <td><?php echo $fecha_mes?></td>
+						     	<td><?php echo $porcentaje_por_anio?></td>
+						        <td><?php echo "$"." ".$datosp[$i]["totalPerdida"]?></td>
+						      </tr>
+						      
+					     	<?php
 
+	                    }//cierre del for
+                   
+				      ?>
+	                  	<tr>
+		                	<td><strong>Totales:</strong></td>
+		                	<td><strong></strong></td>
+		                	<td><strong></strong></td>
+		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
+		                	<td><strong>$ <?php echo $total_perdidas?></strong></td>
+		                </tr>
+				    </tbody>
+				  </table>
 
+		   </div><!--fin box-body-->
+      	</div><!--fin box-->		
+	</div><!--fin col-xs-12-->
+</div><!--fin row-->
 
+ <!--FILA DE LA GRAFICAS-->
+	<div class="row">
+     <!--VENTAS HECHAS-->
+	 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+	    	<div class="box">
+	       		<div class="">
 
-		</div><!--fin row-->
-     
+					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Gráfico reporte general de perdias</h2>
+	      
+		          <!--GRAFICA-->
+		           <div id="container_perdidas" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 
+ 				</div><!--fin box-body-->
+		    </div><!--fin box-->
+		</div><!--fin col-lg-6-->
+	</div><!--fin row-->
+	
+</div><!-- /.content-wrapper -->
 
-</div>
-  <!-- /.content-wrapper -->
+<?php require_once("footer.php");?>
+<script type="text/javascript">
 
+	//VENTAS GENERALES
+    $(document).ready(function() {
 
-   <?php require_once("footer.php");?>
+	//Highcharts.chart('container', {
 
-
-				<script type="text/javascript">
-
-     $(document).ready(function() {
-
-			//Highcharts.chart('container', {
-
-			var chart = new Highcharts.Chart({
-		  //$('#container').highcharts({
+	var chart = new Highcharts.Chart({
+	//$('#container').highcharts({
         
-			   chart: {
-			    	
-			        renderTo: 'container', 
-			        plotBackgroundColor: null,
-			        plotBorderWidth: null,
-			        plotShadow: false,
-			        type: 'pie'
-			    },
+    chart: {
+    	
+        renderTo: 'container', 
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
 
-			        exporting: {
-			        url: 'http://export.highcharts.com/',
-			        enabled: false
-        
-                },
+        exporting: {
+        url: 'http://export.highcharts.com/',
+        enabled: false
 
-			    title: {
-			        text: ''
-			    },
-			    tooltip: {
-			        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-			    },
-			    plotOptions: {
-			        pie: {
-			        	showInLegend:true,
-			            allowPointSelect: true,
-			            cursor: 'pointer',
-			            dataLabels: {
-			                enabled: true,
-			                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-			                style: {
-			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+    },
 
-			                    fontSize: '20px'
-			                }
-			            }
-			        }
-			    },
-			     legend: {
-			        symbolWidth: 12,
-			        symbolHeight: 18,
-			        padding: 0,
-			        margin: 15,
-			        symbolPadding: 5,
-			        itemDistance: 40,
-			        itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
-			    },
+    title: {
+        text: ''
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+        	showInLegend:true,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
 
-			    series: [
+                    fontSize: '20px'
+                }
+            }
+        }
+    },
+     legend: {
+        symbolWidth: 12,
+        symbolHeight: 18,
+        padding: 0,
+        margin: 15,
+        symbolPadding: 5,
+        itemDistance: 40,
+        itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
+    },
 
-                {
-        name: 'Brands',
-        colorByPoint: true,
-        data: [
+    series: [
 
-          <?php echo $datos_grafica= $ventas->suma_ventas_total_grafica();?>
-			    ]
+    {
+		name: 'Brands',
+		colorByPoint: true,
+		data: [
 
-			    }], 
+		<?php echo $datos_grafica= $ventas->suma_ventas_total_grafica();?>
+		    ]
+    }], 
 
-			    exporting: {
-                enabled: false
-             }
+    exporting: {
+    enabled: false
+ }
 
-			});
+});
 
 	//VENTAS CANCELADAS
 
-		var chart = new Highcharts.Chart({
-		  //$('#container').highcharts({
+	var chart = new Highcharts.Chart({
+    //$('#container').highcharts({
         
-			   chart: {
-			    	
-			        renderTo: 'container_cancelada', 
-			        plotBackgroundColor: null,
-			        plotBorderWidth: null,
-			        plotShadow: false,
-			        type: 'pie'
-			    },
+	    chart: {
+	    	
+	        renderTo: 'container_cancelada', 
+	        plotBackgroundColor: null,
+	        plotBorderWidth: null,
+	        plotShadow: false,
+	        type: 'pie'
+	    },
 
-			        exporting: {
-			        url: 'http://export.highcharts.com/',
-			        enabled: false
+	        exporting: {
+	        url: 'http://export.highcharts.com/',
+	        enabled: false
+
+        },
+
+	    title: {
+	        text: ''
+	    },
+	    tooltip: {
+	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	    },
+	    plotOptions: {
+	        pie: {
+	        	showInLegend:true,
+	            allowPointSelect: true,
+	            cursor: 'pointer',
+	            dataLabels: {
+	                enabled: true,
+	                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+	                style: {
+	                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+
+	                    fontSize: '20px'
+	                }
+	            }
+	        }
+	    },
+	     legend: {
+	        symbolWidth: 12,
+	        symbolHeight: 18,
+	        padding: 0,
+	        margin: 15,
+	        symbolPadding: 5,
+	        itemDistance: 40,
+	        itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
+	    },
+
+	    series: [
+
+        {
+			name: 'Brands',
+			colorByPoint: true,
+			data: [
+
+  			<?php echo $datos_grafica= $ventas->suma_ventas_cancelada_total_grafica();?>
+	    ]
+
+	    }], 
+
+	    exporting: {
+        enabled: false
+     }
+
+	});
+
+
+	//PERDIDAS GENERALES
+	var chart = new Highcharts.Chart({
+	//$('#container').highcharts({
         
-                },
+    chart: {
+    	
+        renderTo: 'container_perdidas', 
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
 
-			    title: {
-			        text: ''
-			    },
-			    tooltip: {
-			        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-			    },
-			    plotOptions: {
-			        pie: {
-			        	showInLegend:true,
-			            allowPointSelect: true,
-			            cursor: 'pointer',
-			            dataLabels: {
-			                enabled: true,
-			                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-			                style: {
-			                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+        exporting: {
+        url: 'http://export.highcharts.com/',
+        enabled: false
 
-			                    fontSize: '20px'
-			                }
-			            }
-			        }
-			    },
-			     legend: {
-			        symbolWidth: 12,
-			        symbolHeight: 18,
-			        padding: 0,
-			        margin: 15,
-			        symbolPadding: 5,
-			        itemDistance: 40,
-			        itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
-			    },
+    },
 
-			    series: [
+    title: {
+        text: ''
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+        	showInLegend:true,
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
 
-                {
-        name: 'Brands',
-        colorByPoint: true,
-        data: [
+                    fontSize: '20px'
+                }
+            }
+        }
+    },
+     legend: {
+        symbolWidth: 12,
+        symbolHeight: 18,
+        padding: 0,
+        margin: 15,
+        symbolPadding: 5,
+        itemDistance: 40,
+        itemStyle: { "fontSize": "17px", "fontWeight": "normal" }
+    },
 
-          <?php echo $datos_grafica= $ventas->suma_ventas_cancelada_total_grafica();?>
-			    ]
+    series: [
 
-			    }], 
+    {
+		name: 'Brands',
+		colorByPoint: true,
+		data: [
 
-			    exporting: {
-                enabled: false
-             }
+		<?php echo $datos_grafica = $perdidas->get_perdidas_anio_actual_grafica();?>
+		    ]
+    }], 
 
-			});
+    exporting: {
+    enabled: false
+ }
 
-
+});
 
 	/*****FIN VENTAS CANCELADAS************************************/
 
 			//si se le da click al boton entonces se envia la imagen al archivo PDF por ajax
 			$('#buttonExport').click(function() {
            
-
 			   //alert("clic");
-            printHTML()
-			document.addEventListener("DOMContentLoaded", function(event) {
-			 printHTML(); 
-			});
+	            printHTML()
+				document.addEventListener("DOMContentLoaded", function(event) {
+				 printHTML(); 
+				});
 
-  
-    }); 
+    		}); 
 			//fin prueba
-
 });
 
  //function
-
 	function printHTML() { 
 	  if (window.print) { 
 	    window.print();
