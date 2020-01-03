@@ -80,17 +80,6 @@
                  <h4 class="modal-title">Agregar Donación</h4>
                </div>
 
-          <!--- codigo para mostrar calendario jquery IU -->
-          <script>
-            $(function () {
-                $("#fecha1").datepicker({
-                    format: "dd/mm/yyyy"//,
-                    //firstDay: 1
-                });//.datepicker("setDate", new Date());
-             });          
-           </script>
-
-          <!--- fin codigo para mostrar calendario jquery IU -->
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Fecha</label>

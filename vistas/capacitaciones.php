@@ -142,16 +142,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Agregar Capacitación</h4>
         </div>
-
-          <script>
-            $(function () {
-                $("#fecha1").datepicker({
-                    format: "dd/mm/yyyy"//,
-                    //firstDay: 1
-                });//.datepicker("setDate", new Date());
-             });          
-         </script>
-
+        
          <div class="form-row">
           <div class="form-group col-md-6">
             <label>Fecha</label>

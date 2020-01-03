@@ -101,17 +101,6 @@
             <h4 class="modal-title">Agregar Insumo</h4>
           </div>
 
-          <!--- codigo para mostrar calendario jquery IU -->
-          <script>
-            $(function () {
-                $("#fecha1").datepicker({
-                    format: "dd/mm/yyyy"//,
-                    //firstDay: 1
-                });//.datepicker("setDate", new Date());
-             });          
-           </script>
-          <!--- fin codigo para mostrar calendario jquery IU -->
-
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Cantidad</label>
@@ -209,17 +198,6 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title2">Descontar Insumo</h4>
           </div>
-
-          <!--- codigo para mostrar calendario jquery IU -->
-          <script>
-            $(function () {
-                $("#Fecha").datepicker({
-                    format: "dd/mm/yyyy"//,
-                    //firstDay: 1
-                });//.datepicker("setDate", new Date());
-             });          
-           </script>
-          <!--- fin codigo para mostrar calendario jquery IU -->
 
            <div class="form-row">
             <div class="form-group col-md-12">

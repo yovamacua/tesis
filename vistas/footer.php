@@ -82,6 +82,28 @@
            /*keyboardNavigation: false,*/
            todayHighlight: true
        })
+         
+         $('#fecha1').datepicker({
+         dateFormat: 'dd-mm-yyyy',
+         /*autoclose: true*/
+          /*format: "yyyy-mm-dd",*/
+           /*clearBtn: true, */
+           language: "es",
+           autoclose: false,
+           /*keyboardNavigation: false,*/
+           todayHighlight: true
+       })
+
+         $('#Fecha').datepicker({
+         dateFormat: 'dd-mm-yyyy',
+         /*autoclose: true*/
+          /*format: "yyyy-mm-dd",*/
+           /*clearBtn: true, */
+           language: "es",
+           autoclose: false,
+           /*keyboardNavigation: false,*/
+           todayHighlight: true
+       })
    
 </script>
 <!-- boton bonito resposive -->

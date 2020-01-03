@@ -181,15 +181,6 @@
           <h4 class="modal-title">Registrar fecha del pedido</h4>
         </div>
 
-        <script>
-        $(function () {
-            $("#fecha1").datepicker({
-                format: "dd/mm/yyyy"//,
-                //firstDay: 1
-            });//.datepicker("setDate", new Date());
-         });          
-     </script>
-
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Fecha</label>
