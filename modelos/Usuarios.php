@@ -59,6 +59,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
                     $_SESSION["usuario"]    = $resultado["usuario"];
                     $_SESSION["imagen"]     = $resultado["usuario_imagen"];
                     $_SESSION["cargo"]     = $resultado["cargo"];
+                    $_SESSION["idperfiles"]     = $resultado["idperfiles"];
                     $_SESSION["ultimoAcceso"] = date("Y-n-j H:i:s");
                    
                     //PERMISOS DEL USUARIO PARA ACCEDER A LOS MODULOS
@@ -68,7 +69,8 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
         $usuario = new Usuarios();
         
        //VERIFICAMOS SI EL USUARIO TIENE PERMISOS A CIERTOS MODULOS
-        $marcados = $usuario->listar_permisos_por_usuario($resultado["id_usuario"]);
+        $marcados = $usuario->listar_permisos_por_usuario($resultado["idperfiles"]);
+       
         
         //print_r($marcados);
 
@@ -80,7 +82,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 
           foreach($marcados as $row){
 
-              $valores[]= $row["idmodulo"];
+              $valores[]= $row["id_modulo"];
           }
 
 
@@ -101,10 +103,8 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
       in_array(12,$valores)?$_SESSION['Reporte Financiero']=1:$_SESSION['Reporte Financiero']=0;
       in_array(13,$valores)?$_SESSION['Reportes de Ventas']=1:$_SESSION['Reportes de Ventas']=0;
       in_array(14,$valores)?$_SESSION['Respaldo']=1:$_SESSION['Respaldo']=0;
-      in_array(15,$valores)?$_SESSION['Eliminar']=1:$_SESSION['Eliminar']=0;
-      in_array(16,$valores)?$_SESSION['Editar']=1:$_SESSION['Editar']=0;
-      in_array(17,$valores)?$_SESSION['Registrar']=1:$_SESSION['Registrar']=0;
       in_array(21,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
+      in_array(22,$valores)?$_SESSION['Permiso']=1:$_SESSION['Permiso']=0;
           
           
 
@@ -129,7 +129,8 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "select * from usuarios";
+        $sql = "select *from usuarios as u
+inner join perfil p on p.idperfil=u.idperfiles";
         //se pasa la consulta
         $sql = $conectar->prepare($sql);
         //ejecutar la conexion
@@ -138,7 +139,7 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
     }
   
     //metodo para registrar un nuevo usuario
-    function registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos)
+    function registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado)
     {
 
         $conectar = parent::conexion();
@@ -155,97 +156,42 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
         //informacion capturada de los formulario y se le pasan a la consulta
         $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
         $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
-        $sql->bindValue(3, substr($_POST["email"], 0, 100));
-        $sql->bindValue(4, $_POST["cargo"]);
-        $sql->bindValue(5, substr($_POST["usuario"], 0, 50));
-        $sql->bindValue(6, $encriptar1);
-        $sql->bindValue(7, $encriptar2);
-        $sql->bindValue(8, $_POST["estado"]);
-        $sql->bindValue(9, $usuario_imagen);
+        $sql->bindValue(3, substr($_POST["email"], 0, 100)); 
+        $sql->bindValue(4, substr($_POST["usuario"], 0, 50));
+        $sql->bindValue(5, $encriptar1);
+        $sql->bindValue(6, $encriptar2);
+        $sql->bindValue(7, $_POST["estado"]);
+        $sql->bindValue(8, $usuario_imagen);
+        $sql->bindValue(9, $_POST["cargo"]);
         //se ejecuta
         $sql->execute();
 
-        //obtenemos el valor del id del usuario
-               $id_usuario = $conectar->lastInsertId();
-
-       
-             //insertamos los permisos
+  
             
-            //almacena todos los checkbox que han sido marcados
-            //este es un array tiene un name=permiso[]
-            $permisos= $_POST["permiso"];
-
-             $num_elementos=0;
-
-              while($num_elementos<count($permisos)){
-
-                $sql_detalle= "insert into usuario_permiso
-                values(null,?,?)";
-
-                  $sql_detalle=$conectar->prepare($sql_detalle);
-                  $sql_detalle->bindValue(1, $id_usuario);
-                  $sql_detalle->bindValue(2, $permisos[$num_elementos]);
-                  $sql_detalle->execute();
-                  
-
-                  //recorremos los permisos con este contador
-                  $num_elementos=$num_elementos+1;
-              }
-              //print_r($_POST);   
+            
     }
 
     //metodo para editar usuario
-    function editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos)
+    function editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado)
     {
         $conectar = parent::conexion();
         parent::set_names();
 
         if ($_POST["password1"] == '123456axxxxx' and $_POST["password2"] == '123456axxxxx') {
             $sql = "update usuarios set nombres=?, apellidos=?,
-              correo=?, cargo=?, usuario=?, estado = ? where id_usuario=? ";
+              correo=?, usuario=?, estado = ?, idperfiles=? where id_usuario=? ";
 
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
             $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
             $sql->bindValue(3, substr($_POST["email"], 0, 100));
-            $sql->bindValue(4, $_POST["cargo"]);
-            $sql->bindValue(5, substr($_POST["usuario"], 0, 50));
-            $sql->bindValue(6, $_POST["estado"]);
+            $sql->bindValue(4, substr($_POST["usuario"], 0, 50));
+            $sql->bindValue(5, $_POST["estado"]);
+            $sql->bindValue(6, $_POST["cargo"]);
             $sql->bindValue(7, $_POST["id_usuario"]);
-            $sql->execute();
-            //SE ELIMINAN LOS PERMISOS SOLO CUANDO SE ENVIE EL FORMULARIO CON SUBMIT
-                      //Eliminamos todos los permisos asignados para volverlos a registrar
-                     $sql_delete="delete from usuario_permiso where id_usuario=?";
-                     $sql_delete=$conectar->prepare($sql_delete);
-                     $sql_delete->bindValue(1,$_POST["id_usuario"]);
-                     $sql_delete->execute();
-
-
-                        //insertamos los permisos
-                    
-                    //almacena todos los checkbox que han sido marcados
-                    //este es un array tiene un name=permiso[]
-                       
-                  
-                       $permisos= $_POST["permiso"];
-                        $num_elementos=0;
-
-                          while($num_elementos<count($permisos)){
-
-                            $sql_detalle= "insert into usuario_permiso
-                            values(null,?,?)";
-
-                              $sql_detalle=$conectar->prepare($sql_detalle);
-                              $sql_detalle->bindValue(1, $_POST["id_usuario"]);
-                              $sql_detalle->bindValue(2, $permisos[$num_elementos]);
-                              $sql_detalle->execute();
-                              
-
-                              //recorremos los permisos con este contador
-                              $num_elementos=$num_elementos+1;
-                          }  
+            $sql->execute();  
         } else {
-            $sql = "update usuarios set nombres=?, apellidos=?, correo=?, cargo=?, usuario=?, password=?, password2=?, estado = ? where id_usuario=? ";
+            $sql = "update usuarios set nombres=?, apellidos=?, correo=? , usuario=?, password=?, password2=?, estado = ?, idperfiles=? where id_usuario=? ";
             $sql = $conectar->prepare($sql);
 $encriptar1 = crypt($_POST["password1"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
 $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
@@ -259,42 +205,7 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
             $sql->bindValue(8, $_POST["estado"]);
             $sql->bindValue(9, $_POST["id_usuario"]);
             $sql->execute();
-            //SE ELIMINAN LOS PERMISOS SOLO CUANDO SE ENVIE EL FORMULARIO CON SUBMIT
-                      //Eliminamos todos los permisos asignados para volverlos a registrar
-                     $sql_delete="delete from usuario_permiso where id_usuario=?";
-                     $sql_delete=$conectar->prepare($sql_delete);
-                     $sql_delete->bindValue(1,$_POST["id_usuario"]);
-                     $sql_delete->execute();
-                     //$resultado=$sql_delete->fetchAll();
-
-
-                        //insertamos los permisos
-                    
-                    //almacena todos los checkbox que han sido marcados
-                    //este es un array tiene un name=permiso[]
-
-                       $permisos= $_POST["permiso"];
-
-                       //print_r($_POST);
-             
-              
-                         $num_elementos=0;
-
-                          while($num_elementos<count($permisos)){
-
-                            $sql_detalle= "insert into usuario_permiso
-                            values(null,?,?)";
-
-                              $sql_detalle=$conectar->prepare($sql_detalle);
-                              $sql_detalle->bindValue(1, $_POST["id_usuario"]);
-                              $sql_detalle->bindValue(2, $permisos[$num_elementos]);
-                              $sql_detalle->execute();
-                              
-
-                              //recorremos los permisos con este contador
-                              $num_elementos=$num_elementos+1;
-                          
-                          }  //fin while
+           
         }
     }
 
@@ -377,17 +288,32 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
       
   
 
-public function listar_permisos_por_usuario($id_usuario){
+public function listar_permisos_por_usuario($idperfiles){
 
             $conectar=parent::conexion();
 
-            $sql="select * from usuario_permiso where id_usuario=?";
+            $sql="select * from perfil_modulo where idperfiles=?";
 
             $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $id_usuario);
+            $sql->bindValue(1, $idperfiles);
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
+        //TODAVIA NO
+        public function listar_roles_por_usuario($idusuario){
+
+            $conectar=parent::conexion();
+
+            $sql="select * from rol as r
+         inner join modulo as m  on m.idmodulo=r.idmodulos 
+      inner join roles_usuario as ru on ru.idroles= r.idroles where ru.id_usuarios=?;";
+
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $idusuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        }
+
 
  
   public function ver_modulos($idusuario){

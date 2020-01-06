@@ -46,13 +46,8 @@
                                 <tr>
                                 <th width="5%">Categoría</th>
                                 <th width="5%">Descripcion</th>
-                                <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
-                              
-                              }else{
-                                  echo '<th width="5%">Acciones</th>';
-                              }
-                                ?>
-                              
+                                <th width="5%">Acciones</th>
+                                                          
                                 </tr>
                             </thead>
                             <tbody>

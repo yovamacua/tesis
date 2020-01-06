@@ -11,9 +11,13 @@
 
 <?php
   #variable item activo
-  $activar = 'item_categorias';
+  $activar = 'item_rol';
   require_once("header.php");
 ?>
+<?php if($_SESSION["Permiso"]==1)
+     {
+
+     ?>
 <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
@@ -75,7 +79,12 @@
         <div class="modal-body">
 
           <label>Nombre</label>
-                   <input type="text" id="nombre" name="nombre"   class="form-control" placeholder="nombre" maxlength="60" autocomplete="off" required/>
+                   <select class="form-control" id="nombre" name="nombre" required="">
+                     <option value="">-- Selecciona estado --</option>
+                     <option value="REGISTRAR">REGISTRAR</option>
+                     <option value="EDITAR">EDITAR</option>
+                     <option value="ELIMINAR">ELIMINAR</option>
+                  </select>
                     <label>Codigo</label>
                    <input type="text" id="codigo" name="codigo"   class="form-control" placeholder="codigo" maxlength="60" autocomplete="off" required/>
                    <label>Modulo</label>
@@ -113,7 +122,12 @@
 </div>
 
 
- 
+ <?php  } else {
+
+       require("noacceso.php");
+  }
+   
+  ?><!--
  <!--FIN FORMULARIO VENTANA MODAL-->
 <!--CIERRE DE SESSION DE PERMISO -->
 <?php

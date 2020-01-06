@@ -3,8 +3,10 @@
   require_once("../config/conexion.php");
   //llamo al modelo Producto
   require_once("../modelos/Productos.php");
+   require_once("../modelos/Usuarios.php");
   require_once("mensajes.php");
   $productos = new Producto();
+  $usu= new Usuarios();
  /*if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
@@ -172,23 +174,13 @@
        
        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'
                   </span>';
-                  ?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]=   '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button></div>
-                            <button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]=   '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button></div>';
-
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>';
-        }?>
-        <?php
         
+       $boton_editar=  '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button>';  
+       $boton_eliminar= '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>'; 
+  $sub_array[]= '<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+ 
+ 
+
       $data[] = $sub_array;
       }
     

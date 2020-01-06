@@ -1,0 +1,3 @@
+/*** tabla perfil *// 
+insertar 
+INSERT INTO perfil (nombre , codperfil, estado) VALUES ('Administrador','AD001','1');

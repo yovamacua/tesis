@@ -1,8 +1,11 @@
 <?php
 #se incluye la conexion
    require_once("../config/conexion.php");
+    require_once("../modelos/Perfiles.php");
    #verifica que la session exista
       if(isset($_SESSION["id_usuario"])){
+         $Perfil= new Perfiles();
+         $cat= $Perfil->mostrar_perfiles();
    //crear esta variable para indicar si esta activo o no el item
    $activar = 'item_usuarios';
    #incluye header
@@ -105,11 +108,17 @@
                </div>
                <div class="form-group col-md-6">
 
-                  <label>Cargo*</label>
+                  <label>Perfil *</label>
                   <select class="form-control" id="cargo" name="cargo">
-                     <option value="">-- Selecciona cargo --</option>
-                     <option value="1">Administrador</option>
-                     <option value="0">Empleado</option>
+                     <?php
+
+                           for($i=0; $i<sizeof($cat);$i++){
+                             
+                             ?>
+                              <option value="<?php echo $cat[$i]["idperfil"]?>"><?php echo $cat[$i]["nombre"];?></option>
+                             <?php
+                           }
+                        ?>
                   </select>
                   <span class="error_form" id="error_cargo"></span>
 

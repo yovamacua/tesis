@@ -205,27 +205,6 @@ $(function() {
             error_nombre = true;
         }
     }
-   /* function ISchekbox(){
-     var checked = false;
-    var elements = document.getElementsByName("permiso[]");
-    for(var i=0; i < elements.length; i++){
-        if(elements[i].checked) {
-
-            checked = true;
-              
-        }
-    }
-    if (!checked) {
-        $("#error_permisos").html("Debe seleccionar un permiso");
-         $("#error_permisos").css("position", "absolute");
-          $("#error_permisos").css("color", "red");
-        $("#error_permisos").show();
-        $("#permisos").css("border-bottom", "2px solid #F90A0A");
-        error_permisos = true;
-    }
-  
-
-    }*/
 
     function campo_apellido() {
         var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
@@ -464,7 +443,7 @@ function mostrar(id_usuario) {
         //valor del formulario
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
-        $('#cargo').val(data.cargo);
+        $('#cargo').val(data.idperfiles);
         $('#usuario').val(data.usuario);
         $('#password1').val(cero);
         $('#password2').val(cero);
@@ -474,10 +453,7 @@ function mostrar(id_usuario) {
         $('#id_usuario').val(id_usuario);
         $('#action').val("Edit");
     });
-      //muestra los checkbox en la ventana modal de usuarios
-    $.post("../ajax/usuario.php?op=permisos&id_usuario="+id_usuario,function(r){
-          $("#permisos").html(r);
-      });
+   
 
 }
 

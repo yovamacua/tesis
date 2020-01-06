@@ -23,7 +23,7 @@
 ?>
 <?php if($_SESSION["Producto"]==1)
      {
-
+var_dump($_SESSION["Producto"]);
      ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -67,12 +67,8 @@
                                 <th width="5%">Precio Venta</th>
                                 <th width="5%">Categoría</th>
                                 <th width="5%">Stock</th>
-                                 <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                               <th width="5%">Acciones</th>
                               
-                              }else{
-                                  echo '<th width="5%">Acciones</th>';
-                              }
-                                ?>
                                 </tr>
                             </thead>
 

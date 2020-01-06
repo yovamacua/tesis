@@ -7,7 +7,7 @@
   $activar = 'item_unidad';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Unidad"]==1)
+<?php if($_SESSION["Categoria"]==1)
      {
 
      ?>
@@ -45,13 +45,8 @@
                             <thead>
                                 <tr>
                                 <th width="5%">Unidad</th>
-                                <th width="5%">Descripción</th>
-                                <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
-                              
-                              }else{
-                                  echo '<th width="5%">Acciones</th>';
-                              }
-                                ?>
+                                <th width="5%">Acciones</th>
+                           
                               
                                 </tr>
                             </thead>

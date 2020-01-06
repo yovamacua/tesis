@@ -123,11 +123,11 @@ switch ($_GET["op"]) {
                 $output["nombre"]    = $row["nombres"];
                 $output["apellido"]  = $row["apellidos"];
                 $output["correo"]    = $row["correo"];
-                $output["cargo"]     = $row["cargo"];
                 $output["usuario"]   = $row["usuario"];
                 $output["password1"] = $row["password"];
                 $output["password2"] = $row["password2"];
                 $output["estado"]    = $row["estado"];
+                 $output["idperfiles"]    = $row["idperfiles"];
             }
             //devuelve datos de registro de usuario
 
@@ -175,19 +175,13 @@ switch ($_GET["op"]) {
             }
 
 //imprimr la palabra en vez del numero
-            if ($row["cargo"] == 1) {
-                $cargo = "ADMINISTRADOR";
-            } else {
-                if ($row["cargo"] == 0) {
-                    $cargo = "EMPLEADO";
-                }
-            }
+         
             //campos de la tabla usuario
             $sub_array[] = $row["nombres"];
             $sub_array[] = $row["apellidos"];
             $sub_array[] = $row["usuario"];
             $sub_array[] = $row["correo"];
-            $sub_array[] = $cargo;
+            $sub_array[] = $row["nombre"];
             //se formate el la fecha, tipo y formato
             $sub_array[] = date("d/m/Y", strtotime($row["fecha_ingreso"]));
             //botones con valores de los campos en el id
