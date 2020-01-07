@@ -51,10 +51,12 @@
                                   <th>Descripción</th>
                                   <th width="8%">Cantidad</th>
                                   <th width="10%">Valorado c/u en</th> 
+                                  <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
                               
-                              
-                                  <th>Acciones</th>;
-                                   
+                                    }else{
+                                    echo '<th>Acciones</th>';
+                                    }
+                                  ?>
                                   </tr>
                               </thead>
                             <tbody>
@@ -108,7 +110,7 @@
           </div>
 
            <div class="form-group col-md-6">
-            <label>Precio</label>
+            <label>Valorado c/u en</label>
             <input type="text" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
             <span class="error_form" id="error_precio"></span>
           </div>

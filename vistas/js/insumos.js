@@ -366,7 +366,7 @@ $(function() {
             $("#Fecha").css("border-bottom", "2px solid #F90A0A");
             error_Fecha = true;
         }
-    }
+    } 
 
     // se valida el formulario
     $("#kardexinsumo_form").on("submit", function(e) {
@@ -384,12 +384,17 @@ $(function() {
         //comparacion
         if (error_Id_insumo === false && error_Cantidad === false && 
           error_Fecha === false) {
-            
-            // si todo funciona las barrita de color boton se reseta despues del submit
+               // si todo funciona las barrita de color boton se reseta despues del submit
             $("#Id_insumo").css("border-bottom", "1px solid #d2d6de");
             $("#Cantidad").css("border-bottom", "1px solid #d2d6de");
             $("#Fecha").css("border-bottom", "1px solid #d2d6de");
-            editarcantidad(e);
+            if(validarCantidad(false)){
+                editarcantidad(e); 
+            }else{
+                alert("Cantidad superior a la existencia, verifique la existencia e ingrese un valor valido");
+                return false;
+            }
+            
         } else {
             // se muestra un mensaje si los campos no estan correctos
             alert("Complete/Revise los campos");
@@ -558,6 +563,7 @@ function mostrar(id_insumo){
 		       	$('#resultados_ajax').html(datos);
 		       	$('#insumo_data').DataTable().ajax.reload(null, false);
 		        limpiar();
+                location.reload();
 	       }
 
 	   	});
@@ -606,21 +612,21 @@ function eliminar(id_insumo){
   	});//bootbox
 }
 
-function validarCantidad(id_insumo){
+function validarCantidad(){
     var idIns = document.getElementById("Id_insumo").value;
+    var salida = document.getElementById("Cantidad").value;
     $.post("../ajax/insumo.php?op=cantidad_insumo",{id_insumo: idIns}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
-            $('#canti').val(data.cantidad);
+           var cant = data.cantidad;
+           if(parseInt(salida, 10) > cant) {
+                alert("valor mayor");
+                return false;
+            }else{
+                alert("todo bien");
+                return true;
+            }
      });
-   
-    var salida = document.getElementById("Cantidad").value;
-    var cant = document.getElementById("canti").value;
-
-    if(parseInt(salida, 10) > cant) {
-        alert("Cantidad superior a la existencia del insumo");
-        limpiar2();
-    }
-}  
+} 
 
 init();

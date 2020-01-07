@@ -79,9 +79,7 @@ thead tr th:last-child {
 
 /** clases collapsible de vista capacitacion **/
 .collapsible {
-  margin-top: -30px;
   margin-left: 15px;
-  margin-bottom: 15px;
 }
 
 .contenedor {
@@ -91,7 +89,7 @@ thead tr th:last-child {
 }
 
 .tabla-cap{
-  margin-top: -40px;
+  margin-top: -18px;
 }
 
 /*** media queries for responsive skin using bootstrap 3 ***/

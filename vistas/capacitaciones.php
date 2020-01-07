@@ -52,7 +52,7 @@
                           <table id="capacitacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="12%">No. Capacitación</th>
+                                <th width="12%">No. de Capacitación</th>
                                 <th>Fecha</th>
                                 <th>Nombre del Grupo</th>
                                 <th>Encargado</th>
@@ -66,6 +66,7 @@
                     </div>
                     <!--Fin centro -->
 
+          <div class="box-header">
               <!--Formulario para agregar capacitados -->
 
             <button id="btnAgregarCap" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Capacitado</button>
