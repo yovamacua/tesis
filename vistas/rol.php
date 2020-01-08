@@ -1,10 +1,10 @@
 <?php
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
-    	 require_once("../modelos/Categorias.php");
          require_once("../modelos/Modulos.php");
-         $categoria = new Categorias();
-          $cat = $categoria->get_categoria();
+          require_once("../modelos/Roles.php");
+     
+       $rol = new Roles();
          $modulo= new Modulos();
         $mod= $modulo->mostrar_modulo();
 ?>
@@ -70,7 +70,7 @@
     <!--FORMULARIO VENTANA MODAL-->
   <div id="rolModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="rol_form">
+    <form method="post" id="rol_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -79,20 +79,27 @@
         <div class="modal-body">
 
           <label>Nombre</label>
-                   <select class="form-control" id="nombre" name="nombre" required="">
+                   <select class="form-control" id="nombre" name="nombre" required="" required="" autofocus="autofocus" >
                      <option value="">-- Selecciona estado --</option>
                      <option value="REGISTRAR">REGISTRAR</option>
                      <option value="EDITAR">EDITAR</option>
                      <option value="ELIMINAR">ELIMINAR</option>
                   </select>
+                  <span class="error_form" id="error_nombre"></span>
+                </br>
                     <label>Codigo</label>
-                   <input type="text" id="codigo" name="codigo"   class="form-control" placeholder="codigo" maxlength="60" autocomplete="off" required/>
+                    <?php 
+                         $codigo = $rol-> codigoroles();
+
+                    ?>
+
+                  
                    <label>Modulo</label>
                    
 
                     <select class="form-control" id="modulo" name="modulo" >
 
-                      <option  value="0">Seleccione</option>
+                      <option  value="0">--- Seleccione un modulo</option>
 
                         <?php
 
@@ -105,9 +112,11 @@
                         ?>
                       
                     </select>
+                    <span class="error_form" id="error_modulo"></span>
                   </br>
      <label>descripcion</label>
       <textarea rows="4" maxlength="70" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
+      <span class="error_form" id="error_descripcion"></span>
                    
            </br>
         </div>

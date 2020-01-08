@@ -2,7 +2,8 @@
    require_once("../config/conexion.php");
     if(isset($_SESSION["id_usuario"])){
     	require_once("../modelos/Perfiles.php");
-         require_once("../modelos/Modulos.php");
+         $perfiL= new Perfiles();
+
 ?>
 
 <?php
@@ -67,7 +68,7 @@
     <!--FORMULARIO VENTANA MODAL-->
   <div id="perfilModal" class="modal fade">
   <div class="modal-dialog">
-    <form method="post" id="perfiles_form">
+    <form method="post" id="perfiles_form" autocomplete="off">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -76,9 +77,15 @@
         <div class="modal-body">
 
           <label>Nombre</label>
-                   <input type="text" id="nombre" name="nombre"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
+                   <input type="text" id="nombre" name="nombre"   class="form-control" placeholder="Nombre del Perfil" maxlength="60" autocomplete="off" required/>
+                   <span class="error_form" id="error_nombre"></span>
                     <label>Codigo</label>
-                   <input type="text" id="codigo" name="codigo"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
+                    <?php 
+ 
+                         $codigo = $perfiL->codigoperfil();
+
+                     ?>
+                  
      <label>Estado</label>
        <select class="form-control" id="estado" name="estado" >
         <option value="">selecione el estado</option>
@@ -86,6 +93,7 @@
                             <option value="0">Dehabilitado</option>
                         
                         </select>
+                        <span class="error_form" id="error_estado"></span>
                    
            </br>
         </div>

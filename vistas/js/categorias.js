@@ -120,7 +120,13 @@ function limpiar()
 {
   $('#categoria').val("");
 	$('#descripcion').val("");
-	$('#id_categoria').val("");;
+	$('#id_categoria').val("");
+    /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#categoria").css("border-bottom", "1px solid #d2d6de");
+    $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+    
+    $("#error_categoria").hide();
+    $("#error_descripcion").hide();
 }
 
 //Función Listar

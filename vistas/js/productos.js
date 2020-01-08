@@ -6,6 +6,8 @@ $(function() {
     $("#error_producto").hide();
     $("#error_precio").hide();
     $("#error_stock").hide();
+     $("#error_categoria").hide();
+      $("#error_unidad").hide();
  
 
 
@@ -13,6 +15,8 @@ $(function() {
     var error_producto = false;
     var error_precio = false;
     var error_stock = false;
+    var error_categoria = false;
+      var error_unidad= false;
     
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#producto").focusout(function() {
@@ -24,6 +28,12 @@ $(function() {
     });
       $("#stock").focusout(function() {
         campo_stock();
+    });
+      $("#categoria").focusout(function() {
+        campo_categoria();
+    });
+       $("#id_unidad").focusout(function() {
+        campo_unidad();
     });
 
 
@@ -38,7 +48,7 @@ $(function() {
             $("#error_precio").hide();
             $("#precio_venta").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precio").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_precio").html("numeros");
             $("#error_precio").css("position", "absolute");
             $("#error_precio").css("color", "red");
             $("#error_precio").show();
@@ -70,7 +80,7 @@ $(function() {
             $("#producto").css("border-bottom", "2px solid #F90A0A");
              error_producto = true;
         }
-        var titulo = $("#categoria").val().length;
+        var titulo = $("#producto").val().length;
         if (titulo <= 0) {
             $("#error_producto").html("No se permiten campos vacios");
             $("#error_producto").css("position", "absolute");
@@ -81,13 +91,13 @@ $(function() {
         }
     }
     function campo_stock() {
-        var pattern = /^[0-9.\s]*$/;
+        var pattern = /^[0-9]+[.]+[0-9]*$/;
         var precio = $("#stock").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_stock").hide();
             $("#stock").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_stock").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_stock").html("numeros");
             $("#error_stock").css("position", "absolute");
             $("#error_stock").css("color", "red");
             $("#error_stock").show();
@@ -104,6 +114,33 @@ $(function() {
             error_stock = true;
         }
     }
+    function campo_categoria() {
+        var categoria = document.getElementById("categoria").value;
+        if (categoria.length <= 0) {
+            $("#error_categoria").html("Debe seleccionar una categoria");
+            $("#error_categoria").css("position", "absolute");
+            $("#error_categoria").css("color", "red");
+            $("#error_categoria").show();
+            error_categoria = true;
+        } else {
+            $("#error_categoria").hide();
+            var error_categoria = false;
+        }
+    }
+      function campo_unidad() {
+        var categoria = document.getElementById("id_unidad").value;
+        if (categoria.length <= 0) {
+            $("#error_unidad").html("Debe seleccionar una unidad");
+            $("#error_unidad").css("position", "absolute");
+            $("#error_unidad").css("color", "red");
+            $("#error_unidad").show();
+            error_categoria = true;
+        } else {
+            $("#error_unidad").hide();
+            var error_unidad = false;
+        }
+    }
+
 
     // se valida el formulario
     $("#producto_form").on("submit", function(e) {
@@ -111,22 +148,28 @@ $(function() {
         error_producto = false;
         error_precio = false;
          error_stock = false;
+           error_categoria = false;
+             error_unidad = false;
       
 
 
         // se invoca a las funciones para tener el valor de las variables
         campo_producto();
         campo_precio();
-        campo_stock()
+        campo_stock();
+         campo_categoria();
+          campo_unidad();
 
 
         //comparacion
         if (error_producto=== false &&
-            error_precio === false && error_stock == false) {
+            error_precio === false && error_stock == false && error_categoria== false ) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#categoria").css("border-bottom", "1px solid #d2d6de");
             $("#precio_venta").css("border-bottom", "1px solid #d2d6de");
             $("#stock").css("border-bottom", "1px solid #d2d6de");
+              $("#categoria").css("border-bottom", "1px solid #d2d6de")
+               $("#id_unidads").css("border-bottom", "1px solid #d2d6de")
             guardaryeditar(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
@@ -167,6 +210,19 @@ function limpiar()
     $('#id_unidad').val("");
 	$('#precio_venta').val("");
 	$('#stock').val("");
+      /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#categoria").css("border-bottom", "1px solid #d2d6de");
+    $("#producto").css("border-bottom", "1px solid #d2d6de");
+   $("#precio_venta").css("border-bottom", "1px solid #d2d6de");
+    $("#stock").css("border-bottom", "1px solid #d2d6de");
+     $("#id_unidad").css("border-bottom", "1px solid #d2d6de");
+
+    $("#error_categoria").hide();
+    $("#error_producto").hide();
+    $("#error_precio").hide();
+    $("#error_stock").hide();
+    $("#error_unidad").hide();
+   
 }
 
 //Función Listar

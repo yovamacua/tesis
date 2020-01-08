@@ -148,11 +148,46 @@ inner join modulo as m  on m.idmodulo=r.idmodulos where r.idmodulos=?;";
                       }
                 
         	}
+          // metodo para obtener el valor del numero de venta
+    public function codigoroles(){
+
+       $conectar=parent::conexion();
+        parent::set_names();
+
+     
+        $sql="select codigo from rol;";
+
+        $sql=$conectar->prepare($sql);
+
+        $sql->execute();
+        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+          foreach($resultado as $k=>$v){
+
+            $numero_venta["codigo"]=$v["codigo"];
+
+          }
+
+                      
+                    if(empty($numero_venta["codigo"]))
+                    {
+                      echo'<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo rol"  value="RM0001"  readonly/>';
+                    }else{
+                        $num     = substr($numero_venta["codigo"] , 2);
+                        $dig     = $num + 1;
+                        $fact = str_pad($dig, 4, "0", STR_PAD_LEFT);
+                       // echo '<script>location.reload()</script>';
+                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo rol"    value="RM'.$fact.'" readonly/>';
+                        
+                    }
+     
+        }
+
+  }
    
 
      
    
- }
+
 
 /*$d=4;
 $v= new Roles();

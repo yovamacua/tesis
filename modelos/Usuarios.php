@@ -292,7 +292,8 @@ public function listar_permisos_por_usuario($idperfiles){
 
             $conectar=parent::conexion();
 
-            $sql="select * from perfil_modulo where idperfiles=?";
+            $sql="select pm.id_modulo from perfil_modulo as pm
+inner join perfil as p on pm.idperfiles = p.idperfil where  pm.idperfiles=? and p.estado='1';";
 
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idperfiles);
@@ -323,7 +324,7 @@ public function listar_permisos_por_usuario($idperfiles){
              parent::set_names();
 
             $sql="select DISTINCT id_modulo from perfil_modulo as pm
- inner join perfil_usuario as pu on pu.idperfil = pm.idperfiles where pu.idusuarios=?;";
+ inner join usuarios as u on u.idperfiles = pm.idperfiles where u.id_usuario=?;";
 
              $sql=$conectar->prepare($sql);
                $sql->bindValue(1, $idusuario);

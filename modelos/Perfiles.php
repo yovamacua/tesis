@@ -148,7 +148,41 @@ public function perfil_usuario($pro)
 
 
 }
+
+     public function codigoperfil(){
+
+       $conectar=parent::conexion();
+        parent::set_names();
+
+     
+        $sql="select codperfil from perfil;";
+
+        $sql=$conectar->prepare($sql);
+
+        $sql->execute();
+        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+          //echo json_encode($resultado);
+          foreach($resultado as $k=>$v){
+
+            $perfil["codperfil"]=$v["codperfil"];
+
+          }
+
+                      
+                    if(empty($perfil["codperfil"]))
+                    {
+                      echo'<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"  value="PM0001" readonly/>';
+                    }else{
+                        $num     = substr($perfil["codperfil"] , 2);
+                        $dig     = $num + 1;
+                        $fact = str_pad($dig, 4, "0", STR_PAD_LEFT);
+                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"    value="PM'.$fact.'" readonly/>';
+                        
+                    }
+     
+        }
 }
-/*$v= new Perfiles();
-$v->mostrar_perfiles();*/
+/*$V= NEW Perfiles();
+$r= $V->codigoperfil();*/
+
 ?>

@@ -1,14 +1,124 @@
 var tabla;
+//funcion para validar formulario de usuario
+$(function() {
+    //creando variables y ocultando campos de error
+    $("#error_nombre").hide();
+    $("#error_modulo").hide();
+    $("#error_descripcion").hide();
+
+  
+
+    // se declaran variables con valor false para ver si pasa o no la validacion
+    var error_nombre = false;
+    var error_estado = false;
+     var error_descripcion = false;
+    
+    // se ejecuta funcion en el id del control cuando se pierde el foco
+    $("#nombre").focusout(function() {
+        campo_nombre();
+    });
+
+    $("#modulo").focusout(function() {
+        campo_modulo();
+    });
+     $("#descripcion").focusout(function() {
+        campo_descripcion();
+    });
+    
+    
+
+
+    // funciones para validar
+   
+ function campo_nombre() {
+        var nombre = document.getElementById("nombre").value;
+        if (nombre.length <= 0) {
+            $("#error_nombre").html("Debe seleccionar un rol");
+            $("#error_nombre").css("position", "absolute");
+            $("#error_nombre").css("color", "red");
+            $("#error_nombre").show();
+            error_nombre= true;
+        } else {
+            $("#error_nombre").hide();
+            var error_nombre = false;
+        }
+    }
+  
+    function campo_modulo() {
+        var modulo = document.getElementById("modulo").value;
+        if (modulo.length <= 0) {
+            $("#error_modulo").html("Debe seleccionar un modulo");
+            $("#error_modulo").css("position", "absolute");
+            $("#error_modulo").css("color", "red");
+            $("#error_modulo").show();
+            error_modulo= true;
+        } else {
+            $("#error_modulo").hide();
+            var error_modulo = false;
+        }
+    }
+     function campo_descripcion() {
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var descripcion = $("#descripcion").val();
+        if (pattern.test(descripcion) && descripcion !== '') {
+            $("#error_descripcion").hide();
+            $("#descripcion").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_descripcion").html("Solo se permiten letras, numeros y los simbolos . : , ¿ ? ! ¡");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+        var descripcion = $("#descripcion").val().length;
+        if (descripcion <= 0) {
+            $("#error_descripcion").html("No se permiten campos vacios");
+            $("#error_descripcion").css("position", "absolute");
+            $("#error_descripcion").css("color", "red");
+            $("#error_descripcion").show();
+            $("#descripcion").css("border-bottom", "2px solid #F90A0A");
+            error_descripcion = true;
+        }
+    }
+      
+
+
+    // se valida el formulario
+    $("#rol_form").on("submit", function(e) {
+        // asignacion de valor a vaiables
+        error_nombre= false;
+        error_modulo = false;
+        error_descripcion = false;
+      
+
+
+        // se invoca a las funciones para tener el valor de las variables
+        campo_nombre();
+        campo_modulo();
+        campo_descripcion();
+
+
+        //comparacion
+        if (error_nombre=== false &&
+            error_modulo=== false && error_descripcion== false ) {
+            // si todo funciona las barrita de color boton se reseta despues del submit
+            $("#nombre").css("border-bottom", "1px solid #d2d6de");
+            $("#modulo").css("border-bottom", "1px solid #d2d6de");
+            $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+            guardaryeditar(e);
+        } else {
+            // se muestra un mensaje si los campos no estan correctos
+            bootbox.alert("Complete/Revise los campos");
+            return false;
+        }
+    });
+});
 //Función que se ejecuta al inicio
 function init(){
 
  listar();
 
-  //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
- $("#rol_form").on("submit",function(e)
- {
-   guardaryeditar(e);
- })
 
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
@@ -20,7 +130,16 @@ function limpiar()
 {
 $('#nombre').val("");
 $('#descripcion').val("");
-$('#modulo').val("");;
+$('#modulo').val("");
+ /** reinicia la validacion cuando se sale de la ventana modal **/
+    $("#nombre").css("border-bottom", "1px solid #d2d6de");
+    $("#modulo").css("border-bottom", "1px solid #d2d6de");
+      $("#descripcion").css("border-bottom", "1px solid #d2d6de");
+ 
+
+    $("#error_nombre").hide();
+     $("#error_modulo").hide();
+    $("#error_descripcion").hide();
 }
 
 //Función Listar

@@ -94,7 +94,6 @@ $datos=$usuarios->get_usuario_por_id($identificador);
   
 // el primer foreach verificamos si hay modulo relacionado al usuario
       foreach ($usu as $rows) {
-
    $ver=$roles->rol_modulo($rows["id_modulo"]);
    //se verifica si hay modulos relacionado con roles
        foreach ($ver as $mod) {

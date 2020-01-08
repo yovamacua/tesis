@@ -119,6 +119,7 @@ var_dump($_SESSION["Producto"]);
                         ?>
                       
                     </select>
+                  <span class="error_form" id="error_categoria"></span>
                   </br>
                   <label>Producto</label>
                    <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
@@ -140,6 +141,7 @@ var_dump($_SESSION["Producto"]);
                         ?>
                       
                     </select>
+                     <span class="error_form" id="error_unidad"></span>
                   </br>
 
                   <label>Precio Venta</label>
