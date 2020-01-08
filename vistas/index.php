@@ -94,7 +94,7 @@ else{
           }
         ?>
                       <div class="login-logo">
-                        <b style="color:black;">Acceso</b>
+                        <b style="color:black;">Campo Escuela</b>
                       </div>
               </div>
             </div>
@@ -104,23 +104,22 @@ else{
         <!-- FIN MENSAJES DE ALERTA-->
         <!--Formulario login-->
 
-        <p class="text-center pad text-bold bg-primary margin-bottom"><i class="fa fa-user icon-title"></i> Ingrese sus datos</p>
+        <p class="text-center pad text-bold bg-primary margin-bottom"><i class="fa fa-user-circle-o icon-title"></i> Ingrese sus datos</p>
 
         <form action="" method="post" autocomplete="off">
-          <div class="form-group has-feedback">
-            
-            <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto" autocomplete="off">
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            <span class="error_form" id="error_correo"></span>
+          <div class="input-group">
+               
+                <input type="text" name="correo" id="correo" class="form-control" placeholder="Usuario ó Email" required="required" autofocus="auto" autocomplete="off">
+                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
+              </div>
+          <br>
 
-          </div>
-          <div class="form-group has-feedback">
-            
-            <input type="password" name="password" id="password" class="form-control" placeholder="Password" required="required" autocomplete="off">
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            <span class="error_form" id="error_password"></span>
-
-          </div>
+        <div class="input-group">
+          
+          
+   <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required="required" autocomplete="off">
+   <span class="input-group-addon element1" id="try"><i class="fa fa-lock" id="show"></i></span>
+              </div>
 
           <div class="form-group">
             <input type="hidden" name="enviar" class="form-control" value="si">
@@ -128,10 +127,30 @@ else{
 
           <div class="row">
             <div class="col-xs-7 col-xs-offset-3 col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
-              <button type="submit" class="btn btn-primary bg-primary btn-block btn-flat"><i class="fa fa-power-off" aria-hidden="true"></i>  Iniciar Sesión</button>
+              <button type="submit" class="btn btn-primary bg-primary btn-block btn-flat"><i class="fa fa-sign-in" aria-hidden="true"></i>  Iniciar Sesión</button>
             </div>
             <div class="form-group" style="float: right; margin: 13px 15px 0px 0px;">
-              <a href="#" style="color:#5e99bb; font-size: 1.5rem;">¿No puede acceder?</a>
+              <a data-toggle="modal" data-target="#modal-default" href="#" style="color:#5e99bb; font-size: 1.5rem;">No tengo acceso.</a>
+          <!-- /.modal-content -->
+              <div class="modal fade" id="modal-default" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Información</h4>
+              </div>
+              <div class="modal-body">
+                <p>Para recuperar el acceso o solicitar una cuenta, por favor contacte al administrador.</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Aceptar</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
             </div>
           </div>
         </form>
