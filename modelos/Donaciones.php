@@ -96,13 +96,51 @@
            $conectar = parent::conexion();
            parent::set_names();
 
-           $sql="delete from donaciones where id_donacion=?";
-           $sql=$conectar->prepare($sql);
+           $sql = "delete from donaciones where id_donacion=?";
+           $sq = $conectar->prepare($sql);
            $sql->bindValue(1, $id_donacion);
            $sql->execute();
 
-           return $resultado=$sql->fetch();
+           return $resultado = $sql->fetch();
         }
+
+         public function get_year_donaciones(){
+        	$conectar = parent::conexion();
+
+          	$sql = "select year(fecha) as fecha from donaciones group by year(fecha) asc";
+          
+          	$sql = $conectar->prepare($sql);
+          	$sql->execute();
+          	return $resultado = $sql->fetchAll();
+     	}
+
+        public function get_donacion_mensual($fecha){
+        	$conectar = parent::conexion();
+      
+	      	if(isset($_POST["year"])){
+	        	$fecha = $_POST["year"];
+
+	        	$sql = "select MONTH(fecha) as mes, YEAR(fecha) as anio
+						from donaciones where YEAR(fecha)=? group by mes desc, anio desc;";
+	           
+	          	$sql = $conectar->prepare($sql);
+	          	$sql->bindValue(1, $fecha);
+	          	$sql->execute();
+	         	return $resultado = $sql->fetchAll();
+	        }else{
+
+	          	//sino se envia el POST, entonces se mostraria los datos del año actual cuando se abra la pagina por primera vez
+	          	$fecha_inicial = date("Y");
+
+	            $sql = "select MONTH(fecha) as mes, YEAR(fecha) as anio
+						from donaciones where YEAR(fecha)=? group by mes desc, anio desc;";
+
+	         	$sql=$conectar->prepare($sql);
+	          	$sql->bindValue(1, $fecha_inicial);
+	          	$sql->execute();
+	            return $resultado = $sql->fetchAll();
+        	}
+     	}
 
                 /****** Bloque agregado ******/
 

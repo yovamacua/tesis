@@ -421,6 +421,7 @@ function verdetalle(id_capacitacion){
     $("#add_button").hide();
     $("#listadoregistros").hide();
     $('#id_capa').val(data.id_capacitacion);
+    $('#id_cap').val(data.id_capacitacion);
     });
 }
 

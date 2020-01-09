@@ -1,6 +1,19 @@
 <?php
   require_once("../config/conexion.php");
   if(isset($_SESSION["id_usuario"])){ 
+    require_once("../modelos/Donaciones.php");
+
+    //SI EXISTE EL POST ENTONCES SE LLAMA AL METODO PARA SELECCIONAR LA FECHA
+    $donacion = new Donaciones();
+
+    if(isset($_POST["year"])){
+      $datos = $donacion->get_donacion_mensual($_POST["year"]);  
+    }else{
+      $fecha_inicial = date("Y");
+      $datos = $donacion->get_donacion_mensual($fecha_inicial);  
+    }
+     $fecha_donaciones = $donacion->get_year_donaciones();
+
 ?>
 
 <?php
@@ -62,6 +75,45 @@
                             <tbody>
                             </tbody>
                           </table>
+
+                      <!-- inicio del div del boton generar reporte donaciones -->
+                      <div style="width:200px;">
+                        <!--form para generar el archivo excel-->
+                        <form action="reportes/reporte_donaciones.php" method="post">
+                          <label>Seleccione el año</label>
+                          <div style="width:100px; float:left;">
+                            <select class="form-control" name="year" id="year">
+                              <option value="0">Seleccione...</option>
+                                <?php 
+                                 //si se envia el POST
+                                  if(isset($_POST["year"])){
+                                    for($i=0; $i<count($fecha_donaciones); $i++){
+
+                                      if($fecha_donaciones[$i]["fecha"]==$_POST["year"]){
+                                        echo '<option value="'.$fecha_donaciones[$i]["fecha"].'" selected=selected>'.$fecha_donaciones[$i]["fecha"].'</option>';
+                                      }else{ 
+                                        echo '<option value="'.$fecha_donaciones[$i]["fecha"].'">'.$fecha_donaciones[$i]["fecha"].'</option>';
+                                      } 
+                                    }//cierre del ciclo for
+                                  //SI NO SE ENVIA EL POST
+                                  } else {
+                                    for ($i=0; $i<count($fecha_donaciones); $i++){
+                                      echo '<option value="'. $fecha_donaciones[$i]["fecha"].'" selected=selected>'. $fecha_donaciones[$i]["fecha"].'</option>';        
+
+                                    }//cierre del ciclo for
+                                  }//cierre del ese
+                                ?>
+                            </select>
+                          </div> 
+                         
+                          <div style="width:100px; float:right;">
+                            <input type="hidden" name="fecha" id="fechaA"/>                            
+                            <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
+                          </div>   
+                        </form>
+                      </div> 
+                    <!-- fin del div del boton generar reporte donaciones -->
+
                     </div>
                     <!--Fin centro -->
                   </div><!-- /.box -->

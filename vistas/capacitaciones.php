@@ -110,7 +110,7 @@
 
                     <!--Tabla de capacitados -->
                       <div class="panel-body table-responsive tabla-cap" id="capacitadosModal">
-
+                        
                         <table id="detallecapacitados_data" class="table table-bordered table-striped">
                           <thead>
                               <tr>
@@ -123,8 +123,26 @@
                           <tbody>
                           </tbody>
                         </table>
-                        <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform();"><i class="fa fa-arrow-circle-left"></i> <font color=white>Regresar</font></a></button>
+                        
                         <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+
+                         <!-- div para el boton generar reporte asistencia de capacitacion -->
+                        <div style="width:200px;">
+                         
+                          <div style="width:100px; float:left;">
+                            <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i><font color=white> Regresar</font></a></button>
+                          </div> 
+                         
+                          <div style="width:100px; float:right;">
+                            <!--form para generar el archivo excel-->
+                            <form action="reportes/reporte_capacitacion.php" method="post">
+                              <input type="hidden" name="id_capacitacion" id="id_cap"/>                
+                              <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button>   
+                            </form>
+                        </div> 
+
+                      </div> 
+                    <!-- fin del div del boton generar reporte asistencia de capacitacion -->
                       </div>
                     <!--Fin tabla de capacitados -->
 
