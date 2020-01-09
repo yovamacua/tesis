@@ -81,8 +81,8 @@
                
                <h4 class="modal-title">Agregar Usuario</h4>
             </div>
-
-       <div class="form-row ofield" style="margin-top: 1.2rem!important;">
+<div class="modal-body">
+       <div class="form-row ofield">
                <div class="form-group col-md-6">
                   
                   <label>Nombres*</label>
@@ -161,13 +161,22 @@
                </div>
             </div>
     
+                <div class="form-row">
+               <div class="form-group col-md-12">
 
-                      
-            <div class="modal-footer" >
+					<div><span class="ofield">- Los campos con * (asterisco) son obligatorios<br></span>
+                     <span class="ofield2">- La contraseña debe tener entre 6 caracteres y maximo 15 entre letras y números</span>
+                  </div>
+
+               </div>
+            </div>
+			<br><br>
+</div>
+          <div style="clear: both;"></div>            
+            <div class="modal-footer">
              <input type="hidden" name="id_usuario" id="id_usuario"/>
                <button  type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" onclick="desvanecer()" value="Add"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button> 
-               <button  type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal  "><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-
+               <button  type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
             </div>
          </div>
       </form>
