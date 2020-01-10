@@ -45,7 +45,19 @@ require_once("header.php");?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+<section class="content-header">
+      
+      <h1>Reporte de ventas mensual</h1>
+      
+      <!-- migas de pan -->
+      <ol class="breadcrumb">
+         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+         <li><i class="fa fa-file-text"></i> Reportes V por M</li>
+      </ol>
 
+   </section>
+<section class="content">
+	<div class="box panel-body">
 
    <h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
@@ -270,7 +282,8 @@ require_once("header.php");?>
 
   </div><!--fin row-->
 
-
+</div>
+</section>
 
 </div>
   <!-- /.content-wrapper -->

@@ -14,7 +14,7 @@
 
      	      $conectar=parent::conexion();
                parent::set_names();
-               $sql=" select sum(stock) as producto from kardex;";
+               $sql="select count(producto) as producto from producto;";
                $sql=$conectar->prepare($sql);
                $sql->execute();
                return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);

@@ -63,7 +63,7 @@ $_SESSION["bienvenida"]=1; ?>
           <!-- /.col -->
           <div class="col-md-3 col-sm-6 col-12">
             <div class="info-box">
-              <span class="info-box-icon bg-success" style="background-color: #28a745 !important"><i class="fa fa-lemon-o" ></i></span>
+              <span class="info-box-icon bg-success" style="background-color: #28a745 !important"><i class="fa fa-leaf" ></i></span>
 
               <div class="info-box-content">
                 <span class="info-box-text">Productos</span>
