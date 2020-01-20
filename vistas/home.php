@@ -12,7 +12,7 @@
       $informacion= new infocajas();
 
       $datos_venta = $venta->get_ventas_anio_actual();
-      $datos = $perdidas->get_perdidas_reporte_general();
+      $datos = $perdidas->get_perdidas_anio_actual();
 ?>
 
 <?php
@@ -237,7 +237,7 @@ $_SESSION["bienvenida"]=1; ?>
               ?>
 
               <td></td>
-              <td><strong>IMPORTE TOTAL (<?php echo date("Y");?>)</strong></td>
+              <td><strong>TOTAL (<?php echo date("Y");?>)</strong></td>
               <td><strong>100%</strong></td>
               <td><strong><?php echo "US$ ".$sumaTotal?></strong></td>
                   
@@ -275,7 +275,7 @@ $_SESSION["bienvenida"]=1; ?>
                 <th style="width: 10%">AÑO</th>
                 <th style="width: 10%">MES</th>
                 <th style="width: 10%">PORCENTAJE(%)</th>
-                <th style="width: 20%">TOTAL</th>
+                <th style="width: 10%">TOTAL</th>
                 <th style="width: 30%" class="hidden-xs">BARRA PROGRESO DE VENTAS MENSUALES</th>
               </tr>
             </thead>

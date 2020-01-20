@@ -178,7 +178,7 @@
          
           {
             echo '<a href="#">
-            <i class="fa fa-users" aria-hidden="true"></i> <span>Categoria</span>
+            <i class="fa fa-cubes" aria-hidden="true"></i> <span>Categoria</span>
             <span class="pull-right-container badge movarrow bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -193,7 +193,7 @@
          
           {
         echo '<a href="categorias.php">
-            <i class="fa fa-users" aria-hidden="true"></i> <span>Categoria</span>
+            <i class="fa fa-cubes" aria-hidden="true"></i> <span>Categoria</span>
             </a>';
       }
          ?>
@@ -205,7 +205,7 @@
           {
                  echo' <a href="unidads.php">
 
-                  <i class="fa fa-users" aria-hidden="true"></i> <span>Unidad</span>
+                  <i class="fa fa-cube" aria-hidden="true"></i> <span>Unidad</span>
                   </a>';
                }
                ?>
@@ -220,7 +220,7 @@
          
           {
         echo '<a href="productos.php">
-            <i class="fa fa-lemon-o" aria-hidden="true"></i> <span>Producto</span>
+            <i class="fa fa-leaf" aria-hidden="true"></i> <span>Producto</span>
             </a>';
       }
          ?>

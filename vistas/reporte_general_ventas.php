@@ -13,6 +13,7 @@
 
 	$perdidas = new Perdidas();
 	$datosp = $perdidas->get_perdidas_reporte_general();
+	$datosp_anio = $perdidas->suma_perdidas_total_anio();
 ?>
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
@@ -188,7 +189,7 @@ require_once("header.php");?>
 
 		                 <tr>
 		                 	<td><?php echo $arregloReg[$i]["año"];?></td>
-		                 	<td><?php echo $arregloReg[$i]["total_venta_año"];?></td>
+		                 	<td>$ <?php echo $arregloReg[$i]["total_venta_año"];?></td>
 		                    <td><?php echo $porcentaje_por_ano?></td>
 		                 </tr>
 
@@ -199,7 +200,7 @@ require_once("header.php");?>
 	                ?>
 		                <tr>
 		                	<td><strong>Total:</strong>  </td>
-		                	<td><strong> <?php echo $sumaTotal?> </strong></td>
+		                	<td><strong>$ <?php echo $sumaTotal?> </strong></td>
 		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
 		                </tr>
 
@@ -249,23 +250,22 @@ require_once("header.php");?>
 		</div><!--fin col-lg-6-->
 	</div><!--fin row-->
 
-		 <!--DATOS DE PERDIDAS-->
+<!--DATOS DE PERDIDAS-->
 	<div class="row">
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 	    	<div class="box">
 	       		<div class="">
-					<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte general de perdidas</h2>
+					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de perdidas</h2>
 				              
 				  	<table class="table table-bordered">
 					    <thead>
-					      <tr>
-					        <th>AÑO</th>
-					        <th>N° MES</th>
-					        <th>NOMBRE MES</th>
-					        <th>PORCENTAJE %</th>
-					        <th>TOTAL</th>
-					      </tr>
-					    </thead>
+					      	<tr>
+						        <th>AÑO</th>
+						        <th>N° MES</th>
+						        <th>NOMBRE MES</th>
+						        <th>TOTAL</th>
+					      	</tr>
+				    	</thead>
 				    <tbody>
 				     
                     <?php
@@ -306,10 +306,7 @@ require_once("header.php");?>
 	                       $fecha = $datosp[$i]["mes"];
 	                       $fecha_mes = $meses[date("n", strtotime($fecha))-1];
 
-	                       //CALCULO DEL PORCENTAJE
-					  		$dato_por_anio = $arregloReg[$i]["totalPerdida"];
-					 		$porcentaje_por_anio = round(($dato_por_anio/$sumaTotal)*100,2);	
-					  		$porcentaje_total = $porcentaje_total + $porcentaje_por_anio;
+	                       
 	                        
 					     	?>
 
@@ -317,7 +314,6 @@ require_once("header.php");?>
 						        <td><?php echo $datosp[$i]["anio"]?></td>
 						        <td><?php echo $datosp[$i]["numero_mes"]?></td>
 						        <td><?php echo $fecha_mes?></td>
-						     	<td><?php echo $porcentaje_por_anio?></td>
 						        <td><?php echo "$"." ".$datosp[$i]["totalPerdida"]?></td>
 						      </tr>
 						      
@@ -327,10 +323,9 @@ require_once("header.php");?>
                    
 				      ?>
 	                  	<tr>
-		                	<td><strong>Totales:</strong></td>
+		                	<td><strong>Total:</strong></td>
 		                	<td><strong></strong></td>
 		                	<td><strong></strong></td>
-		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
 		                	<td><strong>$ <?php echo $total_perdidas?></strong></td>
 		                </tr>
 				    </tbody>
@@ -339,7 +334,80 @@ require_once("header.php");?>
 		   </div><!--fin box-body-->
       	</div><!--fin box-->		
 	</div><!--fin col-xs-12-->
-</div><!--fin row-->
+
+<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+		<div class="box">
+            <div class="">
+				<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año de perdidas</h2>
+		         
+		        <table class="table table-bordered">
+	                <thead>
+	                    <th>AÑO</th>
+				        <th>TOTAL</th>
+				        <th>PORCENTAJE %</th>
+	                </thead>
+
+	                <tbody>
+                 
+                    <?php 
+
+                    $arregloReg = array();
+                    for($i=0; $i<count($datosp_anio); $i++){
+                  
+			            array_push($arregloReg, 
+					            array(
+					
+						     	'anio' => $datosp_anio[$i]["anio"],
+						     	'total_perdida_anio' => $datosp_anio[$i]["total_perdida_anio"]
+				            )
+				        );
+				   }//cierre del primer ciclo for
+
+				   //segundo for
+                   $sumaTotal = 0;
+
+				   for($j=0;$j<count($arregloReg);$j++){
+                     
+                     //sumo el total de los años
+                     $sumaTotal = $sumaTotal + $datosp_anio[$j]["total_perdida_anio"];
+ 
+				    }
+                   
+                    $porcentaje_total=0;
+
+					for($i=0;$i<count($arregloReg);$i++) {
+
+				  		//CALCULO DEL PORCENTAJE
+					  		$dato_por_anio = $arregloReg[$i]["total_perdida_anio"];
+					 		$porcentaje_por_anio = round(($dato_por_anio/$sumaTotal)*100,2);	
+					  		$porcentaje_total = $porcentaje_total + $porcentaje_por_anio;
+	              
+	                    ?>
+
+		                 <tr>
+		                 	<td><?php echo $arregloReg[$i]["anio"];?></td>
+		                 	<td>$ <?php echo $arregloReg[$i]["total_perdida_anio"];?></td>
+		                    <td><?php echo $porcentaje_por_anio?></td>
+		                 </tr>
+
+		                 <?php 
+
+	                } //cierre delfor
+
+	                ?>
+		                <tr>
+		                	<td><strong>Total:</strong>  </td>
+		                	<td><strong>$ <?php echo $sumaTotal?> </strong></td>
+		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
+		                </tr>
+
+	                </tbody>
+	             </table>
+
+		        </div><!--fin box-body-->
+            </div><!--fin box-->
+		</div><!--fin col-xs-6-->
+    </div><!--fin row-->
 
  <!--FILA DE LA GRAFICAS-->
 	<div class="row">
@@ -565,7 +633,7 @@ require_once("header.php");?>
 		colorByPoint: true,
 		data: [
 
-		<?php echo $datos_grafica = $perdidas->get_perdidas_anio_actual_grafica();?>
+		<?php echo $datos_grafica = $perdidas->get_perdidas_general_grafica();?>
 		    ]
     }], 
 

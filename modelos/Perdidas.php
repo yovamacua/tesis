@@ -101,7 +101,7 @@
 			$sql-> execute();
 		}
 
-		 // reportes de perdidas 
+		// reportes de perdidas 
 
         public function get_perdidas_reporte_general()
         {
@@ -114,6 +114,20 @@
         	return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function get_perdidas_anio_actual(){
+
+	        $conectar=parent::conexion();
+	        parent::set_names();
+
+	        $sql = "SELECT YEAR(fecha) as anio, MONTHname(fecha) as mes, SUM(precioProduc*cantidad) as totalPerdida FROM perdidas
+	        WHERE YEAR(fecha)=YEAR(CURDATE()) GROUP BY MONTHname(fecha) desc, YEAR(fecha) desc;";
+
+	        $sql=$conectar->prepare($sql);
+	        $sql->execute();
+	        return $resultado=$sql->fetchAll();
+
+    	}
+
         //metodo de llanado para grafica
     	public function get_perdidas_anio_actual_grafica()
     	{
@@ -124,7 +138,7 @@
 	       $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 	       
 	       $sql = "SELECT MONTHname(fecha) as mes, SUM(precioProduc*cantidad) as total_perdida_mes FROM perdidas
-	        GROUP BY mes desc";
+	        WHERE YEAR(fecha)=YEAR(CURDATE()) GROUP BY mes desc";
 	           
 	        $sql = $conectar->prepare($sql);
 	        $sql->execute();
@@ -133,8 +147,6 @@
 	             
 	        //recorro el array y lo imprimo
 	        foreach($resultado as $row){
-	        	//$fecha = $arregloReg[$i]["mes"];
-               // $fecha_mes = $meses[$fecha-1];
 
           		$mes= $output["mes"]=$meses[date("n", strtotime($row["mes"]))-1];
 	          	$total = $output["total_perdida_mes"] = $row["total_perdida_mes"];
@@ -143,6 +155,40 @@
 
 	        }
     	}
+
+    	//grafica de reporte general
+    	public function get_perdidas_general_grafica()
+    	{
+
+	       $conectar=parent::conexion();
+	       parent::set_names();
+	       
+	       $sql = "SELECT YEAR(fecha) as anio, SUM(precioProduc*cantidad) as total_perdida_anio FROM perdidas
+	        GROUP BY anio desc";
+	           
+	        $sql = $conectar->prepare($sql);
+	        $sql->execute();
+	        $resultado = $sql->fetchAll();
+	             
+	        // recorre el array y se imprime
+            foreach ($resultado as $row) {
+              $anio = $output["anio"] = $row["anio"];
+              $total = $output["total_perdida_anio"] = $row["total_perdida_anio"];
+
+              echo $grafica= "{name:'".$anio."', y:".$total."},";
+            }
+    	}
+
+    	// SUMA EL TOTAL DE PERDIDAS POR AÑOS
+      	public function suma_perdidas_total_anio()
+      	{
+        	$conectar = parent::conexion();
+           	parent::set_names();
+           	$sql = "SELECT YEAR(fecha) as anio, SUM(precioProduc*cantidad) as total_perdida_anio FROM perdidas GROUP BY YEAR(fecha) desc;";
+           	$sql = $conectar->prepare($sql);
+           	$sql->execute();
+           	return $resultado=$sql->fetchAll();
+      	}
 
 		//método para eliminar un registro
         public function eliminar_perdida($id_perdida){

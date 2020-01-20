@@ -257,7 +257,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
            parent::set_names();
 
            $sql="SELECT MONTHname(fechaventa) as mes, MONTH(fechaventa) as numero_mes, YEAR(fechaventa) as año, SUM(total_pagar) as total_venta
-        FROM ventas where estado='1' GROUP BY YEAR(fechaventa) desc, month(fechaventa) desc;";
+        FROM ventas where estado='1' GROUP BY YEAR(fechaventa) desc, MONTH(fechaventa) desc, MONTHname(fechaventa) desc;";
         $sql=$conectar->prepare($sql);
         $sql->execute();
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
@@ -412,7 +412,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
           $fecha_inicial=date("Y");
 
              $sql="select MONTHname(fechaventa) as mes, MONTH(fechaventa) as numero_mes, YEAR(fechaventa) as año, SUM(total_pagar) as total_venta
-        from ventas where YEAR(fechaventa)=? and estado='1' group by MONTHname(fechaventa) desc;";
+        from ventas where YEAR(fechaventa)=? and estado='1' group by MONTHname(fechaventa) desc, YEAR(fechaventa) desc;";
           
 
          $sql=$conectar->prepare($sql);
@@ -432,7 +432,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
         $sql="SELECT YEAR(fechaventa) as año, MONTHname(fechaventa) as mes, SUM(total_pagar) as total_venta_mes FROM ventas
         WHERE YEAR(fechaventa)=YEAR(CURDATE()) 
-        and estado='1' GROUP BY MONTHname(fechaventa) desc;";
+        and estado='1' GROUP BY MONTHname(fechaventa) desc, YEAR(fechaventa) desc;";
 
         $sql=$conectar->prepare($sql);
         $sql->execute();
