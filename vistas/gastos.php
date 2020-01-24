@@ -1,6 +1,19 @@
 <?php
   require_once("../config/conexion.php");
   if(isset($_SESSION["id_usuario"])){ 
+    require_once("../modelos/Gastos.php");
+
+    //SI EXISTE EL POST ENTONCES SE LLAMA AL METODO PARA SELECCIONAR LA FECHA
+    $gastos = new Gastos();
+
+    if(isset($_POST["year"])){
+      $datos = $gastos->get_gasto_mensual($_POST["year"]);  
+    }else{
+      $fecha_inicial = date("Y");
+      $datos = $gastos->get_gasto_mensual($fecha_inicial);  
+    }
+     $fecha_gastos = $gastos->get_year_gastos();
+
 ?>
 
 <?php
@@ -50,14 +63,52 @@
                                   <th>Descripción</th>
                                   <th width="10%">Gasto</th>
                                  
-                                  <th>Acciones</th>;
-                                    }
-                                  ?>
+                                  <th>Acciones</th>
+                                    
                                   </tr>
                               </thead>
                             <tbody>
                             </tbody>
                           </table>
+
+                          <!-- inicio del div del boton generar reporte donaciones -->
+                      <div class="form-row" style="width:300px;">
+                        <!--form para generar el archivo excel-->
+                        <label>Seleccione el año para el reporte a generar</label>
+                        <form action="reportes/reporte_gastos.php" method="post">
+                          <div class="form-group col-md-6">
+                            <select class="form-control" name="year" id="year">
+                              <option value="0">Seleccione...</option>
+                                <?php 
+                                 //si se envia el POST
+                                  if(isset($_POST["year"])){
+                                    for($i=0; $i<count($fecha_gastos); $i++){
+
+                                      if($fecha_gastos[$i]["fecha"]==$_POST["year"]){
+                                        echo '<option value="'.$fecha_gastos[$i]["fecha"].'" selected=selected>'.$fecha_gastos[$i]["fecha"].'</option>';
+                                      }else{ 
+                                        echo '<option value="'.$fecha_gastos[$i]["fecha"].'">'.$fecha_gastos[$i]["fecha"].'</option>';
+                                      } 
+                                    }//cierre del ciclo for
+                                  //SI NO SE ENVIA EL POST
+                                  } else {
+                                    for ($i=0; $i<count($fecha_gastos); $i++){
+                                      echo '<option value="'. $fecha_gastos[$i]["fecha"].'" selected=selected>'. $fecha_gastos[$i]["fecha"].'</option>';        
+
+                                    }//cierre del ciclo for
+                                  }//cierre del ese
+                                ?>
+                            </select>
+                          </div> 
+                         
+                          <div class="form-group col-md-6">
+                            <input type="hidden" name="fecha" id="fechaA"/>                            
+                            <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
+                          </div>   
+                        </form>
+                      </div> 
+                    <!-- fin del div del boton generar reporte donaciones -->
+
                     </div>
                     <!--Fin centro -->
                   </div><!-- /.box -->

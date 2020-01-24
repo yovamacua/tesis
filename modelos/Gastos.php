@@ -99,6 +99,44 @@
            return $resultado=$sql->fetch();
         }
 
+        public function get_year_gastos(){
+        	$conectar = parent::conexion();
+
+          	$sql = "select year(fecha) as fecha from gastos group by year(fecha) asc";
+          
+          	$sql = $conectar->prepare($sql);
+          	$sql->execute();
+          	return $resultado = $sql->fetchAll();
+     	}
+
+     	public function get_gasto_mensual($fecha){
+        	$conectar = parent::conexion();
+      
+	      	if(isset($_POST["year"])){
+	        	$fecha = $_POST["year"];
+
+	        	$sql = "select MONTH(fecha) as mes, YEAR(fecha) as anio
+						from gastos where YEAR(fecha)=? group by mes desc, anio desc;";
+	           
+	          	$sql = $conectar->prepare($sql);
+	          	$sql->bindValue(1, $fecha);
+	          	$sql->execute();
+	         	return $resultado = $sql->fetchAll();
+	        }else{
+
+	          	//sino se envia el POST, entonces se mostraria los datos del año actual cuando se abra la pagina por primera vez
+	          	$fecha_inicial = date("Y");
+
+	            $sql = "select MONTH(fecha) as mes, YEAR(fecha) as anio
+						from gastos where YEAR(fecha)=? group by mes desc, anio desc;";
+
+	         	$sql=$conectar->prepare($sql);
+	          	$sql->bindValue(1, $fecha_inicial);
+	          	$sql->execute();
+	            return $resultado = $sql->fetchAll();
+        	}
+     	}
+
                 /****** Bloque agregado ******/
 
           public function get_gastos_por_id_usuario($id_usuario){

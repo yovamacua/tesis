@@ -61,7 +61,7 @@
                                   <th width="10%">Precio Unitario</th>
                                   <th>Fecha</th>
                                  
-                                    <th>Acciones</th>';
+                                    <th>Acciones</th>
                                   
                                   
                                   </tr>

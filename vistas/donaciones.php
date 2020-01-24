@@ -77,11 +77,11 @@
                           </table>
 
                       <!-- inicio del div del boton generar reporte donaciones -->
-                      <div style="width:200px;">
+                      <div class="form-row" style="width:300px;">
                         <!--form para generar el archivo excel-->
+                        <label>Seleccione el año para el reporte a generar</label>
                         <form action="reportes/reporte_donaciones.php" method="post">
-                          <label>Seleccione el año</label>
-                          <div style="width:100px; float:left;">
+                          <div class="form-group col-md-6">
                             <select class="form-control" name="year" id="year">
                               <option value="0">Seleccione...</option>
                                 <?php 
@@ -106,7 +106,7 @@
                             </select>
                           </div> 
                          
-                          <div style="width:100px; float:right;">
+                          <div class="form-group col-md-6">
                             <input type="hidden" name="fecha" id="fechaA"/>                            
                             <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
                           </div>   
