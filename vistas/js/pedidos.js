@@ -97,13 +97,13 @@ $(function() {
     });
     
     function campo_nombreInsumo() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var nombreInsumo = $("#nombreInsumo").val();
         if (pattern.test(nombreInsumo) && nombreInsumo !== '') {
             $("#error_nombreInsumo").hide();
             $("#nombreInsumo").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_nombreInsumo").html("Solo se permiten letras, números y los simbolos . : , ¿ ? ! ¡");
+            $("#error_nombreInsumo").html("Solo se permiten letras y números");
             $("#error_nombreInsumo").css("position", "absolute");
             $("#error_nombreInsumo").css("color", "red");
             $("#error_nombreInsumo").show();

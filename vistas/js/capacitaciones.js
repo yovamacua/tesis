@@ -39,7 +39,7 @@ $(function() {
             $("#error_fecha1").hide();
             $("#fecha1").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").html("Solo se permiten formatos de fecha");
             $("#error_fecha1").css("position", "absolute");
             $("#error_fecha1").css("color", "red");
             $("#error_fecha1").show();
@@ -58,13 +58,13 @@ $(function() {
     }
 
     function campo_nombreGrupo() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var nombreGrupo = $("#nombreGrupo").val();
         if (pattern.test(nombreGrupo) && nombreGrupo !== '') {
             $("#error_nombreGrupo").hide();
             $("#nombreGrupo").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_nombreGrupo").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_nombreGrupo").html("Solo se permiten letras y números");
             $("#error_nombreGrupo").css("position", "absolute");
             $("#error_nombreGrupo").css("color", "red");
             $("#error_nombreGrupo").show();
@@ -83,13 +83,13 @@ $(function() {
     }
 
     function campo_encargado() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
         var encargado = $("#encargado").val();
         if (pattern.test(encargado) && encargado !== '') {
             $("#error_encargado").hide();
             $("#encargado").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_encargado").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_encargado").html("Solo se permiten letras");
             $("#error_encargado").css("position", "absolute");
             $("#error_encargado").css("color", "red");
             $("#error_encargado").show();
@@ -108,13 +108,13 @@ $(function() {
     }
 
     function campo_cargo() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
         var cargo = $("#cargo").val();
         if (pattern.test(cargo) && cargo !== '') {
             $("#error_cargo").hide();
             $("#cargo").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_cargo").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_cargo").html("Solo se permiten letras");
             $("#error_cargo").css("position", "absolute");
             $("#error_cargo").css("color", "red");
             $("#error_cargo").show();
@@ -174,13 +174,11 @@ $(function() {
     $("#error_nombres").hide();
     $("#error_apellidos").hide();
     $("#error_dui").hide();
-    $("#error_id_capa").hide();
 
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_nombres = false;
     var error_apellidos = false;
     var error_dui = false;
-    var error_id_capa = false;
 
     // se ejecuta funcion en el id del control cuando se pierde el foco
     $("#nombres").focusout(function() {
@@ -195,18 +193,14 @@ $(function() {
         campo_dui();
       });
 
-    $("#id_capa").focusout(function() {
-        campo_id_capa();
-      });
-
     function campo_nombres() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
         var nombres = $("#nombres").val();
         if (pattern.test(nombres) && nombres !== '') {
             $("#error_nombres").hide();
             $("#nombres").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_nombres").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_nombres").html("Solo se permiten letras");
             $("#error_nombres").css("position", "absolute");
             $("#error_nombres").css("color", "red");
             $("#error_nombres").show();
@@ -225,13 +219,13 @@ $(function() {
     }
 
     function campo_apellidos() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
         var apellidos = $("#apellidos").val();
         if (pattern.test(apellidos) && apellidos !== '') {
             $("#error_apellidos").hide();
             $("#apellidos").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_apellidos").html("Solo se permiten letras, números y los símbolos . : , ¿ ? ! ¡");
+            $("#error_apellidos").html("Solo se permiten letras");
             $("#error_apellidos").css("position", "absolute");
             $("#error_apellidos").css("color", "red");
             $("#error_apellidos").show();
@@ -250,7 +244,7 @@ $(function() {
     }
 
     function campo_dui() {
-        var pattern =/^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[-]+[0-9]*$/;
+        var pattern =/^\d{8}-\d{1}$/;
         var dui = $("#dui").val();
         if (pattern.test(dui) && dui !== '') {
             $("#error_dui").hide();
@@ -274,30 +268,6 @@ $(function() {
         }
     }
 
-    function campo_id_capa() {
-        var pattern = /^[0-9]*$/;
-        var id_capa = $("#id_capa").val();
-        if (pattern.test(id_capa) && id_capa !== '') {
-            $("#error_id_capa").hide();
-            $("#id_capa").css("border-bottom", "2px solid #34F458");
-        } else {
-            $("#error_id_capa").html("Solo se permiten números enteros");
-            $("#error_id_capa").css("position", "absolute");
-            $("#error_id_capa").css("color", "red");
-            $("#error_id_capa").show();
-            $("#id_capa").css("border-bottom", "2px solid #F90A0A");
-            error_id_capa = true;
-        }
-        var id_capa = $("#id_capa").val().length;
-        if (id_capa <= 0) {
-            $("#error_id_capa").html("No se permiten campos vacios");
-            $("#error_id_capa").css("position", "absolute");
-            $("#error_id_capa").css("color", "red");
-            $("#error_id_capa").show();
-            $("#id_capa").css("border-bottom", "2px solid #F90A0A");
-            error_id_capa = true;
-        }
-    }
 
     // se valida el formulario
     $("#detallecapacitados_form").on("submit", function(e) {
@@ -306,23 +276,20 @@ $(function() {
       var error_nombres = false;
       var error_apellidos = false;
       var error_dui = false;
-      var error_id_capa = false;
 
         // se invoca a las funciones para tener el valor de las variables
         error_nombres = false;
         error_apellidos = false;
         error_dui = false;
-        error_id_capa = false;
 
         //comparacion
         if (error_nombres === false && error_apellidos === false && 
-        error_dui === false && error_id_capa === false) {
+        error_dui === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#nombres").css("border-bottom", "1px solid #d2d6de");
             $("#apellidos").css("border-bottom", "1px solid #d2d6de");
             $("#dui").css("border-bottom", "1px solid #d2d6de");
-            $("#id_capa").css("border-bottom", "1px solid #d2d6de");
             guardaryeditardetalle(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
@@ -372,12 +339,10 @@ function limpiardetalle()
     $("#nombres").css("border-bottom", "1px solid #d2d6de");
     $("#apellidos").css("border-bottom", "1px solid #d2d6de");
     $("#dui").css("border-bottom", "1px solid #d2d6de");
-    $("#id_capa").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_nobmres").hide();
     $("#error_apellidos").hide();
     $("#error_dui").hide();
-    $("#error_id_capa").hide();
 }
 
 function limpiar()

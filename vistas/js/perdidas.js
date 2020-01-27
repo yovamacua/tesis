@@ -77,7 +77,7 @@ $(function() {
             $("#error_cantidad").hide();
             $("#cantidad").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_cantidad").html("Solo se permiten números");
+            $("#error_cantidad").html("Solo se permiten números enteros");
             $("#error_cantidad").css("position", "absolute");
             $("#error_cantidad").css("color", "red");
             $("#error_cantidad").show();
@@ -96,13 +96,13 @@ $(function() {
     }
 
     function campo_precioProduc() {
-        var pattern = /^[0-9]+[.]+[0-9]*$/;
+        var pattern =  /^[0-9]+(\.[0-9][0-9])?$/;
         var precioProduc = $("#precioProduc").val();
         if (pattern.test(precioProduc) && precioProduc !== '') {
             $("#error_precioProduc").hide();
             $("#precioProduc").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precioProduc").html("Solo se permite el formato 0.00");
+            $("#error_precioProduc").html("Solo se permiten números enteros y formato 0.00");
             $("#error_precioProduc").css("position", "absolute");
             $("#error_precioProduc").css("color", "red");
             $("#error_precioProduc").show();
@@ -177,7 +177,7 @@ $(function() {
             $("#error_fecha1").hide();
             $("#fecha1").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_fecha1").html("Solo se permiten números y el símbolos /");
+            $("#error_fecha1").html("Solo se permiten formatos de fecha");
             $("#error_fecha1").css("position", "absolute");
             $("#error_fecha1").css("color", "red");
             $("#error_fecha1").show();

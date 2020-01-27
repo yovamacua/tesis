@@ -53,13 +53,13 @@ $(function() {
     }
 
     function campo_precio() {
-        var pattern = /^[0-9]+[.]+[0-9]*$/;
+        var pattern = /^[0-9]+(\.[0-9][0-9])?$/;
         var precio = $("#precio").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_precio").hide();
             $("#precio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precio").html("Solo se permite el formato 0.00");
+            $("#error_precio").html("Solo se permiten números enteros y formato 0.00");
             $("#error_precio").css("position", "absolute");
             $("#error_precio").css("color", "red");
             $("#error_precio").show();

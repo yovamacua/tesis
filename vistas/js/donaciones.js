@@ -66,13 +66,13 @@ $(function() {
     }
 
     function campo_donante() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9.:,¿?!¡\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var donante = $("#donante").val();
         if (pattern.test(donante) && donante !== '') {
             $("#error_donante").hide();
             $("#donante").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_donante").html("Solo se permiten letras, números y los simbolos . : , ¿ ? ! ¡");
+            $("#error_donante").html("Solo se permiten letras y números");
             $("#error_donante").css("position", "absolute");
             $("#error_donante").css("color", "red");
             $("#error_donante").show();
@@ -141,13 +141,13 @@ $(function() {
     }
 
     function campo_precio() {
-        var pattern = /^[0-9]+[.]+[0-9]*$/;
+        var pattern = /^[0-9]+(\.[0-9][0-9])?$/;
         var precio = $("#precio").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_precio").hide();
             $("#precio").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_precio").html("Solo se permite el formato 0.00");
+            $("#error_precio").html("Solo se permiten números enteros y formato 0.00");
             $("#error_precio").css("position", "absolute");
             $("#error_precio").css("color", "red");
             $("#error_precio").show();
