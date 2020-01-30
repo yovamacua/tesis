@@ -47,9 +47,10 @@ class Perfiles extends Conectar{
 
            $sql="insert into perfil
            values(null,?,?,?);";
+           $codigo="pm0004";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["nombre"]);
-          $sql->bindValue(2,$_POST["codigo"]);
+          $sql->bindValue(2,$codigo);
           $sql->bindValue(3,$_POST["estado"]);
           $sql->execute();
          // print_r($_POST);
@@ -161,6 +162,7 @@ public function perfil_usuario($pro)
 
         $sql->execute();
         $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+
           //echo json_encode($resultado);
           foreach($resultado as $k=>$v){
 
@@ -171,13 +173,14 @@ public function perfil_usuario($pro)
                       
                     if(empty($perfil["codperfil"]))
                     {
-                      echo'<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"  value="PM0001" readonly/>';
+                      echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"  alue="PM0001" readonly/>';
                     }else{
                         $num     = substr($perfil["codperfil"] , 2);
                         $dig     = $num + 1;
                         $fact = str_pad($dig, 4, "0", STR_PAD_LEFT);
-                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"    value="PM'.$fact.'" readonly/>';
-                        
+                        $inter = 'PM'.$fact;
+                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil" value='.$inter.' readonly/>'; 
+                        //echo '<label>PM'.$fact.'</label>';
                     }
      
         }

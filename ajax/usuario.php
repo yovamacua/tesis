@@ -15,6 +15,7 @@ require_once "../modelos/Venta.php";
 require_once "../modelos/Productos.php";
 require_once "../modelos/Categorias.php";
 require_once "../modelos/Pedidos.php";
+require_once("../modelos/Roles.php");
 
 /*AGREGAR LAS TABLAS QUE FALTAN AL TERMINAR PROYECTO */
 
@@ -24,6 +25,7 @@ require_once "../modelos/Usuarios.php";
 require_once "mensajes.php";
 //se crea un objeto de tipo usuario
 $usuarios = new Usuarios();
+$accion = new Roles();
 
 //se declaran las variables de los valores que se envian por el formulario
 //y se valida que no se esten recibiendo vacias
@@ -157,6 +159,14 @@ switch ($_GET["op"]) {
 //inicio caso
     case "listar":
         $datos = $usuarios->get_usuarios();
+        $rol=$accion->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
         //declaramos el array
         $data = array();
         foreach ($datos as $row) {
@@ -185,17 +195,31 @@ switch ($_GET["op"]) {
             //se formate el la fecha, tipo y formato
             $sub_array[] = date("d/m/Y", strtotime($row["fecha_ingreso"]));
             //botones con valores de los campos en el id
-            $sub_array[] = '<div class="cbtns"><button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button>
+            $boton_editar= '<button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button><button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
+             <button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>';
 
- <button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
- <a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarRoles</button></a> 
+ $boton_registrar='<a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarRoles</button></a>'; 
 
-<button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>
-  
             
-      <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
+     $boton_eliminar=' <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
     
+ 
+          if(in_array("REUSUA",$valores) and in_array("EDUSUA",$valores)and in_array("ELUSUA",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+              } elseif (in_array("REUSUA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+              }elseif(in_array("EDUSUA",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELUSUA",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
+              }else{
+                  $sub_array[]='<div class="cbtns"></div>';
+
+              }
+            
+              
+      
       
             
             $data[] = $sub_array;

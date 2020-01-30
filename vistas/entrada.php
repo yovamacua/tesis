@@ -31,7 +31,7 @@ $activar = 'item_partidas';
   $final = sumar($conectar, $identificador);
 
 ?>
-<?php if($_SESSION["Partidas"]==1)
+<?php if($_SESSION["PARTIDAS"]==1)
 
      {
 

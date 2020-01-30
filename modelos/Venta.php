@@ -114,9 +114,6 @@ $resultado1=$sql2->fetchAll(PDO::FETCH_ASSOC);
             parent::set_names();
 
           $estado=1;
-          /*$total_pagar=23.50;
-          $numero_venta='002-0015';
-          $id_usuario=1;*/
           $date_inicial = $_POST["fecha"];
             $date = str_replace('/', '-', $date_inicial);
             $fecha= date("Y-m-d", strtotime($date));

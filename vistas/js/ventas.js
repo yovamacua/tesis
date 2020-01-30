@@ -59,8 +59,8 @@ var tabla_ventas_mes
             return false;
         }
     });
-});*/
-
+});
+*/
 // FIN VALIDACION FORMULARIO
 
 
@@ -430,7 +430,7 @@ function guardaryeditar(e)
 
 		    success: function(datos)
 		    {
-		         /* bootbox.alert(datos);
+		         /*bootbox.alert(datos);
 		          mostrarform(false);
 		          tabla.ajax.reload();
 

@@ -17,11 +17,11 @@
       switch($_GET["op"]){
           case "guardaryeditar":
 
-      $datos = $rol->modulo_rol($_POST["codigo"]);
+      $datos = $rol->modulo_rol($_POST["nombre"],$_POST["modulo"]);
 	       	   /*si el titulo no existe entonces lo registra
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["idroles"])){
-	       	  /*verificamos si el incidente existe en la base de datos, si ya existe un registro con la categoria entonces no se registra*/
+	       	  /*verificamos si el rol existe en la base de datos, si ya existe un registro con el  rol entonces no se registra*/
 			       	   if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe la categoria por lo tanto hacemos el registros
 		 $rol->registar_roles($nombre,$codigo,$descripcion,$modulo);
@@ -29,7 +29,7 @@
 			       	   } //cierre de validacion de $datos
 			       	      /*si ya existes el titulo del incidente entonces aparece el mensaje*/
 				              else {
-				              	  $errors[]="Existe un rol con el mismo nombre";
+				              	  $errors[]="Existe un rol asignado al modulo";
 				              }
 
 			    }//cierre de empty
@@ -37,7 +37,7 @@
 	            else {
 	            	/*si ya existe entonces editamos el incidente*/
 	             $rol->editar_roles($nombre,$codigo,$descripcion,$modulo,$idroles);
-	            	  $messages[]="El modulo se editó correctamente";
+	            	  $messages[]="El rol se editó correctamente";
 	            }
          
      //mensaje success
@@ -96,7 +96,7 @@ if (isset($messages)){
 	 break;
   case 'asignar':
       $rol->asignar_roles($roles,$idusuario);
-      $messages[]="Se asigno los roles correctamente";
+      $messages[]="Se edito  correctamente";
       //mensaje success
           if (isset($messages)) {
               echo exito($messages);
@@ -114,8 +114,8 @@ if (isset($messages)){
 
       $sub_array[] = $row["rol"];
      $sub_array[] = $row["nombre"];
-    $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["idroles"].');"  id="'.$row["idroles"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>
-     <button type="button" onClick="eliminar('.$row["idroles"].');"  id="'.$row["idroles"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perfil "><i class="fa fa-trash"></i></button></div>';
+    $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["idrol"].');"  id="'.$row["idrol"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>
+     <button type="button" onClick="eliminar('.$row["idrol"].');"  id="'.$row["idrol"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Roles "><i class="fa fa-trash"></i></button></div>';
       $data[] = $sub_array;
       }
 
@@ -131,11 +131,11 @@ if (isset($messages)){
 
      case "eliminar_perfil":
 
-  $datos= $perfil->get_perfil_por_id($_POST["idperfil"]);
+  $datos= $rol->get_roles_por_id($_POST["idroles"]);
   
      if(is_array($datos)==true and count($datos)>0){
-          $perfil->deletes_perfil($_POST["idperfil"]);
-          $messages[]=" El perfil se eliminó exitosamente";
+          $rol->deletes($_POST["idroles"]);
+          $messages[]=" El rol se eliminó exitosamente";
      }else {
        $errors[]="No hay registro que borrar";
      }

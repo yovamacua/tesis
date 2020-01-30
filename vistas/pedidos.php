@@ -1,7 +1,8 @@
 <?php 
    require_once("../config/conexion.php");
+    require_once("../modelos/Roles.php");
     if(isset($_SESSION["id_usuario"])){
-
+         $usuario = new Roles();
       require_once("../modelos/Pedidos.php");
       $pedido = new Pedidos();
       $p = $pedido->get_pedido();
@@ -17,7 +18,7 @@
   $activar1 = 'item_pedidos1';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Pedidos"]==1)
+<?php if($_SESSION["PEDIDOS"]==1)
      {
 
      ?>
@@ -43,7 +44,19 @@
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button></h1>
+                             <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REPEDI",$valores)){
+                                  echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#pedidoModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Pedido</button>';
+              }
+                            ?>
+                            </h1>
                         <div class="box-tools pull-right"></div>
                     </div>
                     <!-- /.box-header -->
@@ -66,8 +79,20 @@
                     <!--Fin centro 1-->
 
             <!--Formulario para agregar capacitados -->
-            <button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
+            <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REPEDI",$valores)){
+                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
+';
+              }
+                            ?>
+            
             <div class="panel-body table-responsive contenedor" id="detallepedidosModal">
               <form method="post" id="detallepedidos_form" autocomplete="off">
 
@@ -127,12 +152,9 @@
                               <th>Cantidad</th>
                               <th>Descripción</th>
                               <th>Unidad de Medida</th>
-                             <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0 and $_SESSION["Registrar"]==0){
-                              
-                              }else{
-                                  echo '<th>Acciones</th>';
-                              }
-                                ?>
+                             
+                                <th>Acciones</th>
+                             
                               </tr>
                           </thead>
                           <tbody>

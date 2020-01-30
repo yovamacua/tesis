@@ -3,12 +3,12 @@
 require_once "../config/conexion.php";
 
 #valida que exista la sessión
-if (!isset($_SESSION['id_usuario'])) {?>
+/*if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-}
+}*/
 
 class Usuarios extends Conectar
 {
@@ -89,22 +89,22 @@ $encriptar1 = crypt($password, '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
       ////Determinamos los accesos del usuario
       //si los id_permiso estan en el array $valores entonces se ejecuta la session=1, en caso contrario el usuario no tendria acceso al modulo
       
-      in_array(1,$valores)?$_SESSION['Usuarios']=1:$_SESSION['Usuarios']=0;
-      in_array(2,$valores)?$_SESSION['Incidentes']=1:$_SESSION['Incidentes']=0;
-      in_array(3,$valores)?$_SESSION['Partidas']=1:$_SESSION['Partidas']=0;
-      in_array(4,$valores)?$_SESSION['Perdidas']=1:$_SESSION['Perdidas']=0;
-      in_array(5,$valores)?$_SESSION['Donaciones']=1:$_SESSION['Donaciones']=0;
-      in_array(6,$valores)?$_SESSION['Gastos']=1:$_SESSION['Gastos']=0;
-      in_array(7,$valores)?$_SESSION['Capacitaciones']=1:$_SESSION['Capacitaciones']=0;
-      in_array(8,$valores)?$_SESSION['Categoria']=1:$_SESSION['Categoria']=0;
-      in_array(9,$valores)?$_SESSION['Producto']=1:$_SESSION['Producto']=0;
-      in_array(10,$valores)?$_SESSION['Pedidos']=1:$_SESSION['Pedidos']=0;
-      in_array(11,$valores)?$_SESSION['Venta']=1:$_SESSION['Venta']=0;
-      in_array(12,$valores)?$_SESSION['Reporte Financiero']=1:$_SESSION['Reporte Financiero']=0;
-      in_array(13,$valores)?$_SESSION['Reportes de Ventas']=1:$_SESSION['Reportes de Ventas']=0;
-      in_array(14,$valores)?$_SESSION['Respaldo']=1:$_SESSION['Respaldo']=0;
-      in_array(21,$valores)?$_SESSION['Unidad']=1:$_SESSION['Unidad']=0;
-      in_array(22,$valores)?$_SESSION['Permiso']=1:$_SESSION['Permiso']=0;
+      in_array(1,$valores)?$_SESSION['USUARIOS']=1:$_SESSION['USUARIOS']=0;
+      in_array(2,$valores)?$_SESSION['INCIDENTES']=1:$_SESSION['INCIDENTES']=0;
+      in_array(3,$valores)?$_SESSION['PARTIDAS']=1:$_SESSION['PARTIDAS']=0;
+      in_array(4,$valores)?$_SESSION['PERDIDAS']=1:$_SESSION['PERDIDAS']=0;
+      in_array(5,$valores)?$_SESSION['DONACIONES']=1:$_SESSION['DONACIONES']=0;
+      in_array(6,$valores)?$_SESSION['GASTOS']=1:$_SESSION['GASTOS']=0;
+      in_array(7,$valores)?$_SESSION['CAPACITACIONES']=1:$_SESSION['CAPACITACIONES']=0;
+      in_array(8,$valores)?$_SESSION['CATEGORIA']=1:$_SESSION['CATEGORIA']=0;
+      in_array(9,$valores)?$_SESSION['PRODUCTO']=1:$_SESSION['PRODUCTO']=0;
+      in_array(10,$valores)?$_SESSION['PEDIDOS']=1:$_SESSION['PEDIDOS']=0;
+      in_array(11,$valores)?$_SESSION['VENTA']=1:$_SESSION['VENTA']=0;
+      in_array(12,$valores)?$_SESSION['INFORME FINANCIERO']=1:$_SESSION['INFORME FINANCIERO']=0;
+      in_array(13,$valores)?$_SESSION['REPORTES DE VENTAS']=1:$_SESSION['REPORTES DE VENTAS']=0;
+      in_array(14,$valores)?$_SESSION['RESPALDO']=1:$_SESSION['RESPALDO']=0;
+      in_array(15,$valores)?$_SESSION['UNIDAD']=1:$_SESSION['UNIDAD']=0;
+      in_array(16,$valores)?$_SESSION['PERMISO']=1:$_SESSION['PERMISO']=0;
           
           
 
@@ -300,21 +300,8 @@ inner join perfil as p on pm.idperfiles = p.idperfil where  pm.idperfiles=? and 
             $sql->execute();
             return $resultado=$sql->fetchAll();
         }
-        //TODAVIA NO
-        public function listar_roles_por_usuario($idusuario){
-
-            $conectar=parent::conexion();
-
-            $sql="select * from rol as r
-         inner join modulo as m  on m.idmodulo=r.idmodulos 
-      inner join roles_usuario as ru on ru.idroles= r.idroles where ru.id_usuarios=?;";
-
-            $sql=$conectar->prepare($sql);
-            $sql->bindValue(1, $idusuario);
-            $sql->execute();
-            return $resultado=$sql->fetchAll();
-        }
-
+       
+ 
 
  
   public function ver_modulos($idusuario){
@@ -353,5 +340,9 @@ inner join perfil as p on pm.idperfiles = p.idperfil where  pm.idperfiles=? and 
 
       }   
 }
+/*$v= new Usuarios();
+$p=4;
+$v-> listar_roles_por_usuario($p);*/
+
 
 ?>

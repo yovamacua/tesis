@@ -1,14 +1,16 @@
 <?php
   #incluyendo conexion
    require_once("../config/conexion.php");
+   require_once("../modelos/Roles.php");
    #verficando si existe sessión
     if(isset($_SESSION["id_usuario"])){
+      $usuario = new Roles();
     #variable de item activo
    $activar = 'item_partidas';
     #incluyendo header
      require_once("header.php");
    ?>
-      <?php if($_SESSION["Partidas"]==1)
+      <?php if($_SESSION["PARTIDAS"]==1)
      {
 
      ?>
@@ -61,8 +63,19 @@ function recargar(){
             <div class="box">
                <div class="box-header boton-top">
                   <h1 class="box-title">
+<?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
-                     <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#partidaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar partida</button>
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REPART",$valores)){
+                                  echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#partidaModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar partida</button>';
+              }
+                            ?>
+                     
                      <div id="sumtop" style="display: inherit;"><b>Total($): </b> 
 <span id="recargado" style="font-weight: bold"></span>&nbsp;
 <!--<span><a href="#" onclick="javascript:recargar();">Actualizar</a></span> -->
@@ -85,6 +98,10 @@ function recargar(){
                             <th width="10%">Total ($)</th>
                            <th width="20%" style="background: white!important; pointer-events: none;">Administrar Cuentas</th>
                            <th width="10%">Acciones</th>
+                            
+
+                             
+
                             
                         </tr>
                      </thead>

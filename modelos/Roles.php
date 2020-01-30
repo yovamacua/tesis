@@ -7,8 +7,8 @@ class Roles extends Conectar{
         //YA
           $conectar=parent::conexion();
           parent::set_names();
-          $sql="select r.idroles, r.rol, m.nombre from rol as r
-inner join modulo as m on m.idmodulo= r.idmodulos ;";
+          $sql="select r.idrol, r.rol, m.nombre from rol as r
+inner join modulo as m on m.idmodulo= r.idmodulos;";
           $sql=$conectar->prepare($sql);
           $sql->execute();
          return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
@@ -19,7 +19,7 @@ inner join modulo as m on m.idmodulo= r.idmodulos ;";
 //ya
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="select r.idroles,r.codigo,r.descripcion, r.rol,r.idmodulos from rol as r
+            $sql="select r.idrol,r.codigo,r.descripcion, r.rol,r.idmodulos from rol as r
 inner join modulo as m on m.idmodulo= r.idmodulos where r.idroles=?;";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idrol);
@@ -53,7 +53,7 @@ inner join modulo as m on m.idmodulo= r.idmodulos where r.idroles=?;";
        codigo=?,
              descripcion=?,
             idmodulo=?
-			WHERE idroles =?";
+			WHERE idrol =?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["nombre"]);
             $sql->bindValue(2,$_POST["codigo"]);
@@ -63,14 +63,15 @@ inner join modulo as m on m.idmodulo= r.idmodulos where r.idroles=?;";
           $sql->execute();
      
         }
-        public function modulo_rol($codigo)
+        public function modulo_rol($nombre,$modulo)
         {
           //YA
         	 $conectar= parent::conexion();
            parent::set_names();
-        	  $sql="SELECT * FROM rol WHERE codigo = ?;";
+        	  $sql="SELECT * FROM rol WHERE rol= ? and idmodulos=?;";
           $sql=$conectar->prepare($sql);
-          $sql->bindValue(1,$_POST["codigo"]);
+          $sql->bindValue(1,$_POST["nombre"]);
+          $sql->bindValue(2,$_POST["modulo"]);
            $sql->execute();
         return $resultado=$sql->fetchAll();
          
@@ -109,7 +110,7 @@ inner join modulo as m  on m.idmodulo=r.idmodulos where r.idmodulos=?;";
         {
         	$conectar= parent::conexion();
            parent::set_names();
-        	  $sql="DELETE FROM rol WHERE idroles = ?;";
+        	  $sql="DELETE FROM rol WHERE idrol= ?;";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["idroles"]);
            $sql->execute();
@@ -148,39 +149,21 @@ inner join modulo as m  on m.idmodulo=r.idmodulos where r.idmodulos=?;";
                       }
                 
         	}
-          // metodo para obtener el valor del numero de venta
-    public function codigoroles(){
+           //lista de roles que tiene el usuario
+        public function listar_roles_por_usuario($id_usuario){
 
-       $conectar=parent::conexion();
-        parent::set_names();
+            $conectar=parent::conexion();
 
-     
-        $sql="select codigo from rol;";
+            $sql="select r.codigo from rol as r
+                inner join roles_usuario as rm on rm.idroles = r.idrol where rm.id_usuarios=?;";
 
-        $sql=$conectar->prepare($sql);
-
-        $sql->execute();
-        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-          foreach($resultado as $k=>$v){
-
-            $numero_venta["codigo"]=$v["codigo"];
-
-          }
-
-                      
-                    if(empty($numero_venta["codigo"]))
-                    {
-                      echo'<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo rol"  value="RM0001"  readonly/>';
-                    }else{
-                        $num     = substr($numero_venta["codigo"] , 2);
-                        $dig     = $num + 1;
-                        $fact = str_pad($dig, 4, "0", STR_PAD_LEFT);
-                       // echo '<script>location.reload()</script>';
-                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo rol"    value="RM'.$fact.'" readonly/>';
-                        
-                    }
-     
-        }
+            $sql=$conectar->prepare($sql);
+            $sql->bindValue(1, $id_usuario);
+            $sql->execute();
+            return $resultado=$sql->fetchAll();
+        
+}
+    
 
   }
    

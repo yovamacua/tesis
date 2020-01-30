@@ -2,9 +2,11 @@
   require_once("../config/conexion.php");
   if(isset($_SESSION["id_usuario"])){ 
     require_once("../modelos/Gastos.php");
+    require_once("../modelos/Roles.php");
 
     //SI EXISTE EL POST ENTONCES SE LLAMA AL METODO PARA SELECCIONAR LA FECHA
     $gastos = new Gastos();
+     $usuario = new Roles();
 
     if(isset($_POST["year"])){
       $datos = $gastos->get_gasto_mensual($_POST["year"]);  
@@ -21,7 +23,7 @@
   $activar = 'item_gastos';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Gastos"]==1)
+<?php if($_SESSION["GASTOS"]==1)
 
      {
 
@@ -48,7 +50,19 @@
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#gastoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Gasto</button></h1>
+                             <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REGAST",$valores)){
+                                  echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#gastoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Gasto</button>';
+              }
+                            ?>
+                            </h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -60,7 +74,7 @@
                                 <tr>
                                   <th width="15%">Autor</th>
                                   <th width="10%">Fecha</th>
-                                  <th>Descripción</th>
+                                  <th width="10%">Descripción</th>
                                   <th width="10%">Gasto</th>
                                  
                                   <th>Acciones</th>

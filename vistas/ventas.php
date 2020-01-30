@@ -21,7 +21,7 @@
  <!--VISTA MODAL PARA AGREGAR PRODUCTO-->
  <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
-      <?php if($_SESSION["Venta"]==1)
+      <?php if($_SESSION["VENTA"]==1)
      {
 
      ?>

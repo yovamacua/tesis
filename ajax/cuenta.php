@@ -2,10 +2,12 @@
 //llamo a la conexion de la base de datos
 require_once "../config/conexion.php";
 require_once "../modelos/Cuenta.php";
+require_once("../modelos/Roles.php");
 require_once "mensajes.php";
 
 //objeto de tipo cuentas
 $cuentas = new cuentas();
+$usuario = new Roles();
 
 $id_cuenta    = isset($_POST["id_cuenta"]);
 $nombrecuenta = isset($_POST["nombrecuenta"]);
@@ -87,6 +89,15 @@ switch ($_GET["op"]) {
     case "listar":
         $identificador = $_SESSION["seleccion_partida"];
         $datos         = $cuentas->get_cuentas($identificador);
+           $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
+
         $data          = array();
 
         foreach ($datos as $row) {
@@ -103,22 +114,47 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["estrategia"];
             $sub_array[] = $nulo;
 
-            $sub_array[] = '
-      <div class="cbtns">
-      <a href="entrada.php?identificador=' . $row["id_cuenta"] . '&nombrecuenta=' . $row["nombrecuenta"] . '">
+        
+     $boton_registrar= '<a href="entrada.php?identificador=' . $row["id_cuenta"] . '&nombrecuenta=' . $row["nombrecuenta"] . '">
       <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar <span class="notistyle">'. $cuentas->conteo($row["id_cuenta"]).'</span></button>
-      </a>
-      </div>';
-            $sub_array[] = '
-     <div class="cbtns">
-     <button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>
-     &nbsp;
-<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
+      </a>';
+     
+     $boton_editar='<button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>';
+
+$boton_imprimir='<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
       <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
-      </a>
-     &nbsp;
-     <button type="button" onClick="eliminar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+      </a>';
+      
+     $boton_eliminar='<button type="button" onClick="eliminar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
      </div>';
+     if(in_array("REPART",$valores) and in_array("EDPART",$valores)and in_array("ELPART",$valores)){
+            $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
+                  
+              }
+              elseif (in_array("EDPART",$valores)and in_array("ELPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
+              }
+              elseif (in_array("REPART",$valores)and in_array("EDPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_imprimir.'</div>';
+                }
+                elseif (in_array("ELPART",$valores)and in_array("REPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
+                }
+                elseif (in_array("EDPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_imprimir.'</div>';
+                }
+                elseif(in_array("ELPART",$valores)){
+                    $sub_array[]='<div class="cbtns">'.$boton_eliminar.''.$boton_imprimir.'</div>';
+                }
+                elseif(in_array("REPART",$valores)){
+                    $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_imprimir.'</div>';
+                    }
+                    else{
+                       $sub_array[]='<div class="cbtns"></div>';
+                       $sub_array[]='<div class="cbtns">'.$boton_imprimir.'</div>';
+                   }
+                
             $data[] = $sub_array;
         }
 

@@ -22,7 +22,7 @@
         
                <li <?php if(isset($activar) and $activar == 'item_usuario'){?>class="active"<?php }else{?><?php }?> >
           
-              <?php if($_SESSION["Usuarios"]==1)
+              <?php if($_SESSION["USUARIOS"]==1)
          
           {
            echo '<a href="usuarios.php">
@@ -34,11 +34,11 @@
          </li>
           
        <li <?php if(isset($activar) and $activar == 'item_permiso'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-             <?php if($_SESSION["Permiso"]==1)
+             <?php if($_SESSION["PERMISO"]==1)
          
           {
             echo '<a href="#">
-            <i class="fa fa-paperclip" aria-hidden="true"></i> <span>Permiso</span>
+            <i class="fa fa-expeditedssl" aria-hidden="true"></i> <span>Permiso</span>
             <span class="pull-right-container badge movarrow bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -49,22 +49,22 @@
             
             <ul class="treeview-menu">
                <li <?php if(isset($activar1) and $activar1 == 'item_perfil'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["Permiso"]==1)
+                   <?php if($_SESSION["PERMISO"]==1)
          
           {
                 echo'  <a href="perfilese.php">
-                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <span>Perfiles</span>
+                  <i class="fa fa-male" aria-hidden="true"></i> <span>Perfiles</span>
                   </a>
                </li>';
             }
             ?>
                <li <?php if(isset($activar2) and $activar2 == 'item_rol'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["Permiso"]==1)
+                   <?php if($_SESSION["PERMISO"]==1)
          
           {
                  echo' <a href="rol.php">
 
-                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i> <span>Roles</span>
+                  <i class="fa fa-plus-square" aria-hidden="true"></i> <span>Roles</span>
                   </a>';
                }
                ?>
@@ -75,7 +75,7 @@
           
 
          <li <?php if(isset($activar) and $activar == 'item_incidentes'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-             <?php if($_SESSION["Incidentes"]==1)
+             <?php if($_SESSION["INCIDENTES"]==1)
          
           {
             echo '<a href="#">
@@ -90,7 +90,7 @@
             
             <ul class="treeview-menu">
                <li <?php if(isset($activar1) and $activar1 == 'item_incidentes1'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["Incidentes"]==1)
+                   <?php if($_SESSION["INCIDENTES"]==1)
          
           {
                 echo'  <a href="incidentes.php">
@@ -100,7 +100,7 @@
             }
             ?>
                <li <?php if(isset($activar2) and $activar2 == 'item_incidentes2'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["Incidentes"]==1)
+                   <?php if($_SESSION["INCIDENTES"]==1)
          
           {
                  echo' <a href="reporte_incidente.php">
@@ -113,7 +113,7 @@
             </ul>
          </li>
          <li <?php if(isset($activar) and $activar == 'item_partidas'){?>class="active"<?php }else{?> class=""<?php }?> >
-   <?php if($_SESSION["Partidas"]==1)
+   <?php if($_SESSION["PARTIDAS"]==1)
          
           {
         echo ' <a href="partidas.php">
@@ -124,7 +124,7 @@
 </li>
  
          <li <?php if(isset($activar) and  $activar == 'item_perdidas'){?>class="active"<?php }else{?> class=""<?php }?> >
-            <?php if($_SESSION["Perdidas"]==1)
+            <?php if($_SESSION["PERDIDAS"]==1)
          
           {
         echo ' <a href="perdidas.php">
@@ -136,7 +136,7 @@
          </li>
 
          <li <?php if(isset($activar) and  $activar == 'item_donaciones'){?>class="active"<?php }else{?> class=""<?php }?> >
-             <?php if($_SESSION["Donaciones"]==1)
+             <?php if($_SESSION["DONACIONES"]==1)
          
           {
         echo ' <a href="donaciones.php">
@@ -148,7 +148,7 @@
          </li>
 
          <li <?php if(isset($activar) and  $activar == 'item_gastos'){?>class="active"<?php }else{?> class=""<?php }?> >
-              <?php if($_SESSION["Gastos"]==1)
+              <?php if($_SESSION["GASTOS"]==1)
          
           {
         echo ' <a href="gastos.php">
@@ -160,7 +160,7 @@
          </li>
 
          <li <?php if(isset($activar) and  $activar == 'item_capacitaciones'){?>class="active"<?php }else{?> class=""<?php }?> >
-          <?php if($_SESSION["Capacitaciones"]==1)
+          <?php if($_SESSION["CAPACITACIONES"]==1)
          
           {
         echo ' <a href="capacitaciones.php">
@@ -174,7 +174,7 @@
 
 
          <li <?php if(isset($activar) and $activar == 'item_categorias'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-             <?php if($_SESSION["Categoria"]==1)
+             <?php if($_SESSION["CATEGORIA"]==1)
          
           {
             echo '<a href="#">
@@ -189,7 +189,7 @@
             
             <ul class="treeview-menu">
               <li <?php if(isset($activar) and  $activar == 'item_categorias'){?>class="active"<?php }else{?> class=""<?php }?> >
-            <?php if($_SESSION["Categoria"]==1)
+            <?php if($_SESSION["CATEGORIA"]==1)
          
           {
         echo '<a href="categorias.php">
@@ -200,7 +200,7 @@
             
          </li>
                <li <?php if(isset($activar2) and $activar2 == 'item_unidad'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["Categoria"]==1)
+                   <?php if($_SESSION["CATEGORIA"]==1)
          
           {
                  echo' <a href="unidads.php">
@@ -214,9 +214,8 @@
          </li>
 
          
-
          <li <?php if(isset($activar) and  $activar == 'item_productos'){?>class="active"<?php }else{?> class=""<?php }?> >
-             <?php if($_SESSION["Producto"]==1)
+             <?php if($_SESSION["PRODUCTO"]==1)
          
           {
         echo '<a href="productos.php">
@@ -228,7 +227,7 @@
          </li>
 
           <li <?php if(isset($activar) and $activar == 'item_pedidos'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-             <?php if($_SESSION["Pedidos"]==1)
+             <?php if($_SESSION["PEDIDOS"]==1)
          
           {
         echo '<a href="#">
@@ -243,7 +242,7 @@
 
            <ul class="treeview-menu">
                 <li <?php if(isset($activar1) and $activar1 == 'item_pedidos1'){?>class="active"<?php }else{?><?php }?> >
-                  <?php if($_SESSION["Pedidos"]==1)
+                  <?php if($_SESSION["PEDIDOS"]==1)
          
           {
         echo '<a href="pedidos.php">
@@ -254,7 +253,7 @@
                   
                </li>
                <li <?php if(isset($activar2) and $activar2 == 'item_pedidos2'){?>class="active"<?php }else{?><?php }?> >
-                    <?php if($_SESSION["Pedidos"]==1)
+                    <?php if($_SESSION["PEDIDOS"]==1)
          
           {
         echo '<a href="insumos.php">
@@ -268,7 +267,7 @@
          </li>
 
          <li <?php if(isset($activar) and $activar == 'item_venta'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-                      <?php if($_SESSION["Venta"]==1)
+                      <?php if($_SESSION["VENTA"]==1)
          
           {
         echo '<a href="v#">
@@ -282,7 +281,7 @@
             
             <ul class="treeview-menu">
                 <li <?php if(isset($activar1) and $activar1 == 'item_venta1'){?>class="active"<?php }else{?><?php }?> >
-                          <?php if($_SESSION["Venta"]==1)
+                          <?php if($_SESSION["VENTA"]==1)
          
           {
         echo '<a href="ventas.php">
@@ -295,7 +294,7 @@
                
                </li>
                 <li <?php if(isset($activar3) and $activar3 == 'item_venta3'){?>class="active"<?php }else{?><?php }?> >
-                                 <?php if($_SESSION["Venta"]==1)
+                                 <?php if($_SESSION["VENTA"]==1)
          
           {
         echo '<a href="consultar_ventas_fecha.php">
@@ -306,7 +305,7 @@
                   
                </li>
                <li <?php if(isset($activar4) and $activar4 == 'item_venta4'){?>class="active"<?php }else{?><?php }?> >
-                  <?php if($_SESSION["Venta"]==1)
+                  <?php if($_SESSION["VENTA"]==1)
          
           {
         echo '<a href="consultar_ventas_mes.php">
@@ -320,7 +319,7 @@
          </li>
 
           <li <?php if(isset($activar) and  $activar == 'item_reporteFinanciero'){?>class="active"<?php }else{?> class=""<?php }?> >
-                <?php if($_SESSION["Reporte Financiero"]==1)
+                <?php if($_SESSION["INFORME FINANCIERO"]==1)
          
           {
         echo '<a href="estados_financiero.php">
@@ -332,7 +331,7 @@
          </li>
 
          <li <?php if(isset($activar) and $activar == 'item_reporteVenta'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
-             <?php if($_SESSION["Reportes de Ventas"]==1)
+             <?php if($_SESSION["REPORTES DE VENTAS"]==1)
          
           {
         echo '<a href="reporte_ventas.php">
@@ -346,7 +345,7 @@
            
             <ul class="treeview-menu">
                <li <?php if(isset($activar1) and $activar1 == 'item_reporteVenta1'){?>class="active"<?php }else{?><?php }?> >
-                    <?php if($_SESSION["Reportes de Ventas"]==1)
+                    <?php if($_SESSION["REPORTES DE VENTAS"]==1)
          
           {
         echo '<a href="reporte_general_ventas.php">
@@ -357,7 +356,7 @@
                   
                </li>
                <li <?php if(isset($activar2) and $activar2 == 'item_reporteVenta2'){?>class="active"<?php }else{?><?php }?> >
-                  <?php if($_SESSION["Reportes de Ventas"]==1)
+                  <?php if($_SESSION["REPORTES DE VENTAS"]==1)
          
           {
         echo '<a href="reporte_ventas_mensual.php">
@@ -368,7 +367,7 @@
                   
                </li>
                <li <?php if(isset($activar3) and $activar3 == 'item_reporteVenta3'){?>class="active"<?php }else{?><?php }?> >
-                    <?php if($_SESSION["Reportes de Ventas"]==1)
+                    <?php if($_SESSION["REPORTES DE VENTAS"]==1)
          
           {
         echo '<a href="reporte_ventas_Semanal.php">
@@ -382,7 +381,7 @@
          </li>
          
          <li <?php if(isset($activar) and  $activar == 'item_respaldo'){?>class="active"<?php }else{?> class=""<?php }?> >
-                   <?php if($_SESSION["Respaldo"]==1)
+                   <?php if($_SESSION["RESPALDO"]==1)
          
           {
         echo ' <a href="respaldo.php">

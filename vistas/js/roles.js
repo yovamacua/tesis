@@ -270,25 +270,35 @@ function editarcantidad(e){
 
       });
   }
+function myFunction() {
+  var selectRol = document.getElementById("nombre").value;   
+  var select = document.getElementById("modulo"), //El <select>
+        value = select.value, //El valor seleccionado
+        text = select.options[select.selectedIndex].innerText; //El
+var cod1= selectRol.substr(0,2);
+var cod2= text.substr(0,3);
+var result= cod1+cod2;
+  document.getElementById("codigo").value = result;
+}
 
-function eliminar(idperfil){
+function eliminar(idroles){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(categoria_id);
 
-   bootbox.confirm("¿Está Seguro de eliminar el perfil?", function(result){
+   bootbox.confirm("¿Está Seguro de eliminar el rol?", function(result){
  if(result)
  {
      $.ajax({
-       url:"../ajax/perfiles.php?op=eliminar_perfil",
+       url:"../ajax/roles.php?op=eliminar_perfil",
        method:"POST",
-       data:{idperfil:idperfil},
+       data:{idroles:idroles},
 
        success:function(data)
        {
          //alert(data);
          $("#resultados_ajax").html(data);
-         $("#perfil_data").DataTable().ajax.reload();
+         $("#roles_data").DataTable().ajax.reload();
        }
      });
    }

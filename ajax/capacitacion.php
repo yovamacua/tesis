@@ -3,11 +3,13 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Capacitaciones.php");
   require_once("../modelos/DetalleCapacitados.php");
+  require_once("../modelos/Roles.php");
   require_once "mensajes.php";
 
 //objeto de tipo Capacitaciones y DetalleCapacitados
   $capacitaciones = new Capacitaciones();
   $detallecapacitados = new DetalleCapacitados();
+  $usuario = new Roles();
 
   $id_capacitacion = isset($_POST["id_capacitacion"]);
   $fecha = isset($_POST["fecha"]);
@@ -176,6 +178,14 @@
 
       case "listar":
         $datos = $capacitaciones->get_capacitacion();
+        $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
    	    $data = Array();
  
         foreach($datos as $row)
@@ -186,10 +196,32 @@
           $sub_array[] = $row["nombreGrupo"];
           $sub_array[] = $row["encargado"];
           $sub_array[] = $row["cargo"];
-          $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Adminstrar Capacitación" ><i class="fa fa-cogs"></i></button>
-          <button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitación" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitación "><i class="fa fa-trash"></i></button></div>';
+         
+          $boton_registrar='<button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Adminstrar Capacitación" ><i class="fa fa-cogs"></i></button>';
+
+          $boton_editar='<button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitación" ><i class="fa fa-pencil-square-o"></i></button>';
+
+          $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitación "><i class="fa fa-trash"></i></button></div>';
+
+          ?>
+          <?php  
+          if(in_array("RECAPA",$valores) and in_array("EDCAPA",$valores)and in_array("ELCAPA",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+              } elseif (in_array("RECAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+              }elseif(in_array("EDCAPA",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELCAPA",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                  $sub_array[]='<div class="cbtns"></div>';
+
+              }
+            
+              
+      ?>
+      <?php
           $data[] = $sub_array;
         }
 
@@ -205,6 +237,14 @@
     //listar detallecapacitados
     case 'listardetalle':
       $datos=$detallecapacitados->get_detallecapacitados($_POST["id_capacitacion"]);
+      $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
       $data= Array();
 
         foreach($datos as $row){
@@ -213,9 +253,28 @@
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
           $sub_array[] = $row["dui"];
-          $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="fa fa-trash"></i></button></div>';
+         
+          $boton_editar=' <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>';
+
+          $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitación "><i class="fa fa-trash"></i></button></div>';
+
+          ?>
+          <?php  
+          if(in_array("EDCAPA",$valores)and in_array("ELCAPA",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+              }elseif(in_array("EDCAPA",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELCAPA",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                 $sub_array[]='<div class="cbtns"></div>';
+
+              }
+            
+              
+      ?>
+      <?php
             $data[] = $sub_array;
           }
 

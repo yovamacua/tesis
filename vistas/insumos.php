@@ -1,8 +1,9 @@
 <?php
   require_once("../config/conexion.php");
+  require_once("../modelos/Roles.php");
 
   if(isset($_SESSION["id_usuario"])){ 
-
+$usuario = new Roles();
     require_once("../modelos/Categorias.php");
        $categoria = new Categorias();
        $cat = $categoria->get_categoria();
@@ -26,7 +27,7 @@
   $activar2 = 'item_pedidos2';
   require_once("header.php");
 ?>
- <?php if($_SESSION["Pedidos"]==1)
+ <?php if($_SESSION["PEDIDOS"]==1)
      {
 
      ?>
@@ -52,10 +53,30 @@
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Entrada de Insumo</button></h1>
+                            <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
-                            <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar2()" data-toggle="modal" data-target="#kardexinsumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button></h1>
+                             $valores[]= $rows["codigo"];
+                                } 
+                                $boton_registrar= '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#insumoModal"><i class="fa fa-plus" aria-hidden="true"></i> Entrada de Insumo</button>';
+                                $boton_eliminar= '<button class="btn btn-primary btn-lg" id="minus_button" onclick="limpiar2()" data-toggle="modal" data-target="#kardexinsumoModal"><i class="fa fa-minus" aria-hidden="true"></i> Salida de Insumo</button>';
+                                if(in_array("REPEDI",$valores) and in_array("REPEDI",$valores)){
+                                   print_r($boton_registrar);
+                                  print_r($boton_eliminar);
+
+
+              }elseif(in_array("REPEDI",$valores)){
+                            print_r($boton_eliminar);
+              }else{
+                print_r($boton_registrar);
+              }
+                            ?>
+                           
+                            </h1>
+                            
                         <div class="box-tools pull-right">
                         </div>
                     </div>
@@ -72,12 +93,8 @@
                                   <th width="10%">Cantidad</th>
                                   <th width="10%">Unidad de Medida</th>
                                   <th width="10%">Precio</th>                                  
-                                <?php  if($_SESSION["Eliminar"]==0 and $_SESSION["Editar"]==0){
+                                 <th>Acciones</th>;
                               
-                              }else{
-                                  echo '<th>Acciones</th>';
-                              }
-                                ?>
                                   </tr>
                               </thead>
                             <tbody>

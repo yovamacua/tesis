@@ -2,8 +2,10 @@
 #se incluye la conexion
    require_once("../config/conexion.php");
     require_once("../modelos/Perfiles.php");
+    require_once("../modelos/Roles.php");
    #verifica que la session exista
       if(isset($_SESSION["id_usuario"])){
+        $usuario = new Roles();
          $Perfil= new Perfiles();
          $cat= $Perfil->mostrar_perfiles();
    //crear esta variable para indicar si esta activo o no el item
@@ -11,7 +13,7 @@
    #incluye header
    require_once("header.php");
    ?>
-   <?php if($_SESSION["Usuarios"]==1)
+   <?php if($_SESSION["USUARIOS"]==1)
      {
 
      ?>
@@ -35,8 +37,19 @@
       <div class="box">
          <div class="box-header boton-top">
             <h1 class="box-title">
+            <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
-               <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Usuario</button>
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REUSUA",$valores)){
+                                  echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#usuarioModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Usuario</button>';
+              }
+                            ?>
+               
 
             </h1>
             <div class="box-tools pull-right">

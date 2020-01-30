@@ -104,25 +104,10 @@ if (!isset($_SESSION['id_usuario'])) {?>
         $sub_array = array();
       $sub_array[] = $row["nombre"];
       $sub_array[] = $row["descripcion"];
-
-     ?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]='<div class="cbtns">
+      $sub_array[]='<div class="cbtns">
                      <button type="button" onClick="mostrar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar unidad" ><i class="fa fa-pencil-square-o"></i></button>
                            <button type="button" onClick="eliminar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Unidad "><i class="fa fa-trash"></i></button></div>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Unidad "><i class="fa fa-trash"></i></button></div>';
-
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Unidad" ><i class="fa fa-pencil-square-o"></i></button></div>';
-         
-        }?>
-        <?php
+          
          
           
            

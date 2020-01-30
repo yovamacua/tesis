@@ -3,11 +3,13 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Pedidos.php");
   require_once("../modelos/DetallePedidos.php");
+  require_once("../modelos/Roles.php");
   require_once "mensajes.php";
 
   //objeto de tipo Pedidos y DetallePedidos
   $pedidos = new Pedidos();
   $detallepedidos = new DetallePedidos();
+   $usuario = new Roles();
 
   $id_pedido = isset($_POST["id_pedido"]);
   $fecha = isset($_POST["fecha"]);
@@ -162,6 +164,14 @@
 
       case "listar":
         $datos = $pedidos->get_pedido();
+        $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
    	    $data = Array();
  
         foreach($datos as $row)
@@ -170,46 +180,32 @@
           $sub_array[] = $row["usuario"];
           $sub_array[] = $row["id_pedido"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
-    ?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1 and $_SESSION["Registrar"]==1 )
-                                 {
-                          $sub_array[]='<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>
-          <button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_pedido"].'); desvanecer()"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
-                    }?>
-                       <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]='<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_pedido"].'); desvanecer()"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
-                    }?>
-                    <?php  if( $_SESSION["Editar"]==1 and $_SESSION["Registrar"]==1 )
-                                 {
-                          $sub_array[]='<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>
-          <button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido" ><i class="fa fa-pencil-square-o"></i></button></div>';
-                    }?>
-                     <?php  if($_SESSION["Eliminar"]==1  and $_SESSION["Registrar"]==1 )
-                                 {
-                          $sub_array[]='<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>
-          <button type="button" onClick="eliminar('.$row["id_pedido"].'); desvanecer()"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
+  
+             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
 
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>';
-        }?>
-         <?php if($_SESSION["Registrar"]==1){
-            $sub_array[] = '<div class="cbtns">
+           
+            $boton_editar = '<button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>';
+       
+            $boton_registrar = '<div class="cbtns">
           <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>';
-        }?>
-        <?php
+       ?>
+          <?php  
+          if(in_array("REPEDI",$valores) and in_array("EDPEDI",$valores)and in_array("ELPEDI",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+              } elseif (in_array("REPEDI",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+              }elseif(in_array("EDPEDI",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELPEDI",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                $sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+      <?php
           $data[] = $sub_array;
         }
 
@@ -225,6 +221,14 @@
     //listar detallecapacitados
     case 'listardetalle':
       $datos = $detallepedidos->get_detallepedido($_POST["id_pedido"]);
+       $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
       $data = Array();
 
         foreach($datos as $row){
@@ -234,23 +238,33 @@
           $sub_array[] = $row["cantidad"];
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["nombre"];
-          ?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]='<div class="cbtns">
-          <button type="button" onClick="mostrardetalle('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>
-          <button type="button" onClick="eliminar_detallepedidos('.$row["id_detallepedido"].'); desvanecer()"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button></div>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button></div>';
+        
+              
+             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button>';
 
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<div class="cbtns">
-          <button type="button" onClick="mostrar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>';
-        }?>
-        <?php
+            
+            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>';
+       ?>
+          <?php  
+          if(in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+               }
+            elseif (in_array("EDPEDI",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("EDPEDI",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELPEDI",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                $sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+         
+          
+      <?php 
             $data[] = $sub_array;
           }
           

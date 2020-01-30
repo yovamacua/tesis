@@ -26,7 +26,7 @@
   $activar = 'item_categorias';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Categoria"]==1)
+<?php if($_SESSION["PERMISO"]==1)
      {
 
      ?>

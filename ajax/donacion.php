@@ -4,11 +4,13 @@
  
   //llamar al modelo Donaciones
   require_once("../modelos/Donaciones.php");
+  require_once("../modelos/Roles.php");
   require_once "mensajes.php";
 
   //Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
   $donaciones = new Donaciones();
+   $usuario = new Roles();
  
   $id_donacion = isset($_POST["id_donacion"]);
   $fecha = isset($_POST["fecha"]);
@@ -101,6 +103,14 @@ switch ($_GET["op"]) {
  
     case 'listar':
       $datos=$donaciones->get_donaciones();
+       $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          } 
       $data= Array();
 
       $dolar = '$ ';
@@ -116,20 +126,24 @@ switch ($_GET["op"]) {
           $sub_array[] = $dolar.$row["precio"];
 
             ?>
-            <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1){
-              $sub_array[]='<div class="cbtns">
-                <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación" ><i class="fa fa-pencil-square-o"></i></button>
-                <button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación"><i class="fa fa-trash"></i></button></div>';
-              }?>
-              <?php  if($_SESSION["Eliminar"]==1){
-                $sub_array[]= '<div class="cbtns">
-                <button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación"><i class="fa fa-trash"></i></button></div>';
-                }
-                ?>          
-                <?php if($_SESSION["Editar"]==1){
-                $sub_array[] = '<div class="cbtns">
-                <button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación"><i class="fa fa-pencil-square-o"></i></button></div>';
-              }?>
+            
+              <?php  
+                $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación"><i class="fa fa-trash"></i></button>';
+               $boton_editar ='<button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación"><i class="fa fa-pencil-square-o"></i></button>';
+
+                if(in_array("EDDONA",$valores) and in_array("ELDONA",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+               }
+            elseif (in_array("EDDONA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELDONA",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                   $sub_array[]='<div class="cbtns"></div>';
+
+              }
+              ?>
             <?php
             $data[] = $sub_array;
           }

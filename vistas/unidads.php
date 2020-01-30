@@ -4,10 +4,10 @@
 ?>
 <?php
   #variable item activo
-  $activar = 'item_unidad';
+  $activar2 = 'item_unidad';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Categoria"]==1)
+<?php if($_SESSION["PERMISO"]==1)
      {
 
      ?>
@@ -45,6 +45,7 @@
                             <thead>
                                 <tr>
                                 <th width="5%">Unidad</th>
+                                 <th width="5%">Descripcion</th>
                                 <th width="5%">Acciones</th>
                            
                               

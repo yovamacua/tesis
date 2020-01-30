@@ -2,10 +2,12 @@
 //llamo a la conexion de la base de datos
 require_once "../config/conexion.php";
 require_once "../modelos/Incidentes.php";
+require_once("../modelos/Roles.php");
 require_once "mensajes.php";
 
 //objeto de tipo Incidentes
 $incidentes = new Incidentes();
+$usuario = new Roles();
 
 $id_incidente = isset($_POST["id_incidente"]);
 $titulo       = isset($_POST["titulo"]);
@@ -76,6 +78,14 @@ switch ($_GET["op"]) {
         break;
     case "listar":
         $datos = $incidentes->get_incidentes();
+        $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
         $data  = array();
 
         foreach ($datos as $row) {
@@ -85,16 +95,30 @@ switch ($_GET["op"]) {
             $sub_array[] = $row["usuario"];
             $sub_array[] =  date("d/m/Y", strtotime($row["fecha"]));
 
-                          $sub_array[]='<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button> &nbsp;
-                           <button type="button" onClick="eliminar(' . $row["id_incidente"] . '); desvanecer()"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+                          $boton_editar='<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp';
+
+                           $boton_eliminar='<button type="button" onClick="eliminar(' . $row["id_incidente"] . '); desvanecer()"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
 
             </div>';
- 
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar(' . $row["id_incidente"] . '); desvanecer()"  id="' . $row["id_incidente"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
+  ?>
+          <?php  
+          if(in_array("EDINCI",$valores) and in_array("ELINCI",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+               }
+            elseif (in_array("EDINC",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELINC",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
-            </div>';
-
-            $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar(' . $row["id_incidente"] . ');"  id="' . $row["id_incidente"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button></div>';
+              }else{
+                $sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+         
+          
+      <?php    
             $data[] = $sub_array;
         }
 

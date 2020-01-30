@@ -2,13 +2,16 @@
 
    require_once("../config/conexion.php");
 
+
     if(isset($_SESSION["id_usuario"])){
 
       require_once("../modelos/Categorias.php");
          require_once("../modelos/Unidad.php");
+         require_once("../modelos/Roles.php");
 
       $categoria = new Categorias();
         $unidad = new Unidad();
+         $usuario = new Roles();
 
       $cat = $categoria->get_categoria();  
       $unid= $unidad->get_unidad()   
@@ -21,9 +24,9 @@
   require_once("header.php");
 
 ?>
-<?php if($_SESSION["Producto"]==1)
+<?php if($_SESSION["PRODUCTO"]==1)
      {
-var_dump($_SESSION["Producto"]);
+
      ?>
   <!--Contenido-->
       <!-- Content Wrapper. Contains page content -->
@@ -49,7 +52,19 @@ var_dump($_SESSION["Producto"]);
                   <div class="box">
                     <div class="box-header boton-top">
                           <h1 class="box-title">
-                            <button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#productoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</button></h1>
+                            <?php  
+                              $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REPROD",$valores)){
+                                  echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#productoModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Producto</button>';
+              }
+                            ?>
+                            </h1>
                         <div class="box-tools pull-right">
                         </div>
                     </div>

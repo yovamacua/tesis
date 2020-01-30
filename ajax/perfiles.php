@@ -3,10 +3,12 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Perfiles.php");
     require_once("../modelos/Modulos.php");
+     require_once("../modelos/Roles.php");
   require_once("mensajes.php");
 
 //objeto de tipo Incidentes
   $perfil = new Perfiles();
+  $usuario = new Roles();
    $idperfil=isset($_POST["idperfil"]);
    $nombre=isset($_POST["nombre"]);
    $codigo=isset($_POST["codigo"]);
@@ -117,6 +119,14 @@
    break;
         case "listar":
      $datos=$perfil->mostrar_perfiles();
+      $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
  	 $data= Array();
 
      foreach($datos as $row)
@@ -139,10 +149,31 @@
       $sub_array[] = $row["nombre"];
       $sub_array[] = $row["codperfil"];
       $sub_array[] = $atrib;
-     $sub_array[] = '<div class="cbtns"><button type="button" onClick="mostrar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>
+     
+     $boton_registrar=' <a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarModulo</button></a> ';
 
-     <a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarModulo</button></a> 
-     <button type="button" onClick="eliminar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perfil "><i class="fa fa-trash"></i></button></div>';
+          $boton_editar='<button type="button" onClick="mostrar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>';
+
+          $boton_eliminar='<button type="button" onClick="eliminar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perfil "><i class="fa fa-trash"></i></button>';
+
+          ?>
+          <?php  
+          if(in_array("REPERM",$valores) and in_array("EDPERM",$valores)and in_array("ELPERM",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+              } elseif (in_array("REPERM",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+              }elseif(in_array("EDPERM",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ElPERM",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                 $sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+      <?php
       $data[] = $sub_array;
       }
 

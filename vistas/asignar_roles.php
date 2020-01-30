@@ -31,7 +31,7 @@
   $activar = 'item_categorias';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Categoria"]==1)
+<?php if($_SESSION["PERMISO"]==1)
      {
 
      ?>
@@ -82,7 +82,7 @@ $datos=$usuarios->get_usuario_por_id($identificador);
     <table class="table table-striped table-bordered table-condensed table-hover">
     	<thead>
          <tr>
-            <th>Modulo</th>
+            <th >Modulo</th>
              <th>Rol</th>
          </tr>
       </thead> 
@@ -98,9 +98,10 @@ $datos=$usuarios->get_usuario_por_id($identificador);
    //se verifica si hay modulos relacionado con roles
        foreach ($ver as $mod) {
        echo '<tr>
-              <td>'.$mod["nombre"].'</td>  ';  
+              <td>'.$mod["nombre"].'</td> ';  
              
        $ro=$roles->rol_usuario($identificador);
+     
      //verificamos si el usuario tiene un rol 
        foreach ($ro as $key) {
     
@@ -109,12 +110,12 @@ $datos=$usuarios->get_usuario_por_id($identificador);
        
     }
     // validamos si hay roles con el usuario y modulo     
-   $sw = in_array($mod['idroles'],$valores) ? 'checked':'';
+   $sw = in_array($mod['idrol'],$valores) ? 'checked':'';
       echo '
           
            <td>
             <ul style="list-style:none;">'   
-     .$mod["rol"].'  <input type="checkbox" '.$sw.' name="roles[]"  value="'.$mod["idroles"].' required=""">
+     .$mod["rol"].'  <input type="checkbox" '.$sw.' name="roles[]"  value="'.$mod["idrol"].'" />
     </ul>
  </td>
  </tr>' ;   

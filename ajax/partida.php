@@ -3,11 +3,13 @@
 require_once "../config/conexion.php";
 require_once "../modelos/partidas.php";
 require_once "../modelos/Cuenta.php";
+require_once("../modelos/Roles.php");
 require_once "mensajes.php";
 
 //objeto de tipo partidas
 $partidas = new partidas();
 $cuenta   = new cuentas();
+$usuario = new Roles();
 
 $id_partida    = isset($_POST["id_partida"]);
 $nombrepartida = isset($_POST["nombrepartida"]);
@@ -15,12 +17,12 @@ $responsable   = isset($_POST["responsable"]);
 $id_usuario    = isset($_POST["id_usuario"]);
 $anio         = isset($_POST["anio"]);
 
-if (!isset($_SESSION['id_usuario'])) {?>
+/*if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-}
+}*/
 
 switch ($_GET["op"]) {
     case "guardaryeditar":
@@ -104,6 +106,14 @@ switch ($_GET["op"]) {
     case "listar":
         $iduse = $_SESSION["id_usuario"];
         $datos = $partidas->get_partidas($iduse);
+        $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
         $data  = array();
 
         foreach ($datos as $row) {
@@ -138,16 +148,43 @@ switch ($_GET["op"]) {
 
             $sub_array[] = $nulo;
 
-            $sub_array[] = '<div class="cbtns">
-            <a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'.$partidas->conteo($row["id_partida"]).'</span></button></a>
-            
-            </div>';
-            $sub_array[] = '<div class="cbtns">
-    
-            <button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;
+            $boton_registrar = '<a href="cuenta.php?id=' . $row["id_partida"] . '&partida=' . $row["nombrepartida"] . '"><button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administrar Cuenta <span class="notistyle">'.$partidas->conteo($row["id_partida"]).'</span></button></a>';
+           
+            $boton_editar='<button type="button" onClick="mostrar(' . $row["id_partida"] . ');"  id="' . $row["id_partida"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp';
 
-            <button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer();"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
-            </div>';
+            $boton_eliminar='<button type="button" onClick="eliminar(' . $row["id_partida"] . '); desvanecer();"  id="' . $row["id_partida"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>';
+    
+          if(in_array("REPART",$valores) and in_array("EDPART",$valores)and in_array("ELPART",$valores)){
+            $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+                  
+              }
+              elseif (in_array("EDPART",$valores)and in_array("ELPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+              }
+              elseif (in_array("REPART",$valores)and in_array("EDPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.'</div>';
+                }
+                elseif (in_array("ELPART",$valores)and in_array("REPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+                }
+                elseif (in_array("EDPART",$valores)) {
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+                }
+                elseif(in_array("ELPART",$valores)){
+                    $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+                }
+                elseif(in_array("REPART",$valores)){
+                    $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+                    }
+                    else{
+                       $sub_array[]='<div class="cbtns"></div>';
+                       $sub_array[]='<div class="cbtns"></div>';
+                   }
+                
+      
+
+    
             $data[] = $sub_array;
         }
         $results = array(

@@ -11,10 +11,10 @@
 
 <?php
   #variable item activo
-  $activar = 'item_rol';
+  $activar2 = 'item_rol';
   require_once("header.php");
 ?>
-<?php if($_SESSION["Permiso"]==1)
+<?php if($_SESSION["PERMISO"]==1)
      {
 
      ?>
@@ -79,7 +79,7 @@
         <div class="modal-body">
 
           <label>Nombre</label>
-                   <select class="form-control" id="nombre" name="nombre" required="" required="" autofocus="autofocus" >
+                   <select class="form-control" id="nombre" name="nombre"  required="" autofocus="autofocus" >
                      <option value="">-- Selecciona estado --</option>
                      <option value="REGISTRAR">REGISTRAR</option>
                      <option value="EDITAR">EDITAR</option>
@@ -87,13 +87,7 @@
                   </select>
                   <span class="error_form" id="error_nombre"></span>
                 </br>
-                    <label>Codigo</label>
-                    <?php 
-                         $codigo = $rol-> codigoroles();
-
-                    ?>
-
-                  
+                   
                    <label>Modulo</label>
                    
 
@@ -114,6 +108,12 @@
                     </select>
                     <span class="error_form" id="error_modulo"></span>
                   </br>
+               <label>Codigo</label>
+  <button onclick="myFunction()">Generar Codigo</button>
+ 
+<input type="text" id="codigo" name="codigo" class="form-control" placeholder="Nombre del codigo" maxlength="60" autocomplete="off" required/>
+ </br>
+                   
      <label>descripcion</label>
       <textarea rows="4" maxlength="70" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
       <span class="error_form" id="error_descripcion"></span>

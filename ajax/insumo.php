@@ -4,11 +4,13 @@
  
 	//llamar al modelo Insumos
 	require_once("../modelos/Insumos.php"); 
+	require_once("../modelos/Roles.php");
 	require_once "mensajes.php";
 
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
 	$insumos = new Insumos();
+	 $usuario = new Roles();
  
 	$id_insumo = isset($_POST["id_insumo"]);
 	$cantidad = isset($_POST["cantidad"]);
@@ -116,6 +118,14 @@ switch ($_GET["op"]) {
  
 		case 'listar':
 			$datos = $insumos->get_insumos();
+			$rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
  	 		$data = Array();
 
  	 		$dolar = '$ ';
@@ -131,22 +141,28 @@ switch ($_GET["op"]) {
 		      	$sub_array[] = $row["nombre"];
 		      	$sub_array[] = $dolar.$row["precio"];
 		      	
-      			?>
-                  <?php  if($_SESSION["Eliminar"]==1 and $_SESSION["Editar"]==1)
-                                 {
-                          $sub_array[]='<div class="cbtns">
-		     	<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>
-      			<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
-                    }?>
-            <?php  if($_SESSION["Eliminar"]==1){
-             $sub_array[]= '<div class="cbtns"><button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button></div>';
+      		 
+             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button>';
+            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>';
+            ?>
+        <?php  
+          if(in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+               }
+            elseif (in_array("EDPEDI",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif (in_array("ELPEDI",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
-            }
-            ?>          
-            <?php if($_SESSION["Editar"]==1){
-            $sub_array[] = '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button></div>';
-        }?>
-        <?php
+              }else{
+              	$sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+         
+          
+      <?php   
 		      	$data[] = $sub_array;
 		      }
 

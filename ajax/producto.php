@@ -4,15 +4,17 @@
   //llamo al modelo Producto
   require_once("../modelos/Productos.php");
    require_once("../modelos/Usuarios.php");
+    require_once("../modelos/Roles.php");
   require_once("mensajes.php");
   $productos = new Producto();
   $usu= new Usuarios();
- /*if (!isset($_SESSION['id_usuario'])) {?>
+   $usuario = new Roles();
+ if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
         </script>
     <?php
-}*/
+}
 
    //declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos que si existe el parametro que estamos recibiendo
    
@@ -145,6 +147,14 @@
         case "listar":
 
      $datos=$productos->get_productos();
+     $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
  	 $data= Array();
 
      foreach($datos as $row)
@@ -175,11 +185,29 @@
        $sub_array[] = '<span class="'.$atributo.'">'.$row["stock"].'
                   </span>';
         
-       $boton_editar=  '<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button>';  
-       $boton_eliminar= '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>'; 
-  $sub_array[]= '<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+       $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button>'; 
+
+       $boton_editar= '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>'; 
  
- 
+    ?>
+          <?php  
+          if(in_array("EDPROD",$valores) and in_array("ELPROD",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
+               }
+            elseif (in_array("EDPROD",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELPROD",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
+
+              }else{
+                $sub_array[]='<div class="cbtns"></div>';
+              }
+            
+              
+      ?>
+         
+          
+      <?php    
 
       $data[] = $sub_array;
       }

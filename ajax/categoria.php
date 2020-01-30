@@ -2,6 +2,7 @@
  //llamo a la conexion de la base de datos
   require_once("../config/conexion.php");
   require_once("../modelos/Categorias.php");
+   require_once("../modelos/Roles.php");
   require_once("mensajes.php");
   #valida que exista la sessión
 if (!isset($_SESSION['id_usuario'])) {?>
@@ -15,6 +16,7 @@ if (!isset($_SESSION['id_usuario'])) {?>
 
 //objeto de tipo Incidentes
   $categorias = new Categorias();
+  $usuario = new Roles();
 
    $id_categoria=isset($_POST["id_categoria"]);
    $categoria=isset($_POST["categoria"]);
@@ -105,7 +107,16 @@ if (!isset($_SESSION['id_usuario'])) {?>
 	 break;
         case "listar":
      $datos=$categorias->get_categoria();
-   
+     $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
+        
+         
  	 $data= Array();
 
      foreach($datos as $row)
@@ -113,15 +124,29 @@ if (!isset($_SESSION['id_usuario'])) {?>
         $sub_array = array();
       $sub_array[] = $row["categoria"];
       $sub_array[] = $row["descripcion"];
-        $sub_array[]='<div class="cbtns">
-                     <button type="button" onClick="mostrar('.$row["id_categoria"].');"  id="'.$row["id_categoria"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Categoria" ><i class="fa fa-pencil-square-o"></i></button>
-                           <button type="button" onClick="eliminar('.$row["id_categoria"].');"  id="'.$row["id_categoria"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';
-                 
-                 
-      
+
+              $button_editar=' <button type="button" onClick="mostrar('.$row["id_categoria"].');"  id="'.$row["id_categoria"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Categoria" ><i class="fa fa-pencil-square-o"></i></button>';
+
+                          $button_eliminar=' <button type="button" onClick="eliminar('.$row["id_categoria"].');"  id="'.$row["id_categoria"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida "><i class="fa fa-trash"></i></button></div>';
+            ?>
+          <?php  
+          if(in_array("EDCATE",$valores) and in_array("ELCATE",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$button_editar.''.$button_eliminar.'</div>';
+              } elseif (in_array("EDCATE",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$button_editar.'</div>';
+              }elseif(in_array("ELCATE",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$button_eliminar.'</div>';
+
+              }else{
+                  $sub_array[]='<div class="cbtns"></div>';
+
+              }
+
+              
+      ?>
          
           
-           
+      <?php     
       $data[] = $sub_array;
       }
 
