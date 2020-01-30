@@ -276,7 +276,7 @@ function myFunction() {
         value = select.value, //El valor seleccionado
         text = select.options[select.selectedIndex].innerText; //El
 var cod1= selectRol.substr(0,2);
-var cod2= text.substr(0,3);
+var cod2= text.substr(0,4);
 var result= cod1+cod2;
   document.getElementById("codigo").value = result;
 }
