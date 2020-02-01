@@ -17,7 +17,7 @@ class Perfil extends Conectar
     {
         $conectar = parent::conexion();
         parent::set_names();
-        $sql = "select * from usuarios where id_usuario=?";
+        $sql = "Select * from usuarios as u inner join perfil p on p.idperfil = u.idperfiles where u.id_usuario=?";
         $sql = $conectar->prepare($sql);
         $sql->bindValue(1, $id_usuario);
         $sql->execute();

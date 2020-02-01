@@ -1,9 +1,9 @@
 <footer class="main-footer">
-   <div class="pull-right hidden-xs">
+   <!-- <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
-   </div>
-   <strong>Proyeto CampoEscuela - Salcoatitan &copy; 2019  <a href="https://www.usonsonate.edu.sv" target="_blank">Universidad De Sonsonate</a></strong>
-</footer>
+   </div> -->
+   <div style="text-align: center;"><strong>Proyeto Campo Escuela - Salcoatitan &copy; <?php echo date('Y');?>  <a href="https://www.usonsonate.edu.sv" target="_blank">Universidad De Sonsonate</a></strong></div>
+ </footer>
 <!-- jQuery 3 -->
 <script src="../public/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->

@@ -91,10 +91,12 @@
               <dd><?php echo $datos[$i]["usuario"]?></dd>
               <dt>Correo:</dt>
               <dd><?php echo $datos[$i]["correo"]?></dd>
+              <dt>Cargo:</dt>
+              <dd><?php echo $datos[$i]["nombre"]?></dd>
               <dt>Fecha de registro:</dt>
               <dd><?php echo $datos[$i]["fecha_ingreso"]?></dd>
             </dl>
-
+             
             <?php
               }//cierre del for                                              
               ?>
