@@ -195,13 +195,12 @@ foreach($rol as $rows){
             //se formate el la fecha, tipo y formato
             $sub_array[] = date("d/m/Y", strtotime($row["fecha_ingreso"]));
             //botones con valores de los campos en el id
-            $boton_editar= '<button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button><button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
-             <button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>';
+            $boton_editar= '<button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button> <button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button> <button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>';
 
- $boton_registrar='<a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" " class="btn btn-dark btn-md hint--top" aria-label="Asignar roles "><i class="fa fa-plus-square"></i></button></a>'; 
+ $boton_registrar='<a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" " class="btn btn-info btn-md hint--top" aria-label="Asignar roles "><i class="fa fa-plus-square"></i></button></a> '; 
 
             
-     $boton_eliminar=' <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
+     $boton_eliminar=' <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div> ';
     
  
           if(in_array("REUSUA",$valores) and in_array("EDUSUA",$valores)and in_array("ELUSUA",$valores)){
