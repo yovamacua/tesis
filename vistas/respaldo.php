@@ -19,7 +19,7 @@
               </div>";
     }
 ?>
-<?php if($_SESSION["Respaldo"]==1)
+<?php if($_SESSION["RESPALDO"]==1)
      {
 
      ?>

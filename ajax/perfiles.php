@@ -18,7 +18,7 @@
       switch($_GET["op"]){
           case "guardaryeditar":
 
-      $datos = $perfil->get_perfil_por_codigo($_POST["codigo"]);
+      $datos = $perfil->get_perfil_por_codigo($_POST["nombre"],$_POST["idperfil"]);
 	       	   /*si el titulo no existe entonces lo registra
 	           importante: se debe poner el $_POST sino no funciona*/
 	          if(empty($_POST["idperfil"])){
@@ -150,7 +150,7 @@ foreach($rol as $rows){
       $sub_array[] = $row["codperfil"];
       $sub_array[] = $atrib;
      
-     $boton_registrar=' <a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarModulo</button></a> ';
+     $boton_registrar='<a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-dark btn-md hint--top" aria-label="Asignar Perfiles "><i class="fa fa-plus-square"></i></button></a>';
 
           $boton_editar='<button type="button" onClick="mostrar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>';
 
@@ -160,15 +160,27 @@ foreach($rol as $rows){
           <?php  
           if(in_array("REPERM",$valores) and in_array("EDPERM",$valores)and in_array("ELPERM",$valores)){
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
-              } elseif (in_array("REPERM",$valores)) {
+              }elseif (in_array("EDPERM",$valores) and in_array("ELPERM",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.'</div>';
+
+               } elseif(in_array("REPERM",$valores) and in_array("ELPERM",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_eliminar.'</div>';
+
+              } elseif (in_array("EDPERM",$valores) and in_array("REPERM",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_registrar.'</div>';
+
+              }elseif (in_array("REPERM",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+
+                 
+
               }elseif(in_array("EDPERM",$valores)){
                        $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
-              }elseif(in_array("ElPERM",$valores)){
+              }elseif(in_array("ELPERM",$valores)){
                   $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
               }else{
-                 $sub_array[]='<div class="cbtns"></div>';
+                 $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
               }
             
               

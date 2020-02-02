@@ -103,7 +103,7 @@
   //titulo de la hoja
 
 
-   $valor= "ESTADO DE RESULTADO"."  ".   $date_inicial ."  "."AL"."  ".$date_final  ;
+   $valor= "ESTADO DE RESULTADO DEL CAMPO ESCUELA"."  ".   $date_inicial ."  "."AL"."  ".$date_final  ;
     $estado_resultado->setCellValue('C2', $valor);
     $estado_resultado->getStyle('C2')->applyFromArray($fontStyle);                
 
@@ -262,7 +262,7 @@
     $balance_general->getColumnDimension('F')->setWidth(18);
   //**********************************************************************/////
          $balance_general->setTitle("Balance General");// titulo de la hoja
-         $valor1= "ESTADO DE RESULTADO"."  ".  $date_inicial ."  "."AL"."  ".$date_final ;
+         $valor1= "BALANCE GENERAL DEL CAMPO ESCUELA"."  ".  $date_inicial ."  "."AL"."  ".$date_final ;
     $balance_general->setCellValue('C2', $valor1);
     $balance_general->getStyle('C2')->applyFromArray($fontStyle); 
   //*******************************************************/***

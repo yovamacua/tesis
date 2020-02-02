@@ -84,6 +84,7 @@
                      <option value="REGISTRAR">REGISTRAR</option>
                      <option value="EDITAR">EDITAR</option>
                      <option value="ELIMINAR">ELIMINAR</option>
+                      <option value="CONSULTAR">CONSULTAR</option>
                   </select>
                   <span class="error_form" id="error_nombre"></span>
                 </br>

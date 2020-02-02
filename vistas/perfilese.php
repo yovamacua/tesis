@@ -47,7 +47,7 @@
 
                              $valores[]= $rows["codigo"];
                                 }   
-                                if(in_array("RECAT",$valores)){
+                                if(in_array("REPERM",$valores)){
                                   echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#perfilModal"><i class="fa fa-plus" aria-hidden="true"></i> Nuevo Perfil</button>';
               }
                             ?>
@@ -93,10 +93,10 @@
           <label>Nombre</label>
                    <input type="text" id="nombre" name="nombre"   class="form-control" placeholder="Nombre del Perfil" maxlength="60" autocomplete="off" required/>
                    <span class="error_form" id="error_nombre"></span>
-                    <label>Codigo</label>
+                   <label>Codigo</label>
                     <?php 
- 
-                         $codigo = $perfiL->codigoperfil();
+
+                         $perfiL->codigo();
 
 
                      ?>

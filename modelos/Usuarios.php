@@ -189,6 +189,7 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
             $sql->bindValue(5, $_POST["estado"]);
             $sql->bindValue(6, $_POST["cargo"]);
             $sql->bindValue(7, $_POST["id_usuario"]);
+            
             $sql->execute();  
         } else {
             $sql = "update usuarios set nombres=?, apellidos=?, correo=? , usuario=?, password=?, password2=?, estado = ?, idperfiles=? where id_usuario=? ";
@@ -197,13 +198,14 @@ $encriptar1 = crypt($_POST["password1"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
 $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsystemdev$');
             $sql->bindValue(1, substr($_POST["nombre"], 0, 50));
             $sql->bindValue(2, substr($_POST["apellido"], 0, 50));
-            $sql->bindValue(3, substr($_POST["email"], 0, 100));
-            $sql->bindValue(4, $_POST["cargo"]);
-            $sql->bindValue(5, $_POST["usuario"]);
-            $sql->bindValue(6, $encriptar1);
-            $sql->bindValue(7, $encriptar2);
-            $sql->bindValue(8, $_POST["estado"]);
+            $sql->bindValue(3, substr($_POST["email"], 0, 100));       
+            $sql->bindValue(4, $_POST["usuario"]);
+            $sql->bindValue(5, $encriptar1);
+            $sql->bindValue(6, $encriptar2);
+            $sql->bindValue(7, $_POST["estado"]);
+            $sql->bindValue(8, $_POST["cargo"]);
             $sql->bindValue(9, $_POST["id_usuario"]);
+           
             $sql->execute();
            
         }

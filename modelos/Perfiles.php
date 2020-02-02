@@ -14,13 +14,14 @@ class Perfiles extends Conectar{
           echo json_encode($resultado);*/
        }
        //método para mostrar los datos de un registro a modificar
-        public function get_perfil_por_codigo($codigo){
+        public function get_perfil_por_codigo($codigo,$idperfil){
 
             $conectar= parent::conexion();
             parent::set_names();
-            $sql="SELECT * FROM perfil WHERE codperfil =?;";
+            $sql="SELECT * FROM perfil WHERE nombre= ? and idperfil=?;";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $codigo);
+             $sql->bindValue(2, $idperfil);
             $sql->execute();
             return $resultado=$sql->fetchAll();
            
@@ -47,10 +48,9 @@ class Perfiles extends Conectar{
 
            $sql="insert into perfil
            values(null,?,?,?);";
-           $codigo="pm0004";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["nombre"]);
-          $sql->bindValue(2,$codigo);
+          $sql->bindValue(2,$_POST["clave"]);
           $sql->bindValue(3,$_POST["estado"]);
           $sql->execute();
          // print_r($_POST);
@@ -149,43 +149,33 @@ public function perfil_usuario($pro)
 
 
 }
+// metodo para obtener el valor del numero de venta
+    public function codigo(){
 
-     public function codigoperfil(){
+      
+$caracteres = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.#!';
+for($x = 0; $x < 1; $x++){
+  $aleatoria = substr(str_shuffle($caracteres), 0, 6);
+  echo'<input type="text" class="form-control" id="clave" name="clave" placeholder="Número"  "  value="'.$aleatoria.'" readonly/>';
 
-       $conectar=parent::conexion();
-        parent::set_names();
-
-     
-        $sql="select codperfil from perfil;";
-
-        $sql=$conectar->prepare($sql);
-
-        $sql->execute();
-        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
-
-          //echo json_encode($resultado);
-          foreach($resultado as $k=>$v){
-
-            $perfil["codperfil"]=$v["codperfil"];
-
-          }
-
+    }
                       
-                    if(empty($perfil["codperfil"]))
+                   /* if(empty($cod["codperfil"]))
                     {
-                      echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil"  alue="PM0001" readonly/>';
+                      echo'<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número"  value="PM00001" />';
                     }else{
-                        $num     = substr($perfil["codperfil"] , 2);
+                        $num     = substr($numero_venta["numero_venta"] , 2);
                         $dig     = $num + 1;
-                        $fact = str_pad($dig, 4, "0", STR_PAD_LEFT);
-                        $inter = 'PM'.$fact;
-                        echo '<input type="text" class="form-control" id="codigo" name="codigo" placeholder="codigo perfil" value='.$inter.' readonly/>'; 
-                        //echo '<label>PM'.$fact.'</label>';
-                    }
+                        $fact = str_pad($dig, 5, "0", STR_PAD_LEFT);
+                       // echo '<script>location.reload()</script>';
+                        echo '<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número"  style="width:50%;"  value="NV'.$fact.'" readonly/>';
+                        
+                    }*/
      
         }
+
+    
 }
-/*$V= NEW Perfiles();
-$r= $V->codigoperfil();*/
+
 
 ?>

@@ -5,6 +5,7 @@
   require_once("../modelos/Venta.php");
   require_once("mensajes.php");
   require_once("../modelos/Productos.php");
+   require_once("../modelos/Roles.php");
  if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
         window.location="../vistas/home.php";
@@ -14,6 +15,7 @@
  
   $productos = new Producto();
   $venta = new Ventas();
+   $usuario = new Roles();
 
  $id_usuario = isset($_POST["id_usuario"]);
  $estado=isset($_POST["estado"]);
@@ -84,6 +86,14 @@ $cantidad=isset( $_POST["cantidad"]);
    	case "listar":
 
      $datos=$venta->getventas();
+     $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
  	 $data= Array();
 
     	foreach ($datos as $row) {
@@ -91,8 +101,20 @@ $cantidad=isset( $_POST["cantidad"]);
        if($row["estado"] == 1){
             $est = 'ACEPTADO';
             $atrib = '<span class="label bg-green">Aceptado</span>';
-             $sub_array[]= '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>'.
-          ' <button class="btn btn-danger" onClick="anularventa('.$row["idventas"].','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="btn btn-danger btn-md fa fa-close">Anular</button>';
+             ?>
+         <?php  
+         $button_mostrar='<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
+          $button_eliminar='<button class="btn btn-danger" onClick="anularventa('.$row["idventas"].','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="btn btn-danger btn-md fa fa-close">Anular</button>';
+          if(in_array("ELVENT",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$button_mostrar.''.$button_eliminar.'</div>';
+              } else {
+                 $sub_array[]='<div class="cbtns">'.$button_mostrar.'</div>';
+              }
+
+              
+      ?>
+          <?php 
+             
           }else{
                 $est = 'ANULADO';
                 $atrib='<span class="label bg-red">Anulado</span>';

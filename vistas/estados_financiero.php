@@ -1,10 +1,11 @@
 <?php
 
    require_once("../config/conexion.php");
+   require_once("../modelos/Roles.php");
 
     if(isset($_SESSION["id_usuario"])){
 
-    
+    $usuario = new Roles();
 
 ?>
 
@@ -14,7 +15,7 @@
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 
-<?php if($_SESSION["Reporte Financiero"]==1)
+<?php if($_SESSION["INFORME FINANCIERO"]==1)
 
      {
 
@@ -56,9 +57,20 @@
               
               </div>
 
+ <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("COINFO",$valores)){
+                                  echo '<button type="submit" class="btn btn-primary">CONSULTAR</button>';
+              }
+                            ?>
 
-             <button type="submit" class="btn btn-primary">CONSULTAR</button>
+             
             
             
            </form>

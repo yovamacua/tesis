@@ -1,11 +1,12 @@
 <?php
 
    require_once("../config/conexion.php");
+   require_once("../modelos/Roles.php");
 
     if(isset($_SESSION["id_usuario"])){
 
        require_once("../modelos/Venta.php");
-     
+     $usuario = new Roles();
        $venta = new Ventas();
     
 ?>
@@ -45,8 +46,20 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header boton-top">
-                          <h1 class="box-title" ><label id="letra">Venta</label></h1>
-                            <button class="btn btn-primary btn-lg" id="btnagregar" onclick="mostrarformulario(true)" ><i class="fa fa-plus" aria-hidden="true"></i> Nueva Venta</button></h1>
+                       <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("REVENT",$valores)){
+                                  echo '<h1 class="box-title" ><label id="letra">Venta</label></h1>
+                            <button class="btn btn-primary btn-lg" id="btnagregar" onclick="mostrarformulario(true)" ><i class="fa fa-plus" aria-hidden="true"></i> Nueva Venta</button></h1>';
+              }
+                            ?>
+                          
                         <div class="box-tools pull-right">
                         </div>
                     </div>

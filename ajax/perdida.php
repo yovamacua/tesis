@@ -138,9 +138,11 @@ foreach($rol as $rows){
                }
             elseif (in_array("EDPERD",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
-              }else{
+              }elseif(in_array("ELPERD",$valores)){
                   $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
+              }else{
+                $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
               }
             
               

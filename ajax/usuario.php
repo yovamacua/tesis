@@ -41,7 +41,7 @@ $usuario   = isset($_POST["usuario"]);
 $password1 = isset($_POST["password1"]);
 $password2 = isset($_POST["password2"]);
 $estado    = isset($_POST["estado"]);
-$permisos= isset($_POST["permiso"]);
+
 
 
 if (!isset($_SESSION['id_usuario'])) {?>
@@ -79,7 +79,7 @@ switch ($_GET["op"]) {
                     existe el correo en la base de datos, si existe no se registra el usuario*/
                     if (is_array($datos) == true and count($datos) == 0) {
                         //no existe el usuario por lo tanto hacemos el registros
-                        $usuarios->registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos);
+                        $usuarios->registrar_usuario($nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado);
                         /*si se registra el usuario aparece siguente mensaje*/
                         $messages[] = "El usuario se registró correctamente";
                     } else {
@@ -89,7 +89,7 @@ switch ($_GET["op"]) {
                 } //cierre de la validacion empty que valida el id usuario no sea vacio
                 else {
                     /*si ya existe entonces editamos el usuario*/
-                    $usuarios->editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado,$permisos);
+                    $usuarios->editar_usuario($id_usuario, $nombre, $apellido, $email, $cargo, $usuario, $password1, $password2, $estado);
                     /*si edita el usuario aparece siguente mensaje*/
                     $messages[] = "La informacion se actualizo correctamente";
                 }
@@ -198,7 +198,7 @@ foreach($rol as $rows){
             $boton_editar= '<button type="button" onClick="cambiarEstado(' . $row["id_usuario"] . ',' . $row["estado"] . '); desvanecer()" name="estado" id="' . $row["id_usuario"] . '" class="' . $atrib . ' hint--top" aria-label="Cambiar Estado">' . $est . '</button><button type="button" onClick="mostrar(' . $row["id_usuario"] . ');"  id="' . $row["id_usuario"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar Cuenta" ><i class="fa fa-pencil-square-o"></i></button>
              <button type="button" onClick="pass(' . $row["id_usuario"] . '); desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-warning btn-md hint--top" aria-label="Editar Contraseña" ><i class="fa fa-key"></i></button>';
 
- $boton_registrar='<a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" class="btn btn-primary btn-md"><i></i> AsignarRoles</button></a>'; 
+ $boton_registrar='<a href="asignar_roles.php?id='. $row["id_usuario"] .'"><button type="button" " class="btn btn-dark btn-md hint--top" aria-label="Asignar roles "><i class="fa fa-plus-square"></i></button></a>'; 
 
             
      $boton_eliminar=' <button type="button" onClick="eliminar(' . $row["id_usuario"] . ');desvanecer()"  id="' . $row["id_usuario"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Cuenta "><i class="fa fa-trash"></i></button></div>';
@@ -206,6 +206,16 @@ foreach($rol as $rows){
  
           if(in_array("REUSUA",$valores) and in_array("EDUSUA",$valores)and in_array("ELUSUA",$valores)){
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+                 }elseif (in_array("EDUSUA",$valores) and in_array("ELUSUA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.'</div>';
+
+               } elseif(in_array("REUSUA",$valores) and in_array("ELUSUA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_eliminar.'</div>';
+
+              } elseif (in_array("EDUSUA",$valores) and in_array("REPUSUA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_registrar.'</div>';
+
+              
               } elseif (in_array("REUSUA",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
               }elseif(in_array("EDUSUA",$valores)){
@@ -214,7 +224,7 @@ foreach($rol as $rows){
                   $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
               }else{
-                  $sub_array[]='<div class="cbtns"></div>';
+                  $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
 
               }
             

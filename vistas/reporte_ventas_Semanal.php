@@ -1,11 +1,13 @@
 <?php
 
    require_once("../config/conexion.php");
+   require_once("../modelos/Roles.php");
 
     if(isset($_SESSION["id_usuario"])){
 
       require_once("../modelos/Categorias.php");
          $categoria = new Categorias();
+           $usuario = new Roles();
 
        $cat = $categoria->get_categoria();
 
@@ -20,7 +22,7 @@ $activar3 = 'item_reporteVenta3';
 require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
-<?php if($_SESSION["Venta"]==1)
+<?php if($_SESSION["VENTA"]==1)
      {
 
      ?>
@@ -86,8 +88,19 @@ require_once("header.php");?>
                                  
                  </select>
             </div>
+  <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
 
-             <button type="submit" class="btn btn-primary">CONSULTAR</button>
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("COREPO",$valores)){
+                                  echo '<button type="submit" class="btn btn-primary">CONSULTAR</button>';
+              }
+                            ?>
+             
             
             
            </form>

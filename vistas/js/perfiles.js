@@ -119,6 +119,7 @@ $('#nombre').val("");
    
 }
 
+
 //Función Listar
 function listar()
 {
@@ -226,7 +227,7 @@ function guardaryeditar(e)
    });
 
 }
-/*function editarcantidad(e){
+function editarcantidad(e){
     e.preventDefault(); // no se activa la accion predeterminada del evento
     var formData = new FormData($("#asignar_form")[0]);
 
@@ -244,12 +245,11 @@ function guardaryeditar(e)
          }
 
       });
-  }*/
+  }
 
 function eliminar(idperfil){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-      //alert(categoria_id);
 
    bootbox.confirm("¿Está Seguro de eliminar el perfil?", function(result){
  if(result)

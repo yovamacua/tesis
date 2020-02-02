@@ -103,7 +103,7 @@
                 $fecha_final = date("Y-m-d", strtotime($date));
                 $id_categoria=$_POST["categoria"];
    // TITULO DEL REPORTE
-  $valor= "REPORTE DE VENTAS SEMANAL DE LA FECHA"." ".  $date_inicial." "."HASTA"." ".$date_final;
+  $valor= " CAMPO ESCUELA REPORTE DE VENTAS SEMANAL DE LA FECHA"." ".  $date_inicial." "."HASTA"." ".$date_final;
   $registro_venta->setCellValue('E2', $valor);
   $registro_venta->getStyle('E2')->applyFromArray($fontStyle);
 

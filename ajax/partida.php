@@ -178,8 +178,8 @@ foreach($rol as $rows){
                     $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
                     }
                     else{
-                       $sub_array[]='<div class="cbtns"></div>';
-                       $sub_array[]='<div class="cbtns"></div>';
+                       $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
+                       $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
                    }
                 
       

@@ -3,6 +3,7 @@
   require_once("../config/conexion.php");
   require_once("../modelos/Unidad.php");
   require_once("mensajes.php");
+   require_once("../modelos/Roles.php");
   #valida que exista la sessión
 if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
@@ -15,6 +16,7 @@ if (!isset($_SESSION['id_usuario'])) {?>
 
 //objeto de tipo unidad
   $unidad = new Unidad();
+   $usuario = new Roles();
 
    $id_unidad=isset($_POST["id_unidad"]);
    $nombre=isset($_POST["nombre"]);
@@ -96,6 +98,14 @@ if (!isset($_SESSION['id_usuario'])) {?>
 	 break;
         case "listar":
      $datos=$unidad->get_unidad();
+     $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+      $valores=array();
+
+      //Almacenamos los permisos marcados en el array
+foreach($rol as $rows){
+
+              $valores[]= $rows["codigo"];
+          }
    
  	 $data= Array();
 
@@ -104,12 +114,28 @@ if (!isset($_SESSION['id_usuario'])) {?>
         $sub_array = array();
       $sub_array[] = $row["nombre"];
       $sub_array[] = $row["descripcion"];
-      $sub_array[]='<div class="cbtns">
-                     <button type="button" onClick="mostrar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar unidad" ><i class="fa fa-pencil-square-o"></i></button>
-                           <button type="button" onClick="eliminar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Unidad "><i class="fa fa-trash"></i></button></div>';
-          
-         
-          
+     
+                    $button_editar='<button type="button" onClick="mostrar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar unidad" ><i class="fa fa-pencil-square-o"></i></button>';
+
+                          $button_eliminar=' <button type="button" onClick="eliminar('.$row["idunidad"].');"  id="'.$row["idunidad"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Unidad "><i class="fa fa-trash"></i></button></div>';
+           ?>
+         <?php  
+          if(in_array("EDUNID",$valores) and in_array("ELUNID",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$button_editar.''.$button_eliminar.'</div>';
+              } elseif (in_array("EDUNID",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$button_editar.'</div>';
+              }elseif(in_array("ELUNID",$valores)){
+                  $sub_array[]='<div class="cbtns">'.$button_eliminar.'</div>';
+
+              }else{
+                
+                  $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
+
+              }
+
+              
+      ?>
+          <?php  
            
       $data[] = $sub_array;
       }

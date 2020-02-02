@@ -207,6 +207,15 @@ foreach($rol as $rows){
           <?php  
           if(in_array("RECAPA",$valores) and in_array("EDCAPA",$valores)and in_array("ELCAPA",$valores)){
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+                 }elseif (in_array("EDCAPA",$valores) and in_array("ELCAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.'</div>';
+
+               } elseif(in_array("RECAPA",$valores) and in_array("ELCAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_eliminar.'</div>';
+
+              } elseif (in_array("EDCAPA",$valores) and in_array("RECAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_registrar.'</div>';
+
               } elseif (in_array("RECAPA",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
               }elseif(in_array("EDCAPA",$valores)){
@@ -215,7 +224,7 @@ foreach($rol as $rows){
                   $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
               }else{
-                  $sub_array[]='<div class="cbtns"></div>';
+                  $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
 
               }
             

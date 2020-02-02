@@ -1,11 +1,13 @@
 <?php
    
     require_once("../config/conexion.php");
+      require_once("../modelos/Roles.php");
 
     if(isset($_SESSION["id_usuario"])){
 
    	require_once("../modelos/Venta.php");
    	require_once("../modelos/Perdidas.php");
+   	 $usuario = new Roles();
 
    	$ventas = new Ventas();
    	$datos = $ventas->get_ventas_reporte_general();
@@ -25,7 +27,7 @@ require_once("header.php");?>
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 
- <?php if($_SESSION["Venta"]==1)
+ <?php if($_SESSION["VENTA"]==1)
      {
 
      ?>
@@ -54,7 +56,19 @@ require_once("header.php");?>
 		        <div class="panel-body">
 
 		         <div class="btn-group text-center">
-		          <button type='button' id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>
+                 <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("COREPO",$valores)){
+                                  echo '<button type="button" id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>';
+              }
+                            ?>
+		         
 		         </div>
 		       </div>
 		    </div>

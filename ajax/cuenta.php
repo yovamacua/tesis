@@ -151,7 +151,7 @@ $boton_imprimir='<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["i
                     $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_imprimir.'</div>';
                     }
                     else{
-                       $sub_array[]='<div class="cbtns"></div>';
+                       $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
                        $sub_array[]='<div class="cbtns">'.$boton_imprimir.'</div>';
                    }
                 
