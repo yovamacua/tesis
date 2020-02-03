@@ -145,7 +145,7 @@ inner join perfil p on p.idperfil=u.idperfiles";
         $conectar = parent::conexion();
         parent::set_names();
 
-        $sql = "insert into usuarios values(null,?,?,?,?,?,?,?,now(),?,?);";
+        $sql = "insert into usuarios values(null,?,?,?,?,?,?,now(),?,?,?);";
         //se le pasa la consulta
         $sql            = $conectar->prepare($sql);
         $usuario_imagen = 'imagen_usuario_general.png';

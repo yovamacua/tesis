@@ -412,7 +412,7 @@ function pass(id_usuario) {
         //evento para ventana modal
         $('#nombre').val(data.nombre);
         $('#apellido').val(data.apellido);
-        $('#cargo').val(data.cargo);
+        $('#cargo').val(data.idperfiles);
         $('#usuario').val(data.usuario);
         $("#usuarioModal").modal("show");
         $('#password1').val("");
