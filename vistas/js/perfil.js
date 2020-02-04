@@ -324,7 +324,7 @@ function validarImagen(obj) {
         return;
     }
     if (!(/\.(jpg|png)$/i).test(uploadFile.name)) {
-        bootbox.alert("El formato de imagen no es valido");
+        bootbox.alert("El formato de imagen no es válido");
         $('#usuario_imagen').val("");
         $(".group-span-filestyle .badge").hide();
     } else {
@@ -342,7 +342,7 @@ function validarImagen(obj) {
 
 function quitar_imagen() {
     {
-        bootbox.confirm("¿Está Seguro de eliminar la imagen de usuario?", function(result) {
+        bootbox.confirm("¿Está seguro de eliminar la imagen de usuario?", function(result) {
             if (result) {
                 window.location = "../ajax/perfil.php?op=quitar_imagen";
             }

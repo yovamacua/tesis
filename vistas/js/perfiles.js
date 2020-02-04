@@ -251,7 +251,7 @@ function eliminar(idperfil){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
 
-   bootbox.confirm("¿Está Seguro de eliminar el perfil?", function(result){
+   bootbox.confirm("¿Está seguro de eliminar el perfil?", function(result){
  if(result)
  {
      $.ajax({

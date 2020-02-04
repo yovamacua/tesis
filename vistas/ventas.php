@@ -29,7 +29,7 @@
       <div class="content-wrapper">
        <section class="content-header">
 
-          <h1>Listado de Ventas</h1>
+          <h1>Administración de Ventas</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

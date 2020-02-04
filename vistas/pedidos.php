@@ -27,7 +27,7 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Registro de Pedido</h1>
+          <h1>Administración de Pedido</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

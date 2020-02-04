@@ -33,7 +33,7 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Listado de Gastos</h1>
+          <h1>Administración de Gastos</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

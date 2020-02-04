@@ -269,7 +269,7 @@ function guardaryeditar(e) {
 //funcion para eliminar la información de la cuenta
 function eliminar(id_cuenta) {
 
-    bootbox.confirm("¿Está Seguro de eliminar el cuenta?", function(result) {
+    bootbox.confirm("¿Está seguro de eliminar la cuenta?", function(result) {
         if (result) {
             $.ajax({
                 url: "../ajax/cuenta.php?op=eliminar_cuenta",

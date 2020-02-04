@@ -286,7 +286,7 @@ function eliminar(idroles){
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(categoria_id);
 
-   bootbox.confirm("¿Está Seguro de eliminar el rol?", function(result){
+   bootbox.confirm("¿Está seguro de eliminar el rol?", function(result){
  if(result)
  {
      $.ajax({

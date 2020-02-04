@@ -461,7 +461,7 @@ function mostrar(id_usuario) {
 //la funcion guardaryeditar(e); se llama cuando se da click al boton submit
 function guardaryeditar(e) {
     e.preventDefault(); //No se activará la acción predeterminada del evento
-   // bootbox.confirm("¿Está Seguro registar el nuevo usuario?", function(result){
+   // bootbox.confirm("¿Está seguro registar el nuevo usuario?", function(result){
        // if(result){
     var formData = new FormData($("#usuario_form")[0]);
     var password1 = $("#password1").val();
@@ -496,7 +496,7 @@ function guardaryeditar(e) {
 //EDITAR ESTADO DEL USUARIO
 //importante:id_usuario, est se envia por post via ajax
 function cambiarEstado(id_usuario, est) {
-    bootbox.confirm("¿Está Seguro de cambiar de estado?", function(result) {
+    bootbox.confirm("¿Está seguro de cambiar de estado?", function(result) {
         if (result) {
             $.ajax({
                 url: "../ajax/usuario.php?op=activarydesactivar",
@@ -518,7 +518,7 @@ function cambiarEstado(id_usuario, est) {
 
 function eliminar(id_usuario) {
 
-    bootbox.confirm("¿Está Seguro de eliminar el usuario?", function(result) {
+    bootbox.confirm("¿Está seguro de eliminar el usuario?", function(result) {
         if (result) {
 
             $.ajax({

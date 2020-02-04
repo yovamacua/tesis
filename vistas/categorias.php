@@ -19,12 +19,12 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Listado de Categorias</h1>
+          <h1>Administración de Categorías</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
              <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
-             <li><i class="fa fa-users"></i> Categoria</li>
+             <li><i class="fa fa-users"></i> Categoría</li>
           </ol>
    
         </section>
@@ -59,7 +59,7 @@
                             <thead>
                                 <tr>
                                 <th width="5%">Categoría</th>
-                                <th width="5%">Descripcion</th>
+                                <th width="5%">Descripción</th>
                                 <th width="5%">Acciones</th>
                                  
                                                           
@@ -93,7 +93,7 @@
           <br />
 
 
-          <label>Descripcion</label>
+          <label>Descripción</label>
           <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="70"  autocomplete="off" required=""/>
           <span class="error_form" id="error_descripcion"></span>
           <br />

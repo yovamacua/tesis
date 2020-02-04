@@ -29,7 +29,7 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Capacitaciones</h1>
+          <h1>Administración de Capacitaciones</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

@@ -415,7 +415,7 @@ var inpK= stock[i];
 function guardaryeditar(e)
 {
 	e.preventDefault(); //No se activará la acción predeterminada del evento
-	bootbox.confirm("¿Está Seguro de realizar la compra?", function(result){
+	bootbox.confirm("¿Está seguro de realizar la compra?", function(result){
  if(result)
  {
 	var formData = new FormData($("#formulario")[0]);
@@ -456,7 +456,7 @@ function guardaryeditar(e)
  //anular venta
        //importante:id_usuario, est se envia por post via ajax
        function anularventa(idventas,estado){
-        bootbox.confirm("¿Está Seguro de anular la venta?", function(result){
+        bootbox.confirm("¿Está seguro de anular la venta?", function(result){
 		        if(result)
 		          {
            $.ajax({

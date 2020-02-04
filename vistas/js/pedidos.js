@@ -532,7 +532,7 @@ function guardaryeditardetalle(e)
 //funcion eliminar pedido
 function eliminar(id_pedido){
 
-  bootbox.confirm("¿Está Seguro de eliminar el pedido?", function(result){
+  bootbox.confirm("¿Está seguro de eliminar el pedido?", function(result){
     if(result)
     {
       $.ajax({
@@ -556,7 +556,7 @@ function eliminar_detallepedidos(id_detallepedido){
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(id_detallepedido);
 
-  bootbox.confirm("¿Está Seguro de eliminar el producto?", function(result){
+  bootbox.confirm("¿Está seguro de eliminar el insumo?", function(result){
     if(result)
     {
       $.ajax({

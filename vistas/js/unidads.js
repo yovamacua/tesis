@@ -236,7 +236,7 @@ function eliminar(id_unidad){
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(categoria_id);
 
-   bootbox.confirm("¿Está Seguro de eliminar la categoria?", function(result){
+   bootbox.confirm("¿Está seguro de eliminar la unidad?", function(result){
  if(result)
  {
      $.ajax({

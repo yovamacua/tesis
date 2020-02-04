@@ -595,7 +595,7 @@ function mostrar(id_insumo){
 function eliminar(id_insumo){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-	bootbox.confirm("¿Está Seguro de eliminar el insumo?", function(result){
+	bootbox.confirm("¿Está seguro de eliminar el insumo?", function(result){
 		if(result){
 	    	$.ajax({
 	       		url:"../ajax/insumo.php?op=eliminar_insumo",

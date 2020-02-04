@@ -266,7 +266,7 @@ function eliminar(id_incidente) {
     //IMPORTANTE: asi se imprime el valor de una funcion
     //alert(categoria_id);
 
-    bootbox.confirm("¿Está Seguro de eliminar el incidente?", function(result) {
+    bootbox.confirm("¿Está seguro de eliminar el incidente?", function(result) {
         if (result) {
             $.ajax({
                 url: "../ajax/incidente.php?op=eliminar_incidente",

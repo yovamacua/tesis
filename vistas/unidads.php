@@ -19,7 +19,7 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Listado de Unidades</h1>
+          <h1>Administración de Unidades</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
@@ -59,7 +59,7 @@
                             <thead>
                                 <tr>
                                 <th width="5%">Unidad</th>
-                                 <th width="5%">Descripcion</th>
+                                 <th width="5%">Descripción</th>
                                 <th width="5%">Acciones</th>
                            
                               
@@ -93,7 +93,7 @@
           <br />
 
 
-          <label>Descripcion</label>
+          <label>Descripción</label>
           <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="50" required=""/>
           <span class="error_form" id="error_descripcion"></span>
           <br />

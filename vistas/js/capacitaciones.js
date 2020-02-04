@@ -602,7 +602,7 @@ function eliminar(id_capacitacion){
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(capacitacion_id);
 
-  bootbox.confirm("¿Está Seguro de eliminar la capacitacion?", function(result){
+  bootbox.confirm("¿Está seguro de eliminar la capacitación?", function(result){
     if(result)
     {
       $.ajax({
@@ -626,7 +626,7 @@ function eliminardetalle(id_detallecapacitados){
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(capacitacion_id);
 
-  bootbox.confirm("¿Está Seguro de eliminar el capacitado?", function(result){
+  bootbox.confirm("¿Está seguro de eliminar el capacitado?", function(result){
     if(result)
     {
       $.ajax({

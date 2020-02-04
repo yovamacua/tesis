@@ -36,7 +36,7 @@ $usuario = new Roles();
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Listado de Insumos</h1>
+          <h1>Administración de Insumos</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

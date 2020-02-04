@@ -257,7 +257,7 @@ function mostrar(id_gasto){
 function eliminar(id_gasto){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-	bootbox.confirm("¿Está Seguro de eliminar el gasto?", function(result){
+	bootbox.confirm("¿Está seguro de eliminar el gasto?", function(result){
 		if(result){
 	    	$.ajax({
 	       		url:"../ajax/gasto.php?op=eliminar_gasto",

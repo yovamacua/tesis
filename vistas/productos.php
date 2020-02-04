@@ -34,7 +34,7 @@
         <!-- Main content -->
         <section class="content-header">
 
-          <h1>Listado de Productos</h1>
+          <h1>Administración de Productos</h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

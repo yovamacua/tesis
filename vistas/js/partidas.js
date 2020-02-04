@@ -240,7 +240,7 @@ function guardaryeditar(e) {
 
 function eliminar(id_partida) {
 
-    bootbox.confirm("¿Está Seguro de eliminar el partida?", function(result) {
+    bootbox.confirm("¿Está seguro de eliminar la partida?", function(result) {
         if (result) {
             $.ajax({
                 url: "../ajax/partida.php?op=eliminar_partida",

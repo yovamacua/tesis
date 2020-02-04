@@ -377,7 +377,7 @@ function guardaryeditar(e)
 function eliminar(id_perdida){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
-	bootbox.confirm("¿Está Seguro de eliminar la perdida?", function(result){
+	bootbox.confirm("¿Está seguro de eliminar la perdida?", function(result){
 		if(result){
 	    	$.ajax({
 	       		url:"../ajax/perdida.php?op=eliminar_perdida",
