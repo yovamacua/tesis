@@ -20,7 +20,7 @@ inner join modulo as m on m.idmodulo= r.idmodulos;";
             $conectar= parent::conexion();
             parent::set_names();
             $sql="select r.idrol,r.codigo,r.descripcion, r.rol,r.idmodulos from rol as r
-inner join modulo as m on m.idmodulo= r.idmodulos where r.idroles=?;";
+inner join modulo as m on m.idmodulo= r.idmodulos where r.idrol=?;";
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idrol);
             $sql->execute();
