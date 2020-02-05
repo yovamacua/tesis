@@ -65,6 +65,7 @@
                             </h1>
                         <div class="box-tools pull-right">
                         </div>
+                        <button class="btn btn-primary btn-lg" style="background:#00c0ef" id="add_reporte"  data-toggle="modal" data-target="#reporteModal"><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button>
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
@@ -74,7 +75,7 @@
                                 <tr>
                                   <th width="15%">Autor</th>
                                   <th width="10%">Fecha</th>
-                                  <th width="10%">Descripción</th>
+                                  <th width="40%">Descripción</th>
                                   <th width="10%">Gasto</th>
                                  
                                   <th>Acciones</th>
@@ -84,44 +85,6 @@
                             <tbody>
                             </tbody>
                           </table>
-
-                          <!-- inicio del div del boton generar reporte donaciones -->
-                      <div class="form-row" style="width:300px;">
-                        <!--form para generar el archivo excel-->
-                        <label>Seleccione el año para el reporte a generar</label>
-                        <form action="reportes/reporte_gastos.php" method="post">
-                          <div class="form-group col-md-6">
-                            <select class="form-control" name="year" id="year">
-                              <option value="0">Seleccione...</option>
-                                <?php 
-                                 //si se envia el POST
-                                  if(isset($_POST["year"])){
-                                    for($i=0; $i<count($fecha_gastos); $i++){
-
-                                      if($fecha_gastos[$i]["fecha"]==$_POST["year"]){
-                                        echo '<option value="'.$fecha_gastos[$i]["fecha"].'" selected=selected>'.$fecha_gastos[$i]["fecha"].'</option>';
-                                      }else{ 
-                                        echo '<option value="'.$fecha_gastos[$i]["fecha"].'">'.$fecha_gastos[$i]["fecha"].'</option>';
-                                      } 
-                                    }//cierre del ciclo for
-                                  //SI NO SE ENVIA EL POST
-                                  } else {
-                                    for ($i=0; $i<count($fecha_gastos); $i++){
-                                      echo '<option value="'. $fecha_gastos[$i]["fecha"].'" selected=selected>'. $fecha_gastos[$i]["fecha"].'</option>';        
-
-                                    }//cierre del ciclo for
-                                  }//cierre del ese
-                                ?>
-                            </select>
-                          </div> 
-                         
-                          <div class="form-group col-md-6">
-                            <input type="hidden" name="fecha" id="fechaA"/>                            
-                            <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
-                          </div>   
-                        </form>
-                      </div> 
-                    <!-- fin del div del boton generar reporte donaciones -->
 
                     </div>
                     <!--Fin centro -->
@@ -173,6 +136,63 @@
          </form>
       </div>
     </div>
+
+  <!--FORMULARIO VENTANA MODAL REPORTE-->
+  <div id="reporteModal" class="modal fade">
+      <div class="modal-dialog">
+         <form method="post" action="reportes/reporte_gastos.php">
+            <div class="modal-content">
+               <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title">Generar Reporte</h4>
+               </div>
+
+                <div class="form-row">
+                  <div class="form-group col-md-12">
+                    <label>Seleccione el año para el reporte a generar</label>
+                  </div>
+                </div>
+
+                <div style="text-align: center" class="form-row">
+                  <div class="form-group col-md-6">
+                    <select class="form-control" name="year" id="year">
+                      <option value="0">Seleccione...</option>
+                        <?php 
+                         //si se envia el POST
+                          if(isset($_POST["year"])){
+                            for($i=0; $i<count($fecha_gastos); $i++){
+
+                              if($fecha_gastos[$i]["fecha"]==$_POST["year"]){
+                                echo '<option value="'.$fecha_gastos[$i]["fecha"].'" selected=selected>'.$fecha_gastos[$i]["fecha"].'</option>';
+                              }else{ 
+                                echo '<option value="'.$fecha_gastos[$i]["fecha"].'">'.$fecha_gastos[$i]["fecha"].'</option>';
+                              } 
+                            }//cierre del ciclo for
+                          //SI NO SE ENVIA EL POST
+                          } else {
+                            for ($i=0; $i<count($fecha_gastos); $i++){
+                              echo '<option value="'. $fecha_gastos[$i]["fecha"].'" selected=selected>'. $fecha_gastos[$i]["fecha"].'</option>';        
+
+                            }//cierre del ciclo for
+                          }//cierre del ese
+                        ?>
+                    </select>
+                  </div> 
+                 
+                  <div class="form-group col-md-6">                         
+                    <button id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
+                  </div>   
+                </div> 
+
+                <div class="modal-footer">
+                  <input type="hidden" name="fecha" id="fechaA"/>    
+                </div>
+
+            </div>
+         </form>
+      </div>
+    </div>
+
      <?php  } else {
 
        require("noacceso.php");
