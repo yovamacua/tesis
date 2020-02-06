@@ -217,9 +217,9 @@ $usuario = new Roles();
           </div>
 
            <div class="form-row">
-            <div class="form-group col-md-12">
+            <div class="form-group col-md-6">
               <label>Insumo</label>
-                <select class="form-control" name="idinsumo" id="Id_insumo" placeholder="Seleccione el insumo" required>
+                <select class="form-control" name="idinsumo" id="Id_insumo" onchange="InsumoDisp(id)" required>
                   <option  value="">Seleccione el Insumo</option>
                     <?php
                        for($i=0; $i<sizeof($in);$i++){
@@ -231,6 +231,11 @@ $usuario = new Roles();
                 </select>
                 <span class="error_form" id="error_Id_insumo"></span>
             </div>
+
+            <div class="form-group col-md-6">
+            <label>Disponibles</label>
+            <input type="text" name="disponible" id="disponible" class="form-control" readonly/>
+          </div>
         </div>
 
         <div class="form-row">
@@ -251,7 +256,7 @@ $usuario = new Roles();
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                   <input type="hidden" name="id_kardexinsumo" id="id_kardexinsumo"/>
                   <input type="hidden" name="canti" id="canti"/>
-                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add" onclick="desvanecer(); validarCantidad()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add" onclick="desvanecer();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   <button type="button" onclick="limpiar2()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>
             </div>

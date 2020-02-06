@@ -144,7 +144,7 @@
             <div class="modal-content">
                <div class="modal-header">
                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                 <h4 class="modal-title">Generar Reporte</h4>
+                 <h4>Generar Reporte</h4>
                </div>
 
                 <div class="form-row">
@@ -180,7 +180,7 @@
                   </div> 
                  
                   <div class="form-group col-md-6">                         
-                    <button id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button> 
+                    <button id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Archivo</button> 
                   </div>   
                 </div> 
 

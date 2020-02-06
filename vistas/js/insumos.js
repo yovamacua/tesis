@@ -368,10 +368,21 @@ $(function() {
         }
     } 
 
+    // funcion para validar que la cantidad no sea mayor a lo disponible
+    function validarCantidad(id_insumo){
+    var idIns = document.getElementById("Id_insumo").value;
+    var salida = document.getElementById("Cantidad").value;
+    var disp = document.getElementById("disponible").value;
+       if(parseInt(salida, 10) > disp) {
+            return false;
+        }else{
+            return true;
+        }
+    } 
+
     // se valida el formulario
     $("#kardexinsumo_form").on("submit", function(e) {
-      // asignacion de valor a vaiables
-      
+        // asignacion de valor a vaiables
         var error_Id_insumo = false;
 	    var error_Cantidad = false;
 	    var error_Fecha = false;
@@ -383,21 +394,15 @@ $(function() {
 
         //comparacion
         if (error_Id_insumo === false && error_Cantidad === false && 
-          error_Fecha === false) {
-               // si todo funciona las barrita de color boton se reseta despues del submit
+          error_Fecha === false && validarCantidad(true)) {
+            // si todo funciona las barrita de color boton se reseta despues del submit
             $("#Id_insumo").css("border-bottom", "1px solid #d2d6de");
             $("#Cantidad").css("border-bottom", "1px solid #d2d6de");
             $("#Fecha").css("border-bottom", "1px solid #d2d6de");
-            if(validarCantidad(false)){
-                editarcantidad(e); 
-            }else{
-                alert("Cantidad superior a la existencia, verifique la existencia e ingrese un valor valido");
-                return false;
-            }
-            
+            editarcantidad(e); 
         } else {
             // se muestra un mensaje si los campos no estan correctos
-            alert("Complete/Revise los campos");
+            alert("La cantidad es mayor que la existencia");
             return false;
         }
     });
@@ -611,21 +616,13 @@ function eliminar(id_insumo){
    		}
   	});//bootbox
 }
-
-function validarCantidad(){
+// funcion para mostrar la cantidad disponible del insumo
+function InsumoDisp(id_insumo){
     var idIns = document.getElementById("Id_insumo").value;
-    var salida = document.getElementById("Cantidad").value;
     $.post("../ajax/insumo.php?op=cantidad_insumo",{id_insumo: idIns}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
-           var cant = data.cantidad;
-           if(parseInt(salida, 10) > cant) {
-                alert("valor mayor");
-                return false;
-            }else{
-                alert("todo bien");
-                return true;
-            }
+        $('#disponible').val(data.cantidad);
      });
 } 
 
