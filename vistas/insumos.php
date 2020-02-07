@@ -117,6 +117,7 @@ $usuario = new Roles();
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Agregar Insumo</h4>
           </div>
+    <div class="modal-body">  
 
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -194,6 +195,8 @@ $usuario = new Roles();
               <span class="error_form" id="error_idcategoria"></span>
           </div> 
         </div> 
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    </div><!-- body -->
 
                <div class="modal-footer">
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
@@ -215,6 +218,7 @@ $usuario = new Roles();
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title2">Descontar Insumo</h4>
           </div>
+    <div class="modal-body">
 
            <div class="form-row">
             <div class="form-group col-md-6">
@@ -233,7 +237,7 @@ $usuario = new Roles();
             </div>
 
             <div class="form-group col-md-6">
-            <label>Disponibles</label>
+            <label>Existencia</label>
             <input type="text" name="disponible" id="disponible" class="form-control" readonly/>
           </div>
         </div>
@@ -246,11 +250,13 @@ $usuario = new Roles();
           </div>
 
           <div class="form-group col-md-6">
-            <label>fecha</label>
+            <label>Fecha</label>
             <input type="text" name="fechaS" id="Fecha" class="form-control" placeholder="Fecha" required/>
             <span class="error_form" id="error_Fecha"></span>
           </div>  
         </div> 
+      <br><br><br><br><br><br><br>
+    </div><!-- body -->
 
                <div class="modal-footer">
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />

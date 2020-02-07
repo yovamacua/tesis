@@ -181,6 +181,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Agregar Capacitación</h4>
         </div>
+      <div class="modal-body">
         
          <div class="form-row">
           <div class="form-group col-md-6">
@@ -207,6 +208,8 @@
             <span class="error_form" id="error_cargo"></span>
           </div>
         </div>
+        <br><br><br><br><br><br><br>
+      </div><!-- body -->
     
         <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />

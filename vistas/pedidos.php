@@ -79,7 +79,7 @@
                     <!--Fin centro 1-->
 
             <!--Formulario para agregar capacitados -->
-            <?php 
+                          <?php 
                              $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
                             $valores=array();
                             //Almacenamos los permisos marcados en el array
@@ -88,10 +88,9 @@
                              $valores[]= $rows["codigo"];
                                 }   
                                 if(in_array("REPEDI",$valores)){
-                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>
-';
-              }
-                            ?>
+                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>';
+                                }
+                          ?>
             
             <div class="panel-body table-responsive contenedor" id="detallepedidosModal">
               <form method="post" id="detallepedidos_form" autocomplete="off">
@@ -202,7 +201,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
           <h4 class="modal-title">Registrar fecha del pedido</h4>
         </div>
-
+    <div class="modal-body">  
         <div class="form-row">
           <div class="form-group col-md-12">
             <label>Fecha</label>
@@ -210,7 +209,8 @@
             <span class="error_form" id="error_fecha1"></span>
           </div>
         </div>
-     
+      <br><br><br><br>
+    </div><!-- body -->
          <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
           <input type="hidden" name="id_pedido" id="id_pedido"/>
