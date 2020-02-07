@@ -128,9 +128,10 @@ foreach($rol as $rows){
             ?>
             
               <?php  
-                $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación"><i class="fa fa-trash"></i></button>';
-               $boton_editar ='<button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación"><i class="fa fa-pencil-square-o"></i></button>';
+                $boton_editar ='<button type="button" onClick="mostrar('.$row["id_donacion"].');"  id="'.$row["id_donacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Donación"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
+                $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_donacion"].'); desvanecer()"  id="'.$row["id_donacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Donación"><i class="fa fa-trash"></i></button>';
+                
                 if(in_array("EDDONA",$valores) and in_array("ELDONA",$valores)){
                  $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
                }

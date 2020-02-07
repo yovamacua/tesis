@@ -180,14 +180,14 @@ foreach($rol as $rows){
           $sub_array[] = $row["usuario"];
           $sub_array[] = $row["id_pedido"];
           $sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
-  
-             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
 
-           
-            $boton_editar = '<button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>';
-       
-            $boton_registrar = '<div class="cbtns">
-          <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>';
+          $boton_registrar = '<div class="cbtns">
+            <button type="button" onClick="verdetalle('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-md btn-default update hint--top" aria-label="Agregar Detalle" ><i class="fa fa-plus"></i></button>&nbsp;';
+
+          $boton_editar = '<button type="button" onClick="mostrar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Pedido"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
+  
+          $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_pedido"].');"  id="'.$row["id_pedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Pedido"><i class="fa fa-trash"></i></button></div>';
+            
        ?>
           <?php  
           if(in_array("REPEDI",$valores) and in_array("EDPEDI",$valores)and in_array("ELPEDI",$valores)){
@@ -249,11 +249,10 @@ foreach($rol as $rows){
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["nombre"];
         
-              
-             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button>';
+            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
-            
-            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>';
+            $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button>';
+    
        ?>
           <?php  
           if(in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)){

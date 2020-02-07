@@ -141,9 +141,10 @@ foreach($rol as $rows){
 		      	$sub_array[] = $row["nombre"];
 		      	$sub_array[] = $dolar.$row["precio"];
 		      	
-      		 
-             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button>';
-            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>';
+      		$boton_editar= '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
+
+            $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button>';
+            
             ?>
         <?php  
           if(in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)){

@@ -126,10 +126,9 @@ foreach($rol as $rows){
 		     	$sub_array[] = $dolar.$row["precioProduc"];
 		     	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		     	
-      			  
-	             	$boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida"><i class="fa fa-trash"></i></button>';
-	        $boton_editar = '
-	          		<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida"><i class="fa fa-pencil-square-o"></i></button>';
+	        		$boton_editar = '<button type="button" onClick="mostrar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perdida"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
+	        		
+	          		$boton_eliminar = '<button type="button" onClick="eliminar('.$row["id_perdida"].');"  id="'.$row["id_perdida"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perdida"><i class="fa fa-trash"></i></button>';
         			
         		?>
           <?php  
