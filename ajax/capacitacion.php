@@ -197,9 +197,9 @@ foreach($rol as $rows){
           $sub_array[] = $row["encargado"];
           $sub_array[] = $row["cargo"];
          
-          $boton_registrar='<button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'");" class="btn btn-default btn-md update hint--top" aria-label="Adminstrar Capacitación" ><i class="fa fa-cogs"></i></button>&nbsp;';
+          $boton_registrar='<button type="button" onClick="verdetalle('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'"" class="btn btn-default btn-md update hint--top" aria-label="Administrar Capacitación" ><i class="fa fa-cogs"></i></button>&nbsp;';
 
-          $boton_editar='<button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitación" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
+          $boton_editar='<button type="button" onClick="mostrar('.$row["id_capacitacion"].');"  id="'.$row["id_capacitacion"].' document.getElementById("distancia").style.display="none"" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitación" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
           $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitación "><i class="fa fa-trash"></i></button></div>';
 

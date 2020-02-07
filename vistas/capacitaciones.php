@@ -84,14 +84,14 @@
                             </tbody>
                           </table>
                     </div>
+
                     <!--Fin centro -->
-
-          <div class="box-header">
+          <div class="box-header" style="margin-top: -2.6%; padding: 0px!important;    z-index: 9999999!important;">
               <!--Formulario para agregar capacitados -->
-
+<div id="distancia"><br><br></div>
             <button id="btnAgregarCap" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Capacitado</button>
 
-            <div class="panel-body table-responsive contenedor" id="detallecapacitadosModal">
+            <div class="panel-body table-responsive contenedor" id="detallecapacitadosModal" >
               <form method="post" id="detallecapacitados_form" autocomplete="off">
 
                 <div class="form-group col-md-12">
@@ -129,7 +129,7 @@
             <!--Fin formulario para agregar capacitados -->
 
                     <!--Tabla de capacitados -->
-                      <div class="panel-body table-responsive tabla-cap" id="capacitadosModal">
+                      <div class="panel-body table-responsive tabla-cap" id="capacitadosModal" style="margin-top: -2.5rem!important;">
                         
                         <table id="detallecapacitados_data" class="table table-bordered table-striped">
                           <thead>
@@ -150,7 +150,8 @@
                         <div style="width:200px;">
                          
                           <div style="width:100px; float:left;">
-                            <button id="btnCancelar" class="btn btn-danger" type="button" onclick="cancelarform()"><i class="fa fa-arrow-circle-left"></i><font color=white> Regresar</font></a></button>
+  <button id="btnCancelar" class="btn btn-danger" type="button" 
+  onclick="cancelarform(); document.getElementById('distancia').style.display='block'"><i class="fa fa-arrow-circle-left"></i><font color=white> Regresar</font></a></button>
                           </div> 
                          
                           <div style="width:100px; float:right;">

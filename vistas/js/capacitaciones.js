@@ -379,6 +379,7 @@ function verdetalle(id_capacitacion){
     data = JSON.parse(data);
     $("#letra1").show();
     $("#btnAgregarCap").show();
+    $("#distancia").hide();
     $("#capacitadosModal").show();
     listarDetalleCapacitados(id_capacitacion);
     $("#letra").hide();
@@ -397,6 +398,7 @@ function cancelarform()
   $("#capacitadosModal").hide();
   $("#add_button").show();
   $("#listadoregistros").show();
+  $("#ocultar1").hide();
   $("#detallecapacitadosModal").hide();
 }
 

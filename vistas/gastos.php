@@ -144,10 +144,10 @@
       <div class="modal-dialog">
          <form method="post" action="reportes/reporte_gastos.php">
             <div class="modal-content">
-               <div class="modal-header">
-                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                 <h4>Generar Reporte</h4>
-               </div>
+<div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal">×</button>
+               <h4 class="modal-title">Generar Reporte</h4>
+            </div>
           <div class="modal-body">  
 
                 <div class="form-row">
@@ -156,8 +156,12 @@
                   </div>
                 </div>
 
+                <div class="form-group col-md-2">
+                                      &nbsp;
+                                    </div>
+                    
                 <div style="text-align: center" class="form-row">
-                  <div class="form-group col-md-6">
+                  <div class="form-group col-md-4">
                     <select class="form-control" name="year" id="year">
                       <option value="0">Seleccione...</option>
                         <?php 
@@ -182,15 +186,19 @@
                     </select>
                   </div> 
                  
-                  <div class="form-group col-md-6">                         
+                  <div class="form-group col-md-2">                         
                     <button id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Archivo</button> 
-                  </div>   
+                  </div> 
+                  <div class="form-group col-md-2">
+                      &nbsp;
+                    </div>  
                 </div> 
               <br><br><br><br>
           </div><!-- body -->
-
+                <div style="clear: both;"></div>
                 <div class="modal-footer">
-                  <input type="hidden" name="fecha" id="fechaA"/>    
+                  <input type="hidden" name="fecha" id="fechaA"/>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>    
                 </div>
 
             </div>
