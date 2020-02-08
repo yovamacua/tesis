@@ -103,7 +103,7 @@
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Nombre del Producto</label>
-              <select class="form-control" id="idproducto" name="idproducto" required>
+              <select class="form-control" id="idproducto" name="idproducto" onchange="precioProd(id)" required>
                 <option  value="">Seleccione el Producto</option>
                   <?php
                      for($i=0; $i<sizeof($p);$i++){
@@ -147,7 +147,7 @@
 
             <div class="form-group col-md-4">
               <label>Precio Unitario</label>
-              <input type="text" name="precioProduc" id="precioProduc" class="form-control" autocomplete="off" placeholder="0.00" required/>
+              <input type="text" name="precioProduc" id="precioProduc" class="form-control" readonly/>
               <span class="error_form" id="error_precioProduc"></span>
             </div>
           </div>

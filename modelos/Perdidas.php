@@ -43,6 +43,20 @@
 			return $resultado = $sql->fetchAll();
 		}
 
+		//obtener precio de venta por el id
+		public function get_producto_por_id($idproducto){
+
+			$conectar = parent::conexion();
+			parent::set_names();
+
+			$sql = "select pe.idproducto, pro.precio_venta from perdidas pe inner join producto pro on pro.id_producto = pe.idproducto where idproducto=?;";	
+			$sql = $conectar->prepare($sql);
+			$sql-> bindValue(1, $idproducto);
+			$sql-> execute();
+
+			return $resultado = $sql->fetchAll();
+		}
+
 		//registrar perdidas
 		public function registrar_perdidas($idproducto, $cantidad, $descripcion, $precioProduc, $fecha, $unidadDelProduc, $id_usuario){
 

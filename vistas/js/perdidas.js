@@ -394,4 +394,14 @@ function eliminar(id_perdida){
   	});//bootbox
 }
 
+// funcion para mostrar el precio del producto
+function precioProd(idproducto){
+    var idPro = document.getElementById("idproducto").value;
+    $.post("../ajax/perdida.php?op=precio_producto",{idproducto: idPro}, function(data, status){
+        //analiza una cadena de texto como json
+        data = JSON.parse(data);
+        $('#precioProduc').val(data.precio_venta);
+     });
+} 
+
 init();

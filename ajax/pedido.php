@@ -249,7 +249,7 @@ foreach($rol as $rows){
           $sub_array[] = $row["descripcion"];
           $sub_array[] = $row["nombre"];
         
-            $boton_editar= '<button type="button" onClick="mostrar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
+            $boton_editar= '<button type="button" onClick="mostrardetalle('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_detallepedido"].');"  id="'.$row["id_detallepedido"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo"><i class="fa fa-trash"></i></button>';
     

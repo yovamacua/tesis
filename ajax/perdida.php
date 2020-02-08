@@ -4,7 +4,7 @@
  
 	//llamar al modelo perdidas
 	require_once("../modelos/Perdidas.php");
-	 require_once("../modelos/Roles.php");
+	require_once("../modelos/Roles.php");
 	require_once "mensajes.php";
 
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
@@ -101,14 +101,37 @@ switch ($_GET["op"]) {
 		    }
 		    //fin mensaje error
 		break;
+
+		case 'precio_producto':
+			# selecciona el id de la perdida
+			//el parametro id_perdida se envia por AJAX cuando se edita la perdida
+			$datos =  $perdidas->get_producto_por_id($_POST["idproducto"]);
+			if(is_array($datos)==true and count($datos)>0){
+				
+				foreach ($datos as $row) {
+					$output["precio_venta"] = $row["precio_venta"];
+				}
+					echo json_encode($output);
+
+			}else{
+				//si no existe el registro no se recorre el array
+				$errors[] = "No existe una producto con ese id";
+
+			}
+			//mensaje error
+		    if (isset($errors)) {
+		        echo error($errors);
+		    }
+		    //fin mensaje error
+		break;
  
 		case 'listar':
 			$datos=$perdidas->get_perdidas();
 			$rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
-      $valores=array();
+     		$valores=array();
 
       //Almacenamos los permisos marcados en el array
-foreach($rol as $rows){
+			foreach($rol as $rows){
 
               $valores[]= $rows["codigo"];
           }
