@@ -77,9 +77,7 @@
                                   <th width="10%">Fecha</th>
                                   <th width="40%">Descripción</th>
                                   <th width="10%">Gasto</th>
-                                 
-                                  <th>Acciones</th>
-                                    
+                                  <th>Acciones</th> 
                                   </tr>
                               </thead>
                             <tbody>
@@ -151,7 +149,7 @@
           <div class="modal-body">  
 
                 <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-12" style="text-align: center">
                     <label>Seleccione el año para el reporte a generar</label>
                   </div>
                 </div>

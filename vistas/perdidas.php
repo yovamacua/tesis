@@ -73,11 +73,8 @@
                                   <th>Descripción</th>
                                   <th width="10%">Precio Unitario</th>
                                   <th width="10%">Fecha</th>
-                                 
-                                    <th>Acciones</th>
-                                  
-                                  
-                                  </tr>
+                                  <th>Acciones</th>
+                                </tr>
                               </thead>
                             <tbody>
                             </tbody>

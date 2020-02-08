@@ -66,9 +66,9 @@
                           <table id="pedido_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="15%">Autor</th>
-                                <th width="15%">No. de Pedido</th>
-                                <th width="15%">Fecha</th>
+                                <th width="20%">Autor</th>
+                                <th width="20%">No. de Pedido</th>
+                                <th width="20%">Fecha</th>
                                 <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -103,16 +103,16 @@
                     <span class="error_form" id="error_nombreInsumo"></span>
                   </div>
 
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <label>Cantidad</label>
                     <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
                     <span class="error_form" id="error_cantidad"></span>
                   </div>
 
-                  <div class="form-group col-md-3">
+                  <div class="form-group col-md-2">
                     <label>Unidad de Medida</label>
                     <select class="form-control" id="id_uni" name="id_uni" required>
-                        <option  value="">Seleccione la Unidad</option>
+                        <option  value="">Seleccione...</option>
                           <?php
                              for($i=0; $i<sizeof($uni);$i++){
                                ?>
@@ -130,12 +130,16 @@
                     <span class="error_form" id="error_descripcion"></span>
                   </div>
 
+                  <div class="form-group col-md-2" style="margin-top: 5px">
+                    <br>
+                    <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  </div>
+
                 </div>
 
                     <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                     <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
                     <input type="hidden" name="id_pedido" id="id_pe"/>
-                    <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   
                 </form>
               </div>
@@ -146,15 +150,13 @@
                       <!-- Tabla de insumo -->
                         <table id="detallepedidos_data" class="table table-bordered table-striped">
                           <thead>
-                              <tr>
-                              <th>Nombre de Insumo</th>
-                              <th>Cantidad</th>
-                              <th>Descripción</th>
-                              <th>Unidad de Medida</th>
-                             
-                                <th>Acciones</th>
-                             
-                              </tr>
+                            <tr>
+                              <th width="8%">Nombre de Insumo</th>
+                              <th width="4%">Cantidad</th>
+                              <th width="15%">Descripción</th>
+                              <th width="4%">Unidad de Medida</th>
+                              <th width="5%">Acciones</th>
+                            </tr>
                           </thead>
                           <tbody>
                           </tbody>
@@ -202,13 +204,20 @@
           <h4 class="modal-title">Registrar fecha del pedido</h4>
         </div>
     <div class="modal-body">  
-        <div class="form-row">
-          <div class="form-group col-md-12">
+       <div class="form-group col-md-3">
+                                     &nbsp;
+                                    </div>
+        <div style="text-align: center" class="form-row">
+          <div class="form-group col-md-6">
             <label>Fecha</label>
             <input type="text" name="fecha" id="fecha1" class="form-control" placeholder="Fecha" required/>
             <span class="error_form" id="error_fecha1"></span>
           </div>
         </div>
+
+         <div class="form-group col-md-3">
+                                      &nbsp;
+                                    </div>
       <br><br><br><br>
     </div><!-- body -->
          <div class="modal-footer">

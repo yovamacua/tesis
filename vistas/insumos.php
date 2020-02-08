@@ -93,9 +93,8 @@ $usuario = new Roles();
                                   <th width="10%">Cantidad</th>
                                   <th width="10%">Unidad de Medida</th>
                                   <th width="10%">Precio</th>                                  
-                                 <th>Acciones</th>;
-                              
-                                  </tr>
+                                  <th>Acciones</th>
+                                </tr>
                               </thead>
                             <tbody>
                             </tbody>

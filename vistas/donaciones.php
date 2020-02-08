@@ -79,8 +79,7 @@
                                   <th>Descripción</th>
                                   <th width="8%">Cantidad</th>
                                   <th width="10%">Valorado c/u en</th> 
-                                    <th >Acciones</th>
-                                  
+                                  <th >Acciones</th>
                                   </tr>
                               </thead>
                             <tbody>
@@ -165,7 +164,7 @@
             </div>
       <div class="modal-body">  
                 <div class="form-row">
-                  <div class="form-group col-md-12">
+                  <div class="form-group col-md-12" style="text-align: center">
                     <label>Seleccione el año para el reporte a generar</label>
                   </div>
                 </div>

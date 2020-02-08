@@ -58,8 +58,7 @@
                                 }   
                                 if(in_array("RECAPA",$valores)){
                                   echo '<button class="btn btn-primary btn-lg" id="add_button"  onclick="limpiar()" data-toggle="modal" data-target="#capacitacionModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Capacitación</button>';
-              }
-                           
+                                }
 
                              ?>
                             </h1>
@@ -71,13 +70,12 @@
                           <table id="capacitacion_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                <th width="12%">No. de Capacitación</th>
-                                <th>Fecha</th>
-                                <th>Nombre del Grupo</th>
-                                <th>Encargado</th>
-                                <th>Cargo</th>
-                                <th>Acciones</th>
-
+                                  <th width="12%">No. de Capacitación</th>
+                                  <th>Fecha</th>
+                                  <th>Nombre del Grupo</th>
+                                  <th>Encargado</th>
+                                  <th>Cargo</th>
+                                  <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -114,13 +112,16 @@
                     <span class="error_form" id="error_dui"></span>
                   </div>
 
+                  <div class="form-group col-md-3" style="margin-top: 5px">
+                    <br>
+                    <button type="submit" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  </div>
+
                 </div>
              
                     <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                     <input type="hidden" name="id_detallecapacitados" id="id_detallecapacitados"/>
-                    <input type="hidden" name="id_capacitacion" id="id_capa"/> 
-                   
-                   <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                    <input type="hidden" name="id_capacitacion" id="id_capa"/>  
                   
                 </form>
               </div>
@@ -134,10 +135,10 @@
                         <table id="detallecapacitados_data" class="table table-bordered table-striped">
                           <thead>
                               <tr>
-                              <th>Nombre</th>
-                              <th>Apellido</th>
-                              <th>DUI</th>
-                              <th>Acciones</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>DUI</th>
+                                <th>Acciones</th>
                               </tr>
                           </thead>
                           <tbody>
@@ -215,7 +216,7 @@
         <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
           <input type="hidden" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>"/>
-          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+          <button type="submit" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
         </div>
       </div>
