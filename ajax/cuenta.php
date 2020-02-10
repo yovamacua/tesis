@@ -119,30 +119,30 @@ foreach($rol as $rows){
       <button type="button" class="btn btn-primary btn-md"><i class="glyphicon glyphicon-edit"></i> Administar <span class="notistyle">'. $cuentas->conteo($row["id_cuenta"]).'</span></button>
       </a>';
      
-     $boton_editar='<button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>';
+     $boton_editar='<button type="button" onClick="mostrar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-primary btn-md update hint--top" aria-label="Editar"><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
 $boton_imprimir='<a href="reportes/reporte-excel-cuenta.php?selector=' . $row["id_cuenta"] . '&selector2='.$_SESSION["seleccion_partida"].'" download>
       <button type="button" class="btn btn-info btn-md update hint--top" aria-label="Descargar Excel"><i class="fa fa fa-file-excel-o"></i></button>
       </a>';
       
      $boton_eliminar='<button type="button" onClick="eliminar(' . $row["id_cuenta"] . ');"  id="' . $row["id_cuenta"] . '" class="btn btn-danger btn-md hint--top" aria-label="Eliminar"><i class="fa fa-trash"></i></button>
-     </div>';
+     ';
      if(in_array("REPART",$valores) and in_array("EDPART",$valores)and in_array("ELPART",$valores)){
             $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
                  $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
                   
               }
               elseif (in_array("EDPART",$valores)and in_array("ELPART",$valores)) {
-                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.''.$boton_imprimir.'</div>';
               }
               elseif (in_array("REPART",$valores)and in_array("EDPART",$valores)) {
-                    $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_imprimir.'</div>';
+                    $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_editar.''.$boton_imprimir.'</div>';
                 }
                 elseif (in_array("ELPART",$valores)and in_array("REPART",$valores)) {
-                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.''.$boton_imprimir.'</div>';
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.''.$boton_imprimir.'</div>';
                 }
                 elseif (in_array("EDPART",$valores)) {
-                    $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_imprimir.'</div>';
+                    $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_imprimir.'</div>';
                 }
                 elseif(in_array("ELPART",$valores)){
                     $sub_array[]='<div class="cbtns">'.$boton_eliminar.''.$boton_imprimir.'</div>';

@@ -190,7 +190,7 @@ function mostrar(idperfil)
        $('#perfilModal').modal('show');
        $('#nombre').val(data.nombre);
 
-       $('#codigo').val(data.codigo);
+       $('#clave').val(data.codigo);
        $('#estado').val(data.estado);
        $('.modal-title').text("Editar perfil");
        $('#idperfil').val(idperfil);

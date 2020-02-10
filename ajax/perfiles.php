@@ -83,7 +83,7 @@
               $output["idperfil"] = $row["idperfil"];
               $output["nombre"] = $row["nombre"];
               $output["codigo"] = $row["codperfil"];
-               $output["estado"] = $row["estado"];
+               $output["estado"] = $row["estados"];
     		
     				}
               echo json_encode($output);
@@ -135,24 +135,24 @@ foreach($rol as $rows){
         $est = '';
         
          $atrib = "btn btn-danger btn-md estado";
-        if($row["estado"] == 1){
+        if($row["estados"] == 1){
           $est = 'Habiltado';
             $atrib = '<span class="label bg-green">'.$est.'</span>';;
         }
         else{
-          if($row["estado"] == 0){
+          if($row["estados"] == 0){
             $est = 'deshabilitado';
             $atrib='<span class="label bg-red">'.$est.'</span>';
            
           } 
         }
+        $sub_array[] = $row["codperfil"];
       $sub_array[] = $row["nombre"];
-      $sub_array[] = $row["codperfil"];
       $sub_array[] = $atrib;
      
-     $boton_registrar='<a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-dark btn-md hint--top" aria-label="Asignar Perfiles "><i class="fa fa-plus-square"></i></button></a>';
+     $boton_registrar='<a href="asignar_perfil.php?id='. $row["idperfil"] .'"><button type="button" class="btn btn-dark btn-md hint--top" aria-label="Asignar Perfiles "><i class="fa fa-plus-square"></i></button></a>&nbsp;';
 
-          $boton_editar='<button type="button" onClick="mostrar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>';
+          $boton_editar='<button type="button" onClick="mostrar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
           $boton_eliminar='<button type="button" onClick="eliminar('.$row["idperfil"].');"  id="'.$row["idperfil"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Perfil "><i class="fa fa-trash"></i></button>';
 

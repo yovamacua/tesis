@@ -69,6 +69,7 @@
                      <th>Cargo</th>
                      <th>Fecha Registro</th>
                      <th>Acciones</th>
+                     
                   </tr>
                </thead>
                <tbody>

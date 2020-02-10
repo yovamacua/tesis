@@ -689,9 +689,7 @@ function mostrar(idventas)
 		mostrarformulario(true);
 
 		$("#idventa").val(data.idventa);
-		//$("#idventa").selectpicker('refresh');
 		$("#nombre").val(data.usuario);
-		//$("#nombre").selectpicker('refresh');
 		$('#fecha').datepicker('setDate', data.fecha);
 		$("#numero_venta").val(data.numero_venta); 
 		//Ocultar y mostrar los botones

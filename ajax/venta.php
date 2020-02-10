@@ -103,7 +103,7 @@ foreach($rol as $rows){
             $atrib = '<span class="label bg-green">Aceptado</span>';
              ?>
          <?php  
-         $button_mostrar='<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
+         $button_mostrar='<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>&nbsp;';
           $button_eliminar='<button class="btn btn-danger" onClick="anularventa('.$row["idventas"].','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="btn btn-danger btn-md fa fa-close">Anular</button>';
           if(in_array("ELVENT",$valores)){
                  $sub_array[]='<div class="cbtns">'.$button_mostrar.''.$button_eliminar.'</div>';
@@ -320,7 +320,7 @@ if (isset($messages)){
             {
               $output["idventas"] = $row["idventas"];
               $output["usuario"] = $row["vendedor"];
-              $output["fecha"] = $row["fecha"];  //date("d-m-Y", strtotime($row["fecha"]));
+              $output["fecha"] =date("d-m-Y", strtotime($row["fecha"]));
               $output["numero_venta"] = $row["numero_venta"];
         
             }
@@ -357,18 +357,17 @@ if (isset($messages)){
         if(is_array($datos)==true and count($datos)>0){
     
    $html= " <thead style='background-color:#A9D0F5'>
-                                    <th>Opciones</th>
                                     <th>Producto</th>
                                     <th>Cantidad</th>
                                     <th>Precio Venta</th>
-                                    <th>Subtotal</th>
+                                    <th style='background-color: #A9D0F5 !important'>Subtotal</th>
                                 </thead>";
             foreach($datos as $row)
             {
 
         $subtotal=round($row['subtotal'] * 100) / 100;
        //
-        $html.="'<tr>'<td></td>'+
+        $html.="'<tr>
       '<td>".$row['producto']."</td>'+
       '<td>".$row['cantidad']."</td>'+
       '<td>".$row['precio_venta']."</td>'+
@@ -381,7 +380,7 @@ if (isset($messages)){
                                     <th>TOTAL</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
+                                    
                                     <th>$/'.$total.'</th> 
                                 </tfoot';
                                     echo $html;

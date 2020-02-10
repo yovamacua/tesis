@@ -41,7 +41,7 @@
           <!-- migas de pan-->
           <ol class="breadcrumb">
              <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
-             <li><i class="fa fa-users"></i> Categoria</li>
+             <li><i class="fa fa-users"></i> Perfiles</li>
           </ol>
    
         </section>
@@ -113,9 +113,9 @@ $datos=$perfil-> get_perfil_por_id( $identificador);
        
            <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
            <input type="hidden" name="idperfil" id="idperfil" value="<?php echo  $identificador;?>" />
-                            <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardar"><i class="fa fa-save"></i>Guardar</button>
+                            <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Guardar</button>
 
-                            <button id="btnCancelar" class="btn btn-danger"  type="button" onclick="cancelar()"><i class="fa fa-arrow-circle-left"></i>Cerrar</button>
+                            <button id="btnCancelar" class="btn btn-danger"  type="button" onclick="cancelar()"><i class="fa fa-arrow-circle-left"></i> Cerrar</button>
     
       </div>
     </form>

@@ -159,8 +159,20 @@
          <form method="post" action="reportes/reporte_donaciones.php">
             <div class="modal-content">
 <div class="modal-header">
-               <button type="button" class="close" data-dismiss="modal">×</button>
-               <h4 class="modal-title">Generar Reporte</h4>
+   <?php 
+                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
+                            $valores=array();
+                            //Almacenamos los permisos marcados en el array
+                             foreach($rol as $rows){
+
+                             $valores[]= $rows["codigo"];
+                                }   
+                                if(in_array("CODONA",$valores)){
+                                  echo '<button type="button" class="close" data-dismiss="modal">×</button>
+               <h4 class="modal-title">Generar Reporte</h4>';
+              }
+                            ?>
+               
             </div>
       <div class="modal-body">  
                 <div class="form-row">

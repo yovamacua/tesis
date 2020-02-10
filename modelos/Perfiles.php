@@ -62,14 +62,15 @@ class Perfiles extends Conectar{
            parent::set_names();
        $sql="update perfil SET nombre =?,
             codperfil=?,
-            estado=?
+            estados=?
            WHERE idperfil =?";
           $sql=$conectar->prepare($sql);
           $sql->bindValue(1,$_POST["nombre"]);
-           $sql->bindValue(2,$_POST["codigo"]);
+           $sql->bindValue(2,$_POST["clave"]);
             $sql->bindValue(3,$_POST["estado"]);
            $sql->bindValue(4,$_POST["idperfil"]);
           $sql->execute();
+    
         }
       
         public function deletes_perfil($idperfil)
@@ -151,24 +152,39 @@ public function perfil_usuario($pro)
 }
 // metodo para obtener el valor del numero de venta
     public function codigo(){
+$conectar=parent::conexion();
+        parent::set_names();
 
-      
+     
+        $sql="select codperfil from perfil;";
+
+        $sql=$conectar->prepare($sql);
+
+        $sql->execute();
+        $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+          foreach($resultado as $k=>$v){
+
+            $cod["codperfil"]=$v["codperfil"];
+
+          }
+      if(!empty($cod["codperfil"])){
 $caracteres = '123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-.#!';
 for($x = 0; $x < 1; $x++){
   $aleatoria = substr(str_shuffle($caracteres), 0, 6);
   echo'<input type="text" class="form-control" id="clave" name="clave" placeholder="Número"  "  value="'.$aleatoria.'" readonly/>';
 
     }
+  }
                       
-                   /* if(empty($cod["codperfil"]))
+                  /* if(empty($cod["codperfil"]))
                     {
-                      echo'<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número"  value="PM00001" />';
+                      echo'<input type="text" class="form-control" id="clave" name="numero_venta" placeholder="Número"  value="PM00001" />';
                     }else{
-                        $num     = substr($numero_venta["numero_venta"] , 2);
+                        $num     = substr($cod["codperfil"] , 2);
                         $dig     = $num + 1;
                         $fact = str_pad($dig, 5, "0", STR_PAD_LEFT);
                        // echo '<script>location.reload()</script>';
-                        echo '<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número"  style="width:50%;"  value="NV'.$fact.'" readonly/>';
+                        echo '<input type="text" class="form-control" id="clave" name="clave" placeholder="Número"  style="width:50%;"  value="PM'.$fact.'" readonly/>';
                         
                     }*/
      

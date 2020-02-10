@@ -210,7 +210,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
            $fecha= ($ano."-".$mes."%");
 
 
-          $sql= "select v.idventas,concat(u.nombres, u.apellidos) as vendedor,v.total_pagar, v.numero_venta, v.fechaventa, v.estado from ventas v inner join usuarios u on v.id_usuario= u.id_usuario
+          $sql= "select v.idventas,concat(u.nombres,' ' , u.apellidos) as vendedor,v.total_pagar, v.numero_venta, v.fechaventa, v.estado from ventas v inner join usuarios u on v.id_usuario= u.id_usuario
             WHERE fechaventa like ?;";
 
             $sql = $conectar->prepare($sql);

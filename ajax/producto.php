@@ -187,7 +187,7 @@ foreach($rol as $rows){
         
        $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Producto "><i class="fa fa-trash"></i></button>'; 
 
-       $boton_editar= '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>'; 
+       $boton_editar= '<button type="button" onClick="mostrar('.$row["id_producto"].');"  id="'.$row["id_producto"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Producto" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;'; 
  
     ?>
           <?php  

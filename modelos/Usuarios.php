@@ -224,7 +224,7 @@ $encriptar2 = crypt($_POST["password2"], '$2a$07$asxx54ahjppf45sd87a5a4dDDGsyste
         $sql->bindValue(1, $id_usuario);
         $sql->execute();
         return $resultado = $sql->fetchAll();
-
+    var_dump($sql);
     }
 
     //editar el estado del usuario, activar y desactiva el estado
@@ -295,7 +295,7 @@ public function listar_permisos_por_usuario($idperfiles){
             $conectar=parent::conexion();
 
             $sql="select pm.id_modulo from perfil_modulo as pm
-inner join perfil as p on pm.idperfiles = p.idperfil where  pm.idperfiles=? and p.estado='1';";
+inner join perfil as p on pm.idperfiles = p.idperfil where  pm.idperfiles=? and p.estados='1';";
 
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $idperfiles);
