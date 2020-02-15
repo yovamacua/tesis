@@ -18,7 +18,7 @@
 
 <!-- FIN DEL HEADER - LIBRERIAS -->
 
-<?php if($_SESSION["Venta"]==1)
+<?php if($_SESSION["VENTA"]==1)
      {
 
      ?>

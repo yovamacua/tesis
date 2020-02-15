@@ -79,7 +79,7 @@ require_once("header.php");?>
                              $valores[]= $rows["codigo"];
                                 }   
                                 if(in_array("COREPO",$valores)){
-                                  echo 'button type="button" id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>';
+                                  echo '<button type="button" id="buttonExport" class="btn btn-primary btn-lg" ><i class="fa fa-print" aria-hidden="true"></i> Imprimir</button>';
               }
                             ?>
           

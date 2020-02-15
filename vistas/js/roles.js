@@ -208,7 +208,7 @@ function mostrar(idroles)
  $.post("../ajax/roles.php?op=mostrar",{idroles : idroles}, function(data, status)
  {
  	  
-    data=   JSON.parse(data);
+     data = JSON.parse(data);
 
        $('#rolModal').modal('show');
        $('#nombre').val(data.nombre);
@@ -216,7 +216,7 @@ function mostrar(idroles)
        $('#modulo').val(data.idmodulo);
        $('#descripcion').val(data.descripcion);
        $('.modal-title').text("Editar roles");
-       $('#idroles').val(idroles);
+       $('#idroles').val(data.idrol);
        $('#action').val("Edit");
        
 

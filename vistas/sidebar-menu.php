@@ -48,7 +48,7 @@
          ?>
             
             <ul class="treeview-menu">
-               <li <?php if(isset($activar1) and $activar1 == 'item_perfil'){?>class="active"<?php }else{?><?php }?> >
+               <li <?php if(isset($activar1) and $activar1 == 'item_permiso1'){?>class="active"<?php }else{?><?php }?> >
                    <?php if($_SESSION["PERMISO"]==1)
          
           {
@@ -58,7 +58,7 @@
                </li>';
             }
             ?>
-               <li <?php if(isset($activar2) and $activar2 == 'item_rol'){?>class="active"<?php }else{?><?php }?> >
+               <li <?php if(isset($activar2) and $activar2 == 'item_permiso2'){?>class="active"<?php }else{?><?php }?> >
                    <?php if($_SESSION["PERMISO"]==1)
          
           {

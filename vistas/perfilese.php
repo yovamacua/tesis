@@ -10,7 +10,7 @@
 
 <?php
   #variable item activo
-  $activar1 = 'item_perfil';
+  $activar1 = 'item_permiso1';
   require_once("header.php");
 ?>
 <?php if($_SESSION["PERMISO"]==1)

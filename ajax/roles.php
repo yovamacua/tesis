@@ -64,7 +64,7 @@ if (isset($messages)){
 	      if(is_array($datos)==true and count($datos)>0){
     				foreach($datos as $row)
     				{
-              $output["idrol"] = $row["idroles"];
+              $output["idrol"] = $row["idrol"];
              $output["codigo"] = $row["codigo"];
               $output["descripcion"] = $row["descripcion"];
              $output["nombre"] = $row["rol"];

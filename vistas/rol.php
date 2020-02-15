@@ -11,7 +11,7 @@
 
 <?php
   #variable item activo
-  $activar2 = 'item_rol';
+  $activar2 = 'item_permiso2';
   require_once("header.php");
 ?>
 <?php if($_SESSION["PERMISO"]==1)

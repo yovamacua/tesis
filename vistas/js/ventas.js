@@ -5,7 +5,7 @@ var tabla_ventas;
 var tabla_ventas_mes
 //// INICIO DE VALIDACION DEL FORMULARIO///
 // funcion para validar formulario de usuario
-/*$(function() {
+$(function() {
     //creando variables y ocultando campos de error
     $("#error_fecha").hide();
 
@@ -60,7 +60,7 @@ var tabla_ventas_mes
         }
     });
 });
-*/
+
 // FIN VALIDACION FORMULARIO
 
 
@@ -311,7 +311,7 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	'<td><button type="button" class="btn btn-danger" onclick="eliminarDetalle('+cont+')">X</button></td>'+
     	'<td><input type="hidden"  name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
     	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
-    	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'"></td>'+
+    	'<td><input type="number" maxlength="5"  style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'" min="0" max="1000"></td>'+
     	'<td><input type="text"  maxlength="5"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' "></td>'+
     	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
     	//'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
@@ -344,7 +344,8 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	var inpK= stock[i];   
     	if(parseInt(inpC.value)  >= parseInt(inpK.value)){
 
-    		alert("producto insuficiente");
+    		
+    		bootbox.alert("producto insuficiente");
     	} else{
            inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
        document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
@@ -354,7 +355,6 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
             
     		
      	i++;
-     	//setTimeOut(modificarSubototales, 1000);
      }
 
     /*for (var i = 0; i <cant.length; i++) {
