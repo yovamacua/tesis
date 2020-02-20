@@ -29,16 +29,16 @@ $hojaDeCuentas->mergeCells('A1:J1');
 $hojaDeCuentas->setTitle("Cuenta");
 //$hojaDeCuentas->getRowDimension()->setRowHeight(100);
 $hojaDeCuentas->getDefaultColumnDimension()->setWidth(30);
-$hojaDeCuentas->getStyle('A7:J8')->getAlignment()->setHorizontal('center');
+$hojaDeCuentas->getStyle('A8:J9')->getAlignment()->setHorizontal('center');
 $hojaDeCuentas->getStyle('A3:J100')->getAlignment()->setVertical('top');
 $hojaDeCuentas->getStyle('A1')->getFont()->setSize(15);
 $hojaDeCuentas->getStyle('A7:J7')->getFont()->setSize(13);
 $hojaDeCuentas->getStyle('A8:J8')->getFont()->setSize(13);
 
-$hojaDeCuentas->getStyle('A7:J8')->getFill()
+$hojaDeCuentas->getStyle('A8:J9')->getFill()
     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
     ->getStartColor()->setARGB('F1F1F1F1');
-
+ 
 $styleArray = [
     'borders' => [
         'top' => [
@@ -56,40 +56,40 @@ $styleArray = [
     ],
 ];
 
-$hojaDeCuentas->getStyle('A7:J7')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('A8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('B8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('C8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('D8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('E8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('F8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('G8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('H8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('I8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('J8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('C7:C8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('J7:J8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('H7:I8')->applyFromArray($styleArray);
-$hojaDeCuentas->getStyle('C7:C8')->getAlignment()->setVertical('center');
-$hojaDeCuentas->getStyle('J7:J8')->getAlignment()->setVertical('center');
+$hojaDeCuentas->getStyle('A8:J8')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('A9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('B9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('C9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('D9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('E9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('F9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('G9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('H9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('I9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('J9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('C8:C9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('J8:J9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('H8:I9')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('C8:C9')->getAlignment()->setVertical('center');
+$hojaDeCuentas->getStyle('J8:J9')->getAlignment()->setVertical('center');
 
 $encabezado = ["FUNCIONAMIENTO DE OFICINA DE AGRONEGOCIOS"];
 $hojaDeCuentas->fromArray($encabezado, null, 'A1');
 
 
 $encabezado = ["Actividades", "","Responsable", "Recurso","","","","Plazo","","Indicador de Logro"];
-$hojaDeCuentas->fromArray($encabezado, null, 'A7');
-$hojaDeCuentas->mergeCells('A7:B7');
-$hojaDeCuentas->mergeCells('C7:C8');
-$hojaDeCuentas->mergeCells('D7:G7');
-$hojaDeCuentas->mergeCells('J7:J8');
-$hojaDeCuentas->mergeCells('H7:I7');
+$hojaDeCuentas->fromArray($encabezado, null, 'A8');
+$hojaDeCuentas->mergeCells('A8:B8');
+$hojaDeCuentas->mergeCells('C8:C9');
+$hojaDeCuentas->mergeCells('D8:G8');
+$hojaDeCuentas->mergeCells('J8:J9');
+$hojaDeCuentas->mergeCells('H8:I8');
 
 
 # Escribir encabezado
 $encabezado = ["Generales", "Especificas", "Responsable", "Académico", "Técnico","Financiero ($)", "Infraestructura", "Inicio", "Fin", "Indicadores de Logro"];
 # El último argumento es por defecto A1 pero lo pongo para que se explique mejor
-$hojaDeCuentas->fromArray($encabezado, null, 'A8');
+$hojaDeCuentas->fromArray($encabezado, null, 'A9');
 
 $consulta1 = "SELECT * from entrada WHERE id_cuenta = '".$selector."'";
 $sentencia1 = $bd->prepare($consulta1);
@@ -107,7 +107,7 @@ $sentencia->execute();
 
 
 # Comenzamos en la 9 porque la 1-8 es del encabezado
-$numeroDeFila = 9;
+$numeroDeFila = 10;
 $total = 0;
 while ($cuenta = $sentencia->fetchObject()) {
 
@@ -210,9 +210,9 @@ while ($cuenta = $sentencia->fetchObject()) {
     $hojaDeCuentas->setCellValueByColumnAndRow(5, $numeroDeFila, $Tecnico);
     $hojaDeCuentas->setCellValueByColumnAndRow(6, $numeroDeFila, $Financiero);
     $hojaDeCuentas->setCellValueByColumnAndRow(7, $numeroDeFila, $Infraestructura);
-    $hojaDeCuentas->setCellValueByColumnAndRow(8, $numeroDeFila, $Inicio);
-    $hojaDeCuentas->setCellValueByColumnAndRow(9, $numeroDeFila, $Fin);
-    $hojaDeCuentas->setCellValueByColumnAndRow(10, $numeroDeFila, $Logro);
+    $hojaDeCuentas->setCellValueByColumnAndRow(8, $numeroDeFila, $Logro);
+    $hojaDeCuentas->setCellValueByColumnAndRow(9, $numeroDeFila, $Inicio);
+    $hojaDeCuentas->setCellValueByColumnAndRow(10, $numeroDeFila, $Fin);
 
     $total = $total+$Financiero;
 
@@ -223,13 +223,14 @@ $hojaDeCuentas->mergeCells('B3:J3');
 $hojaDeCuentas->mergeCells('B4:J4');
 $hojaDeCuentas->mergeCells('B5:J5');
 $hojaDeCuentas->mergeCells('B6:J6');
-
+$hojaDeCuentas->mergeCells('B7:J7');
 
 $hojaDeCuentas->getStyle('A2')->applyFromArray($styleArray);
 $hojaDeCuentas->getStyle('A3')->applyFromArray($styleArray);
 $hojaDeCuentas->getStyle('A4')->applyFromArray($styleArray);
 $hojaDeCuentas->getStyle('A5')->applyFromArray($styleArray);
 $hojaDeCuentas->getStyle('A6')->applyFromArray($styleArray);
+$hojaDeCuentas->getStyle('A7')->applyFromArray($styleArray);
 
 $hojaDeCuentas->getStyle('B2:J2')->applyFromArray($styleArray);
 $hojaDeCuentas->getStyle('B3:J3')->applyFromArray($styleArray);
