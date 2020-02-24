@@ -299,7 +299,7 @@ function init() {
      /*en este caso NO se envia un id_usuario ya que se va agregar un 
      usuario nuevo, solo se enviaría cuando se edita y ahí se enviaría el id_usuario
      que se está editando*/
-     $.post("../ajax/usuario.php?op=permisos&id_usuario=",function(r){
+     $.post("../controlador/usuario.php?op=permisos&id_usuario=",function(r){
           $("#permisos").html(r);
    });
 }
@@ -352,7 +352,7 @@ function listar() {
 
         "ajax": {
             //configuracion de donde se obtienen los datos
-            url: '../ajax/usuario.php?op=listar',
+            url: '../controlador/usuario.php?op=listar',
             type: "get",
             dataType: "json",
             error: function(e) {
@@ -400,7 +400,7 @@ function listar() {
 
 //Mostrar datos del usuario en la ventana modal del formulario
 function pass(id_usuario) {
-    $.post("../ajax/usuario.php?op=mostrar", {
+    $.post("../controlador/usuario.php?op=mostrar", {
         id_usuario: id_usuario
     }, function(data, status) {
         //analiza una cadena de texto como json
@@ -428,7 +428,7 @@ function pass(id_usuario) {
 
 //Mostrar datos del usuario en la ventana modal del formulario
 function mostrar(id_usuario) {
-    $.post("../ajax/usuario.php?op=mostrar", {
+    $.post("../controlador/usuario.php?op=mostrar", {
         id_usuario: id_usuario
     }, function(data, status) {
         var cero = '123456axxxxx';
@@ -470,7 +470,7 @@ function guardaryeditar(e) {
     //si el password conincide entonces se envia el formulario
     if (password1 == password2) {
         $.ajax({
-            url: "../ajax/usuario.php?op=guardaryeditar",
+            url: "../controlador/usuario.php?op=guardaryeditar",
             type: "POST",
             data: formData,
             contentType: false,
@@ -499,7 +499,7 @@ function cambiarEstado(id_usuario, est) {
     bootbox.confirm("¿Está seguro de cambiar de estado?", function(result) {
         if (result) {
             $.ajax({
-                url: "../ajax/usuario.php?op=activarydesactivar",
+                url: "../controlador/usuario.php?op=activarydesactivar",
                 method: "POST",
                 //toma el valor del id y del estado
                 data: {
@@ -522,7 +522,7 @@ function eliminar(id_usuario) {
         if (result) {
 
             $.ajax({
-                url: "../ajax/usuario.php?op=eliminar_usuario",
+                url: "../controlador/usuario.php?op=eliminar_usuario",
                 method: "POST",
                 data: {
                     id_usuario: id_usuario

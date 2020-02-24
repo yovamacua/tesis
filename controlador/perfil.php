@@ -94,6 +94,7 @@ break;
 
                 $perfil->editar_perfil($id_usuario_perfil, $nombre_perfil, $apellido_perfil, $email_perfil, $usuario_perfil, $password1_perfil, $password2_perfil, $usuario_imagen);
                 $_SESSION["nombre"] = $_POST["nombre_perfil"];
+                $_SESSION["usuario"] = $_POST["usuario_perfil"];
             } //cierre condicional $datos
         } //cierre de condicional del password
         else {?>

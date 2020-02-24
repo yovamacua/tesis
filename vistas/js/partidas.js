@@ -139,7 +139,7 @@ function listar() {
             'pdf' */
         ],
         "ajax": {
-            url: '../ajax/partida.php?op=listar',
+            url: '../controlador/partida.php?op=listar',
             type: "get",
             dataType: "json",
             error: function(e) {
@@ -183,7 +183,7 @@ function listar() {
 
 
 function mostrar(id_partida) {
-    $.post("../ajax/partida.php?op=mostrar", {
+    $.post("../controlador/partida.php?op=mostrar", {
         id_partida: id_partida
     }, function(data, status) {
         data = JSON.parse(data);
@@ -201,7 +201,7 @@ function mostrar(id_partida) {
 
 function cambiarEstado(id_partida, est) {
             $.ajax({
-                url: "../ajax/partida.php?op=activarydesactivar",
+                url: "../controlador/partida.php?op=activarydesactivar",
                 method: "POST",
                 //toma el valor del id y del estado
                 data: {
@@ -220,7 +220,7 @@ function guardaryeditar(e) {
     var formData = new FormData($("#partida_form")[0]);
 
     $.ajax({
-        url: "../ajax/partida.php?op=guardaryeditar",
+        url: "../controlador/partida.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -243,7 +243,7 @@ function eliminar(id_partida) {
     bootbox.confirm("¿Está seguro de eliminar la partida?", function(result) {
         if (result) {
             $.ajax({
-                url: "../ajax/partida.php?op=eliminar_partida",
+                url: "../controlador/partida.php?op=eliminar_partida",
                 method: "POST",
                 data: {
                     id_partida: id_partida

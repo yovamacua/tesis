@@ -5,7 +5,7 @@
       
       require_once("../modelos/Venta.php");
       require_once("../modelos/Perdidas.php");
-       require_once("../ajax/infocajas.php");
+       require_once("../controlador/infocajas.php");
       
       $venta = new Ventas();
       $perdidas = new Perdidas();

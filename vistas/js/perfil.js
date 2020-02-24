@@ -235,7 +235,7 @@ function limpiar() {
 
 //MOSTRAR PERFIL DE USUARIO
 function mostrar_perfil(id_usuario_perfil) {
-    $.post("../ajax/perfil.php?op=mostrar_perfil", {
+    $.post("../controlador/perfil.php?op=mostrar_perfil", {
         id_usuario_perfil: id_usuario_perfil
     }, function(data, status) {
         var cero = '123456axxxxx';
@@ -266,7 +266,7 @@ function retorno() {
 }
 
 function editar_pass(id_usuario_perfil) {
-    $.post("../ajax/perfil.php?op=mostrar_perfil", {
+    $.post("../controlador/perfil.php?op=mostrar_perfil", {
         id_usuario_perfil: id_usuario_perfil
     }, function(data, status) {
         data = JSON.parse(data);
@@ -300,7 +300,7 @@ function editar_perfil(e) {
     if (password1 == password2) {
 
         $.ajax({
-            url: "../ajax/perfil.php?op=editar_perfil",
+            url: "../controlador/perfil.php?op=editar_perfil",
             type: "POST",
             data: formData,
             contentType: false,
@@ -344,7 +344,7 @@ function quitar_imagen() {
     {
         bootbox.confirm("¿Está seguro de eliminar la imagen de usuario?", function(result) {
             if (result) {
-                window.location = "../ajax/perfil.php?op=quitar_imagen";
+                window.location = "../controlador/perfil.php?op=quitar_imagen";
             }
         });
     }

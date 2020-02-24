@@ -178,7 +178,7 @@ function listar() {
             'pdf' */
         ],
         "ajax": {
-            url: '../ajax/cuenta.php?op=listar',
+            url: '../controlador/cuenta.php?op=listar',
             type: "get",
             dataType: "json",
             error: function(e) {
@@ -226,7 +226,7 @@ function listar() {
 
 //funcion para mostrar la informacion en la tabla
 function mostrar(id_cuenta) {
-    $.post("../ajax/cuenta.php?op=mostrar", {
+    $.post("../controlador/cuenta.php?op=mostrar", {
         id_cuenta: id_cuenta
     }, function(data, status) {
         data = JSON.parse(data);
@@ -248,7 +248,7 @@ function guardaryeditar(e) {
     var formData = new FormData($("#cuenta_form")[0]);
 
     $.ajax({
-        url: "../ajax/cuenta.php?op=guardaryeditar",
+        url: "../controlador/cuenta.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -272,7 +272,7 @@ function eliminar(id_cuenta) {
     bootbox.confirm("¿Está seguro de eliminar la cuenta?", function(result) {
         if (result) {
             $.ajax({
-                url: "../ajax/cuenta.php?op=eliminar_cuenta",
+                url: "../controlador/cuenta.php?op=eliminar_cuenta",
                 method: "POST",
                 data: {
                     id_cuenta: id_cuenta

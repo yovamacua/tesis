@@ -169,7 +169,7 @@ function listar() {
              'pdf'*/
         ],
         "ajax": {
-            url: '../ajax/incidente.php?op=listar',
+            url: '../controlador/incidente.php?op=listar',
             type: "get",
             dataType: "json",
             error: function(e) {
@@ -217,7 +217,7 @@ function listar() {
 
 
 function mostrar(id_incidente) {
-    $.post("../ajax/incidente.php?op=mostrar", {
+    $.post("../controlador/incidente.php?op=mostrar", {
         id_incidente: id_incidente
     }, function(data, status) {
         data = JSON.parse(data);
@@ -240,7 +240,7 @@ function guardaryeditar(e) {
     var formData = new FormData($("#incidente_form")[0]);
 
     $.ajax({
-        url: "../ajax/incidente.php?op=guardaryeditar",
+        url: "../controlador/incidente.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -269,7 +269,7 @@ function eliminar(id_incidente) {
     bootbox.confirm("¿Está seguro de eliminar el incidente?", function(result) {
         if (result) {
             $.ajax({
-                url: "../ajax/incidente.php?op=eliminar_incidente",
+                url: "../controlador/incidente.php?op=eliminar_incidente",
                 method: "POST",
                 data: {
                     id_incidente: id_incidente
