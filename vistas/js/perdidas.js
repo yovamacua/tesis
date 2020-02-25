@@ -285,7 +285,7 @@ function listar(){
 
 		"ajax":
 			{
-				url: '../ajax/perdida.php?op=listar',
+				url: '../controlador/perdida.php?op=listar',
 				type: "get",
 				dataType: "json",
 				error: function(e){
@@ -330,7 +330,7 @@ function listar(){
  
 //mostrar las perdidas en la ventana modal del formulario
 function mostrar(id_perdida){
-	$.post("../ajax/perdida.php?op=mostrar",{id_perdida : id_perdida}, function(data, status){
+	$.post("../controlador/perdida.php?op=mostrar",{id_perdida : id_perdida}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
@@ -354,7 +354,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#perdida_form")[0]);
 
    $.ajax({
-     url: "../ajax/perdida.php?op=guardaryeditar",
+     url: "../controlador/perdida.php?op=guardaryeditar",
        type: "POST",
        data: formData,
        contentType: false,
@@ -380,7 +380,7 @@ function eliminar(id_perdida){
 	bootbox.confirm("¿Está seguro de eliminar la perdida?", function(result){
 		if(result){
 	    	$.ajax({
-	       		url:"../ajax/perdida.php?op=eliminar_perdida",
+	       		url:"../controlador/perdida.php?op=eliminar_perdida",
 	      		method:"POST",
 	       		data:{id_perdida:id_perdida},
 
@@ -397,7 +397,7 @@ function eliminar(id_perdida){
 // funcion para mostrar el precio del producto
 function precioProd(idproducto){
     var idPro = document.getElementById("idproducto").value;
-    $.post("../ajax/perdida.php?op=precio_producto",{idproducto: idPro}, function(data, status){
+    $.post("../controlador/perdida.php?op=precio_producto",{idproducto: idPro}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
         $('#precioProduc').val(data.precio_venta);

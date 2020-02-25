@@ -486,7 +486,7 @@ function listar(){
 
 		"ajax":
 			{
-				url: '../ajax/insumo.php?op=listar',
+				url: '../controlador/insumo.php?op=listar',
 				type: "get",
 				dataType: "json",
 				error: function(e){
@@ -531,7 +531,7 @@ function listar(){
  
 //mostrar los insumos en la ventana modal del formulario
 function mostrar(id_insumo){
-	$.post("../ajax/insumo.php?op=mostrar",{id_insumo: id_insumo}, function(data, status){
+	$.post("../controlador/insumo.php?op=mostrar",{id_insumo: id_insumo}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
@@ -555,7 +555,7 @@ function mostrar(id_insumo){
 		var formData = new FormData($("#insumo_form")[0]);
 
 	    $.ajax({
-	     	url: "../ajax/insumo.php?op=guardaryeditar",
+	     	url: "../controlador/insumo.php?op=guardaryeditar",
 	       	type: "POST",
 	       	data: formData,
 	       	contentType: false,
@@ -580,7 +580,7 @@ function mostrar(id_insumo){
 		var formData = new FormData($("#kardexinsumo_form")[0]);
 
 	    $.ajax({
-	     	url: "../ajax/insumo.php?op=editarcantidad",
+	     	url: "../controlador/insumo.php?op=editarcantidad",
 	       	type: "POST",
 	       	data: formData,
 	       	contentType: false,
@@ -603,7 +603,7 @@ function eliminar(id_insumo){
 	bootbox.confirm("¿Está seguro de eliminar el insumo?", function(result){
 		if(result){
 	    	$.ajax({
-	       		url:"../ajax/insumo.php?op=eliminar_insumo",
+	       		url:"../controlador/insumo.php?op=eliminar_insumo",
 	      		method:"POST",
 	       		data:{id_insumo:id_insumo},
 
@@ -619,7 +619,7 @@ function eliminar(id_insumo){
 // funcion para mostrar la cantidad disponible del insumo
 function InsumoDisp(id_insumo){
     var idIns = document.getElementById("Id_insumo").value;
-    $.post("../ajax/insumo.php?op=cantidad_insumo",{id_insumo: idIns}, function(data, status){
+    $.post("../controlador/insumo.php?op=cantidad_insumo",{id_insumo: idIns}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
         $('#disponible').val(data.cantidad);

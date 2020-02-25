@@ -314,7 +314,7 @@ function cancelarform()
 }
 
   function verdetalle(id_pedido){
-   $.post("../ajax/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
+   $.post("../controlador/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
  {
     data = JSON.parse(data);
        $('#listadoregistros').hide();
@@ -344,7 +344,7 @@ function listar()
     buttons: [],
     "ajax":
        {
-          url: '../ajax/pedido.php?op=listar',
+          url: '../controlador/pedido.php?op=listar',
           type : "get",
           dataType : "json",
           error: function(e){
@@ -400,7 +400,7 @@ function listarDetallePedido(id_pedido)
     buttons: [ ],
     "ajax":
        {
-          url:"../ajax/pedido.php?op=listardetalle&id="+id_pedido,
+          url:"../controlador/pedido.php?op=listardetalle&id="+id_pedido,
           method:"POST",
           data:{id_pedido:id_pedido},
 
@@ -449,7 +449,7 @@ function listarDetallePedido(id_pedido)
 //Función mostrar para mostrar datos en el modal des pedido
 function mostrar(id_pedido)
 {
- $.post("../ajax/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
+ $.post("../controlador/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
  {
     data = JSON.parse(data);
 
@@ -465,7 +465,7 @@ function mostrar(id_pedido)
 //Función mostrardetalle para mostrar datos en el modal des detallepedido
 function mostrardetalle(id_detallepedido)
 {
- $.post("../ajax/pedido.php?op=mostrardetalle",{id_detallepedido : id_detallepedido}, function(data, status)
+ $.post("../controlador/pedido.php?op=mostrardetalle",{id_detallepedido : id_detallepedido}, function(data, status)
  {
     data = JSON.parse(data);
 
@@ -488,7 +488,7 @@ function guardaryeditar(e)
   var formData = new FormData($("#pedido_form")[0]);
 
     $.ajax({
-        url: "../ajax/pedido.php?op=guardaryeditar",
+        url: "../controlador/pedido.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -513,7 +513,7 @@ function guardaryeditardetalle(e)
   var formData = new FormData($("#detallepedidos_form")[0]);
 
     $.ajax({
-        url: "../ajax/pedido.php?op=guardaryeditardetalle",
+        url: "../controlador/pedido.php?op=guardaryeditardetalle",
         type: "POST",
         data: formData,
         contentType: false,
@@ -536,7 +536,7 @@ function eliminar(id_pedido){
     if(result)
     {
       $.ajax({
-            url:"../ajax/pedido.php?op=eliminar_pedidos",
+            url:"../controlador/pedido.php?op=eliminar_pedidos",
             method:"POST",
             data:{id_pedido:id_pedido},
 
@@ -560,7 +560,7 @@ function eliminar_detallepedidos(id_detallepedido){
     if(result)
     {
       $.ajax({
-            url:"../ajax/pedido.php?op=eliminar_detallepedidos",
+            url:"../controlador/pedido.php?op=eliminar_detallepedidos",
             method:"POST",
             data:{id_detallepedido:id_detallepedido},
 

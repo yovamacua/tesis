@@ -29,7 +29,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#asignar_roles")[0]);
 
    $.ajax({
-     url: "../ajax/roles.php?op=asignar",
+     url: "../controlador/roles.php?op=asignar",
        type: "POST",
        data: formData,
        contentType: false,

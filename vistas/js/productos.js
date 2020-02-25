@@ -237,7 +237,7 @@ function listar()
 	    buttons: [],
 		"ajax":
 				{
-					url: '../ajax/producto.php?op=listar',
+					url: '../controlador/producto.php?op=listar',
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -304,7 +304,7 @@ function listar()
  //Mostrar datos del producto en la ventana modal 
 function mostrar(id_producto)
 {
-	$.post("../ajax/producto.php?op=mostrar",{id_producto : id_producto}, function(data, status)
+	$.post("../controlador/producto.php?op=mostrar",{id_producto : id_producto}, function(data, status)
 	{
 		//data = JSON.parse(data);
             data=   JSON.parse(data);
@@ -337,7 +337,7 @@ function guardaryeditar(e)
 
 
 		$.ajax({
-			url: "../ajax/producto.php?op=guardaryeditar",
+			url: "../controlador/producto.php?op=guardaryeditar",
 		    type: "POST",
 		    data: formData,
 		    contentType: false,
@@ -376,7 +376,7 @@ function eliminar(id_producto){
  if(result)
  {
      $.ajax({
-       url:"../ajax/producto.php?op=eliminar_producto",
+       url:"../controlador/producto.php?op=eliminar_producto",
        method:"POST",
        data:{id_producto:id_producto},
 

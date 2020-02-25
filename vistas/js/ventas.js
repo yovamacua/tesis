@@ -162,7 +162,7 @@ function listar()
 	    buttons: [],
 		"ajax":
 				{
-					url: '../ajax/venta.php?op=listar',
+					url: '../controlador/venta.php?op=listar',
 					type : "get",
 					dataType : "json",
 					error: function(e){
@@ -239,7 +239,7 @@ function listarProductoVenta()
 		        ],
 		"ajax":
 				{
-					url: '../ajax/venta.php?op=listarProductoVenta',
+					url: '../controlador/venta.php?op=listarProductoVenta',
 					type : "get",
 					dataType : "json",
 					error: function(e){
@@ -422,7 +422,7 @@ function guardaryeditar(e)
 
 
 		$.ajax({
-			url: "../ajax/venta.php?op=guardaryeditar",
+			url: "../controlador/venta.php?op=guardaryeditar",
 		    type: "POST",
 		    data: formData,
 		    contentType: false,
@@ -460,7 +460,7 @@ function guardaryeditar(e)
 		        if(result)
 		          {
            $.ajax({
-				url:"../ajax/venta.php?op=anular",
+				url:"../controlador/venta.php?op=anular",
 				 method:"POST",
 				//toma el valor del id y del estado
 				data:{idventas:idventas, estado:estado},
@@ -503,7 +503,7 @@ function guardaryeditar(e)
 	      buttons: [],
 
 	         "ajax":{
-	            url:"../ajax/venta.php?op=buscar_ventas_fecha",
+	            url:"../controlador/venta.php?op=buscar_ventas_fecha",
                 type : "post",
 				//dataType : "json",
 				data:{fecha_inicial:fecha_inicial,fecha_final:fecha_final},						
@@ -604,7 +604,7 @@ function guardaryeditar(e)
 	      buttons: [],
 
 	         "ajax":{
-	            url:"../ajax/venta.php?op=buscar_ventas_fecha_mes",
+	            url:"../controlador/venta.php?op=buscar_ventas_fecha_mes",
                 type : "post",
 				//dataType : "json",
 				data:{mes:mes,ano:ano},						
@@ -682,7 +682,7 @@ function guardaryeditar(e)
 
 function mostrar(idventas)
 {
-	$.post("../ajax/venta.php?op=mostrar",{idventas : idventas}, function(data, status)
+	$.post("../controlador/venta.php?op=mostrar",{idventas : idventas}, function(data, status)
 	{
 		//data = JSON.parse(data);
 		data =JSON.parse(data);		
@@ -698,7 +698,7 @@ function mostrar(idventas)
 		$("#btnAgregarArt").hide();
  	});
 
- 	$.post("../ajax/venta.php?op=listarDetalle&id="+idventas,function(r){
+ 	$.post("../controlador/venta.php?op=listarDetalle&id="+idventas,function(r){
 	        $("#detalles").html(r);
 	});	
 }

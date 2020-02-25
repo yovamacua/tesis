@@ -29,7 +29,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#asignar_form")[0]);
 
    $.ajax({
-     url: "../ajax/perfiles.php?op=asignar",
+     url: "../controlador/perfiles.php?op=asignar",
        type: "POST",
        data: formData,
        contentType: false,

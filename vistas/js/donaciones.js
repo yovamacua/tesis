@@ -248,7 +248,7 @@ function listar(){
 		buttons: [],
 		"ajax":
 			{
-				url: '../ajax/donacion.php?op=listar',
+				url: '../controlador/donacion.php?op=listar',
 				type: "get",
 				dataType: "json",
 				error: function(e){
@@ -293,7 +293,7 @@ function listar(){
  
 //mostrar las donaciones en la ventana modal del formulario
 function mostrar(id_donacion){
-	$.post("../ajax/donacion.php?op=mostrar",{id_donacion : id_donacion}, function(data, status){
+	$.post("../controlador/donacion.php?op=mostrar",{id_donacion : id_donacion}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
@@ -315,7 +315,7 @@ function mostrar(id_donacion){
 		var formData = new FormData($("#donacion_form")[0]);
 
 	    $.ajax({
-	     	url: "../ajax/donacion.php?op=guardaryeditar",
+	     	url: "../controlador/donacion.php?op=guardaryeditar",
 	       	type: "POST",
 	       	data: formData,
 	       	contentType: false,
@@ -339,7 +339,7 @@ function eliminar(id_donacion){
 	bootbox.confirm("¿Está seguro de eliminar la donación?", function(result){
 		if(result){
 	    	$.ajax({
-	       		url:"../ajax/donacion.php?op=eliminar_donacion",
+	       		url:"../controlador/donacion.php?op=eliminar_donacion",
 	      		method:"POST",
 	       		data:{id_donacion:id_donacion},
 

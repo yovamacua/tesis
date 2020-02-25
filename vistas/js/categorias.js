@@ -145,7 +145,7 @@ function listar()
                'pdf'],
    "ajax":
        {
-         url: '../ajax/categoria.php?op=listar',
+         url: '../controlador/categoria.php?op=listar',
          type : "get",
          dataType : "json",
          error: function(e){
@@ -192,7 +192,7 @@ function listar()
 
 function mostrar(id_categoria)
 {
- $.post("../ajax/categoria.php?op=mostrar",{id_categoria : id_categoria}, function(data, status)
+ $.post("../controlador/categoria.php?op=mostrar",{id_categoria : id_categoria}, function(data, status)
  {
    data = JSON.parse(data);
 
@@ -215,7 +215,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#categoria_form")[0]);
 
    $.ajax({
-     url: "../ajax/categoria.php?op=guardaryeditar",
+     url: "../controlador/categoria.php?op=guardaryeditar",
        type: "POST",
        data: formData,
        contentType: false,
@@ -246,7 +246,7 @@ function eliminar(id_categoria){
  if(result)
  {
      $.ajax({
-       url:"../ajax/categoria.php?op=eliminar_categoria",
+       url:"../controlador/categoria.php?op=eliminar_categoria",
        method:"POST",
        data:{id_categoria:id_categoria},
 

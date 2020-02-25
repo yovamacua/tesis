@@ -171,7 +171,7 @@ function listar(){
 		buttons: [],
 		"ajax":
 			{
-				url: '../ajax/gasto.php?op=listar',
+				url: '../controlador/gasto.php?op=listar',
 				type: "get",
 				dataType: "json",
 				error: function(e){
@@ -216,7 +216,7 @@ function listar(){
  
 //mostrar los gastos en la ventana modal del formulario
 function mostrar(id_gasto){
-	$.post("../ajax/gasto.php?op=mostrar",{id_gasto: id_gasto}, function(data, status){
+	$.post("../controlador/gasto.php?op=mostrar",{id_gasto: id_gasto}, function(data, status){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
@@ -236,7 +236,7 @@ function mostrar(id_gasto){
 		var formData = new FormData($("#gasto_form")[0]);
 
 	    $.ajax({
-	     	url: "../ajax/gasto.php?op=guardaryeditar",
+	     	url: "../controlador/gasto.php?op=guardaryeditar",
 	       	type: "POST",
 	       	data: formData,
 	       	contentType: false,
@@ -260,7 +260,7 @@ function eliminar(id_gasto){
 	bootbox.confirm("¿Está seguro de eliminar el gasto?", function(result){
 		if(result){
 	    	$.ajax({
-	       		url:"../ajax/gasto.php?op=eliminar_gasto",
+	       		url:"../controlador/gasto.php?op=eliminar_gasto",
 	      		method:"POST",
 	       		data:{id_gasto:id_gasto},
 

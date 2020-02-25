@@ -158,7 +158,7 @@ function listar()
            ],
    "ajax":
        {
-         url: '../ajax/roles.php?op=listar',
+         url: '../controlador/roles.php?op=listar',
          type : "get",
          dataType : "json",
          error: function(e){
@@ -205,7 +205,7 @@ function listar()
 
 function mostrar(idroles)
 {
- $.post("../ajax/roles.php?op=mostrar",{idroles : idroles}, function(data, status)
+ $.post("../controlador/roles.php?op=mostrar",{idroles : idroles}, function(data, status)
  {
  	  
      data = JSON.parse(data);
@@ -231,7 +231,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#rol_form")[0]);
 
    $.ajax({
-     url: "../ajax/roles.php?op=guardaryeditar",
+     url: "../controlador/roles.php?op=guardaryeditar",
        type: "POST",
        data: formData,
        contentType: false,
@@ -256,7 +256,7 @@ function editarcantidad(e){
     var formData = new FormData($("#asignar_form")[0]);
 
       $.ajax({
-        url: "../ajax/perfiles.php?op=asignar",
+        url: "../controlador/perfiles.php?op=asignar",
           type: "POST",
           data: formData,
           contentType: false,
@@ -290,7 +290,7 @@ function eliminar(idroles){
  if(result)
  {
      $.ajax({
-       url:"../ajax/roles.php?op=eliminar_perfil",
+       url:"../controlador/roles.php?op=eliminar_perfil",
        method:"POST",
        data:{idroles:idroles},
 

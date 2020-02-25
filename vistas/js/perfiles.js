@@ -136,7 +136,7 @@ function listar()
            ],
    "ajax":
        {
-         url: '../ajax/perfiles.php?op=listar',
+         url: '../controlador/perfiles.php?op=listar',
          type : "get",
          dataType : "json",
          error: function(e){
@@ -183,7 +183,7 @@ function listar()
 
 function mostrar(idperfil)
 {
- $.post("../ajax/perfiles.php?op=mostrar",{idperfil : idperfil}, function(data, status)
+ $.post("../controlador/perfiles.php?op=mostrar",{idperfil : idperfil}, function(data, status)
  {
    data = JSON.parse(data);
 
@@ -207,7 +207,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#perfiles_form")[0]);
 
    $.ajax({
-     url: "../ajax/perfiles.php?op=guardaryeditar",
+     url: "../controlador/perfiles.php?op=guardaryeditar",
        type: "POST",
        data: formData,
        contentType: false,
@@ -232,7 +232,7 @@ function editarcantidad(e){
     var formData = new FormData($("#asignar_form")[0]);
 
       $.ajax({
-        url: "../ajax/perfiles.php?op=asignar",
+        url: "../controlador/perfiles.php?op=asignar",
           type: "POST",
           data: formData,
           contentType: false,
@@ -255,7 +255,7 @@ function eliminar(idperfil){
  if(result)
  {
      $.ajax({
-       url:"../ajax/perfiles.php?op=eliminar_perfil",
+       url:"../controlador/perfiles.php?op=eliminar_perfil",
        method:"POST",
        data:{idperfil:idperfil},
 

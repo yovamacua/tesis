@@ -374,7 +374,7 @@ function mostrarformulario(flag)
 }
 
 function verdetalle(id_capacitacion){
-   $.post("../ajax/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
+   $.post("../controlador/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
  {
     data = JSON.parse(data);
     $("#letra1").show();
@@ -414,7 +414,7 @@ function listar()
     buttons: [],
     "ajax":
        {
-          url: '../ajax/capacitacion.php?op=listar',
+          url: '../controlador/capacitacion.php?op=listar',
           type : "get",
           dataType : "json",
           error: function(e){
@@ -471,7 +471,7 @@ function listarDetalleCapacitados(id_capacitacion)
             ], 
     "ajax":
         {
-          url:"../ajax/capacitacion.php?op=listardetalle&id="+id_capacitacion,
+          url:"../controlador/capacitacion.php?op=listardetalle&id="+id_capacitacion,
           method:"POST",
           data:{id_capacitacion:id_capacitacion},
 
@@ -518,7 +518,7 @@ function listarDetalleCapacitados(id_capacitacion)
 
 function mostrar(id_capacitacion)
 {
- $.post("../ajax/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
+ $.post("../controlador/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
  {
     data = JSON.parse(data);
 
@@ -536,7 +536,7 @@ function mostrar(id_capacitacion)
 
 function mostrardetalle(id_detallecapacitados)
 {
- $.post("../ajax/capacitacion.php?op=mostrardetalle",{id_detallecapacitados : id_detallecapacitados}, function(data, status)
+ $.post("../controlador/capacitacion.php?op=mostrardetalle",{id_detallecapacitados : id_detallecapacitados}, function(data, status)
  {
     data = JSON.parse(data);
 
@@ -558,7 +558,7 @@ function guardaryeditar(e)
   var formData = new FormData($("#capacitacion_form")[0]);
 
     $.ajax({
-        url: "../ajax/capacitacion.php?op=guardaryeditar",
+        url: "../controlador/capacitacion.php?op=guardaryeditar",
         type: "POST",
         data: formData,
         contentType: false,
@@ -582,7 +582,7 @@ function guardaryeditardetalle(e)
   var formData = new FormData($("#detallecapacitados_form")[0]);
 
     $.ajax({
-        url: "../ajax/capacitacion.php?op=guardaryeditardetalle",
+        url: "../controlador/capacitacion.php?op=guardaryeditardetalle",
         type: "POST",
         data: formData,
         contentType: false,
@@ -608,7 +608,7 @@ function eliminar(id_capacitacion){
     if(result)
     {
       $.ajax({
-            url:"../ajax/capacitacion.php?op=eliminar_capacitaciones",
+            url:"../controlador/capacitacion.php?op=eliminar_capacitaciones",
             method:"POST",
             data:{id_capacitacion:id_capacitacion},
 
@@ -632,7 +632,7 @@ function eliminardetalle(id_detallecapacitados){
     if(result)
     {
       $.ajax({
-            url:"../ajax/capacitacion.php?op=eliminar_detallecapacitados",
+            url:"../controlador/capacitacion.php?op=eliminar_detallecapacitados",
             method:"POST",
             data:{id_detallecapacitados:id_detallecapacitados},
 

@@ -139,7 +139,7 @@ function listar()
                'pdf'*/],
    "ajax":
        {
-         url: '../ajax/unidad.php?op=listar',
+         url: '../controlador/unidad.php?op=listar',
          type : "get",
          dataType : "json",
          error: function(e){
@@ -186,7 +186,7 @@ function listar()
 
 function mostrar(id_unidad)
 {
- $.post("../ajax/unidad.php?op=mostrar",{id_unidad : id_unidad}, function(data, status)
+ $.post("../controlador/unidad.php?op=mostrar",{id_unidad : id_unidad}, function(data, status)
  {
    data = JSON.parse(data);
 
@@ -209,7 +209,7 @@ function guardaryeditar(e)
  var formData = new FormData($("#unidad_form")[0]);
 
    $.ajax({
-     url: "../ajax/unidad.php?op=guardaryeditar",
+     url: "../controlador/unidad.php?op=guardaryeditar",
        type: "POST",
        data: formData,
        contentType: false,
@@ -240,7 +240,7 @@ function eliminar(id_unidad){
  if(result)
  {
      $.ajax({
-       url:"../ajax/unidad.php?op=eliminar_unidad",
+       url:"../controlador/unidad.php?op=eliminar_unidad",
        method:"POST",
        data:{id_unidad:id_unidad},
 
