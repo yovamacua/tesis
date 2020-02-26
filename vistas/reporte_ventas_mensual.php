@@ -52,7 +52,7 @@ require_once("header.php");?>
       
       <!-- migas de pan -->
       <ol class="breadcrumb">
-         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+         <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
          <li><i class="fa fa-file-text"></i> Reportes V por M</li>
       </ol>
 

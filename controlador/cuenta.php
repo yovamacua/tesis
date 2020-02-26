@@ -17,7 +17,7 @@ $objetivo     = isset($_POST["objetivo"]);
 
 if (!isset($_SESSION['id_usuario'])) {?>
         <script type="text/javascript">
-        window.location="../vistas/home.php";
+        window.location="../vistas/inicio.php";
         </script>
     <?php
 }

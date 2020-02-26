@@ -72,7 +72,7 @@ function recargar2(){
 
       <!--- migas de pan -->
       <ol class="breadcrumb">
-         <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
+         <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
          <li><a href="partidas.php"><i class="fa fa-file-text-o"></i> Partidas</a></li>
          <li><i class="fa fa-clipboard"></i> Cuentas</li>
       </ol>

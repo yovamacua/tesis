@@ -13,7 +13,7 @@
 
 if(isset($_SESSION["id_usuario"]))
 {
-   header("Location:".Conectar::ruta()."vistas/home.php");
+   header("Location:".Conectar::ruta()."vistas/inicio.php");
 }
 else{
 // muestra si la session no existe
