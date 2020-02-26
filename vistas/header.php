@@ -88,7 +88,7 @@
       <div class="wrapper">
       <header class="main-header">
          <!-- Logo -->
-         <a href="home.php" class="logo">
+         <a href="inicio.php" class="logo">
             <!-- Mini logo -->
             <span class="logo-mini"><b>C.E</b></span>
 
