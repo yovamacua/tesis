@@ -78,7 +78,7 @@
                     </div>
                     <!--Fin centro 1-->
 
-            <!--Formulario para agregar capacitados -->
+            <!--Formulario para agregar insumos a pedidos -->
                           <?php 
                              $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
                             $valores=array();
@@ -88,7 +88,7 @@
                              $valores[]= $rows["codigo"];
                                 }   
                                 if(in_array("REPEDI",$valores)){
-                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Insumo</button>';
+                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar/Editar Insumo</button>';
                                 }
                           ?>
             
@@ -137,13 +137,13 @@
 
                 </div>
 
-                    <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                    <input type="hidden" name="id_usuario" id="id_usuarioi" value="<?php echo $_SESSION["id_usuario"];?>" />
                     <input type="hidden" name="id_detallepedido" id="id_detallepedido"/>
                     <input type="hidden" name="id_pedido" id="id_pe"/>
                   
                 </form>
               </div>
-            <!--Fin formulario para agregar capacitados -->
+            <!--Fin formulario para agregar insumos a pedido -->
 
                     <!-- centro 2-->
                     <div class="panel-body table-responsive tabla-cap" id="listadopedido">
@@ -221,9 +221,9 @@
       <br><br><br><br>
     </div><!-- body -->
          <div class="modal-footer">
-          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+          <input type="hidden" name="id_usuario" id="id_usuariom" value="<?php echo $_SESSION["id_usuario"];?>" />
           <input type="hidden" name="id_pedido" id="id_pedido"/>
-          <button type="submit" name="action" id="btnGuardarDet" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+          <button type="submit" name="action" id="btnGuardarModal" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiardetalle()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
         </div>
       </div>

@@ -641,6 +641,7 @@ function eliminardetalle(id_detallecapacitados){
             //alert(data);
             $("#resultados_ajax").html(data);
             $("#detallecapacitados_data").DataTable().ajax.reload(null, false);
+            listarDetalleCapacitados(id_capacitacion);
           }
       });
     }

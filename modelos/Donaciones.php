@@ -97,7 +97,7 @@
            parent::set_names();
 
            $sql = "delete from donaciones where id_donacion=?";
-           $sq = $conectar->prepare($sql);
+           $sql = $conectar->prepare($sql);
            $sql->bindValue(1, $id_donacion);
            $sql->execute();
 

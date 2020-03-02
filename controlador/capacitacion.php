@@ -262,10 +262,10 @@ foreach($rol as $rows){
           $sub_array[] = $row["nombres"];
           $sub_array[] = $row["apellidos"];
           $sub_array[] = $row["dui"];
-         
+          
           $boton_editar=' <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
-          $boton_eliminar='<button type="button" onClick="eliminar('.$row["id_capacitacion"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitación "><i class="fa fa-trash"></i></button></div>';
+          $boton_eliminar='<button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="fa fa-trash"></i></button></div>';
 
           ?>
           <?php  

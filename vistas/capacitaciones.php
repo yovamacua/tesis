@@ -33,7 +33,7 @@
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
-             <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><a href="home.php"><i class="fa fa-home"></i>Inicio</a></li>
              <li><i class="fa fa-book"></i> Capacitaciones</li>
           </ol>
    
@@ -84,10 +84,10 @@
                     </div>
 
                     <!--Fin centro -->
-          <div class="box-header" style="margin-top: -2.6%; padding: 0px!important;    z-index: 9999999!important;">
+          <div class="box-header" style="margin-top: -2.6%; padding: 0px!important;    z-index: 9999999!important;"></div>
               <!--Formulario para agregar capacitados -->
 <div id="distancia"><br><br></div>
-            <button id="btnAgregarCap" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar Capacitado</button>
+            <button id="btnAgregarCap" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallecapacitadosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar/Editar Capacitado</button>
 
             <div class="panel-body table-responsive contenedor" id="detallecapacitadosModal" >
               <form method="post" id="detallecapacitados_form" autocomplete="off">
@@ -145,7 +145,7 @@
                           </tbody>
                         </table>
                         
-                        <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                        <input type="hidden" name="id_usuario" id="id_usuarioc" value="<?php echo $_SESSION["id_usuario"];?>" />
 
                          <!-- div para el boton generar reporte asistencia de capacitacion -->
                         <div style="width:200px;">
@@ -214,7 +214,7 @@
       </div><!-- body -->
     
         <div class="modal-footer">
-          <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+          <input type="hidden" name="id_usuario" id="id_usuariom" value="<?php echo $_SESSION["id_usuario"];?>" />
           <input type="hidden" name="id_capacitacion" id="id_capacitacion" value="<?php echo $_GET["id_capacitacion"];?>"/>
           <button type="submit" class="btn btn-success pull-left" value="Add" onclick="desvanecer()"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
           <button type="button" onclick="limpiar()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
