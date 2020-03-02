@@ -591,7 +591,6 @@ function guardaryeditardetalle(e)
        success: function(datos)
        {
           console.log(datos);
-          //$('#detallecapacitados_form')[0].reset();
           $('#resultados_ajax').html(datos);
           $('#detallecapacitados_data').DataTable().ajax.reload(null, false);
           limpiardetalle();

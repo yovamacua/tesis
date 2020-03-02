@@ -9,7 +9,7 @@ $(function() {
     $("#error_descripcion").hide();
     $("#error_iduni").hide();
     $("#error_fecha1").hide();
-    $("#error_idpe").hide();
+    $("#error_cantidad1").hide();
     $("#error_idcategoria").hide();
     
     // se declaran variables con valor false para ver si pasa o no la validacion
@@ -18,7 +18,7 @@ $(function() {
     var error_descripcion = false;
     var error_iduni = false;
     var error_fecha1 = false;
-    var error_idpe = false;
+    var error_cantidad1 = false; 
 	var error_idcategoria = false;
 
     // se ejecuta funcion en el id del control cuando se pierde el foco
@@ -42,8 +42,8 @@ $(function() {
         campo_fecha1();
     });
 
-    $("#idpe").focusout(function() {
-        campo_idpe();
+    $("#cantidad1").focusout(function() {
+        campo_cantidad1();
     });
 
     $("#idcategoria").focusout(function() {
@@ -176,28 +176,28 @@ $(function() {
         }
     }
 
-    function campo_idpe() {
+    function campo_cantidad1() {
         var pattern = /^[0-9]*$/;   
-        var idpe = $("#idpe").val();
-        if (pattern.test(idpe) && idpe !== '') {
-            $("#error_idpe").hide();
-            $("#idpe").css("border-bottom", "2px solid #34F458");
+        var cantidad1 = $("#cantidad1").val();
+        if (pattern.test(cantidad1) && cantidad1 !== '') {
+            $("#error_cantidad1").hide();
+            $("#cantidad1").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_idpe").html("Solo se permiten números enteros");
-            $("#error_idpe").css("position", "absolute");
-            $("#error_idpe").css("color", "red");
-            $("#error_idpe").show();
-            $("#idpe").css("border-bottom", "2px solid #F90A0A");
-            error_idpe = true;
+            $("#error_cantidad1").html("Solo se permiten números enteros");
+            $("#error_cantidad1").css("position", "absolute");
+            $("#error_cantidad1").css("color", "red");
+            $("#error_cantidad1").show();
+            $("#cantidad1").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad1 = true;
         }
-        var idpe = $("#idpe").val().length;
-        if (idpe <= 0) {
-            $("#error_idpe").html("No se permiten campos vacios");
-            $("#error_idpe").css("position", "absolute");
-            $("#error_idpe").css("color", "red");
-            $("#error_idpe").show();
-            $("#idpe").css("border-bottom", "2px solid #F90A0A");
-            error_idpe = true;
+        var cantidad1 = $("#cantidad1").val().length;
+        if (cantidad1 <= 0) {
+            $("#error_cantidad1").html("No se permiten campos vacios");
+            $("#error_cantidad1").css("position", "absolute");
+            $("#error_cantidad1").css("color", "red");
+            $("#error_cantidad1").show();
+            $("#cantidad1").css("border-bottom", "2px solid #F90A0A");
+            error_cantidad1 = true;
         }
     }
 
@@ -234,7 +234,7 @@ $(function() {
 	    var error_descripcion = false;
 	    var error_iduni = false;
 	    var error_fecha1 = false;
-        var error_idpe = false;
+        var error_cantidad1 = false;
 		var error_idcategoria = false;
 
         // se invoca a las funciones para tener el valor de las variables
@@ -243,13 +243,13 @@ $(function() {
 	    error_descripcion = false;
 	    error_iduni = false;
 	    error_fecha1 = false;
-        error_idpe = false;
+        error_cantidad1 = false;
 		error_idcategoria = false;
 
         //comparacion
         if (error_cantidad === false && error_precio === false && 
         	error_descripcion === false && error_iduni=== false && 
-        	error_fecha1 === false && error_idpe === false && error_idcategoria === false) {
+        	error_fecha1 === false && error_cantidad1 === false && error_idcategoria === false) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#cantidad").css("border-bottom", "1px solid #d2d6de");
@@ -257,7 +257,7 @@ $(function() {
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
             $("#iduni").css("border-bottom", "1px solid #d2d6de");
             $("#fecha1").css("border-bottom", "1px solid #d2d6de");
-            $("#idpe").css("border-bottom", "1px solid #d2d6de");
+            $("#cantidad1").css("border-bottom", "1px solid #d2d6de");
             $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
         } else {
@@ -418,6 +418,7 @@ function init(){
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
+        $(".ofield").hide();
 		$(".modal-title").text("Agregar Insumo");
 	});
 
@@ -435,7 +436,7 @@ function limpiar(){
 	$('#iduni').val("");
 	$('#descripcion').val("");
 	$('#fecha1').val("");
-    $('#idpe').val("");
+    $('#cantidad1').val("");
 	$('#idcategoria').val("");
 	$('#id_insumo').val("");
 
@@ -445,7 +446,7 @@ function limpiar(){
     $("#iduni").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
     $("#fecha1").css("border-bottom", "1px solid #d2d6de");
-    $("#idpe").css("border-bottom", "1px solid #d2d6de");
+    $("#cantidad1").css("border-bottom", "1px solid #d2d6de");
     $("#idcategoria").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_cantidad").hide();
@@ -453,7 +454,7 @@ function limpiar(){
     $("#error_iduni").hide();
     $("#error_descripcion").hide();
     $("#error_fecha1").hide();
-    $("#error_idpe").hide();
+    $("#error_cantidad1").hide();
     $("#error_idcategoria").hide();
 
 }
@@ -535,13 +536,14 @@ function mostrar(id_insumo){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
+            $(".ofield").show();
 	 		$('#insumoModal').modal("show");
 	 		$('#cantidad').val(data.cantidad);
 	 		$('#precio').val(data.precio);
 	 		$('#iduni').val(data.iduni);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#fecha1').val(data.fecha);
-	 		$('#idpe').val(data.idpedido);
+	 		//$('#idpe').val(data.idpedido);
 	 		$('#idcategoria').val(data.idcategoria);
 	 		$('.modal-title').text("Editar Insumo");
 	 		$('#id_insumo').val(id_insumo);
@@ -592,6 +594,7 @@ function mostrar(id_insumo){
 		       	$('#kardexinsumoModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
 		        limpiar2();
+                location.reload();
 	       }
 
 	   	});

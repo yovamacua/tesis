@@ -10,14 +10,14 @@
 	//Declaramos las variables de los valores que se envian por el formulario y que recibimos por ajax y decimos  que si existe el parametro que estamos recibiendo
 
 	$insumos = new Insumos();
-	 $usuario = new Roles();
+	$usuario = new Roles();
  
 	$id_insumo = isset($_POST["id_insumo"]);
 	$cantidad = isset($_POST["cantidad"]);
 	$precio = isset($_POST["precio"]);
 	$descripcion = isset($_POST["descripcion"]);
 	$fecha = isset($_POST["fecha"]);
-	$idpedido = isset($_POST["idpedido"]);
+	$cantidad1 = isset($_POST["cantidad1"]); 
 	$idcategoria = isset($_POST["idcategoria"]);
 	$iduni = isset($_POST["iduni"]);
 
@@ -49,7 +49,7 @@ switch ($_GET["op"]) {
 	       	  /*verificamos si el insumo existe en la base de datos, si ya existe un registro con el insumo entonces no se registra*/
 			    if(is_array($datos)==true and count($datos)==0){
 			       	   	  //no existe el insumo por lo tanto hacemos el registros
-		 			$insumos->registrar_insumo($cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni);
+		 			$insumos->registrar_insumo($cantidad, $precio, $descripcion, $fecha, $idcategoria, $iduni);
 			       	   	  
 			       	   	  $messages[]= "El insumo se registró correctamente";
 			    }else {
@@ -59,7 +59,7 @@ switch ($_GET["op"]) {
 
 			    }else {
 	            	/*si ya existe entonces editamos el insumo*/
-	             $insumos->editar_insumo($id_insumo, $cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni);
+	             $insumos->editar_insumo($id_insumo, $cantidad, $precio, $descripcion, $fecha, $idcategoria, $iduni, $cantidad1);
 
 	            	  $messages[]="El insumo se editó correctamente";
 	            }
@@ -99,7 +99,7 @@ switch ($_GET["op"]) {
 					$output["descripcion"] = $row["descripcion"];
 					$output["fecha"] = date("d/m/Y", strtotime($row["fecha"]));
 					$output["idcategoria"] = $row["idcategoria"];
-					$output["idpedido"] = $row["idpedido"];
+					//$output["idpedido"] = $row["idpedido"];
 					
 				}
 					echo json_encode($output);
@@ -181,6 +181,7 @@ foreach($rol as $rows){
 		  	$datos = $insumos->get_insumos_por_id($_POST["id_insumo"]);
 
 		    if(is_array($datos)==true and count($datos)>0){
+		    	  $insumos->eliminar_kardexinsumo($_POST["id_insumo"]);
 		          $insumos->eliminar_insumo($_POST["id_insumo"]);
 		          $messages[]="El registro se eliminó exitosamente";
 		     }else {

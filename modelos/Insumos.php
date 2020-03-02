@@ -17,12 +17,11 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select u.usuario, i.id_insumo, i.cantidad, i.precio, i.descripcion, i.fecha, i.idpedido, c.categoria, uni.nombre, i.iduni
+			$sql = "select u.usuario, i.id_insumo, i.cantidad, i.precio, i.descripcion, i.fecha, c.categoria, uni.nombre, i.iduni
 				from insumos i 
 				inner join categorias c on c.id_categoria = i.idcategoria 
-				inner join pedidos p on p.id_pedido = i.idpedido 
-				inner join usuarios u on p.id_usuario = u.id_usuario
-				inner join unidad uni on i.iduni = uni.idunidad";
+				inner join unidad uni on uni.idunidad = i.iduni
+				inner join usuarios u on u.id_usuario = uni.idusuariouni";
 
 			$sql = $conectar->prepare($sql);
 			$sql-> execute();
@@ -45,7 +44,7 @@
 		}
 
 		//registrar insumos
-		public function registrar_insumo($cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni){
+		public function registrar_insumo($cantidad, $precio, $descripcion, $fecha, $idcategoria, $iduni){
 
 			try{
 	            $conectar=parent::conexion();
@@ -55,16 +54,15 @@
 	            $date = str_replace('/', '-', $date_inicial);
 	            $fecha = date("Y-m-d", strtotime($date));
 	          
-	          	$sql = "call registrar_insumo(?,?,?,?,?,?,?);";
+	          	$sql = "call registrar_insumo(?,?,?,?,?,?);";
 
 	            $sql = $conectar->prepare($sql);
 				$sql-> bindValue(1, $_POST["cantidad"], PDO::PARAM_INT);
 				$sql-> bindValue(2, $_POST["precio"], PDO::PARAM_STR);
 				$sql-> bindValue(3, $_POST["descripcion"], PDO::PARAM_STR);
 				$sql-> bindValue(4, $fecha);
-				$sql-> bindValue(5, $_POST["idpedido"], PDO::PARAM_INT);
-				$sql-> bindValue(6, $_POST["idcategoria"], PDO::PARAM_INT);
-				$sql-> bindValue(7, $_POST["iduni"], PDO::PARAM_INT);
+				$sql-> bindValue(5, $_POST["idcategoria"], PDO::PARAM_INT);
+				$sql-> bindValue(6, $_POST["iduni"], PDO::PARAM_INT);
 				$sql-> execute();
 
          	}catch(PDOException $ex){
@@ -92,12 +90,11 @@
 			$sql-> bindValue(2, $_POST["salida"], PDO::PARAM_INT);
 			$sql-> bindValue(3, $fechaS);
 			$sql-> execute();
-
 			
 		}
  
 		//editar insumos
-		public function editar_insumo($id_insumo, $cantidad, $precio, $descripcion, $fecha, $idpedido, $idcategoria, $iduni){
+		public function editar_insumo($id_insumo, $cantidad, $precio, $descripcion, $fecha, $idcategoria, $iduni, $cantidad1){
 
 			$conectar = parent::conexion();
 			parent::set_names();
@@ -106,28 +103,18 @@
             $date = str_replace('/', '-', $date_inicial);
             $fecha = date("Y-m-d", strtotime($date));
 
-			$sql = "update insumos set
-            cantidad=?,
-            precio=?,
-            descripcion=?,
-            fecha=?,
-            idpedido=?,
-            idcategoria=?,
-            iduni=?
-            where
-            id_insumo=?";	
+			$sql = "call editar_valoresinsumo(?,?,?,?,?,?,?,?);";	
 
 			$sql = $conectar->prepare($sql);
 
-			$sql-> bindValue(1, $_POST["cantidad"]);
-			$sql-> bindValue(2, $_POST["precio"]);
-			$sql-> bindValue(3, $_POST["unidadMedida"]);
+			$sql-> bindValue(1, $_POST["id_insumo"]);
+			$sql-> bindValue(2, $_POST["cantidad"]);
+			$sql-> bindValue(3, $_POST["precio"]);
 			$sql-> bindValue(4, $_POST["descripcion"]);
 			$sql-> bindValue(5, $fecha);
-			$sql-> bindValue(6, $_POST["idpedido"]);
-			$sql-> bindValue(7, $_POST["idcategoria"]);
-			$sql-> bindValue(8, $_POST["iduni"]);
-			$sql-> bindValue(9, $_POST["id_insumo"]);
+			$sql-> bindValue(6, $_POST["idcategoria"]);
+			$sql-> bindValue(7, $_POST["iduni"]);
+			$sql-> bindValue(8, $_POST["cantidad1"]);
 			$sql-> execute();
 		}
 
@@ -136,12 +123,29 @@
            $conectar = parent::conexion();
            parent::set_names();
 
-           $sql="delete from insumos where id_insumo=?";
+           $sql="delete from insumos where id_insumo=?"; 
            $sql=$conectar->prepare($sql);
            $sql->bindValue(1, $id_insumo);
            $sql->execute();
 
            return $resultado=$sql->fetch();
+        }
+
+        //método para eliminar un registro de kardexinsumo
+        public function eliminar_kardexinsumo($id_insumo){
+          $conectar = parent::conexion();
+          parent::set_names();
+
+            //Sentencia para eliminar kardexinsumo con ese id
+            $sql = "delete ki from kardexinsumo ki 
+					inner join insumos i
+					on ki.idinsumo = i.id_insumo
+					where i.id_insumo = ?";
+            $sql = $conectar->prepare($sql);
+            $sql->bindValue(1, $id_insumo);
+            $sql->execute();
+
+            return $resultado = $sql->fetch();
         }
 	}
 ?>

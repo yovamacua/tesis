@@ -8,10 +8,6 @@ $usuario = new Roles();
        $categoria = new Categorias();
        $cat = $categoria->get_categoria();
 
-    require_once("../modelos/Pedidos.php");
-       $pedido = new Pedidos();
-       $p = $pedido->get_pedido();
-
     require_once("../modelos/Insumos.php");
        $insumo = new Insumos();
        $in = $insumo->get_insumos();
@@ -68,11 +64,11 @@ $usuario = new Roles();
                                   print_r($boton_eliminar);
 
 
-              }elseif(in_array("REPEDI",$valores)){
-                            print_r($boton_eliminar);
-              }else{
-                print_r($boton_registrar);
-              }
+                                }elseif(in_array("REPEDI",$valores)){
+                                              print_r($boton_eliminar);
+                                }else{
+                                  print_r($boton_registrar);
+                                }
                             ?>
                            
                             </h1>
@@ -120,8 +116,8 @@ $usuario = new Roles();
 
           <div class="form-row">
             <div class="form-group col-md-6">
-              <label>Cantidad</label>
-              <input type="text" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="Cantidad" required/>
+              <label>Cantidad actual</label>
+              <input type="text" name="cantidad" id="cantidad" autocomplete="off" class="form-control" placeholder="Cantidad actual" required/>
               <span class="error_form" id="error_cantidad"></span>
             </div>
 
@@ -131,6 +127,14 @@ $usuario = new Roles();
               <span class="error_form" id="error_precio"></span>
             </div>
         </div>
+
+         <div class="form-row ofield">
+           <div class="form-group col-md-12">
+              <label>Agregar a cantidad</label>
+              <input type="text" name="cantidad1" id="cantidad1" autocomplete="off" class="form-control" value="0"/>
+              <span class="error_form" id="error_cantidad1"></span>
+            </div>
+          </div>
 
         <div class="form-row">
           <div class="form-group col-md-12">
@@ -164,22 +168,7 @@ $usuario = new Roles();
         </div> 
 
         <div class="form-row">
-          <div class="form-group col-md-6">
-             <label>No. de Pedido</label>
-              <select class="form-control" id="idpe" name="idpedido" required>
-                <option  value="">Seleccione el No. de Pedido</option>
-                  <?php
-                     for($i=0; $i<sizeof($p);$i++){
-                       ?>
-                        <option value="<?php echo $p[$i]["id_pedido"]?>"><?php echo $p[$i]["id_pedido"];?></option>
-                       <?php
-                     }
-                  ?>   
-              </select>
-              <span class="error_form" id="error_idpe"></span>
-          </div>
-
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <label>Categoría</label>
               <select class="form-control" id="idcategoria" name="idcategoria" required>
                 <option  value="">Seleccione la Categoría</option>
@@ -258,10 +247,10 @@ $usuario = new Roles();
     </div><!-- body -->
 
                <div class="modal-footer">
-                  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
+                  <input type="hidden" name="id_usuario" id="id_usuariom" value="<?php echo $_SESSION["id_usuario"];?>" />
                   <input type="hidden" name="id_kardexinsumo" id="id_kardexinsumo"/>
                   <input type="hidden" name="canti" id="canti"/>
-                  <button type="submit" name="action" id="btnGuardar" class="btn btn-success pull-left" value="Add" onclick="desvanecer();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
+                  <button type="submit" name="action" id="btnGuardarm" class="btn btn-success pull-left" value="Add" onclick="desvanecer();"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</button>
                   <button type="button" onclick="limpiar2()" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
               </div>
             </div>
