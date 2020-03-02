@@ -81,13 +81,13 @@ try{
               return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
         }
                 // editar los productos
-         public function editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock){
+         public function editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock,$stock1){
            
             try {
                $conectar=parent::conexion();
             parent::set_names();
          
-          $sql="call editar_producto(?,?,?,?,?,?,?)";
+          $sql="call editar_producto(?,?,?,?,?,?,?,?)";
            
              $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $_POST["producto"], PDO::PARAM_STR);
@@ -97,6 +97,7 @@ try{
             $sql->bindValue(5, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_producto"], PDO::PARAM_INT);
             $sql->bindValue(7, $_POST["stock"], PDO::PARAM_INT);
+             $sql->bindValue(8, $_POST["stock1"], PDO::PARAM_INT);
                $sql->execute();
             
               
