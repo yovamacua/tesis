@@ -95,7 +95,7 @@ foreach($rol as $rows){
               $valores[]= $rows["codigo"];
           }
  	 $data= Array();
-
+  $dolar="$ ";
     	foreach ($datos as $row) {
  			$sub_array = array();
        if($row["estado"] == 1){
@@ -126,7 +126,7 @@ foreach($rol as $rows){
                  $sub_array[] = $row["usuario"];
                    $sub_array[] = $row["fechaventa"];
                  $sub_array[] = $row["numero_venta"];
-                 $sub_array[] = $row["total_pagar"];
+                 $sub_array[] = $dolar.$row["total_pagar"];
               
 	       
              $sub_array[] =$atrib;
@@ -370,8 +370,8 @@ if (isset($messages)){
         $html.="'<tr>
       '<td>".$row['producto']."</td>'+
       '<td>".$row['cantidad']."</td>'+
-      '<td>".$row['precio_venta']."</td>'+
-      '<td>".$subtotal."</td>'
+      '<td>$ ".$row['precio_venta']."</td>'+
+      '<td>$ ".$subtotal."</td>'
       '</tr>'";
         $total= $total+$subtotal;
             }
@@ -381,8 +381,8 @@ if (isset($messages)){
                                     <th></th>
                                     <th></th>
                                     
-                                    <th>$/'.$total.'</th> 
-                                </tfoot';
+                                    <th>$ '.$total.'</th> 
+                                </tfoot>';
                                     echo $html;
                                
           } else {

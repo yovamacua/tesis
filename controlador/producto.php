@@ -27,6 +27,7 @@
    $id_usuario=isset($_POST["id_usuario"]);
    $id_categoria=isset($_POST["categoria"]);
    $stock = isset($_POST["stock"]);
+     $stock1 = isset($_POST["stock1"]);
 
 
    switch($_GET["op"]){
@@ -74,7 +75,7 @@
 	            else {
 	            	//si ya existe entonces editamos el producto
 
-	            $productos->editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock);
+	            $productos->editar_producto($producto,$precio_venta,$id_unidad,$id_usuario,$id_categoria,$id_producto,$stock, $stock1);
 
 
 	            	  $messages[]="El producto se editó correctamente";
@@ -156,7 +157,7 @@ foreach($rol as $rows){
               $valores[]= $rows["codigo"];
           }
  	 $data= Array();
-
+$dolar="$ ";
      foreach($datos as $row)
       {
         $sub_array = array();
@@ -177,7 +178,7 @@ foreach($rol as $rows){
                  }
                  $sub_array[] = $row["producto"];
                  $sub_array[] = $row["unidad"];
-                 $sub_array[] = $row["precio_venta"];
+                 $sub_array[] = $dolar.$row["precio_venta"];
                  $sub_array[] = $row["categoria"];
       
        

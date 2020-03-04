@@ -137,18 +137,20 @@ function cancelarform()
 	limpiar();
 	//location.reload();
 	mostrarformulario(false);
-	//cargar();
+	cargar();
 }
 
 function cancelar(){
 
 	limpiar();
 	mostrarformulario(false);
+	cargar();
 	
 }
 function cargar(){
 
 	window.location.reload();
+
 }
 //Función Listar
 function listar()

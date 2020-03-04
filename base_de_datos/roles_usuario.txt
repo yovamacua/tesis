@@ -37,3 +37,7 @@ INSERT INTO roles_usuario VALUES("36","36","1");
 INSERT INTO roles_usuario VALUES("37","37","1");
 INSERT INTO roles_usuario VALUES("38","38","1");
 INSERT INTO roles_usuario VALUES("39","39","1");
+INSERT INTO roles_usuario VALUES("40","40","1");
+INSERT INTO roles_usuario VALUES("41","41","1");
+INSERT INTO roles_usuario VALUES("42","42","1");
+INSERT INTO roles_usuario VALUES("43","43","1");

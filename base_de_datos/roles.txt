@@ -37,3 +37,7 @@ INSERT INTO rol VALUES("36","ELIMINAR","ELUNID","elimina unidad","15");
 INSERT INTO rol VALUES("37","REGISTRAR","REPERM","agrega permiso","16");
 INSERT INTO rol VALUES("38","EDITAR","EDPERM","edita los permiso","16");
 INSERT INTO rol VALUES("39","ELIMINAR","ELPERM","eliminar permiso","16");
+INSERT INTO rol VALUES("40","CONSULTAR","COGAST","consulta de gasto","6");
+INSERT INTO rol VALUES("41","CONSULTAR","CODONA","comsulta de donaciones","5");
+INSERT INTO rol VALUES("42","CONSULTAR","COINFO","consulta de informes","12");
+INSERT INTO rol VALUES("43","CONSULTAR","COREPO","consulta de ventas","13");

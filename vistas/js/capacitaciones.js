@@ -626,8 +626,7 @@ function eliminardetalle(id_detallecapacitados){
 
     //IMPORTANTE: asi se imprime el valor de una funcion
       //alert(capacitacion_id);
-
-  bootbox.confirm("¿Está seguro de eliminar el capacitado?", function(result){
+ bootbox.confirm("¿Está seguro de eliminar la capacitación?", function(result){
     if(result)
     {
       $.ajax({
@@ -643,8 +642,9 @@ function eliminardetalle(id_detallecapacitados){
             listarDetalleCapacitados(id_capacitacion);
           }
       });
-    }
+         }
   });//bootbox
+   
 }
 
 init();

@@ -235,6 +235,7 @@
       $ids=$numeroDeFilas-1;
      //// realiza la suma de los totales
        $registro_venta->setCellValue('I'.$ids,"=SUM(C".$ids.":H".$ids.")");
+       
    // aplica formato a la celda con el contenido
   
    $registro_venta->getStyle('B'.$ids.":B".$ids)->applyFromArray($styleArray);

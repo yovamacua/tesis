@@ -6,6 +6,7 @@ $(function() {
     $("#error_producto").hide();
     $("#error_precio").hide();
     $("#error_stock").hide();
+    $("#error_stock1").hide();
      $("#error_categoria").hide();
       $("#error_unidad").hide();
  
@@ -15,6 +16,7 @@ $(function() {
     var error_producto = false;
     var error_precio = false;
     var error_stock = false;
+    var error_stock1 = false;
     var error_categoria = false;
       var error_unidad= false;
     
@@ -28,6 +30,9 @@ $(function() {
     });
       $("#stock").focusout(function() {
         campo_stock();
+    });
+       $("#stock1").focusout(function() {
+        campo_stock1();
     });
       $("#categoria").focusout(function() {
         campo_categoria();
@@ -91,7 +96,7 @@ $(function() {
         }
     }
     function campo_stock() {
-        var pattern = /^[0-9]+[.]+[0-9]*$/;
+        var pattern = /^[0-9]*$/;
         var precio = $("#stock").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_stock").hide();
@@ -112,6 +117,30 @@ $(function() {
             $("#error_stock").show();
             $("#stock").css("border-bottom", "2px solid #F90A0A");
             error_stock = true;
+        }
+    }
+    function campo_stock1() {
+        var pattern = /^[0-9]*$/;
+        var precio = $("#stock1").val();
+        if (pattern.test(precio) && precio !== '') {
+            $("#error_stock1").hide();
+            $("#stock1").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_stock1").html("numeros");
+            $("#error_stock1").css("position", "absolute");
+            $("#error_stock1").css("color", "red");
+            $("#error_stock1").show();
+            $("#stock1").css("border-bottom", "2px solid #F90A0A");
+            error_stock1 = true;
+        }
+        var precio = $("#stock1").val().length;
+        if (precio <= 0) {
+            $("#error_stock1").html("No se permiten campos vacios");
+            $("#error_stock1").css("position", "absolute");
+            $("#error_stock1").css("color", "red");
+            $("#error_stock1").show();
+            $("#stock1").css("border-bottom", "2px solid #F90A0A");
+            error_stock1 = true;
         }
     }
     function campo_categoria() {
@@ -148,6 +177,7 @@ $(function() {
         error_producto = false;
         error_precio = false;
          error_stock = false;
+         error_stock1 = false;
            error_categoria = false;
              error_unidad = false;
       
@@ -157,17 +187,19 @@ $(function() {
         campo_producto();
         campo_precio();
         campo_stock();
+        campo_stock1();
          campo_categoria();
           campo_unidad();
 
 
         //comparacion
         if (error_producto=== false &&
-            error_precio === false && error_stock == false && error_categoria== false ) {
+            error_precio === false && error_stock == false && error_categoria== false && error_stock1== false ) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#categoria").css("border-bottom", "1px solid #d2d6de");
             $("#precio_venta").css("border-bottom", "1px solid #d2d6de");
             $("#stock").css("border-bottom", "1px solid #d2d6de");
+             $("#stock1").css("border-bottom", "1px solid #d2d6de");
               $("#categoria").css("border-bottom", "1px solid #d2d6de")
                $("#id_unidads").css("border-bottom", "1px solid #d2d6de")
             guardaryeditar(e);
@@ -189,7 +221,7 @@ function init(){
  
     //cambia el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
-			
+			$(".ofield").hide();
 			$(".modal-title").text("Agregar Producto");
 	
 	  });
@@ -215,12 +247,14 @@ function limpiar()
     $("#producto").css("border-bottom", "1px solid #d2d6de");
    $("#precio_venta").css("border-bottom", "1px solid #d2d6de");
     $("#stock").css("border-bottom", "1px solid #d2d6de");
+     $("#stock1").css("border-bottom", "1px solid #d2d6de");
      $("#id_unidad").css("border-bottom", "1px solid #d2d6de");
 
     $("#error_categoria").hide();
     $("#error_producto").hide();
     $("#error_precio").hide();
     $("#error_stock").hide();
+    $("#error_stock1").hide();
     $("#error_unidad").hide();
    
 }
@@ -310,7 +344,9 @@ function mostrar(id_producto)
             data=   JSON.parse(data);
 		// alert(data.cedula);
 		
-			
+			 $('.ofield').show();
+    
+           
 				$('#productoModal').modal('show');
                 $('#categoria').val(data.id_categoria);
                 $('#producto').val(data.producto);

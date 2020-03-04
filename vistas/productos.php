@@ -167,7 +167,12 @@
                     <input type="text" class="form-control" id="stock" name="stock" maxlength="4" autocomplete="off" required/>
                      <span class="error_form" id="error_stock"></span>
                </br>
-             
+               <div class="form-row  ofield">
+               <label>Stock nuevo</label>
+                    <input   type="text" class="form-control" id="stock1" name="stock1" maxlength="4" autocomplete="off" value="0"/>
+                     <span class="error_form" id="error_stock1"></span>
+               </br>
+             </div>
           <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
           <input type="hidden" name="id_producto" id="id_producto"/>
