@@ -210,6 +210,7 @@ function init(){
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 		$(".modal-title").text("Agregar Donación");
+        $('#fecha1').datepicker('setDate', 'today');
 	});
 
 }
@@ -298,7 +299,7 @@ function mostrar(id_donacion){
         data = JSON.parse(data);
 
 	 		$('#donacionModal').modal("show");
-	 		$('#fecha1').val(data.fecha);
+	 		$('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#donante').val(data.donante);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#cantidad').val(data.cantidad);

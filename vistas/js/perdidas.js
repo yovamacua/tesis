@@ -243,6 +243,7 @@ function init(){
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 		$(".modal-title").text("Agregar Pérdida");
+        $('#fecha1').datepicker('setDate', 'today');
 	});
 
 }
@@ -336,11 +337,14 @@ function mostrar(id_perdida){
 
 	 		$('#perdidaModal').modal("show");
 	 		$('#idproducto').val(data.idproducto);
+            $('#idproducto').attr("readonly","readonly");
 	 		$('#cantidad').val(data.cantidad);
+            $('#cantidad').attr("readonly","readonly");
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precioProduc').val(data.precioProduc);
-            $('#fecha1').val(data.fecha);
+            $('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#unidadDelProduc').val(data.unidadDelProduc);
+            $('#unidadDelProduc').attr("readonly","readonly");
 	 		$('.modal-title').text("Editar Pérdida");
 	 		$('#id_perdida').val(id_perdida);
 	 		$('#action').val("Edit");

@@ -250,7 +250,7 @@ $(function() {
             $("#error_dui").hide();
             $("#dui").css("border-bottom", "2px solid #34F458");
         } else {
-            $("#error_dui").html("Solo se permiten el formato de DUI");
+            $("#error_dui").html("Este campo solo permite formato de DUI");
             $("#error_dui").css("position", "absolute");
             $("#error_dui").css("color", "red");
             $("#error_dui").show();
@@ -306,9 +306,22 @@ function init(){
   mostrarformulario(false);
   listar();
 
+  //funcion para agregar un - en el input de dui
+  $(document).ready(Principal);
+    function Principal(){
+        var flag1 = true;
+        $(document).on('keyup','[id=dui]',function(e){
+            if($(this).val().length == 8 && flag1) {
+                $(this).val($(this).val()+"-");
+                flag1 = false;
+            }
+        });
+    }
+
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
      $(".modal-title").text("Agregar Capacitación");
+     $('#fecha1').datepicker('setDate', 'today');
    });
 }
 
@@ -368,6 +381,7 @@ function limpiar()
 //Función mostrar formulario
 function mostrarformulario(flag)
 { 
+  $("#titulo2").hide();
   $("#capacitadosModal").hide();
   $("#detallecapacitadosModal").hide();
   $("#btnAgregarCap").hide();
@@ -377,6 +391,8 @@ function verdetalle(id_capacitacion){
    $.post("../controlador/capacitacion.php?op=mostrar",{id_capacitacion : id_capacitacion}, function(data, status)
  {
     data = JSON.parse(data);
+    $("#titulo1").hide();
+    $("#titulo2").show();
     $("#letra1").show();
     $("#btnAgregarCap").show();
     $("#distancia").hide();
@@ -388,12 +404,15 @@ function verdetalle(id_capacitacion){
     $("#listadoregistros").hide();
     $('#id_capa').val(data.id_capacitacion);
     $('#id_cap').val(data.id_capacitacion);
+    $('#id').val(data.id_capacitacion);
     });
 }
 
 //Función cancelarform
 function cancelarform()
 {
+  $("#titulo1").show();
+  $("#titulo2").hide();
   $("#btnAgregarCap").hide();
   $("#capacitadosModal").hide();
   $("#add_button").show();
@@ -523,7 +542,7 @@ function mostrar(id_capacitacion)
     data = JSON.parse(data);
 
        $('#capacitacionModal').modal('show');
-       $('#fecha1').val(data.fecha);
+       $('#fecha1').datepicker('setDate', data.fecha);
        $('#nombreGrupo').val(data.nombreGrupo);
        $('#cargo').val(data.cargo);
        $('#encargado').val(data.encargado);

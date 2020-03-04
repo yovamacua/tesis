@@ -238,6 +238,7 @@ function init(){
    //cambia el titulo de la ventana modal cuando se da click al boton
  $("#add_button").click(function(){
      $(".modal-title").text("Agregar fecha de pedido");
+     $('#fecha1').datepicker('setDate', 'today');
    });
 }
 
@@ -454,7 +455,7 @@ function mostrar(id_pedido)
     data = JSON.parse(data);
 
        $('#pedidoModal').modal('show');
-       $('#fecha1').val(data.fecha);
+       $('#fecha1').datepicker('setDate', data.fecha);
        $('.modal-title').text("Editar fecha del pedido");
        $('#id_pedido').val(data.id_pedido);  //AGREGAR EL ID DEL DETALLE
        $('#action').val("Edit");
@@ -568,7 +569,6 @@ function eliminar_detallepedidos(id_detallepedido){
           {
             $("#resultados_ajax").html(data);
             $("#detallepedidos_data").DataTable().ajax.reload(null, false);
-            listarDetallePedido(id_pedido);
           }
       });
     }

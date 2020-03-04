@@ -92,6 +92,7 @@ thead tr th:last-child {
   margin-top: -18px;
 }
 
+.readOnly {color:#808080;}
 /*** media queries for responsive skin using bootstrap 3 ***/
 
 

@@ -78,7 +78,7 @@
                                   <th width="15%">Donante</th>
                                   <th>Descripción</th>
                                   <th width="8%">Cantidad</th>
-                                  <th width="10%">Valorado c/u en</th> 
+                                  <th width="10%">Valor unitario</th> 
                                   <th >Acciones</th>
                                   </tr>
                               </thead>
@@ -130,12 +130,12 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <label>Cantidad</label>
-            <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
+            <input type="number" min="1" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
             <span class="error_form" id="error_cantidad"></span>
           </div>
 
            <div class="form-group col-md-6">
-            <label>Valorado c/u en</label>
+            <label>Valor unitario</label>
             <input type="text" name="precio" id="precio" class="form-control" autocomplete="off" placeholder="0.00" required/>
             <span class="error_form" id="error_precio"></span>
           </div>

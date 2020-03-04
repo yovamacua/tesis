@@ -138,7 +138,7 @@
 
             <div class="form-group col-md-4">
               <label>Cantidad</label>
-              <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
+              <input type="number" min="1" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
               <span class="error_form" id="error_cantidad"></span>
             </div>
 

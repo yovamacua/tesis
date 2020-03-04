@@ -29,7 +29,8 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Administración de Capacitaciones</h1>
+          <h1 id="titulo1">Administración de Capacitaciones</h1>
+          <h1 id="titulo2">Capacitación # <input style="width:30px; background: transparent; border: 0" id="id" readonly/></h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">

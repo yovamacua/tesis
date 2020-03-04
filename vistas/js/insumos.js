@@ -1,7 +1,7 @@
 var tabla;
  
 //// INICIO DE VALIDACION DEL FORMULARIO ENTRADA///
-// funcion para validar formulario gastos
+// funcion para validar formulario insumos
 $(function() {
     //creando variables y ocultando campos de error
     $("#error_cantidad").hide();
@@ -402,7 +402,7 @@ $(function() {
             editarcantidad(e); 
         } else {
             // se muestra un mensaje si los campos no estan correctos
-            alert("La cantidad es mayor que la existencia");
+            bootbox.confirm("La cantidad es mayor a la existencia", function(result){});
             return false;
         }
     });
@@ -420,11 +420,13 @@ function init(){
 	$("#add_button").click(function(){
         $(".ofield").hide();
 		$(".modal-title").text("Agregar Insumo");
+        $('#fecha1').datepicker('setDate', 'today');
 	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#minus_button").click(function(){
 		$(".modal-title2").text("Descontar Insumo");
+        $('#Fecha').datepicker('setDate', 'today');
 	});
 
 }
@@ -539,11 +541,12 @@ function mostrar(id_insumo){
             $(".ofield").show();
 	 		$('#insumoModal').modal("show");
 	 		$('#cantidad').val(data.cantidad);
+            $('#cantidad').attr("readonly","readonly");
+            $('#cantidad').addClass("readOnly");
 	 		$('#precio').val(data.precio);
 	 		$('#iduni').val(data.iduni);
 	 		$('#descripcion').val(data.descripcion);
-	 		$('#fecha1').val(data.fecha);
-	 		//$('#idpe').val(data.idpedido);
+	 		$('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#idcategoria').val(data.idcategoria);
 	 		$('.modal-title').text("Editar Insumo");
 	 		$('#id_insumo').val(id_insumo);
@@ -570,7 +573,6 @@ function mostrar(id_insumo){
 		       	$('#resultados_ajax').html(datos);
 		       	$('#insumo_data').DataTable().ajax.reload(null, false);
 		        limpiar();
-                location.reload();
 	       }
 
 	   	});
@@ -593,8 +595,8 @@ function mostrar(id_insumo){
 		       	$('#kardexinsumo_form')[0].reset();
 		       	$('#kardexinsumoModal').modal('hide');
 		       	$('#resultados_ajax').html(datos);
+                $('#insumo_data').DataTable().ajax.reload(null, false);
 		        limpiar2();
-                location.reload();
 	       }
 
 	   	});

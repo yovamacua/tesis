@@ -139,6 +139,7 @@ function init(){
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 		$(".modal-title").text("Agregar Gasto");
+        $('#fecha1').datepicker('setDate', 'today');
 	});
 
 }
@@ -221,7 +222,7 @@ function mostrar(id_gasto){
         data = JSON.parse(data);
 
 	 		$('#gastoModal').modal("show");
-	 		$('#fecha1').val(data.fecha);
+	 		$('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precio').val(data.precio);
 	 		$('.modal-title').text("Editar Gasto");

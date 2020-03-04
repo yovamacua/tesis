@@ -1,0 +1,101 @@
+
+-- -----------------------------------------------------
+-- procedimiento editar_insumo
+-- -----------------------------------------------------
+DELIMITER $$
+CREATE PROCEDURE editar_insumo (
+ in idinsumos int,
+ in cantida int,
+ in fecha date
+ )
+begin
+ set @cant = (select salida from kardexinsumo where idinsumo=idinsumos);
+ update kardexinsumo set
+ salida = @cant + cantida,
+ fechaS = fecha
+ where idinsumo = idinsumos;
+ update insumos set
+ cantidad = cantidad - cantida,
+ fecha = fecha
+ where id_insumo = idinsumos;
+END $$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- procedimiento registrar_insumo
+-- -----------------------------------------------------
+
+DELIMITER $$
+
+DELIMITER $$
+CREATE PROCEDURE registrar_insumo (
+ in cantida int,
+ in precios double,
+ in descrip varchar(100),
+ in fecha date,
+ in idcategoria int,
+ in iduni int
+ )
+begin
+ INSERT INTO insumos(
+ cantidad,
+ precio,
+ descripcion,
+ fecha,
+ idcategoria,
+ iduni
+ ) values(
+ cantida,
+ precios,
+ descrip,
+ fecha,
+ idcategoria,
+ iduni
+ );
+ set @id= (select LAST_INSERT_ID());
+ set @sal= 0;
+ insert into kardexinsumo(
+ entrada,
+ salida,
+ fechaS,
+ idinsumo
+)values(
+ cantida,
+ @sal,
+ fecha,
+ @id
+ );
+END $$
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- procedimiento editar_valoresinsumo
+-- -----------------------------------------------------
+
+DELIMITER $$
+CREATE PROCEDURE editar_valoresinsumo (
+in idinsumos int,
+in cant int,
+in prec double,
+in descr varchar(100),
+in fec date,
+in idcate int(11),
+in idunid int(11),
+in sumar int
+)
+begin
+update kardexinsumo set
+   entrada = cant + sumar
+   where idinsumo = idinsumos;
+update insumos set
+     cantidad = cant + sumar,
+     precio = prec,
+     descripcion = descr,
+     fecha = fec,
+     idcategoria = idcate,
+     iduni = idunid
+     where id_insumo = idinsumos;
+END $$
+DELIMITER ;

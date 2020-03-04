@@ -77,7 +77,7 @@
                           </table>
                     </div>
                     <!--Fin centro 1-->
-
+            <div class="box-header" style="margin-top: -2.6%; padding: 0px!important;    z-index: 9999999!important;"></div>
             <!--Formulario para agregar insumos a pedidos -->
                           <?php 
                              $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
@@ -88,7 +88,7 @@
                              $valores[]= $rows["codigo"];
                                 }   
                                 if(in_array("REPEDI",$valores)){
-                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar/Editar Insumo</button>';
+                                  echo '<button id="addInsumo" class="collapsible btn btn-primary btn-lg" onclick="limpiardetalle();" data-target="#detallepedidosModal"><i class="fa fa-plus" aria-hidden="true"></i> Agregar/Editar Insumo</button>'; 
                                 }
                           ?>
             
@@ -105,7 +105,7 @@
 
                   <div class="form-group col-md-2">
                     <label>Cantidad</label>
-                    <input type="text" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
+                    <input type="number" min="1" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad" required/>
                     <span class="error_form" id="error_cantidad"></span>
                   </div>
 
