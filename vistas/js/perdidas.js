@@ -337,14 +337,14 @@ function mostrar(id_perdida){
 
 	 		$('#perdidaModal').modal("show");
 	 		$('#idproducto').val(data.idproducto);
-            $('#idproducto').attr("readonly","readonly");
+            $('#idproducto option:not(:selected)').attr('disabled',true);
 	 		$('#cantidad').val(data.cantidad);
             $('#cantidad').attr("readonly","readonly");
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#precioProduc').val(data.precioProduc);
             $('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#unidadDelProduc').val(data.unidadDelProduc);
-            $('#unidadDelProduc').attr("readonly","readonly");
+            $('#unidadDelProduc option:not(:selected)').attr('disabled',true);
 	 		$('.modal-title').text("Editar Pérdida");
 	 		$('#id_perdida').val(id_perdida);
 	 		$('#action').val("Edit");

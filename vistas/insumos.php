@@ -183,7 +183,7 @@ $usuario = new Roles();
               <span class="error_form" id="error_idcategoria"></span>
           </div> 
         </div> 
-      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+      <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
     </div><!-- body -->
 
                <div class="modal-footer">

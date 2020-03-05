@@ -295,6 +295,7 @@ function limpiar()
 //Función mostrar formulario
 function mostrarformulario(flag)
 {
+   $("#titulo2").hide();
    $("#listadopedido").hide();
    $("#addInsumo").hide();
    $("#btnCancelar").hide();
@@ -305,6 +306,8 @@ function mostrarformulario(flag)
 //Función cancelarform
 function cancelarform()
 {
+  $("#titulo1").show();
+  $("#titulo2").hide();
   $("#add_button").show();
   $("#listadoregistros").show();
   $("#listadopedido").hide();
@@ -318,6 +321,8 @@ function cancelarform()
    $.post("../controlador/pedido.php?op=mostrar",{id_pedido : id_pedido}, function(data, status)
  {
     data = JSON.parse(data);
+       $("#titulo1").hide();
+       $("#titulo2").show();
        $('#listadoregistros').hide();
        $("#add_button").hide();
        $("#listadopedido").show();
@@ -329,6 +334,7 @@ function cancelarform()
        $('#id_p').val(data.id_pedido); 
        $('#id_pe').val(data.id_pedido);  
        $('#fechaA').val(data.fecha);
+       $('#id').val(data.id_pedido); 
     });
       listarDetallePedido(id_pedido);
 }

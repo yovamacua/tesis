@@ -27,7 +27,8 @@
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Administración de Pedido</h1>
+          <h1 id="titulo1">Administración de Pedido</h1>
+          <h1 id="titulo2">Pedido # <input style="width:30px; background: transparent; border: 0" id="id" readonly/></h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
@@ -185,7 +186,7 @@
                          
                     </div> <!-- /.col -->
                     <!--Fin centro 2-->
-
+                    <div id="distancia"><br></div>
                 </div>
               </div>
             </div>

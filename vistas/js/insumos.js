@@ -544,10 +544,13 @@ function mostrar(id_insumo){
             $('#cantidad').attr("readonly","readonly");
             $('#cantidad').addClass("readOnly");
 	 		$('#precio').val(data.precio);
+            $('#precio').attr("readonly","readonly");
 	 		$('#iduni').val(data.iduni);
+            $('#iduni option:not(:selected)').attr('disabled',true);
 	 		$('#descripcion').val(data.descripcion);
 	 		$('#fecha1').datepicker('setDate', data.fecha);
 	 		$('#idcategoria').val(data.idcategoria);
+            $('#idcategoria option:not(:selected)').attr('disabled',true);
 	 		$('.modal-title').text("Editar Insumo");
 	 		$('#id_insumo').val(id_insumo);
 	 		$('#action').val("Edit");
