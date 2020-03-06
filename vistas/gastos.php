@@ -124,7 +124,7 @@
             <span class="error_form" id="error_descripcion"></span>
           </div>  
         </div> 
-      <br><br><br><br><br><br><br><br><br><br>
+      <div style="clear: both;"></div>
     </div><!-- body -->
                <div class="modal-footer">
                   <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
@@ -203,9 +203,9 @@
                       &nbsp;
                     </div>  
                 </div> 
-              <br><br><br><br>
+              <div style="clear: both;"></div>
           </div><!-- body -->
-                <div style="clear: both;"></div>
+               
                 <div class="modal-footer">
                   <input type="hidden" name="fecha" id="fechaA"/>
                   <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>    

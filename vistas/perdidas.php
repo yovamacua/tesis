@@ -157,7 +157,7 @@
               <span class="error_form" id="error_descripcion"></span>
             </div>
           </div>
-       <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+       <div style="clear: both;"></div>
     </div><!-- body -->
 
               <div class="modal-footer">

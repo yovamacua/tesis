@@ -140,7 +140,7 @@
             <span class="error_form" id="error_precio"></span>
           </div>
         </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <div style="clear: both;"></div>
       </div><!-- body -->
                 <div class="modal-footer">
                  <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
