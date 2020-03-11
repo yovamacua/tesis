@@ -182,11 +182,14 @@
                    </div>
                  </div>
                </br>
-               <div class="form-row  ofield">
+               <div class="form-row">
+                <div class="form-group col-md-12 ofield">
                <label>Stock nuevo</label>
-                    <input   type="text" class="form-control" id="stock1" name="stock1" maxlength="4" autocomplete="off" value="0"/>
+                    <input   type="text" class="form-control " id="stock1" name="stock1" maxlength="4" autocomplete="off" value="0"/>
                      <span class="error_form" id="error_stock1"></span>
-               </br>
+               
+             </div>
+             <div style="clear:both;"></div>
              </div>
           <div class="modal-footer">
           <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>"/>
@@ -199,6 +202,7 @@
            </div><!--modal-footer-->
       </div>
      </div>
+   </form>
   </div>
 </div>
  <!--FIN FORMULARIO VENTANA MODAL-->
