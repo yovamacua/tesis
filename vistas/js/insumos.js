@@ -421,6 +421,10 @@ function init(){
         $(".ofield").hide();
 		$(".modal-title").text("Agregar Insumo");
         $('#fecha1').datepicker('setDate', 'today');
+        $('#cantidad').removeAttr("readonly","readonly");
+        $('#precio').removeAttr("readonly","readonly");
+        $('#iduni option:not(:selected)').attr('disabled',false);
+        $('#idcategoria option:not(:selected)').attr('disabled',false);
 	});
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
@@ -429,7 +433,7 @@ function init(){
         $('#Fecha').datepicker('setDate', 'today');
 	});
 
-}
+} 
 
 //funcion que limpia los campos del formulario
 function limpiar(){

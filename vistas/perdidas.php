@@ -130,25 +130,32 @@
           </div>
 
           <div class="form-row">
-            <div class="form-group col-md-4">
-              <label>Fecha</label>
-              <input type="text" name="fecha" id="fecha1" class="form-control" autocomplete="off" placeholder="Fecha" required />
-              <span class="error_form" id="error_fecha1"></span>
-            </div>
-
-            <div class="form-group col-md-4">
-              <label>Cantidad</label>
-              <input type="number" min="1" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número" required/>
-              <span class="error_form" id="error_cantidad"></span>
-            </div>
-
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
               <label>Precio Unitario</label>
               <input type="text" name="precioProduc" id="precioProduc" class="form-control" readonly/>
               <span class="error_form" id="error_precioProduc"></span>
             </div>
+
+            <div class="form-group col-md-6">
+              <label>Fecha</label>
+              <input type="text" name="fecha" id="fecha1" class="form-control" autocomplete="off" placeholder="Fecha" required />
+              <span class="error_form" id="error_fecha1"></span>
+            </div>
           </div>
 
+          <div class="form-row ofield">
+            <div class="form-group col-md-6">
+              <label>Stock</label>
+              <input type="text" value="0" name="stock" id="stock" class="form-control" autocomplete="off" readonly/>
+              <span class="error_form" id="error_stock"></span>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Cantidad</label>
+              <input type="number" min="1" name="cantidad" id="cantidad" class="form-control" autocomplete="off" placeholder="Cantidad en número"/>
+              <span class="error_form" id="error_cantidad"></span>
+            </div>
+          </div>
 
           <div class="form-row">
             <div class="form-group col-md-12">

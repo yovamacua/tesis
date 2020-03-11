@@ -49,7 +49,9 @@
 			$conectar = parent::conexion();
 			parent::set_names();
 
-			$sql = "select pro.id_producto, pro.precio_venta from producto pro where pro.id_producto=?;";	
+			$sql = "select pro.id_producto, pro.precio_venta, pro.id_unidad, k.id_producto1, k.stock 
+					from producto pro inner join kardex k
+					on pro.id_producto = k.id_producto1 where id_producto=?";
 			$sql = $conectar->prepare($sql);
 			$sql-> bindValue(1, $idproducto);
 			$sql-> execute();

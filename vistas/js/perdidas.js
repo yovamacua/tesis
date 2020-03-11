@@ -6,6 +6,7 @@ $(function() {
     //creando variables y ocultando campos de error
     $("#error_idproducto").hide();
     $("#error_cantidad").hide();
+    $("#error_stock").hide();
     $("#error_precioProduc").hide();
     $("#error_unidadDelProduc").hide();
     $("#error_descripcion").hide();
@@ -14,6 +15,7 @@ $(function() {
     // se declaran variables con valor false para ver si pasa o no la validacion
     var error_idproducto= false;
     var error_cantidad = false;
+    var error_stock = false;
     var error_precioProduc = false;
     var error_unidadDelProduc = false;
     var error_descripcion = false;
@@ -27,6 +29,10 @@ $(function() {
     $("#cantidad").focusout(function() {
         campo_cantidad();
     	});
+
+    $("#stock").focusout(function() {
+        campo_stock();
+        });
 
     $("#precioProduc").focusout(function() {
         campo_precioProduc();
@@ -92,6 +98,31 @@ $(function() {
             $("#error_cantidad").show();
             $("#cantidad").css("border-bottom", "2px solid #F90A0A");
             error_cantidad = true;
+        }
+    }
+
+    function campo_stock() {
+        var pattern = /^[0-9]*$/;   
+        var stock = $("#stock").val();
+        if (pattern.test(stock) && stock !== '') {
+            $("#error_stock").hide();
+            $("#stock").css("border-bottom", "2px solid #34F458");
+        } else {
+            $("#error_stock").html("Solo se permiten números enteros");
+            $("#error_stock").css("position", "absolute");
+            $("#error_stock").css("color", "red");
+            $("#error_stock").show();
+            $("#stock").css("border-bottom", "2px solid #F90A0A");
+            error_stock = true;
+        }
+        var stock = $("#stock").val().length;
+        if (stock <= 0) {
+            $("#error_stock").html("No se permiten campos vacios");
+            $("#error_stock").css("position", "absolute");
+            $("#error_stock").css("color", "red");
+            $("#error_stock").show();
+            $("#stock").css("border-bottom", "2px solid #F90A0A");
+            error_stock = true;
         }
     }
 
@@ -195,11 +226,24 @@ $(function() {
         }
     }
 
+    // funcion para validar que la cantidad no sea mayor al stock
+    function validarCantidad(id_perdida){
+    var idIns = document.getElementById("id_perdida").value;
+    var salida = document.getElementById("cantidad").value;
+    var disp = document.getElementById("stock").value;
+       if(parseInt(salida, 10) > disp) {
+            return false;
+        }else{
+            return true;
+        }
+    } 
+
     // se valida el formulario
     $("#perdida_form").on("submit", function(e) {
         // asignacion de valor a vaiables
         var error_idproducto= false;
 	    var error_cantidad = false;
+        var error_stock = false;
 	    var error_precioProduc = false;
 	    var error_unidadDelProduc = false;
 	    var error_descripcion = false;
@@ -208,19 +252,21 @@ $(function() {
         // se invoca a las funciones para tener el valor de las variables
         error_idproducto = false;
         error_cantidad = false;
+        error_stock = false;
         error_precioProduc = false;
         error_unidadDelProduc = false;
         error_descripcion = false;
         error_fecha1 = false;
 
         //comparacion
-        if (error_idproducto === false && error_cantidad === false && 
+        if (error_idproducto === false && error_cantidad === false && error_stock === false &&
         	error_precioProduc === false && error_unidadDelProduc === false && 
-        	error_descripcion === false && error_fecha1 === false) {
+        	error_descripcion === false && error_fecha1 === false && validarCantidad(true)) {
             
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#idproducto").css("border-bottom", "1px solid #d2d6de");
             $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+            $("#stock").css("border-bottom", "1px solid #d2d6de");
             $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
             $("#unidadDelProduc").css("border-bottom", "1px solid #d2d6de");
             $("#descripcion").css("border-bottom", "1px solid #d2d6de");
@@ -228,7 +274,7 @@ $(function() {
             guardaryeditar(e);
         } else {
             // se muestra un mensaje si los campos no estan correctos
-            alert("Complete/Revise los campos");
+            bootbox.confirm("La cantidad es mayor que el stock del producto", function(result){});
             return false;
         }
     });
@@ -242,8 +288,10 @@ function init(){
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
+        $(".ofield").show();
 		$(".modal-title").text("Agregar Pérdida");
         $('#fecha1').datepicker('setDate', 'today');
+        $('#idproducto option:not(:selected)').attr('disabled',false);
 	});
 
 }
@@ -252,6 +300,7 @@ function init(){
 function limpiar(){
 	$('#idproducto').val("");
 	$('#cantidad').val("");
+    $('#stock').val("");
 	$('#descripcion').val("");
 	$('#precioProduc').val("");
 	$('#fecha1').val("");
@@ -261,6 +310,7 @@ function limpiar(){
     /** reinicia la validacion cuando se sale de la ventana modal **/
     $("#idproducto").css("border-bottom", "1px solid #d2d6de");
     $("#cantidad").css("border-bottom", "1px solid #d2d6de");
+    $("#stock").css("border-bottom", "1px solid #d2d6de");
     $("#descripcion").css("border-bottom", "1px solid #d2d6de");
     $("#precioProduc").css("border-bottom", "1px solid #d2d6de");
     $("#fecha1").css("border-bottom", "1px solid #d2d6de");
@@ -268,6 +318,7 @@ function limpiar(){
 
     $("#error_idproducto").hide();
     $("#error_cantidad").hide();
+    $("#error_stock").hide();
     $("#error_precioProduc").hide();
     $("#error_unidadDelProduc").hide();
     $("#error_descripcion").hide();
@@ -335,19 +386,20 @@ function mostrar(id_perdida){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
 
-	 		$('#perdidaModal').modal("show");
-	 		$('#idproducto').val(data.idproducto);
+             $(".ofield").hide();
+            $('#perdidaModal').modal("show");
+            $('#idproducto').val(data.idproducto);
             $('#idproducto option:not(:selected)').attr('disabled',true);
-	 		$('#cantidad').val(data.cantidad);
-            $('#cantidad').attr("readonly","readonly");
-	 		$('#descripcion').val(data.descripcion);
-	 		$('#precioProduc').val(data.precioProduc);
+            $('#cantidad').val(data.cantidad);
+            $('#stock').val(data.cantidad);
+            $('#descripcion').val(data.descripcion);
+            $('#precioProduc').val(data.precioProduc);
             $('#fecha1').datepicker('setDate', data.fecha);
-	 		$('#unidadDelProduc').val(data.unidadDelProduc);
+            $('#unidadDelProduc').val(data.unidadDelProduc);
             $('#unidadDelProduc option:not(:selected)').attr('disabled',true);
-	 		$('.modal-title').text("Editar Pérdida");
-	 		$('#id_perdida').val(id_perdida);
-	 		$('#action').val("Edit");
+            $('.modal-title').text("Editar Pérdida");
+            $('#id_perdida').val(id_perdida);
+            $('#action').val("Edit");
 	 });
  
 }  
@@ -405,6 +457,8 @@ function precioProd(idproducto){
         //analiza una cadena de texto como json
         data = JSON.parse(data);
         $('#precioProduc').val(data.precio_venta);
+        $('#unidadDelProduc').val(data.id_unidad);
+        $('#stock').val(data.stock);
      });
 } 
 

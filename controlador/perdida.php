@@ -110,6 +110,8 @@ switch ($_GET["op"]) {
 				
 				foreach ($datos as $row) {
 					$output["precio_venta"] = $row["precio_venta"];
+					$output["id_unidad"] = $row["id_unidad"];
+					$output["stock"] = $row["stock"];
 				}
 					echo json_encode($output);
 
