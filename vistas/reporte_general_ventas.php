@@ -77,7 +77,7 @@ require_once("header.php");?>
 	<div class="row">
 	 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 	    <div class="box">
-	       <div class="">
+	       <div class="" id="tab">
 				<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de ventas</h2>
 				              
 				  <table class="table table-bordered">
@@ -124,11 +124,11 @@ require_once("header.php");?>
 				     	?>
 
 					      <tr>
-					        <td><?php echo $datos[$i]["año"]?></td>
-					        <td><?php echo $datos[$i]["numero_mes"]?></td>
-					        <td><?php echo $fecha_mes?></td>
+					        <td align="center"><?php echo $datos[$i]["año"]?></td>
+					        <td align="center"><?php echo $datos[$i]["numero_mes"]?></td>
+					        <td align="center"><?php echo $fecha_mes?></td>
 					     
-					        <td><?php echo "$"." ".$datos[$i]["total_venta"]?></td>
+					        <td align="center"><?php echo "$"." ".$datos[$i]["total_venta"]?></td>
 					      </tr>
 					      
 				     	<?php
@@ -141,7 +141,7 @@ require_once("header.php");?>
 		                	<td><strong>Total:</strong></td>
 		                	<td><strong></strong></td>
 		                	<td><strong></strong></td>
-		                	<td><strong>$ <?php echo $total_ventas?></strong></td>
+		                	<td align="center"><strong>$ <?php echo $total_ventas?></strong></td>
 		                </tr>
 				    </tbody>
 				  </table>
@@ -152,7 +152,7 @@ require_once("header.php");?>
 
 	<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		<div class="box">
-            <div class="">
+            <div class="" id="tab2">
 				<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año de ventas</h2>
 		         
 		        <table class="table table-bordered">
@@ -202,9 +202,9 @@ require_once("header.php");?>
 	                    ?>
 
 		                 <tr>
-		                 	<td><?php echo $arregloReg[$i]["año"];?></td>
-		                 	<td>$ <?php echo $arregloReg[$i]["total_venta_año"];?></td>
-		                    <td><?php echo $porcentaje_por_ano?></td>
+		                 	<td align="center"><?php echo $arregloReg[$i]["año"];?></td>
+		                 	<td align="center">$ <?php echo $arregloReg[$i]["total_venta_año"];?></td>
+		                    <td align="center"><?php echo $porcentaje_por_ano?></td>
 		                 </tr>
 
 		                 <?php 
@@ -213,9 +213,9 @@ require_once("header.php");?>
 
 	                ?>
 		                <tr>
-		                	<td><strong>Total:</strong>  </td>
-		                	<td><strong>$ <?php echo $sumaTotal?> </strong></td>
-		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
+		                	<td align="center"><strong>Total:</strong>  </td>
+		                	<td align="center"><strong>$ <?php echo $sumaTotal?> </strong></td>
+		                	<td align="center"> <strong> <?php echo $porcentaje_total?> </strong></td>
 		                </tr>
 
 	                </tbody>
@@ -268,7 +268,7 @@ require_once("header.php");?>
 	<div class="row">
 		<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 	    	<div class="box">
-	       		<div class="">
+	       		<div class="" id="perd1">
 					<h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">Reporte general de perdidas</h2>
 				              
 				  	<table class="table table-bordered">
@@ -325,10 +325,10 @@ require_once("header.php");?>
 					     	?>
 
 						      <tr>
-						        <td><?php echo $datosp[$i]["anio"]?></td>
-						        <td><?php echo $datosp[$i]["numero_mes"]?></td>
-						        <td><?php echo $fecha_mes?></td>
-						        <td><?php echo "$"." ".$datosp[$i]["totalPerdida"]?></td>
+						        <td align="center"><?php echo $datosp[$i]["anio"]?></td>
+						        <td align="center"><?php echo $datosp[$i]["numero_mes"]?></td>
+						        <td align="center"><?php echo $fecha_mes?></td>
+						        <td align="center"><?php echo "$"." ".$datosp[$i]["totalPerdida"]?></td>
 						      </tr>
 						      
 					     	<?php
@@ -337,10 +337,10 @@ require_once("header.php");?>
                    
 				      ?>
 	                  	<tr>
-		                	<td><strong>Total:</strong></td>
+		                	<td align="center"><strong>Total:</strong></td>
 		                	<td><strong></strong></td>
 		                	<td><strong></strong></td>
-		                	<td><strong>$ <?php echo $total_perdidas?></strong></td>
+		                	<td align="center"><strong>$ <?php echo $total_perdidas?></strong></td>
 		                </tr>
 				    </tbody>
 				  </table>
@@ -351,7 +351,7 @@ require_once("header.php");?>
 
 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		<div class="box">
-            <div class="">
+            <div class="" id="perd">
 				<h2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Porcentaje por año de perdidas</h2>
 		         
 		        <table class="table table-bordered">
@@ -399,9 +399,9 @@ require_once("header.php");?>
 	                    ?>
 
 		                 <tr>
-		                 	<td><?php echo $arregloReg[$i]["anio"];?></td>
-		                 	<td>$ <?php echo $arregloReg[$i]["total_perdida_anio"];?></td>
-		                    <td><?php echo $porcentaje_por_anio?></td>
+		                 	<td align="center"><?php echo $arregloReg[$i]["anio"];?></td>
+		                 	<td align="center">$ <?php echo $arregloReg[$i]["total_perdida_anio"];?></td>
+		                    <td align="center"><?php echo $porcentaje_por_anio?></td>
 		                 </tr>
 
 		                 <?php 
@@ -410,9 +410,9 @@ require_once("header.php");?>
 
 	                ?>
 		                <tr>
-		                	<td><strong>Total:</strong>  </td>
-		                	<td><strong>$ <?php echo $sumaTotal?> </strong></td>
-		                	<td> <strong> <?php echo $porcentaje_total?> </strong></td>
+		                	<td align="center"><strong>Total:</strong>  </td>
+		                	<td align="center"><strong>$ <?php echo $sumaTotal?> </strong></td>
+		                	<td align="center"> <strong> <?php echo $porcentaje_total?> </strong></td>
 		                </tr>
 
 	                </tbody>
@@ -663,9 +663,9 @@ require_once("header.php");?>
 			$('#buttonExport').click(function() {
            
 			   //alert("clic");
-	            printHTML()
+	            imprSelec()
 				document.addEventListener("DOMContentLoaded", function(event) {
-				 printHTML(); 
+				 imprSelec()
 				});
 
     		}); 
@@ -673,11 +673,29 @@ require_once("header.php");?>
 });
 
  //function
-	function printHTML() { 
-	  if (window.print) { 
-	    window.print();
-	  }
-	}
+		function imprSelec() {
+    var grafica1 = document.getElementById("container_perdidas");
+    var grafica2 = document.getElementById("container");
+    var tabla1 = document.getElementById("tab");
+     var tabla2= document.getElementById("tab2");
+      var tabla3 = document.getElementById("perd");
+       var tabla4 = document.getElementById("perd2")
+    var ventimp = window.open(' ', 'popimpr');
+   
+    ventimp.document.write('<div align="center">');
+     ventimp.document.write('<p><h1>Campo Escuela Salcoatitan</h1><br>' );
+    ventimp.document.write(tabla1.innerHTML );
+    ventimp.document.write(tabla2.innerHTML );
+     ventimp.document.write(grafica2.innerHTML );
+     ventimp.document.write(tabla3.innerHTML );
+     //ventimp.document.write(tabla4.innerHTML );
+     ventimp.document.write(grafica1.innerHTML );
+     ventimp.document.write('<div>');
+     
+    ventimp.document.close();
+    ventimp.print( );
+    ventimp.close();
+  }
 	
 </script>
 <?php  } else {

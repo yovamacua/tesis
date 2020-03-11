@@ -207,7 +207,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
 
 
-           $fecha= ($ano."-".$mes."%");
+           $fecha= ($ano."-%".$mes."%");
 
 
           $sql= "select v.idventas,concat(u.nombres,' ' , u.apellidos) as vendedor,v.total_pagar, v.numero_venta, v.fechaventa, v.estado from ventas v inner join usuarios u on v.id_usuario= u.id_usuario
@@ -216,6 +216,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
             $sql = $conectar->prepare($sql);
             $sql->bindValue(1,$fecha);
             $sql->execute();
+      
             return $result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 
@@ -258,6 +259,30 @@ foreach ($array_id_producto as $clave=>$id_producto) {
         $sql=$conectar->prepare($sql);
         $sql->execute();
         return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function mes(){
+
+        $conectar=parent::conexion();
+           parent::set_names();
+
+           $sql="SELECT  DISTINCT MONTH(fechaventa) as numero_mes, Monthname(fechaventa)  meses
+        FROM ventas  GROUP BY MONTH(fechaventa) , YEAR(fechaventa) asc;";
+        $sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+          public function anio(){
+
+        $conectar=parent::conexion();
+           parent::set_names();
+
+           $sql="SELECT year(fechaventa) as año FROM ventas GROUP BY YEAR(fechaventa) asc;";
+        $sql=$conectar->prepare($sql);
+        $sql->execute();
+        return $resultado=$sql->fetchAll(PDO::FETCH_ASSOC);
+
         }
 
         // SUMA EL TOTAL DE VENTAS POR AÑOS
@@ -501,7 +526,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
                       
                     if(empty($numero_venta["numero_venta"]))
                     {
-                      echo'<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número" style="width:50%;" value="NV00001" />';
+                      echo'<input type="text" class="form-control" id="numero_venta" name="numero_venta" placeholder="Número" style="width:50%;" value="NV00001" readonly/>';
                     }else{
                         $num     = substr($numero_venta["numero_venta"] , 2);
                         $dig     = $num + 1;

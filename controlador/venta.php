@@ -124,7 +124,7 @@ foreach($rol as $rows){
      
          
                  $sub_array[] = $row["usuario"];
-                   $sub_array[] = $row["fechaventa"];
+                   $sub_array[] = date("d-m-Y", strtotime($row["fechaventa"]));
                  $sub_array[] = $row["numero_venta"];
                  $sub_array[] = $dolar.$row["total_pagar"];
               
@@ -171,7 +171,7 @@ if (isset($messages)){
       case  'listarProductoVenta':
    $datos=$productos->get_productos();
    $data= Array();
-
+  $cont=1;
      foreach($datos as $row){
  $sub_array = array();
       if($row["stock"]<=1){
@@ -185,7 +185,8 @@ if (isset($messages)){
 
              $stock = $row["stock"];
                      $atributo = "badge bg-green";
-                      $sub_array[] = ' <button class="btn btn-warning" onclick="agregarDetalle('.$row["id_producto"].',\''.$row["producto"].'\','.$row["precio_venta"]. ','.$row["stock"].')" <span class="fa fa-plus">+</span></button>';
+                      $sub_array[] = ' <button class="btn btn-warning " id="btn'.$cont.'" onclick="agregarDetalle('.$row["id_producto"].',\''.$row["producto"].'\','.$row["precio_venta"]. ','.$row["stock"].') ;ocultar('.$cont.')" <span class="fa fa-plus">+</span></button>';
+                      $cont++;
                    }
     
     
@@ -210,7 +211,7 @@ if (isset($messages)){
   case "buscar_ventas_fecha":
           
      $datos=$venta->lista_busca_registros_fecha($_POST["fecha_inicial"], $_POST["fecha_final"]);
-
+$dolar="$ ";
      //Vamos a declarar un array
    $data= Array();
 
@@ -236,9 +237,9 @@ if (isset($messages)){
          $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
          
          $sub_array[] = $row["vendedor"];
-         $sub_array[] = $row["total_pagar"];
+         $sub_array[] = $dolar.$row["total_pagar"];
          $sub_array[] = $row["numero_venta"];
-         $sub_array[] = date("d-m-Y",strtotime($row["fechaventa"]));
+         $sub_array[] = date("d/m/Y",strtotime($row["fechaventa"]));
 
            /*IMPORTANTE: poner \' cuando no sea numero, sino no imprime*/
                  $sub_array[] = '<button type="button" onClick="cambiarEstado('.$row["idventas"].',\''.$row["numero_venta"].'\','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="'.$atrib.'">'.$est.'</button>';
@@ -263,7 +264,7 @@ if (isset($messages)){
       
       $datos= $venta->lista_busca_registros_fecha_mes($_POST["mes"],$_POST["ano"]);
 
-
+        $dolar="$ ";
         //Vamos a declarar un array
       $data= Array();
 
@@ -290,9 +291,9 @@ if (isset($messages)){
       $sub_array[] = '<button class="btn btn-warning" onclick="mostrar('.$row["idventas"].')"><i class="fa fa-eye"></i></button>';
         
          $sub_array[] = $row["vendedor"];
-         $sub_array[] = $row["total_pagar"];
+         $sub_array[] =  $dolar.$row["total_pagar"];
          $sub_array[] = $row["numero_venta"];
-         $sub_array[] = date("d-m-Y", strtotime($row["fechaventa"]));
+         $sub_array[] = date("d/m/Y", strtotime($row["fechaventa"]));
            /*IMPORTANTE: poner \' cuando no sea numero, sino no imprime*/
                  $sub_array[] = '<button type="button" onClick="cambiarEstado('.$row["idventas"].',\''.$row["numero_venta"].'\','.$row["estado"].');" name="estado" id="'.$row["idventas"].'" class="'.$atrib.'">'.$est.'</button>';
                 
@@ -313,6 +314,7 @@ if (isset($messages)){
      case "mostrar":
      //selecciona del incidente
   //el parametro id_incidente se envia por AJAX cuando se edita la categoria
+
   $datos=$venta->Mostrar($_POST["idventas"]);
           // si existe el id del incidnete entonces recorre el array
         if(is_array($datos)==true and count($datos)>0){
@@ -346,6 +348,7 @@ if (isset($messages)){
             }
           //fin de mensaje de error
    break;
+   
    case "listarDetalle":
      //selecciona del incidente
      $id=$_GET['id'];

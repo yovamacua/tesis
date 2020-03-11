@@ -171,48 +171,47 @@
             
             
          </li>
-
-
          <li <?php if(isset($activar) and $activar == 'item_categorias'){?>class="active treeview menu-open"<?php }else{?> class="treeview"<?php }?> >
              <?php if($_SESSION["CATEGORIA"]==1)
          
           {
-            echo '<a href="#">
-            <i class="fa fa-cubes" aria-hidden="true"></i> <span>Categoria</span>
-            <span class="pull-right-container badge movarrow bg-blue">
+        echo '<a href="#">
+            <i class="fa fa-cubes" aria-hidden="true"></i> <span>Categorias</span>
+            <span class="pull-right-container badge bg-blue">
             <i class="fa fa-angle-left pull-right"></i>
             </span>
-            </a>';
-              }
-
-         ?>
-            
-            <ul class="treeview-menu">
-              <li <?php if(isset($activar) and  $activar == 'item_categorias'){?>class="active"<?php }else{?> class=""<?php }?> >
-            <?php if($_SESSION["CATEGORIA"]==1)
-         
-          {
-        echo '<a href="categorias.php">
-            <i class="fa fa-cubes" aria-hidden="true"></i> <span>Categoria</span>
-            </a>';
+           </a>';
       }
          ?>
             
-         </li>
-               <li <?php if(isset($activar2) and $activar2 == 'item_unidad'){?>class="active"<?php }else{?><?php }?> >
-                   <?php if($_SESSION["CATEGORIA"]==1)
+
+           <ul class="treeview-menu">
+                <li <?php if(isset($activar1) and $activar1 == 'item_categorias1'){?>class="active"<?php }else{?><?php }?> >
+                  <?php if($_SESSION["CATEGORIA"]==1)
          
           {
-                 echo' <a href="unidads.php">
-
-                  <i class="fa fa-cube" aria-hidden="true"></i> <span>Unidad</span>
+        echo '<a href="categorias.php">
+                  <i class="fa fa-cube" aria-hidden="true"></i><span>Categorias</span>
                   </a>';
-               }
-               ?>
+      }
+         ?>
+                  
                </li>
-            </ul>
+               <li <?php if(isset($activar2) and $activar2 == 'item_categorias2'){?>class="active"<?php }else{?><?php }?> >
+                    <?php if($_SESSION["CATEGORIA"]==1)
+         
+          {
+        echo '<a href="unidads.php">
+                  <i class="fa fa-cube" aria-hidden="true"></i><span>Unidades</span>
+                  </a>';
+      }
+         ?>
+                  
+               </li>
+           </ul>
          </li>
 
+        
          
          <li <?php if(isset($activar) and  $activar == 'item_productos'){?>class="active"<?php }else{?> class=""<?php }?> >
              <?php if($_SESSION["PRODUCTO"]==1)

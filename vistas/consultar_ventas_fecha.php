@@ -32,7 +32,10 @@
        Consulta de Ventas por fecha
        
       </h1>
-      
+       <ol class="breadcrumb">
+             <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-search"></i> Consulta</li>
+          </ol>
     </section>
 
     <!-- Main content -->
@@ -76,7 +79,7 @@
 
    
       <div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
           
           <div class="table-responsive">
             <div class="box-header">

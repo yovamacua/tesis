@@ -265,7 +265,11 @@ foreach($rol as $rows){
           
           $boton_editar=' <button type="button" onClick="mostrardetalle('.$row["id_detallecapacitados"].');"  id="'.$row["id_detallecapacitados"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Capacitado" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
+<<<<<<< Updated upstream:controlador/capacitacion.php
           $boton_eliminar='<button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_detallecapacitados"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Capacitado "><i class="fa fa-trash"></i></button></div>';
+=======
+          $boton_eliminar='<button type="button" onClick="eliminardetalle('.$row["id_detallecapacitados"].'); desvanecer()"  id="'.$row["id_capacitacion"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar detalles "><i class="fa fa-trash"></i></button></div>';
+>>>>>>> Stashed changes:ajax/capacitacion.php
 
           ?>
           <?php  

@@ -27,25 +27,37 @@ require_once("header.php");?>
 
      ?>
 
-  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
+        <section class="content-header">
 
+          <h1>Reporte</h1>
 
-   <div >
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-file-text"></i> Venta Semanal</li>
+          </ol>
+   
+        </section>
+        <!-- Main content -->
+        <section class="content">
+             <div id="resultados_ajax"></div>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="box">
+                   
+                       <div >
    <H2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
            Reporte de ventas semanal
   </div>
-   
+            
+                   
+          <div class="panel-body table-responsive tabla-top">
+            
 
-  
- <div class="panel panel-default">
-        
-        <div class="panel-body">
-
-   <div class="row  col-sm-5 col-sm-offset-3">
-        
-        <div class="">
+             <div class="form-row">       
+       <div class="row  col-sm-5 col-sm-offset-3">
 
             <form action="reportes/reporte_ventas_Semanal_excel.php" method="post">
 
@@ -104,18 +116,14 @@ require_once("header.php");?>
             
             
            </form>
-
-       </div>
-      </div>
-
-    </div>
-</div>
-
-  
-
-
-</div>
-  <!-- /.content-wrapper -->
+         </div>
+                    </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+              </div><!-- /.col -->
+          </div><!-- /.row -->
+      </section><!-- /.content -->
+  </div><!-- /.content-wrapp
 
  <?php  } else {
 

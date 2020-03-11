@@ -21,26 +21,37 @@
 
      ?>
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
+ <div class="content-wrapper">
+        <section class="content-header">
 
+          <h1>Reporte</h1>
 
-   <div >
+          <!-- migas de pan-->
+          <ol class="breadcrumb">
+             <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-file-text"></i> Estado Finaciero</li>
+          </ol>
+   
+        </section>
+        <!-- Main content -->
+        <section class="content">
+             <div id="resultados_ajax"></div>
+            <div class="row">
+              <div class="col-md-12">
+                  <div class="box">
+                   
+                       <div >
    <H2 class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">
         
-           Reporte Financieros
+           Reporte de ventas semanal
   </div>
-   
+                    <!-- /.box-header -->
+                    <!-- centro -->
+                    <div class="panel-body table-responsive tabla-top">
+                         <div class="form-row">       
+       <div class="row  col-sm-5 col-sm-offset-3">
 
-  
- <div class="panel panel-default">
-        
-        <div class="panel-body">
-
-   <div class="row  col-sm-5 col-sm-offset-3">
-        
-        <div class="">
-
-            <form action="reportes/reporte_financiero_excel.php" method="post">
+            <form action="reportes/reporte_ventas_Semanal_excel.php" method="post">
 
                    <div class="form-group">
                 <label for="inputPassword">Fecha Inicial</label>
@@ -70,21 +81,14 @@
               }
                             ?>
 
-             
-            
-            
-           </form>
-
-       </div>
-      </div>
-
-    </div>
-</div>
-
-  
-
-
-</div>
+             </div>
+                    </div>
+                    <!--Fin centro -->
+                  </div><!-- /.box -->
+              </div><!-- /.col -->
+          </div><!-- /.row -->
+      </section><!-- /.content -->
+  </div><!-- /.content-wrapper -->
   <!-- /.content-wrapper -->
 <?php  } else {
 

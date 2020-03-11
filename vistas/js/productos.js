@@ -222,6 +222,7 @@ function init(){
     //cambia el titulo de la ventana modal cuando se da click al boton
 	$("#add_button").click(function(){
 			$(".ofield").hide();
+             $("#stock").removeAttr('readonly');
 			$(".modal-title").text("Agregar Producto");
 	
 	  });
@@ -345,6 +346,8 @@ function mostrar(id_producto)
 		// alert(data.cedula);
 		
 			 $('.ofield').show();
+
+              $("#stock").attr("readonly","true");
     
            
 				$('#productoModal').modal('show');

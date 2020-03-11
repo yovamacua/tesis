@@ -6,7 +6,8 @@
 ?>
 <?php
   #variable item activo
-  $activar = 'item_categorias';
+$activar = 'item_categorias';
+  $activar1 = 'item_categorias1';
   require_once("header.php");
 ?>
 <?php if($_SESSION["CATEGORIA"]==1)
@@ -94,7 +95,7 @@
 
 
           <label>Descripción</label>
-          <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" maxlength="70"  autocomplete="off" required=""/>
+          <textarea rows="4" maxlength="75" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción" required/></textarea>
           <span class="error_form" id="error_descripcion"></span>
           <br />
 

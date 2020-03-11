@@ -16,10 +16,10 @@
 
 
       #vacia la sessiones
-      unset( $_SESSION["id_usuario"] ); 
+      unset( $_SESSION["rol"] ); 
 
       #asigna valor a las sessiones
-      $_SESSION["id_usuario"] = $identificador;
+      $_SESSION["rol"] = $identificador;
      }else{
       #redirecciona a partidas si no recibe toda la informacion
        $redireccion = Conectar::ruta()."vistas/perfilese.php"; ?>
@@ -60,7 +60,7 @@
                     <!-- centro -->
   
               
- <form method="post" id="asignar_roles">
+ <form  onsubmit="setTimeout('document.forms[0].reset()', 2000" method="post" id="asignar_roles">
        <div class="form-group table-responsive">
         <div class="modal-body">
    <?php		

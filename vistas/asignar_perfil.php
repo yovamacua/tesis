@@ -11,10 +11,10 @@
 
 
       #vacia la sessiones
-      unset( $_SESSION["idperfil"] ); 
+      unset( $_SESSION["perfil"] ); 
 
       #asigna valor a las sessiones
-      $_SESSION["idperfil"] = $identificador;
+      $_SESSION["perfil"] = $identificador;
      }else{
       #redirecciona a partidas si no recibe toda la informacion
        $redireccion = Conectar::ruta()."vistas/perfilese.php"; ?>
@@ -23,7 +23,8 @@
 <?php
   }
   #variable item activo
-  $activar = 'item_categorias';
+ $activar = 'item_permiso';
+  $activar1 = 'item_permiso1';
   require_once("header.php");
 ?>
 <?php if($_SESSION["PERMISO"]==1)

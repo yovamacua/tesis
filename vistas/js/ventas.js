@@ -49,7 +49,7 @@ $(function() {
 
 
         //comparacion
-        if (error_titulo === false) {
+        if (error_fecha === false) {
             // si todo funciona las barrita de color boton se reseta despues del submit
             $("#fecha").css("border-bottom", "1px solid #d2d6de");
             guardaryeditar(e);
@@ -66,7 +66,15 @@ $(function() {
 
 //Función que se ejecuta al inicio
 function init(){
-	mostrarformulario(false);
+	//mostrarformulario(false);
+	$("#formularioregistros").hide();
+	 $("#listadoregistros").show();
+	  $("#ventasfechas").show();
+	  $("#formularioregistros3").hide();
+	 
+	 $('#fecha').datepicker('setDate', 'today');
+
+	 evaluar()
 	listar();
 	 //cuando se da click al boton submit entonces se ejecuta la funcion guardaryeditar(e);
 	$("#formulario").on("submit",function(e)
@@ -93,7 +101,6 @@ function limpiar()
     $("#id_producto").val("");
 	//$("#id_usuario").val("");
 	$('#producto').val("");
-	//$('#fila0').remove();
     $('#numero_venta').val("");
 	$('#precio_venta').val("");
 	$('#total_pagar').val("");
@@ -101,57 +108,24 @@ function limpiar()
 	$('#stock').val("");
 }
 
-//Función mostrar formulario
-function mostrarformulario(flag)
-{
 
-	if (flag)
-	{
-		$("#listadoregistros").hide();
-		$("#formularioregistros").show();
-		//$("#btnGuardar").prop("disabled",false);
-		$("#btnagregar").hide();
-		$("#ventasfechas").hide();
-		$("#ocultar").hide();
-		listarProductoVenta();
-		$("#letra").show();
-		$("#btnGuardar").hide();
-		$("#btnCancelar").show();
-		$("#btnAgregarArt").show();
-		detalles=0;
-	}
-	else
-	{
-        $("#listadoregistros").show();
-        $("#ventasfechas").show();
-        $("#ocultar").show();
-		$("#formularioregistros").hide();
-		$("#letra").hide();
-		$("#btnagregar").show();
-	}
-}
 //Función cancelarform
 function cancelarform()
 {
 	
 	limpiar();
-	//location.reload();
-	mostrarformulario(false);
-	cargar();
+	$("#formularioregistros").hide();
+	 $("#listadoregistros").show();
+	 $("#formularioregistros3").hide();
+	 $("#ventasfechas").show();
 }
 
 function cancelar(){
 
 	limpiar();
-	mostrarformulario(false);
-	cargar();
 	
 }
-function cargar(){
 
-	window.location.reload();
-
-}
 //Función Listar
 function listar()
 {
@@ -227,6 +201,8 @@ function listar()
 
 	}).DataTable();
 }
+
+
 //Función Listar
 function listarProductoVenta()
 {
@@ -298,7 +274,6 @@ function listarProductoVenta()
 }
 //Declaración de variables necesarias para trabajar con las compras y
 //sus detalles
-//var impuesto=13;
 var cont=0;
 var detalles=0;
 function agregarDetalle(id_producto,producto,precio_venta,stock)
@@ -314,14 +289,14 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	'<td><input type="hidden"  name="id_producto[]" value="'+id_producto+'">'+producto+'</td>'+
     	'<td><input type="text" maxlength="5"  style="WIDTH: 58px; text-align: center" name="stock[]" id="stock[]" value="'+stock+' " readonly></td>'+
     	'<td><input type="number" maxlength="5"  style="WIDTH: 58px; text-align: center" onchange="modificarSubototales()" name="cantidad[]" id="cantidad[]" value="'+cantidad+'" min="0" max="1000"></td>'+
-    	'<td><input type="text"  maxlength="5"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' "></td>'+
+    	'<td><input type="text"  maxlength="5"  style="WIDTH: 58px; text-align: center" name="precio_venta[]" id="precio_venta[]" value="'+precio_venta+' " readonly/></td>'+
     	'<td><span name="subtotal" id="subtotal'+cont+'">'+subtotal+'</span></td>'+
-    	//'<td><button type="button" onclick="modificarSubototales()" class="btn btn-info"><i class="fa fa-refresh"></i></button></td>'+
     	'</tr>';
     	cont++;
     	detalles=detalles+1;
     	$('#detalles').append(fila);
     	modificarSubototales();
+    	evaluar()
 
 
     }
@@ -330,6 +305,12 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
     	alert("Error al ingresar el detalle, revisar los datos del producto");
     }
   }
+
+  function ocultar(id){
+document.getElementById('btn' + id).style.display = 'none';
+}
+
+
   function modificarSubototales()
   {
     var stock = document.getElementsByName("stock[]");  	
@@ -348,7 +329,10 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
 
     		
     		bootbox.alert("producto insuficiente");
-    	} else{
+    	} else if(parseInt(inpC.value) < 0){
+            inpS.value=Math.ceil((0 * inpP.value)*100)/100;
+            document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
+    		}else{
            inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
        document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
 
@@ -359,21 +343,6 @@ function agregarDetalle(id_producto,producto,precio_venta,stock)
      	i++;
      }
 
-    /*for (var i = 0; i <cant.length; i++) {
-    	var inpC=cant[i];
-    	var inpP=prec[i];
-    	var inpS=sub[i];
-var inpK= stock[i]; 
-    		if(parseInt(inpC.value)  >= parseInt(inpK.value)){
-
-    		alert("producto insuficiente");
-    	} else{
-           inpS.value=Math.ceil((inpC.value * inpP.value)*100)/100;
-       document.getElementsByName("subtotal")[i].innerHTML = inpS.value;
-
-    	}
-    	
-    }*/
     calcularTotales();
 
   }
@@ -384,14 +353,15 @@ var inpK= stock[i];
   function calcularTotales(){
   	var sub = document.getElementsByName("subtotal");
   	var total = 0.0;
+  	var n=0.0;
 
   	for (var i = 0; i <sub.length; i++) {
 		total += document.getElementsByName("subtotal")[i].value;
-
+          n= total.toFixed(2);
 	}
   	
-	$("#total").html("$" + total);
-    $("#total_pagar").val(total);
+	$("#total").html("$" + n);
+    $("#total_pagar").val(n);
     evaluar();
   }
 
@@ -446,6 +416,7 @@ function guardaryeditar(e)
 				$('#ventas_data').DataTable().ajax.reload(null, false);
 
                 limpiar();
+                window.location.replace("ventas.php");
 
 		    }
 
@@ -688,13 +659,17 @@ function mostrar(idventas)
 	{
 		//data = JSON.parse(data);
 		data =JSON.parse(data);		
-		mostrarformulario(true);
-
+		//mostrarformulario(true);
+      $("#formularioregistros").show();
+      $("#formularioregistros3").show();
+      $("#listadoregistros").hide();
+       $("#ventasfechas").hide();
 		$("#idventa").val(data.idventa);
 		$("#nombre").val(data.usuario);
 		$('#fecha').datepicker('setDate', data.fecha);
 		$("#numero_venta").val(data.numero_venta); 
 		//Ocultar y mostrar los botones
+		
 		$("#btnGuardar").hide();
 		$("#btnCancelar").show();
 		$("#btnAgregarArt").hide();

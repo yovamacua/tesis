@@ -97,7 +97,7 @@ if (isset($messages)){
 	 break;
   case 'asignar':
       $rol->asignar_roles($roles,$idusuario);
-      $messages[]="Se edito  correctamente";
+      $messages[]="Se asigno  correctamente";
       //mensaje success
           if (isset($messages)) {
               echo exito($messages);

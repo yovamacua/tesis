@@ -115,9 +115,10 @@
           <h4 class="modal-title">Agregar Producto</h4>
         </div>
          <div class="modal-body">
-
+                 <div class="form-row">
+                  <div class="form-group col-md-6">
                   <label>Categoría</label>
-                    <!--<input type="text" class="form-control" id="categoria" name="categoria" placeholder="Categoria">-->
+                  
 
                     <select class="form-control" id="categoria" name="categoria" >
 
@@ -135,12 +136,9 @@
                       
                     </select>
                   <span class="error_form" id="error_categoria"></span>
-                  </br>
-                  <label>Producto</label>
-                   <input type="text" id="producto" name="producto"   class="form-control" placeholder="Descripción Producto" maxlength="60" autocomplete="off" required/>
-                   <span class="error_form" id="error_producto"></span>
-                   </br>
-                   <label>Unidad</label>
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label>Unidad</label>
                    <select class="form-control" id="id_unidad" name="id_unidad" >
 
                       <option  value="0">Seleccione</option>
@@ -158,14 +156,31 @@
                     </select>
                      <span class="error_form" id="error_unidad"></span>
                   </br>
-
+                </div>
+              </div>
+                  </br>
+                  <div class="form-row">
+                     <div class="form-group col-md-12">
+                  <label>Producto</label>
+                   <textarea rows="4" maxlength="60" style=" word-break: break-all;    max-width: 100% !important;" cols="250" name="producto" id="producto" class="form-control" placeholder="Descripción" autocomplete="off" required/></textarea>
+                   
+                   <span class="error_form" id="error_producto"></span>
+                   </br>
+                   </div>
+                 </div>
+                 <div class="form-row">
+                     <div class="form-group col-md-6">
                   <label>Precio Venta</label>
                   <input type="text" class="form-control" id="precio_venta" name="precio_venta"  placeholder="Precio Venta" maxlength="4" autocomplete="off" required />
                    <span class="error_form" id="error_precio"></span>
+                 </div>
                 </br>
+                  <div class="form-group col-md-6">
                   <label>Stock</label>
-                    <input type="text" class="form-control" id="stock" name="stock" maxlength="4" autocomplete="off" required/>
+                    <input  type="text" class="form-control " id="stock" name="stock" maxlength="4" autocomplete="off" required/>
                      <span class="error_form" id="error_stock"></span>
+                   </div>
+                 </div>
                </br>
                <div class="form-row  ofield">
                <label>Stock nuevo</label>

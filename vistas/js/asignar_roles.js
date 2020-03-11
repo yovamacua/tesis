@@ -17,7 +17,8 @@ function init(){
 //Función Listar
 function cancelar(){
 
- window.location.replace("usuarios.php");
+ //window.location.replace("usuarios.php");
+ window.history.back();
 }
 
 
@@ -40,6 +41,7 @@ function guardaryeditar(e)
       console.log(datos);
        $('#asignar_roles')[0].reset();
        $('#resultados_ajax').html(datos);
+       //$('#asignar_roles').reload(null,faks)
       
 
        }

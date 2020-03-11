@@ -8,15 +8,13 @@
        require_once("../modelos/Venta.php");
      $usuario = new Roles();
        $venta = new Ventas();
-      
     
 ?>
 
 
 
 <!-- INICIO DEL HEADER - LIBRERIAS -->
-<?php
-
+<?php 
   #variable para mostrar como item activo
   $activar = 'item_venta';
   $activar1 = 'item_venta1';
@@ -48,59 +46,19 @@
               <div class="col-md-12">
                   <div class="box">
                     <div class="box-header boton-top">
-                       <?php 
-                             $rol=$usuario->listar_roles_por_usuario($_SESSION['id_usuario']);
-                            $valores=array();
-                            //Almacenamos los permisos marcados en el array
-                             foreach($rol as $rows){
-
-                             $valores[]= $rows["codigo"];
-                                }   
-                                if(in_array("REVENT",$valores)){
-                                  echo '<h1 class="box-title" ><a  href="compra.php"></h1>
-                            <button  class="btn btn-primary btn-lg" id="btnagregar"><i class="fa fa-plus" aria-hidden="true"></i> Nueva Venta</button></a></h1>';
-              }
-                            ?>
+                      
                           
                         <div class="box-tools pull-right">
                         </div>
                     </div>
-                    <!-- /.box-header -->
-                    <!-- centro -->
-                   <div class="panel-body table-responsive tabla-top" id="listadoregistros">
-    
-                          <table id="ventas_data" class="table table-bordered table-striped">
-                            <thead>
-                              
-                                                            
-                                <th width="5%">Opciones</th>
-                                <th width="15%">Usuario</th>
-                                <th width="10%">Fecha</th>
-                                <th width="5%">Numero venta</th>
-                                <th width="5%">Total Pagar</th>
-                                <th width="5%">Estado</th>
-                               
-                               
 
-                                </tr>
-
-                            </thead>
-
-                            <tbody>
-                              
-
-                            </tbody>
-
-
-                          </table>
-                     
-                    </div>
+                  
 
                      <!-- columna del formulario venta -->
        
 
 
-                  <div class="panel-body table-responsive ofields " id="formularioregistros">
+                    <div class="panel-body table-responsive" id="formularioregistros2">
                       
                       
                        <form name="formulario" id="formulario"style="width: 90%;" method="POST">
@@ -110,8 +68,8 @@
                   <div class="col-lg-9">
                     <input type="text" class="form-control" id="nombre" name="nombre"  style="width:50%;" value="<?php echo $_SESSION["nombre"];?>" readonly/>
                   </div>
-              </div>   
-              <div class="form-group table-responsive">
+              </div>  
+               <div class="form-group table-responsive"> 
                      <label for="" class="col-lg-3 control-label">Fecha(*)</label>
 
                   <div class="col-lg-9">
@@ -128,14 +86,14 @@
                     ?> 
               </div>  
                          
-                          <div class="form-group table-responsive">
+                          <div class="form-group ">
                             <a data-toggle="modal" href="#myModal">           
                               <button  id="btnAgregarArt" type="button" class="btn btn-primary" onclick="listarProductoVenta()" data-toggle="modal" data-target="lista_productos_ventas_Modal"> <span class="fa fa-plus"></span> Agregar Productos</button>
                             </a>
                           </div>
                     </div>
                      <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
-                            <table id="detalles"  class="table table-striped table-bordered table-condensed table-hover">
+                            <table id="detalles" class="table table-striped table-bordered table-condensed table-hover">
                               <thead style="background-color:#A9D0F5">
                                     <th  width="10%">Opciones</th>
                                     <th  width="10%">Producto</th>
@@ -161,8 +119,8 @@
                           <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <button class="btn btn-primary" name ="Guardar" type="submit" id="btnGuardar"><i class="fa fa-save"></i> Comprar</button>
 
-                            <button id="btnCancelar" class="btn btn-danger" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button>
-                      <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" /> 
+                            <a href="ventas.php"><button id="btnCancelar" class="btn btn-danger" type="button"><i class="fa fa-arrow-circle-left"></i> Regresar</button></a>
+                      <input type="hidden" name="id_usuario" id="id_usuario" value="<?php echo $_SESSION["id_usuario"];?>" />
                             
                           </div>
                            </form>

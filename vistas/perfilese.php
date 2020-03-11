@@ -10,6 +10,7 @@
 
 <?php
   #variable item activo
+  $activar = 'item_permiso';
   $activar1 = 'item_permiso1';
   require_once("header.php");
 ?>

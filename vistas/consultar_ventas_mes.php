@@ -5,7 +5,10 @@
 
     if(isset($_SESSION["id_usuario"])){
         
-
+      require_once("../modelos/Venta.php");
+      $venta = new Ventas();
+      $vent= $venta->mes();
+      $anio= $venta->anio()
 ?>
 
 
@@ -31,7 +34,10 @@
        Consulta de Ventas por mes
        
       </h1>
-      
+      <ol class="breadcrumb">
+             <li><a href="inicio.php"><i class="fa fa-home"></i>Inicio</a></li>
+             <li><i class="fa fa-search"></i> Consulta</li>
+          </ol>
     </section>
 
     <!-- Main content -->
@@ -49,18 +55,22 @@
                  <div class="col-sm-10">
                     <select name="mes" id="mes" class="form-control">
                                 <option value="">MES</option>
-                                <option value="01">ENERO</option>
-                                <option value="02">FEBRERO</option>
-                                <option value="03">MARZO</option>
-                                <option value="04">ABRIL</option>
-                                <option value="05">MAYO</option>
-                                <option value="06">JUNIO</option>
-                                <option value="07">JULIO</option>
-                                <option value="08">AGOSTO</option>
-                                <option value="09">SEPTIEMBRE</option>
-                                <option value="10">OCTUBRE</option>
-                                <option value="11">NOVIEMBRE</option>
-                                <option value="12">DICIEMBRE</option>
+                                 <?php
+                          foreach ($vent as $row) {
+                            $num=$row["numero_mes"];
+                            $mes=$row["meses"];
+                            $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+ 
+                      $fecha= $mes;
+
+                      $fecha_mes = $meses[date("n", strtotime($fecha))-1];
+
+                            echo '<option value="'.$num.'">'.$fecha_mes.'</option>';
+                          }
+
+                             ?>
+                              
+                         
                               </select>
                  </div>
               </div>
@@ -70,28 +80,17 @@
                 <div class="col-sm-10">
                   <select name="ano" id="ano" class="form-control">
                                   <option value="">AÑO</option>
-                                  <option value="2014">2014</option>
-                                  <option value="2015">2015</option>
-                                  <option value="2016">2016</option>
-                                  <option value="2017">2017</option>
-                                  <option value="2018">2018</option>
-                                  <option value="2019">2019</option>
-                                  <option value="2020">2020</option>
-                                  <option value="2021">2021</option>
-                                  <option value="2022">2022</option>
-                                  <option value="2023">2023</option>
-                                  <option value="2024">2024</option>
-                                  <option value="2025">2025</option>
-                                  <option value="2026">2026</option>
-                                  <option value="2027">2027</option>
-                                  <option value="2028">2028</option>
-                                  <option value="2029">2029</option>
-                                  <option value="2030">2030</option>
-                                  <option value="2031">2031</option>
-                                  <option value="2032">2032</option>
-                                  <option value="2033">2033</option>
-                                  <option value="2034">2034</option>
-                                  <option value="2035">2035</option>
+                                       <?php
+                          foreach ($anio as $rows) {
+                            $anios=$rows["año"];
+                            print_r($anios);
+                           
+                            echo '<option value="'.$anios.'">'.$anios.'</option>';
+                          }
+
+                             ?>
+                              
+                         
                                 </select>
                 </div>
               </div>
@@ -150,7 +149,7 @@
            
               <div class="box-body">
 
-                    <div class="panel-body table-responsive" id="formularioregistros">
+                    <div class="panel-body table-responsive" id="formularioregistros3">
                       
                       
                        <form name="formulario" id="formulario"style="width: 90%;" method="POST">

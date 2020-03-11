@@ -89,7 +89,7 @@ require_once("header.php");?>
        </div>
       </div>
 
-   <div class="panel panel-default">
+   <div class="panel panel-default" >
         
         <div class="panel-body">
 
@@ -182,13 +182,13 @@ require_once("header.php");?>
 
 	    <div class="box">
 
-	       <div class="">
+	       <div class="" id="tab">
 
-				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">reporte de ventas mensual</h2>
+				  <h2 class="reporte_compras_general container-fluid bg-primary text-white col-lg-12 text-center mh-50">reporte de ventas mensuales</h2>
 				              
-				  <table class="table table-bordered">
-				    <thead>
-				      <tr>
+				  <table class="table table-bordered" >
+				    <thead >
+				      <tr >
 				        <th>AÑO</th>
 				        <th>N° MES</th>
 				        <th>NOMBRE MES</th>
@@ -222,7 +222,7 @@ require_once("header.php");?>
     			     ?>
 
 
-					      <tr>
+					      <tr >
 					        <td><?php echo $datos[$i]["año"]?></td>
 					        <td><?php echo $datos[$i]["numero_mes"]?></td>
 					        <td><?php echo $fecha_mes?></td>
@@ -261,9 +261,9 @@ require_once("header.php");?>
 
 
 					      <tr>
-					        <td><?php echo $datos[$i]["año"]?></td>
-					        <td><?php echo $datos[$i]["numero_mes"]?></td>
-					        <td><?php echo $fecha_mes?></td>
+					        <td align="center"><?php echo $datos[$i]["año"]?></td>
+					        <td align="center"><?php echo $datos[$i]["numero_mes"]?></td>
+					        <td align="center"><?php echo $fecha_mes?></td>
                             <td><?php echo "$"." ".$datos[$i]["total_venta"]?></td>
 					      </tr>
 					      
@@ -290,10 +290,10 @@ require_once("header.php");?>
 		  <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 		  	  <div class="box">
 
-	             <div class="">
+	             <div class="" id="tab">
 
 				   
-		         <h2  class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte de ventas mensual</h2>
+		         <h2  class="reporte_compras_general container-fluid bg-red text-white col-lg-12 text-center mh-50">Reporte de ventas mensuales</h2>
 
       
 	          <!--GRAFICA-->
@@ -417,10 +417,12 @@ require_once("header.php");?>
 			$('#buttonExport').click(function() {
            
 
-			   //alert("clic");
-            printHTML()
+			   
+         imprSelec();
+            
 			document.addEventListener("DOMContentLoaded", function(event) {
-			 printHTML(); 
+			
+       imprSelec(); 
 			});
 
   
@@ -429,14 +431,23 @@ require_once("header.php");?>
 
 });
 
- //function
+ //function para imprimir la informacion
 
-	function printHTML() { 
-	  if (window.print) { 
-	    window.print();
-	  }
-	}
-	
+	function imprSelec() {
+    var grafica = document.getElementById("container");
+    var tabla = document.getElementById("tab");
+    var ventimp = window.open(' ', 'popimpr');
+   
+    ventimp.document.write('<div align="center">');
+     ventimp.document.write('<p><h1>Campo Escuela Salcoatitan</h1><br>' );
+    ventimp.document.write(tabla.innerHTML );
+     ventimp.document.write(grafica.innerHTML );
+     ventimp.document.write('<div>');
+     
+    ventimp.document.close();
+    ventimp.print( );
+    ventimp.close();
+  }
 </script>
 <?php  } else {
 
