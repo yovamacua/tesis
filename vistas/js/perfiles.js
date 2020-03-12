@@ -25,7 +25,7 @@ $(function() {
    
 
     function campo_nombre() {
-        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ\s]*$/;
+        var pattern = /^[a-záéíóúñA-ZÁÉÍÓÚÑ_0-9\s]*$/;
         var titulo = $("#nombre").val();
         if (pattern.test(titulo) && titulo !== '') {
             $("#error_nombre").hide();

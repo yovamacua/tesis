@@ -53,17 +53,18 @@ public function retornoventa($idventas){
 // iniciamos la actualizacion del stock por la devulocion de la venta
   $conectar = parent::conexion();
       parent::set_names();
+      //$s=53;
       $sql1 ="select d.id_producto, d.cantidad from detalleventas as d where id_ventas=?";
       $sql1 = $conectar->prepare($sql1);
       $sql1-> bindValue(1, $idventas);
       $sql1->execute();
-      $resultado = $sql1->fetchAll(PDO::FETCH_ASSOC);
+      $resultado = $sql1->fetchAll();
      // se recorre  la tabla
       foreach ($resultado as $row) {
 
-        $id_producto=$row["id_producto"];
+        $id_producto=$output["id_producto"]=$row["id_producto"];
         //selecciona la cantidad vendida
-         $cantidad_venta=$row["cantidad"];
+         $cantidad_venta=$output["cantida"]=$row["cantidad"];
 
       //validacion si el id_producto existe
       if(isset($id_producto)==true){
@@ -73,23 +74,23 @@ public function retornoventa($idventas){
 
         $sql2->bindValue(1, $id_producto);
         $sql2->execute();
-$resultado1=$sql2->fetchAll(PDO::FETCH_ASSOC);
+       $resultado1=$sql2->fetchAll();
       
 // se recorre la tabla
         foreach ($resultado1 as  $row2) {
-          $stock=$row2["stock"];
+          $stock=$output2["stock"]=$row2["stock"];
           // se realiza la sumatoria al stock de la devolucion
           $cantidad_actual= $stock + $cantidad_venta;
         }
-      }
+    
       //se actualiza el sctok del inventario
       $sql3="update kardex set stock=? where id_producto1=?;";
       $sql3=$conectar->prepare($sql3);
       $sql3->bindValue(1,$cantidad_actual);
       $sql3->bindValue(2,$id_producto);
       $sql3->execute();
-       return $resultado=$sql3->fetch();
       }
+    }
     }
 
        //obtiene el registro por id despues de editar
@@ -539,4 +540,5 @@ foreach ($array_id_producto as $clave=>$id_producto) {
         }
 
   }
+  
 ?>

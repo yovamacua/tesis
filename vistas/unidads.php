@@ -45,7 +45,7 @@
 
                              $valores[]= $rows["codigo"];
                                 }   
-                                if(in_array("REVENT",$valores)){
+                                if(in_array("REUNID",$valores)){
                                   echo '<button class="btn btn-primary btn-lg" id="add_button" onclick="limpiar()" data-toggle="modal" data-target="#unidadModal"><i class="fa fa-plus" aria-hidden="true"></i> Registrar Unidad</button></h1>';
               }
                             ?>

@@ -123,7 +123,7 @@ foreach($roles as $rows){
 
       $sub_array[] = $row["rol"];
      $sub_array[] = $row["nombre"];
-    $button_editar='<button type="button" onClick="mostrar('.$row["idrol"].');"  id="'.$row["idrol"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>';
+    $button_editar='<button type="button" onClick="mostrar('.$row["idrol"].');"  id="'.$row["idrol"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Perfil" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
      $button_eliminar='<button type="button" onClick="eliminar('.$row["idrol"].');"  id="'.$row["idrol"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Roles "><i class="fa fa-trash"></i></button></div>';
      ?>

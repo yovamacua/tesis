@@ -124,7 +124,7 @@ foreach($rol as $rows){
      
          
                  $sub_array[] = $row["usuario"];
-                   $sub_array[] = date("d-m-Y", strtotime($row["fechaventa"]));
+                   $sub_array[] = date("d/m/Y", strtotime($row["fechaventa"]));
                  $sub_array[] = $row["numero_venta"];
                  $sub_array[] = $dolar.$row["total_pagar"];
               
