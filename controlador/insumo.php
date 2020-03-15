@@ -158,18 +158,18 @@ foreach($rol as $rows){
                 
         ?>
           <?php  
-          if(in_array("RECAPA",$valores) and in_array("EDPEDI",$valores)and in_array("ELPEDI",$valores)){
+          if(in_array("REPEDI",$valores) and in_array("EDPEDI",$valores)and in_array("ELPEDI",$valores)){
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
                  }elseif (in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.'</div>';
 
-               } elseif(in_array("RECAPA",$valores) and in_array("ELPEDI",$valores)) {
+               } elseif(in_array("REPEDI",$valores) and in_array("ELPEDI",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_eliminar.'</div>';
 
-              } elseif (in_array("EDPEDI",$valores) and in_array("RECAPA",$valores)) {
+              } elseif (in_array("EDPEDI",$valores) and in_array("REPEDI",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_registrar.'</div>';
 
-              } elseif (in_array("RECAPA",$valores)) {
+              } elseif (in_array("REPEDI",$valores)) {
                  $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
               }elseif(in_array("EDPEDI",$valores)){
                        $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
