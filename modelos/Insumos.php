@@ -29,6 +29,22 @@
 			return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 		}
 
+		//método para seleccionar registros
+        public function get_detalle_salida($id_insumo){
+	        $conectar = parent::conexion();
+	        parent::set_names();
+
+	        $sql = "select u.usuario, ki.idinsumo, ki.fechaS, ki.salida from kardexinsumo ki
+					inner join insumos i on ki.idinsumo = i.id_insumo 
+					inner join unidad uni on uni.idunidad = i.iduni
+					inner join usuarios u on u.id_usuario = uni.idusuariouni
+					where idinsumo=?";
+	        $sql = $conectar->prepare($sql);
+	        $sql->bindValue(1, $id_insumo);
+	        $sql->execute();
+	        return $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+       }
+
 		//mostrar los insumos por el id
 		public function get_insumos_por_id($id_insumo){
 

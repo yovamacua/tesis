@@ -32,7 +32,8 @@ $usuario = new Roles();
       <div class="content-wrapper">
         <section class="content-header">
 
-          <h1>Administración de Insumos</h1>
+          <h1 id="titulo1">Administración de Insumos</h1>
+          <h1 id="titulo2">Detalle de salidas: <input style="width:500px; background: transparent; border: 0" id="insumodes" readonly/></h1>
 
           <!-- migas de pan-->
           <ol class="breadcrumb">
@@ -78,15 +79,15 @@ $usuario = new Roles();
                     </div>
                     <!-- /.box-header -->
                     <!-- centro -->
-                    <div class="panel-body table-responsive tabla-top">
+                    <div class="panel-body table-responsive tabla-top" id="listadoregistros">
                           <table id="insumo_data" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                  <th width="15%">Autor</th>
-                                  <th width="10%">Fecha</th>
+                                  <th width="12%">Autor</th>
+                                  <th width="10%">Fecha de entrada</th>
                                   <th width="10%">Categoria</th>
-                                  <th>Descripcion</th>
-                                  <th width="10%">Cantidad</th>
+                                  <th>Descripción</th>
+                                  <th width="10%">Cantidad disponible</th>
                                   <th width="10%">Unidad de Medida</th>
                                   <th width="10%">Precio</th>                                  
                                   <th>Acciones</th>
@@ -97,11 +98,50 @@ $usuario = new Roles();
                           </table>
                     </div>
                     <!--Fin centro -->
-                  </div><!-- /.box -->
-              </div><!-- /.col -->
-          </div><!-- /.row -->
-      </section><!-- /.content -->
-  </div><!-- /.content-wrapper -->
+
+                     <!--Tabla de capacitados -->
+                      <div class="panel-body table-responsive tabla-cap" id="salidasModal" style="margin-top: -2.5rem!important;">
+                        
+                        <table id="detallesalida_data" class="table table-bordered table-striped">
+                          <thead>
+                              <tr>
+                                <th width="25%">Autor</th>
+                                <th>Fecha ultimo movimiento</th>
+                                <th>Cantidad de salida</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                          </tbody>
+                        </table>
+                        
+                        <input type="hidden" name="id_usuario" id="id_usuarioc" value="<?php echo $_SESSION["id_usuario"];?>" />
+
+                         <!-- div para el boton generar reporte asistencia de capacitacion -->
+                        <div style="width:200px;">
+                         
+                          <div style="width:100px; float:left;">
+                          <button id="btnCancelar" class="btn btn-danger" type="button" 
+                          onclick="cancelarform(); document.getElementById('distancia').style.display='block'"><i class="fa fa-arrow-circle-left"></i><font color=white> Regresar</font></a></button>
+                          </div> 
+                         
+                         <!--form para generar el archivo excel-->
+                          <!-- <div style="width:100px; float:right;">
+                            <form action="reportes/reporte_capacitacion.php" method="post">
+                              <input type="hidden" name="id_capacitacion" id="id_cap"/>                
+                              <button  id="btnArchivo" type="submit" class="btn btn-primary" ><i class="fa fa-file-excel-o" aria-hidden="true"></i> Generar Reporte</button>   
+                            </form>
+                        </div> --> 
+
+                      </div> 
+                    <!-- fin del div del boton generar reporte asistencia de capacitacion -->
+                      </div>
+                    <!--Fin tabla de capacitados -->
+
+                </div>
+              </div>
+            </div>
+          </section><!-- /.content -->
+        </div>
   <!--Fin-Contenido-->
   <!--FORMULARIO VENTANA MODAL-->
   <div id="insumoModal" class="modal fade">

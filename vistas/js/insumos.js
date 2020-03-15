@@ -414,6 +414,7 @@ $(function() {
 // FIN VALIDACION FORMULARIO ENTRADA
 //funcion que se ejecuta al inicio
 function init(){
+    mostrarformulario(false);
 	listar();
 
 	//cambiar el titulo de la ventana modal cuando se da click al boton
@@ -482,6 +483,39 @@ function limpiar2(){
 
 }
 
+//Función mostrar formulario
+function mostrarformulario(flag)
+{ 
+  $("#titulo2").hide();
+  $("#salidasModal").hide();
+}
+
+function verdetalle(id_insumo){
+   $.post("../controlador/insumo.php?op=mostrar",{id_insumo : id_insumo}, function(data, status)
+ {
+    data = JSON.parse(data);
+    $("#titulo1").hide();
+    $("#titulo2").show();
+    $("#salidasModal").show();
+    listarDetalleSalidas(id_insumo);
+    $("#add_button").hide();
+    $("#minus_button").hide();
+    $("#listadoregistros").hide();
+    $('#insumodes').val(data.descripcion);
+    }); 
+}
+
+//Función cancelarform
+function cancelarform()
+{
+  $("#titulo1").show();
+  $("#titulo2").hide();
+  $("#salidasModal").hide();
+  $("#add_button").show();
+  $("#minus_button").show();
+  $("#listadoregistros").show();
+}
+
 // funcion listar
 function listar(){
 	tabla = $('#insumo_data').dataTable({
@@ -534,6 +568,64 @@ function listar(){
         }//cerrando language
 
 	}).DataTable();
+}
+
+//Función Listar
+function listarDetalleSalidas(id_insumo)
+{
+  tabla=$('#detallesalida_data').dataTable(
+  {
+    "aProcessing": true,//Activamos el procesamiento del datatables
+    "aServerSide": true,//Paginación y filtrado realizados por el servidor
+      dom: 'Bfrtip',//Definimos los elementos del control de tabla
+      buttons: [
+
+            ], 
+    "ajax":
+        {
+          url:"../controlador/insumo.php?op=listardetalle&id="+id_insumo,
+          method:"POST",
+          data:{id_insumo:id_insumo},
+
+          error: function(e){
+            console.log(e.responseText);
+          }
+        },
+        "bDestroy": true,
+        "responsive": true,
+        "bInfo":true,
+        "iDisplayLength": 10,//Por cada 10 registros hace una paginación
+        "order": [[ 0, "desc" ]],//Ordenar (columna,orden)
+        //configuraciones para el lenguaje del dataTable
+          "language": {
+
+             "sProcessing":     "Procesando...",
+             "sLengthMenu":     "Mostrar _MENU_ registros",
+             "sZeroRecords":    "No se encontraron resultados",
+             "sEmptyTable":     "Ningún dato disponible en esta tabla",
+             "sInfo":           "Mostrando un total de _TOTAL_ registros",
+             "sInfoEmpty":      "Mostrando un total de 0 registros",
+             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+             "sInfoPostFix":    "",
+             "sSearch":         "Buscar:",
+             "sUrl":            "",
+             "sInfoThousands":  ",",
+             "sLoadingRecords": "Cargando...",
+             "oPaginate": {
+                 "sFirst":    "Primero",
+                 "sLast":     "Último",
+                 "sNext":     "Siguiente",
+                 "sPrevious": "Anterior"
+          },
+
+              "oAria": {
+                 "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+              }
+
+        }//cerrando language
+
+  }).DataTable();
 }
  
 //mostrar los insumos en la ventana modal del formulario

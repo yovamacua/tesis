@@ -136,33 +136,53 @@ foreach($rol as $rows){
 		      	$sub_array[] = date("d/m/Y",strtotime($row["fecha"]));
 		      	$sub_array[] = $row["categoria"];
 		      	$sub_array[] = $row["descripcion"];
-		      	$sub_array[] = $row["cantidad"];
+		      	//Cantidad, si es mayor de 5 se pone rojo sino se pone verde
+				$cantidad=""; 
+
+				if($row["cantidad"]<=5){     
+                    $cantidad = $row["cantidad"];
+                    $atributo = "badge bg-red-active";
+				} else {
+				    $cantidad = $row["cantidad"];
+                    $atributo = "badge bg-green";
+                }
+                $sub_array[] = '<span class="'.$atributo.'">'.$row["cantidad"].'</span>';
 		      	$sub_array[] = $row["nombre"];
 		      	$sub_array[] = $dolar.$row["precio"];
+
+		    $boton_registrar='<button type="button" onClick="verdetalle('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'"" class="btn btn-warning btn-md update hint--top" aria-label="Ver detalle salidas" ><i class="fa fa-eye"></i></button>&nbsp;';
 		      	
       		$boton_editar= '<button type="button" onClick="mostrar('.$row["id_insumo"].');"  id="'.$row["id_insumo"].'" class="btn btn-primary btn-md update hint--top" aria-label="Editar Insumo" ><i class="fa fa-pencil-square-o"></i></button>&nbsp;';
 
             $boton_eliminar= '<button type="button" onClick="eliminar('.$row["id_insumo"].'); desvanecer()"  id="'.$row["id_insumo"].'" class="btn btn-danger btn-md hint--top" aria-label="Eliminar Insumo "><i class="fa fa-trash"></i></button>';
-            
-            ?>
-        <?php  
-          if(in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)){
-                 $sub_array[]='<div class="cbtns">'.$boton_editar.''.$boton_eliminar.'</div>';
-               }
-            elseif (in_array("EDPEDI",$valores)) {
-                 $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
-              }elseif (in_array("ELPEDI",$valores)){
+                
+        ?>
+          <?php  
+          if(in_array("RECAPA",$valores) and in_array("EDPEDI",$valores)and in_array("ELPEDI",$valores)){
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.''.$boton_editar.''.$boton_eliminar.'</div>';
+                 }elseif (in_array("EDPEDI",$valores) and in_array("ELPEDI",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_eliminar.'</div>';
+
+               } elseif(in_array("RECAPA",$valores) and in_array("ELPEDI",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.' '.$boton_eliminar.'</div>';
+
+              } elseif (in_array("EDPEDI",$valores) and in_array("RECAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_editar.' '.$boton_registrar.'</div>';
+
+              } elseif (in_array("RECAPA",$valores)) {
+                 $sub_array[]='<div class="cbtns">'.$boton_registrar.'</div>';
+              }elseif(in_array("EDPEDI",$valores)){
+                       $sub_array[]='<div class="cbtns">'.$boton_editar.'</div>';
+              }elseif(in_array("ELPEDI",$valores)){
                   $sub_array[]='<div class="cbtns">'.$boton_eliminar.'</div>';
 
               }else{
-              	$sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
-              }
-            
+                  $sub_array[]='<div class="cbtns badge bg-red-active"> No Acciones</div>';
+
+              }       
               
-      ?>
-         
-          
-      <?php   
+        ?>
+        <?php
 		      	$data[] = $sub_array;
 		      }
 
@@ -174,6 +194,31 @@ foreach($rol as $rows){
 
 		 			echo json_encode($results);
 		break;
+
+		 //listar detalle de las salidas de insumo
+    	case 'listardetalle':
+      		$datos=$insumos->get_detalle_salida($_POST["id_insumo"]);
+
+	      	$data= Array();
+
+	        foreach($datos as $row){
+	          $sub_array = array();
+
+		        $sub_array[] = $row["usuario"];
+		      	$sub_array[] = date("d/m/Y",strtotime($row["fechaS"]));
+		      	$sub_array[] = $row["salida"];
+
+	            $data[] = $sub_array;
+	          }
+
+	          $results = array(
+	          "sEcho"=>1, //Información para el datatables
+	          "iTotalRecords"=>count($data), //enviamos el total registros al datatable
+	          "iTotalDisplayRecords"=>count($data), //enviamos el total registros a visualizar
+	          "aaData"=>$data);
+
+	          echo json_encode($results);
+    	break;
 
 		case "eliminar_insumo":
 

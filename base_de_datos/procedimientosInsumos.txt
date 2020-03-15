@@ -9,14 +9,20 @@ CREATE PROCEDURE editar_insumo (
  in fecha date
  )
 begin
- set @cant = (select salida from kardexinsumo where idinsumo=idinsumos);
- update kardexinsumo set
- salida = @cant + cantida,
- fechaS = fecha
- where idinsumo = idinsumos;
+set @ent= 0;
+  INSERT INTO kardexinsumo(
+ entrada,
+ salida,
+ fechaS,
+ idinsumo
+ ) values(
+ @ent,
+ cantida,
+ fecha,
+ idinsumos
+ );
  update insumos set
- cantidad = cantidad - cantida,
- fecha = fecha
+ cantidad = cantidad - cantida
  where id_insumo = idinsumos;
 END $$
 DELIMITER ;
@@ -25,9 +31,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedimiento registrar_insumo
 -- -----------------------------------------------------
-
-DELIMITER $$
-
 DELIMITER $$
 CREATE PROCEDURE registrar_insumo (
  in cantida int,
@@ -59,8 +62,7 @@ begin
  entrada,
  salida,
  fechaS,
- idinsumo
-)values(
+ idinsumo)values(
  cantida,
  @sal,
  fecha,
@@ -73,7 +75,6 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- procedimiento editar_valoresinsumo
 -- -----------------------------------------------------
-
 DELIMITER $$
 CREATE PROCEDURE editar_valoresinsumo (
 in idinsumos int,
