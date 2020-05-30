@@ -51,7 +51,7 @@
                          <div class="form-row">       
        <div class="row  col-sm-5 col-sm-offset-3">
 
-            <form action="reportes/estados_financiero.php" method="post">
+            <form action="reportes/reporte_financiero_excel.php" method="post">
 
                    <div class="form-group">
                 <label for="inputPassword">Fecha Inicial</label>
