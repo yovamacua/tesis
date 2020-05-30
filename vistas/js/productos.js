@@ -47,7 +47,7 @@ $(function() {
    
 
     function campo_precio() {
-        var pattern = /^[0-9.\s]*$/;
+        var pattern = /^[0-9]+(\.[0-9][0-9])?$/;
         var precio = $("#precio_venta").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_precio").hide();
@@ -96,7 +96,7 @@ $(function() {
         }
     }
     function campo_stock() {
-        var pattern = /^[0-9]*$/;
+        var pattern = /^[0-9]+(\.[0-9][0-9])?$/;
         var precio = $("#stock").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_stock").hide();
@@ -120,7 +120,7 @@ $(function() {
         }
     }
     function campo_stock1() {
-        var pattern = /^[0-9]*$/;
+        var pattern = /^[0-9]+(\.[0-9][0-9])?$/;
         var precio = $("#stock1").val();
         if (pattern.test(precio) && precio !== '') {
             $("#error_stock1").hide();
