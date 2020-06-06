@@ -57,7 +57,7 @@ try{
             $sql->bindValue(2,substr($_POST["precio_venta"], 0, 4), PDO::PARAM_STR);
             $sql->bindValue(3, $_POST["id_unidad"],PDO::PARAM_INT);
             $sql->bindValue(4, $_POST["categoria"], PDO::PARAM_INT);
-            $sql->bindValue(5, substr($_POST["stock"], 0, 4), PDO::PARAM_INT);
+            $sql->bindValue(5, ($_POST["stock"]),PDO::PARAM_STR);
             $sql->bindValue(6, $_POST["id_usuario"],PDO::PARAM_INT);
              
            $sql->execute();
@@ -96,9 +96,10 @@ try{
             $sql->bindValue(4, $_POST["id_usuario"],PDO::PARAM_INT);
             $sql->bindValue(5, $_POST["categoria"], PDO::PARAM_INT);
             $sql->bindValue(6, $_POST["id_producto"], PDO::PARAM_INT);
-            $sql->bindValue(7, $_POST["stock"], PDO::PARAM_INT);
-             $sql->bindValue(8, $_POST["stock1"], PDO::PARAM_INT);
+            $sql->bindValue(7, $_POST["stock"], PDO::PARAM_STR);
+             $sql->bindValue(8, $_POST["stock1"], PDO::PARAM_STR);
                $sql->execute();
+           
             
               
             } catch (PDOException $ex) {

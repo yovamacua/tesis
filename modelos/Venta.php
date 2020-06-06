@@ -155,7 +155,7 @@ foreach ($array_id_producto as $clave=>$id_producto) {
 
             $sql=$conectar->prepare($sql);
             $sql->bindValue(1, $id_producto, PDO::PARAM_STR);
-            $sql->bindValue(2, $cantidad, PDO::PARAM_INT);
+            $sql->bindValue(2, $cantidad, PDO::PARAM_STR);
             $sql->bindValue(3, $precio_venta,PDO::PARAM_STR);
             $sql->bindValue(4, $id_venta,PDO::PARAM_INT);
             $sql->execute();
